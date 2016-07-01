@@ -1,0 +1,172 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "atlres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral (Default) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP_BUTTON       BITMAP                  "imagebutton.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_SAMPLE_MENU MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "Exit",                        ID_FILE_EXIT
+    END
+    MENUITEM "Edit",                        ID_EDIT
+    MENUITEM "View",                        ID_VIEW
+    MENUITEM "Help",                        ID_HELP40002
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BUTTON              BITMAP                  "button.bmp"
+IDB_CHECKBOX            BITMAP                  "checkbox.bmp"
+IDB_GROUPBOX            BITMAP                  "groupbox.bmp"
+IDB_RADIOBUTTON         BITMAP                  "radiobutton.bmp"
+IDB_COMBOBOX            BITMAP                  "combobox.bmp"
+IDB_EDIT                BITMAP                  "edit.bmp"
+IDB_HSCROLLBAR          BITMAP                  "hscrollbar.bmp"
+IDB_VSCROLLBAR          BITMAP                  "vscrollb.bmp"
+IDB_HEADERCTRL          BITMAP                  "headerctrl.bmp"
+IDB_LISTVIEWCTRL        BITMAP                  "listview.bmp"
+IDB_TOOLBARCTRL         BITMAP                  "toolbar.bmp"
+IDB_TREEVIEWCTRL        BITMAP                  "treeviewctrl.bmp"
+IDB_STATUSBARCTRL       BITMAP                  "statusbarctrl.bmp"
+IDB_TABCTRL             BITMAP                  "tabctrl.bmp"
+IDB_TRACKBARCTRL        BITMAP                  "trackbarctrl.bmp"
+IDB_UPDOWNCTRL          BITMAP                  "updownctrl.bmp"
+IDB_PROGRESSBARCTRL     BITMAP                  "progressbar.bmp"
+IDB_HOTKEYCTRL          BITMAP                  "hotkeyctrl.bmp"
+IDB_ANIMATECTRL         BITMAP                  "animatectrl.bmp"
+IDB_RICHEDITCTRL        BITMAP                  "richedit.bmp"
+IDB_WINDOWIMPL          BITMAP                  "window.bmp"
+IDB_PLUS                BITMAP                  "PLUS.BMP"
+IDB_ARROWD              BITMAP                  "ARROWD.BMP"
+IDB_ARROWU              BITMAP                  "ARROWU.BMP"
+IDB_MINUS               BITMAP                  "minus.BMP"
+IDB_DATETIME            BITMAP                  "datetime.bmp"
+IDB_HYPERLINK           BITMAP                  "hyperlin.bmp"
+IDB_IMAGELIST           BITMAP                  "imagelis.bmp"
+IDB_SPLITTERWINDOW      BITMAP                  "splitter.bmp"
+IDB_HORSPLITTERWINDOW   BITMAP                  "horsplit.bmp"
+IDB_PICTURE             BITMAP                  "picture.bmp"
+IDB_MENU                BITMAP                  "menu.bmp"
+IDB_PANECONTAINER       BITMAP                  "panecontainer.bmp"
+IDB_STDCTRL             BITMAP                  "stdctrl.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_NULL DIALOG  0, 0, 44, 23
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg"
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_NULL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 37
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 16
+    END
+END
+#endif    // APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_MINUS               ICON                    "minus.ico"
+IDI_UPDATE              ICON                    "update.ico"
+IDI_PLUS                ICON                    "plus.ico"
+IDI_ARROWU              ICON                    "arrowu.ico"
+IDI_ARROWD              ICON                    "arrowd.ico"
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_STATIC              BITMAP                  "static.bmp"
+IDB_LISTBOX             BITMAP                  "listbox.bmp"
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""atlres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#include ""EditListBox.rc""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+#endif
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "EditListBox.rc"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

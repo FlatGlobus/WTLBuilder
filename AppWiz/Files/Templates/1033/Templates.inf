@@ -1,0 +1,59 @@
+stdafx.cpp
+stdafx.h
+root.cpp
+root.h
+root.rc
+layoutmgr.cpp
+layoutmgr.h
+
+[!if !WTL_APPTYPE_DLG]
+frame.h
+frame.cpp
+frame.wff
+toolbar.bmp
+[!endif]
+
+[!if WTL_APPTYPE_DLG]
+MainDlg.h
+MainDlg.cpp
+MainDlg.wff
+[!endif]
+
+root.ico
+
+[!if WTL_APPTYPE_MDI]
+rootDoc.ico
+ChildFrm.h
+ChildFrm.cpp
+ChildFrm.wff
+[!endif]
+
+[!if WTL_USE_VIEW]
+view.h
+view.cpp
+view.wff
+[!endif]
+
+[!if !WTL_APPTYPE_DLG_MODAL]
+AboutDlg.h
+AboutDlg.cpp
+AboutDlg.wff
+[!endif]
+
+resource.h
+
+[!if WTL_USE_RIBBON]
+Ribbon.xml
+Ribbon.h
+[!endif]
+
+[!if WTL_COM_SERVER]
+root.idl
+root.rgs
+rootps.mk
+rootps.def
+[!endif]
+
+[!if WTL_USE_MANIFEST]
+root.exe.manifest
+[!endif]

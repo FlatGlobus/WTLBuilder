@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="aboutdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cgfiltyp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CScriptEditor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CToolBoxWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FormType.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Project.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolPanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValueListHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WTLBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="atlscript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aboutdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cgfiltyp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CScriptEditor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CToolBoxWnd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FormType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Project.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValueListHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WTLBuilder_h.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ScriptHost.rgs" />
+    <None Include="res\typelib1.bin" />
+    <None Include="res\AigmentRight.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\AligmentBottom.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\AligmentLeft.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\aligntoolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\AlignTop.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\AllSides.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\arrow.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\BottomSide.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\CenterGroupHoriz.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\CenterGroupVert.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\CenterHoriz.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\CenterVert.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ChangeParent.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\closeform.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\CreationOrder.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\default.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\DistGroupHoriz.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\DistGroupVert.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Grid.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\GSGrid.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\GSHoriz.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\GSVert.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\HorizOrder.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\HorizOrderRight.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\HorizSize.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon1.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\icon4.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\infomsg.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\LeftSide.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\logo.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\new.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Open.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\prop.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\RightSide.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\SameSize.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Save.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\SaveAll.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\showform.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\sortform.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\TabOrder.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToBackground.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToForeground.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ToParent.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\TopSide.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\VertOrder.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\VertOrderBottom.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\VertSize.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\warnmsg.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\WTLBuilder.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="AboutDlg.wff">
+      <Filter>Form Files</Filter>
+    </None>
+    <None Include="CToolBoxWnd.wff">
+      <Filter>Form Files</Filter>
+    </None>
+    <None Include="FormType.wff">
+      <Filter>Form Files</Filter>
+    </None>
+    <None Include="MainFrm.wff">
+      <Filter>Form Files</Filter>
+    </None>
+    <None Include="OutputWindow.wff">
+      <Filter>Form Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3516796d-1a16-4be6-a0ee-d4f8186759f0}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{ff0f181f-0647-4ab8-adf0-bcaab160d0c6}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{866d9716-704d-461d-a713-4b98f9e7350b}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{0665fa17-176f-4671-9ccb-9b3dd1009d7f}</UniqueIdentifier>
+      <Extensions>wff</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WTLBuilder.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="AnimateCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComboBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPagesEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CStringsEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTimePicker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Edit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HeaderCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HotKeyCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HyperLink.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListViewCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PaneContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBarCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RichEditCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scrollbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Splitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusBarCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StdCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TabCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBarCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackBarCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeViewCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpDownCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AnimateCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CHeaderEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComboBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPagesEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CStringsEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTimePicker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Edit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HeaderCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HotKeyCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HyperLink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListViewCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PagesList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PaneContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBarCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RichEditCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scrollbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Splitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusBarCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UpDownCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="animatectrl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Arrowd.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="arrowd.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Arrowu.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="arrowu.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="button.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="checkbox.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="combobox.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="datetime.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="edit.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="groupbox.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="headerctrl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="horsplit.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="hotkeyctrl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="hscrollbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="hyperlin.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imagebutton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imagelis.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="listbox.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="listview.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="menu.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="minus.BMP">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="minus.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="panecontainer.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="picture.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Plus.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="plus.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="progressbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="radiobutton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="richedit.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="window.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="vscrollb.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="updownctrl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="update.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="treeviewctrl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="trackbarctrl.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{a51987b8-56fa-483b-bd2d-61b87c1e7b1b}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{b7526899-dd9f-4554-89b7-926c4e662327}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{685ce9c1-91e7-4387-b671-8bf5522a0fae}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StdCtrl.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<Form Page="Form" Class="CDialogImpl" AcceptFiles="false" AppWindow="false" BaseCtrlID="1000" Border="WS_DLGFRAME" Caption="ListBox items edit" CaptionBar="true" ClientEdge="false" ClientHeight="401" ClientWidth="476" ClipChildren="true" ClipSiblings="true" Color="COLOR_BTNFACE" ContextHelp="false" ControlParent="false" CtrlWindowStyle="382402560" CtrlWindowStyleEx="256" EnableLayout="false" GSGuides="false" Generate="true" Grid="true" HScroll="false" Height="435" Left="280" LocalizeName="" MDIChild="false" MaximizeBox="true" MinimizeBox="true" ModalFrame="false" NPositions="1" Name="CStringsEdit" ParentName="m_hWnd" ShowWindow="false" StaticEdge="false" SysMenu="true" ToolWindow="false" Top="221" TopMost="false" Transparent="false" UniqueID="0" VScroll="false" Visible="true" Width="484" WindowClass="false" WindowClassStyle="11" WindowEdge="true">
+	<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+	<GSGuides FromLeftToRight="true" FromTopToBottom="true" Moveable="false" OffsetX="0" OffsetY="0"/>
+	<Grid GridWidth="6" GridHeight="6"/>
+	<Icon FileName="" ID="" ImageType="None"/>
+	<WindowClass ClassName="NULL" CommonResID="" CS_BYTEALIGNCLIENT="false" CS_BYTEALIGNWINDOW="false" CS_CLASSDC="false" CS_DBLCLKS="true" CS_GLOBALCLASS="false" CS_HREDRAW="true" CS_NOCLOSE="false" CS_OWNDC="false" CS_PARENTDC="false" CS_SAVEBITS="false" CS_VREDRAW="true"/>
+	<Controls LastCtrlId="21">
+		<m_panel17 Page="DecorativeCtrl" Class="CPanel" AcceptFiles="false" BkColor="COLOR_BTNFACE" Border="false" Caption="" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="true" CtrlWindowStyle="1342242816" CtrlWindowStyleEx="65536" DoContained="false" EdgeType="BF_RECT" EnableToolTip="false" Enabled="true" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="357" HorizTextAlign="DT_CENTER" Hosted="false" ID="IDC_CSTRINGSEDIT_PANEL17" InnerBorder="0" Layout="false" Left="0" Localize="false" Name="m_panel17" OuterBorder="BDR_RAISEDOUTER" ParentName="m_hWnd" SingleLine="true" TabIndex="-1" TabStop="true" TextColor="COLOR_BTNTEXT" Theme="false" ToolTip="" Top="0" Transparent="false" UniqueID="17" VScroll="false" VertTextAlign="DT_VCENTER" Visible="true" Width="476">
+			<DoContained MessageMapID="0"/>
+			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Layout>
+				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Right AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Bottom AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<HCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+			</Layout>
+		</m_panel17>
+		<m_stringsList Page="ViksoeCtrl" Class="CEditListBox" AcceptFiles="false" Border="false" Browse="false" Caption="" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="false" CtrlWindowStyle="1342177280" CtrlWindowStyleEx="0" DoContained="false" EnableToolTip="false" Enabled="true" Focus="true" Font="false" Generate="true" Group="false" HScroll="false" Height="298" ID="IDC_STRINGS_LIST" Layout="false" Left="16" Localize="false" MoveButtons="true" Name="m_stringsList" ParentName="m_panel17" TabIndex="-1" TabStop="false" ToolTip="" Top="40" Transparent="false" UniqueID="15" VScroll="false" Visible="true" Width="444">
+			<DoContained MessageMapID="0"/>
+			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Layout>
+				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Right AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Bottom AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<HCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+			</Layout>
+		</m_stringsList>
+		<m_panel18 Page="DecorativeCtrl" Class="CPanel" AcceptFiles="false" BkColor="COLOR_BTNFACE" Border="false" Caption="" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="true" CtrlWindowStyle="1342242816" CtrlWindowStyleEx="65536" DoContained="false" EdgeType="BF_RECT" EnableToolTip="false" Enabled="true" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="43" HorizTextAlign="DT_CENTER" Hosted="false" ID="IDC_CSTRINGSEDIT_PANEL18" InnerBorder="BDR_RAISEDINNER" Layout="false" Left="0" Localize="false" Name="m_panel18" OuterBorder="0" ParentName="m_hWnd" SingleLine="true" TabIndex="-1" TabStop="true" TextColor="COLOR_BTNTEXT" Theme="false" ToolTip="" Top="358" Transparent="false" UniqueID="18" VScroll="false" VertTextAlign="DT_VCENTER" Visible="true" Width="476">
+			<DoContained MessageMapID="0"/>
+			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Layout>
+				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Right AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Bottom AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<HCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+			</Layout>
+		</m_panel18>
+		<m_ok Page="StdCtl" Class="CButton" AcceptFiles="false" Border="false" Caption="OK" Check="UnChecked" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="false" CtrlWindowStyle="1342181121" CtrlWindowStyleEx="0" DefPushButton="true" DoContained="false" EnableToolTip="false" Enabled="true" Flat="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="22" HorizAlign="BS_CENTER" ID="IDOK" Layout="false" Left="300" LeftText="false" Localize="false" MultiLine="false" Name="m_ok" Notify="false" ParentName="m_panel18" PushButton="true" Style="BS_TEXT" TabIndex="-1" TabStop="false" ToolTip="" Top="13" Transparent="false" UniqueID="0" VScroll="false" VertAlign="BS_VCENTER" Visible="true" Width="74">
+			<DoContained MessageMapID="0"/>
+			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Image FileName="" ID="" ImageType="None"/>
+			<Layout>
+				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Right AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Bottom AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<HCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+			</Layout>
+		</m_ok>
+		<m_cancel Page="StdCtl" Class="CButton" AcceptFiles="false" Border="false" Caption="Cancel" Check="UnChecked" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="false" CtrlWindowStyle="1342181120" CtrlWindowStyleEx="0" DefPushButton="false" DoContained="false" EnableToolTip="false" Enabled="true" Flat="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="22" HorizAlign="BS_CENTER" ID="IDCANCEL" Layout="false" Left="386" LeftText="false" Localize="false" MultiLine="false" Name="m_cancel" Notify="false" ParentName="m_panel18" PushButton="true" Style="BS_TEXT" TabIndex="-1" TabStop="false" ToolTip="" Top="13" Transparent="false" UniqueID="11" VScroll="false" VertAlign="BS_VCENTER" Visible="true" Width="74">
+			<DoContained MessageMapID="0"/>
+			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Image FileName="" ID="" ImageType="None"/>
+			<Layout>
+				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Right AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Bottom AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<HCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+			</Layout>
+		</m_cancel>
+		<m_static19 Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="ListBox items:" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="false" CtrlWindowStyle="1342242816" CtrlWindowStyleEx="0" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_CSTRINGSEDIT_STATIC19" Layout="false" Left="16" Localize="false" Name="m_static19" NoPrefix="true" Notify="false" ParentName="m_panel17" Simple="false" TabIndex="1" TabStop="true" TextAlign="SS_LEFT" ToolTip="" Top="11" Transparent="false" UniqueID="19" VScroll="false" Visible="true" Width="66" WordWrap="false">
+			<DoContained MessageMapID="0"/>
+			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Layout>
+				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Right AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Bottom AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<HCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+			</Layout>
+		</m_static19>
+	</Controls>
+</Form>

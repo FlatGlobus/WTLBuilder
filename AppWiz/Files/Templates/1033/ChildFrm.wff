@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<Form Page="Form" Class="[!output WTL_CHILD_FRAME_BASE_CLASS]" Name="[!output WTL_CHILD_FRAME_CLASS]" InternalWindowStyle="1456406528" InternalWindowStyleEx="64">
+	<Icon FileName="res\[!output PROJECT_NAME]Doc.ico" ID="IDR_MDICHILD"/>
+	<WindowClass ClassName="NULL" CommonResID="IDR_MDICHILD"/>
+</Form>

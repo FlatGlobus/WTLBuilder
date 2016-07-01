@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CED269A2-9C9F-4798-9D67-22B5DBD5DF8B}</ProjectGuid>
+    <RootNamespace>WTLBuilder</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);wtl/;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);wtl/;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);wtl/;</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <TypeLibraryName>%(RootDir)%(Directory)/$(ProjectName).tlb</TypeLibraryName>
+      <ErrorCheckAllocations>true</ErrorCheckAllocations>
+      <ErrorCheckBounds>true</ErrorCheckBounds>
+      <ErrorCheckRefPointers>true</ErrorCheckRefPointers>
+      <ErrorCheckStubData>true</ErrorCheckStubData>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>SDK\mmgr;SDK\Property;SDK\Utils;SDK\Event;SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;__WTLBUILDER__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)WTLBuilder.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);SDK\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>uxtheme.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <TypeLibraryFile>
+      </TypeLibraryFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <ProgramDatabaseFile>$(OutDir)WTLBuilder.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>res/wtlbuilder.exe.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Development\wtl\</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>SDK\mmgr;SDK\Property;SDK\Utils;SDK\Event;SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;__WTLBUILDER__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)WTLBuilder.exe</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);SDK\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>uxtheme.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>res/wtlbuilder.exe.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="aboutdlg.cpp" />
+    <ClCompile Include="cgfiltyp.cpp" />
+    <ClCompile Include="CScriptEditor.cpp" />
+    <ClCompile Include="CToolBoxWnd.cpp" />
+    <ClCompile Include="FormType.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="ModuleLoader.cpp" />
+    <ClCompile Include="OptionsDlg.cpp" />
+    <ClCompile Include="OutputWindow.cpp" />
+    <ClCompile Include="Project.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="ToolPanel.cpp" />
+    <ClCompile Include="ValueListHelper.cpp" />
+    <ClCompile Include="WTLBuilder.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aboutdlg.h" />
+    <ClInclude Include="atlscript.h" />
+    <ClInclude Include="cgfiltyp.h" />
+    <ClInclude Include="CScriptEditor.h" />
+    <ClInclude Include="CToolBoxWnd.h" />
+    <ClInclude Include="FormType.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="ModuleLoader.h" />
+    <ClInclude Include="OptionsDlg.h" />
+    <ClInclude Include="OutputWindow.h" />
+    <ClInclude Include="Project.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ScriptError.h" />
+    <ClInclude Include="ScriptHandler.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="ToolPanel.h" />
+    <ClInclude Include="ValueListHelper.h" />
+    <ClInclude Include="WTLBuilder_h.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\AigmentRight.ico" />
+    <None Include="res\AligmentBottom.ico" />
+    <None Include="res\AligmentLeft.ico" />
+    <None Include="res\aligntoolbar.bmp" />
+    <None Include="res\AlignTop.ico" />
+    <None Include="res\AllSides.ico" />
+    <None Include="res\arrow.bmp" />
+    <None Include="res\BottomSide.ico" />
+    <None Include="res\CenterGroupHoriz.ico" />
+    <None Include="res\CenterGroupVert.ico" />
+    <None Include="res\CenterHoriz.ico" />
+    <None Include="res\CenterVert.ico" />
+    <None Include="res\ChangeParent.ico" />
+    <None Include="res\closeform.ico" />
+    <None Include="res\CreationOrder.ico" />
+    <None Include="res\default.bmp" />
+    <None Include="res\DistGroupHoriz.ico" />
+    <None Include="res\DistGroupVert.ico" />
+    <None Include="res\Grid.ico" />
+    <None Include="res\GSGrid.ico" />
+    <None Include="res\GSHoriz.ico" />
+    <None Include="res\GSVert.ico" />
+    <None Include="res\HorizOrder.ico" />
+    <None Include="res\HorizOrderRight.ico" />
+    <None Include="res\HorizSize.ico" />
+    <None Include="res\icon1.ico" />
+    <None Include="res\icon4.ico" />
+    <None Include="res\infomsg.ico" />
+    <None Include="res\LeftSide.ico" />
+    <None Include="res\logo.bmp" />
+    <None Include="res\new.ico" />
+    <None Include="res\Open.ico" />
+    <None Include="res\prop.ico" />
+    <None Include="res\RightSide.ico" />
+    <None Include="res\SameSize.ico" />
+    <None Include="res\Save.ico" />
+    <None Include="res\SaveAll.ico" />
+    <None Include="ScriptHost.rgs" />
+    <None Include="res\showform.ico" />
+    <None Include="res\sortform.ico" />
+    <None Include="res\TabOrder.ico" />
+    <None Include="res\ToBackground.ico" />
+    <None Include="res\ToForeground.ico" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\ToParent.ico" />
+    <None Include="res\TopSide.ico" />
+    <None Include="res\typelib1.bin" />
+    <None Include="res\VertOrder.ico" />
+    <None Include="res\VertOrderBottom.ico" />
+    <None Include="res\VertSize.ico" />
+    <None Include="res\warnmsg.ico" />
+    <None Include="res\WTLBuilder.ico" />
+    <None Include="AboutDlg.wff">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CToolBoxWnd.wff" />
+    <None Include="FormType.wff" />
+    <None Include="MainFrm.wff" />
+    <None Include="OutputWindow.wff" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WTLBuilder.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Components\DecorativeCtrl\DecorativeCtrl.vcxproj">
+      <Project>{99d6d0c6-e7b0-477a-be54-107d4e65f7ee}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Components\ViksoeCtrl\ViksoeCtrl.vcxproj">
+      <Project>{579d7eb2-842d-4ec4-808f-c198b5197f5b}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Components\WTLBuilderCtrl\WTLBuilderCtrl.vcxproj">
+      <Project>{ba53825d-79e6-4179-a3d8-4ed410ea966d}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Forms\Form\Form.vcxproj">
+      <Project>{bb313c75-0d87-4125-a7f3-d534472995b9}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="Package\Package.vcxproj">
+      <Project>{bec7b932-5284-4733-8425-172782b40918}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="SDK\Event\Event.vcxproj">
+      <Project>{657e60f5-4bc0-4765-b6c0-94b944deb8a0}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="SDK\Property\Property.vcxproj">
+      <Project>{3fef5aed-07a3-48bd-875a-bb82c7d3cb63}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="SDK\Utils\Utils.vcxproj">
+      <Project>{2529a233-1d43-4d9e-b926-6d73f7738d20}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="WTLBuilder.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D8E484B5-2C56-4A69-A8E1-5CE887C69904}</ProjectGuid>
+    <RootNamespace>StdCtrl</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.23107.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);../../wtl/;</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);../../wtl/;</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\SDK\Utils;..\..\SDK\mmgr;..\..\SDK\Property;..\..\SDK\Event;..\..\SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;STDCTRL_EXPORTS;__WTLBUILDER__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\SDK\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)StdCtrl.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);..\SDK\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)StdCtrl.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences />
+      <EnableCOMDATFolding />
+      <ImportLibrary>$(OutDir)StdCtrl.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\Package\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\SDK\Utils;..\..\SDK\mmgr;..\..\SDK\Property;..\..\SDK\Event;..\..\SDK;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;STDCTRL_EXPORTS;__WTLBUILDER__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\SDK\Utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)StdCtrl.dll</OutputFile>
+      <AdditionalLibraryDirectories>$(OutDir);..\SDK\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>uxtheme.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)StdCtrl.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(OutDir)StdCtrl.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\Package\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AnimateCtrl.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ComboBox.cpp" />
+    <ClCompile Include="CPagesEdit.cpp" />
+    <ClCompile Include="CStringsEdit.cpp" />
+    <ClCompile Include="DateTimePicker.cpp" />
+    <ClCompile Include="Edit.cpp" />
+    <ClCompile Include="HeaderCtrl.cpp" />
+    <ClCompile Include="HotKeyCtrl.cpp" />
+    <ClCompile Include="HyperLink.cpp" />
+    <ClCompile Include="ImageList.cpp" />
+    <ClCompile Include="Label.cpp" />
+    <ClCompile Include="ListBox.cpp" />
+    <ClCompile Include="ListViewCtrl.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="PaneContainer.cpp" />
+    <ClCompile Include="ProgressBarCtrl.cpp" />
+    <ClCompile Include="RichEditCtrl.cpp" />
+    <ClCompile Include="scrollbar.cpp" />
+    <ClCompile Include="Splitter.cpp" />
+    <ClCompile Include="StatusBarCtrl.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="StdCtrl.cpp" />
+    <ClCompile Include="TabCtrl.cpp" />
+    <ClCompile Include="ToolBarCtrl.cpp" />
+    <ClCompile Include="TrackBarCtrl.cpp" />
+    <ClCompile Include="TreeViewCtrl.cpp" />
+    <ClCompile Include="UpDownCtrl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AnimateCtrl.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="CHeaderEdit.h" />
+    <ClInclude Include="ComboBox.h" />
+    <ClInclude Include="CPagesEdit.h" />
+    <ClInclude Include="CStringsEdit.h" />
+    <ClInclude Include="DateTimePicker.h" />
+    <ClInclude Include="Edit.h" />
+    <ClInclude Include="HeaderCtrl.h" />
+    <ClInclude Include="HotKeyCtrl.h" />
+    <ClInclude Include="HyperLink.h" />
+    <ClInclude Include="ImageList.h" />
+    <ClInclude Include="Label.h" />
+    <ClInclude Include="ListBox.h" />
+    <ClInclude Include="ListViewCtrl.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="PagesList.h" />
+    <ClInclude Include="PaneContainer.h" />
+    <ClInclude Include="ProgressBarCtrl.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RichEditCtrl.h" />
+    <ClInclude Include="scrollbar.h" />
+    <ClInclude Include="Splitter.h" />
+    <ClInclude Include="StatusBarCtrl.h" />
+    <ClInclude Include="UpDownCtrl.h" />
+    <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="animatectrl.bmp" />
+    <Image Include="Arrowd.bmp" />
+    <Image Include="arrowd.ico" />
+    <Image Include="Arrowu.bmp" />
+    <Image Include="arrowu.ico" />
+    <Image Include="button.bmp" />
+    <Image Include="checkbox.bmp" />
+    <Image Include="combobox.bmp" />
+    <Image Include="datetime.bmp" />
+    <Image Include="edit.bmp" />
+    <Image Include="groupbox.bmp" />
+    <Image Include="headerctrl.bmp" />
+    <Image Include="horsplit.bmp" />
+    <Image Include="hotkeyctrl.bmp" />
+    <Image Include="hscrollbar.bmp" />
+    <Image Include="hyperlin.bmp" />
+    <Image Include="imagebutton.bmp" />
+    <Image Include="imagelis.bmp" />
+    <Image Include="listbox.bmp" />
+    <Image Include="listview.bmp" />
+    <Image Include="menu.bmp" />
+    <Image Include="minus.BMP" />
+    <Image Include="minus.ico" />
+    <Image Include="panecontainer.bmp" />
+    <Image Include="picture.bmp" />
+    <Image Include="Plus.bmp" />
+    <Image Include="plus.ico" />
+    <Image Include="progressbar.bmp" />
+    <Image Include="radiobutton.bmp" />
+    <Image Include="richedit.bmp" />
+    <Image Include="toolbar.bmp" />
+    <Image Include="trackbarctrl.bmp" />
+    <Image Include="treeviewctrl.bmp" />
+    <Image Include="update.ico" />
+    <Image Include="updownctrl.bmp" />
+    <Image Include="vscrollb.bmp" />
+    <Image Include="window.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StdCtrl.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SDK\Event\Event.vcxproj">
+      <Project>{657e60f5-4bc0-4765-b6c0-94b944deb8a0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SDK\Property\Property.vcxproj">
+      <Project>{3fef5aed-07a3-48bd-875a-bb82c7d3cb63}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SDK\Utils\Utils.vcxproj">
+      <Project>{2529a233-1d43-4d9e-b926-6d73f7738d20}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

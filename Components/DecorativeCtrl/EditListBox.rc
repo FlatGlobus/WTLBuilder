@@ -1,0 +1,28 @@
+// Developed by Bjarke Viksoe
+//
+// EditListBox Control Resources version 1.0
+
+#ifndef __EDITLISTBOXCTRL_RC__
+#define __EDITLISTBOXCTRL_RC__
+
+#ifndef AFX_EDITLISTBOX_H__20010311_8A0B_FC46_5D30_0080AD509054__INCLUDED_
+	#include "EditListBox.h"
+#endif // AFX_EDITLISTBOX_H__20010311_8A0B_FC46_5D30_0080AD509054__INCLUDED_
+
+#ifdef APSTUDIO_INVOKED
+// This will prevent the VC++ Resource Editor user from saving this file
+1 TEXTINCLUDE DISCARDABLE
+BEGIN
+"< Cannot change EditListBox resources! >\0"
+END
+#endif    // APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// InfoStatic Control Icons
+//
+
+IDB_EDITLISTBOX         BITMAP  DISCARDABLE     "Res\\EditListBox.bmp"
+
+
+#endif //!__EDITLISTBOXCTRL_RC__

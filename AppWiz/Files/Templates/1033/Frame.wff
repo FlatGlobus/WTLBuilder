@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<Form Page="Form" Class="[!output WTL_FRAME_BASE_CLASS]" Name="[!output WTL_FRAME_CLASS]" InternalWindowStyle="114229248" InternalWindowStyleEx="262400">
+	<WindowClass ClassName="NULL" CommonResID="IDR_MAINFRAME"/>
+</Form>

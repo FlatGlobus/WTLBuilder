@@ -1,0 +1,284 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1D589EED-3287-4B38-8BF6-FCAC355A2C10}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Script\CAnimateCtrl.js = Bin\Script\CAnimateCtrl.js
+		Bin\Script\CButton.js = Bin\Script\CButton.js
+		Bin\Script\CButtonST.js = Bin\Script\CButtonST.js
+		Bin\Script\CCalculatorEdit.js = Bin\Script\CCalculatorEdit.js
+		Bin\Script\CComboBox.js = Bin\Script\CComboBox.js
+		Bin\Script\CDateTimePickerCtrl.js = Bin\Script\CDateTimePickerCtrl.js
+		Bin\Script\CDialogImpl.js = Bin\Script\CDialogImpl.js
+		Bin\Script\CEdit.js = Bin\Script\CEdit.js
+		Bin\Script\CEditListBox.js = Bin\Script\CEditListBox.js
+		Bin\Script\CFrameWindowImpl.js = Bin\Script\CFrameWindowImpl.js
+		Bin\Script\CGridCtrl.js = Bin\Script\CGridCtrl.js
+		Bin\Script\CHeaderCtrl.js = Bin\Script\CHeaderCtrl.js
+		Bin\Script\CHotKeyCtrl.js = Bin\Script\CHotKeyCtrl.js
+		Bin\Script\CHyperLink.js = Bin\Script\CHyperLink.js
+		Bin\Script\CImageList.js = Bin\Script\CImageList.js
+		Bin\Script\CImageListView.js = Bin\Script\CImageListView.js
+		Bin\Script\CListBox.js = Bin\Script\CListBox.js
+		Bin\Script\CListViewCtrl.js = Bin\Script\CListViewCtrl.js
+		Bin\Script\CMaskEdit.js = Bin\Script\CMaskEdit.js
+		Bin\Script\CMDIChildWindowImpl.js = Bin\Script\CMDIChildWindowImpl.js
+		Bin\Script\CMDIFrameWindowImpl.js = Bin\Script\CMDIFrameWindowImpl.js
+		Bin\Script\CMenu.js = Bin\Script\CMenu.js
+		Bin\Script\ColorButton.js = Bin\Script\ColorButton.js
+		Bin\Script\CPaneContainer.js = Bin\Script\CPaneContainer.js
+		Bin\Script\CPanel.js = Bin\Script\CPanel.js
+		Bin\Script\CProgressBarCtrl.js = Bin\Script\CProgressBarCtrl.js
+		Bin\Script\CPropertyGrid.js = Bin\Script\CPropertyGrid.js
+		Bin\Script\CPropertyList.js = Bin\Script\CPropertyList.js
+		Bin\Script\CRichEditCtrl.js = Bin\Script\CRichEditCtrl.js
+		Bin\Script\CScrollBar.js = Bin\Script\CScrollBar.js
+		Bin\Script\CShellComboCtrl.js = Bin\Script\CShellComboCtrl.js
+		Bin\Script\CShellListCtrl.js = Bin\Script\CShellListCtrl.js
+		Bin\Script\CShellTreeCtrl.js = Bin\Script\CShellTreeCtrl.js
+		Bin\Script\CSortListViewCtrl.js = Bin\Script\CSortListViewCtrl.js
+		Bin\Script\CSplitterWindow.js = Bin\Script\CSplitterWindow.js
+		Bin\Script\CStatic.js = Bin\Script\CStatic.js
+		Bin\Script\CStatusBarCtrl.js = Bin\Script\CStatusBarCtrl.js
+		Bin\Script\CStripedListView.js = Bin\Script\CStripedListView.js
+		Bin\Script\CTabCtrl.js = Bin\Script\CTabCtrl.js
+		Bin\Script\CToolBarCtrl.js = Bin\Script\CToolBarCtrl.js
+		Bin\Script\CToolPanel.js = Bin\Script\CToolPanel.js
+		Bin\Script\CTrackbarCtrl.js = Bin\Script\CTrackbarCtrl.js
+		Bin\Script\CTreeListView.js = Bin\Script\CTreeListView.js
+		Bin\Script\CTreeViewCtrl.js = Bin\Script\CTreeViewCtrl.js
+		Bin\Script\CUpDownCtrl.js = Bin\Script\CUpDownCtrl.js
+		Bin\Script\CWindow.js = Bin\Script\CWindow.js
+		Bin\Script\CWindowImpl.js = Bin\Script\CWindowImpl.js
+		Bin\Script\CWtlEditBrowserCtrl.js = Bin\Script\CWtlEditBrowserCtrl.js
+		Bin\Script\LangID.js = Bin\Script\LangID.js
+		Bin\Script\Layout.js = Bin\Script\Layout.js
+		Bin\Script\rulers.js = Bin\Script\rulers.js
+		Bin\Script\SplitterBar.js = Bin\Script\SplitterBar.js
+		Bin\Script\Util.js = Bin\Script\Util.js
+		Bin\Script\WindowClass.js = Bin\Script\WindowClass.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CDialogImpl", "CDialogImpl", "{E86ECE4F-D1B1-4FF0-BC77-9F87FC99DC6D}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CDialogImpl\CDialogImpl.bmp = Bin\Template\CDialogImpl\CDialogImpl.bmp
+		Bin\Template\CDialogImpl\CDialogImpl.cpp = Bin\Template\CDialogImpl\CDialogImpl.cpp
+		Bin\Template\CDialogImpl\CDialogImpl.h = Bin\Template\CDialogImpl\CDialogImpl.h
+		Bin\Template\CDialogImpl\CDialogImpl.wff = Bin\Template\CDialogImpl\CDialogImpl.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CDialogTemplate", "CDialogTemplate", "{FBC9FBAD-CFE4-4B65-9ED4-24F1D7065465}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CDialogTemplate\CDialogTemplate.bmp = Bin\Template\CDialogTemplate\CDialogTemplate.bmp
+		Bin\Template\CDialogTemplate\CDialogTemplate.cpp = Bin\Template\CDialogTemplate\CDialogTemplate.cpp
+		Bin\Template\CDialogTemplate\CDialogTemplate.h = Bin\Template\CDialogTemplate\CDialogTemplate.h
+		Bin\Template\CDialogTemplate\CDialogTemplate.wff = Bin\Template\CDialogTemplate\CDialogTemplate.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CFrameWindowImpl", "CFrameWindowImpl", "{9CD01189-404A-4CE0-B153-6A78B656171A}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CFrameWindowImpl\CFrameWindowImpl.cpp = Bin\Template\CFrameWindowImpl\CFrameWindowImpl.cpp
+		Bin\Template\CFrameWindowImpl\CFrameWindowImpl.h = Bin\Template\CFrameWindowImpl\CFrameWindowImpl.h
+		Bin\Template\CFrameWindowImpl\CFrameWindowImpl.ico = Bin\Template\CFrameWindowImpl\CFrameWindowImpl.ico
+		Bin\Template\CFrameWindowImpl\CFrameWindowImpl.wff = Bin\Template\CFrameWindowImpl\CFrameWindowImpl.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CMainFrame", "CMainFrame", "{63E762BB-9CBD-4D37-BF1E-C29E64AD86EC}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CMainFrame\CMainFrame.cpp = Bin\Template\CMainFrame\CMainFrame.cpp
+		Bin\Template\CMainFrame\CMainFrame.h = Bin\Template\CMainFrame\CMainFrame.h
+		Bin\Template\CMainFrame\CMainFrame.ico = Bin\Template\CMainFrame\CMainFrame.ico
+		Bin\Template\CMainFrame\CMainFrame.wff = Bin\Template\CMainFrame\CMainFrame.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CMDIChildWindowImpl", "CMDIChildWindowImpl", "{6C305862-4B66-4A26-8DDD-31B9DB23CF93}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CMDIChildWindowImpl\CMDIChildWindowImpl.cpp = Bin\Template\CMDIChildWindowImpl\CMDIChildWindowImpl.cpp
+		Bin\Template\CMDIChildWindowImpl\CMDIChildWindowImpl.h = Bin\Template\CMDIChildWindowImpl\CMDIChildWindowImpl.h
+		Bin\Template\CMDIChildWindowImpl\CMDIChildWindowImpl.ico = Bin\Template\CMDIChildWindowImpl\CMDIChildWindowImpl.ico
+		Bin\Template\CMDIChildWindowImpl\CMDIChildWindowImpl.wff = Bin\Template\CMDIChildWindowImpl\CMDIChildWindowImpl.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CMDIFrameWindowImpl", "CMDIFrameWindowImpl", "{91D72249-1B35-4886-A38C-9F2B63AD2895}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CMDIFrameWindowImpl\CMDIFrameWindowImpl.cpp = Bin\Template\CMDIFrameWindowImpl\CMDIFrameWindowImpl.cpp
+		Bin\Template\CMDIFrameWindowImpl\CMDIFrameWindowImpl.h = Bin\Template\CMDIFrameWindowImpl\CMDIFrameWindowImpl.h
+		Bin\Template\CMDIFrameWindowImpl\CMDIFrameWindowImpl.ico = Bin\Template\CMDIFrameWindowImpl\CMDIFrameWindowImpl.ico
+		Bin\Template\CMDIFrameWindowImpl\CMDIFrameWindowImpl.wff = Bin\Template\CMDIFrameWindowImpl\CMDIFrameWindowImpl.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "COptionsDlg", "COptionsDlg", "{76991CDB-8387-472B-A37A-84DB7ECEBED6}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\COptionsDlg\COptionsDlg.cpp = Bin\Template\COptionsDlg\COptionsDlg.cpp
+		Bin\Template\COptionsDlg\COptionsDlg.h = Bin\Template\COptionsDlg\COptionsDlg.h
+		Bin\Template\COptionsDlg\COptionsDlg.wff = Bin\Template\COptionsDlg\COptionsDlg.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CPagesEdit", "CPagesEdit", "{D8E1A09C-100C-4689-BF03-0F17195EC9BB}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CPagesEdit\CPagesEdit.cpp = Bin\Template\CPagesEdit\CPagesEdit.cpp
+		Bin\Template\CPagesEdit\CPagesEdit.h = Bin\Template\CPagesEdit\CPagesEdit.h
+		Bin\Template\CPagesEdit\CPagesEdit.wff = Bin\Template\CPagesEdit\CPagesEdit.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSplashWnd", "CSplashWnd", "{8D130FC4-D732-4A6A-A3B0-9D421A2E41B1}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CSplashWnd\csplashwnd.cpp = Bin\Template\CSplashWnd\csplashwnd.cpp
+		Bin\Template\CSplashWnd\csplashwnd.h = Bin\Template\CSplashWnd\csplashwnd.h
+		Bin\Template\CSplashWnd\csplashwnd.ico = Bin\Template\CSplashWnd\csplashwnd.ico
+		Bin\Template\CSplashWnd\csplashwnd.js = Bin\Template\CSplashWnd\csplashwnd.js
+		Bin\Template\CSplashWnd\csplashwnd.wff = Bin\Template\CSplashWnd\csplashwnd.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CStringsEdit", "CStringsEdit", "{047C9037-C7C9-40DF-8D75-67FB16FEDCFF}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CStringsEdit\CStringsEdit.cpp = Bin\Template\CStringsEdit\CStringsEdit.cpp
+		Bin\Template\CStringsEdit\CStringsEdit.h = Bin\Template\CStringsEdit\CStringsEdit.h
+		Bin\Template\CStringsEdit\CStringsEdit.wff = Bin\Template\CStringsEdit\CStringsEdit.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CWindowImpl", "CWindowImpl", "{9D52A555-B2D5-4A3A-8514-566EE5ABDDF0}"
+	ProjectSection(SolutionItems) = preProject
+		Bin\Template\CWindowImpl\CWindowImpl.cpp = Bin\Template\CWindowImpl\CWindowImpl.cpp
+		Bin\Template\CWindowImpl\CWindowImpl.h = Bin\Template\CWindowImpl\CWindowImpl.h
+		Bin\Template\CWindowImpl\CWindowImpl.ico = Bin\Template\CWindowImpl\CWindowImpl.ico
+		Bin\Template\CWindowImpl\CWindowImpl.wff = Bin\Template\CWindowImpl\CWindowImpl.wff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SDK", "SDK", "{B9665BF8-2528-4534-8891-9DBE20BFC576}"
+	ProjectSection(SolutionItems) = preProject
+		SDK\Command.h = SDK\Command.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{5D3FC03D-DF7A-42B6-9E7F-FD90748FF7AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms", "Forms", "{5AE638EF-D9C0-463E-A4E6-9FB6EA950B8D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WTLBuilder", "WTLBuilder.vcxproj", "{CED269A2-9C9F-4798-9D67-22B5DBD5DF8B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D8E484B5-2C56-4A69-A8E1-5CE887C69904} = {D8E484B5-2C56-4A69-A8E1-5CE887C69904}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Package", "Package\Package.vcxproj", "{BEC7B932-5284-4733-8425-172782B40918}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Event", "SDK\Event\Event.vcxproj", "{657E60F5-4BC0-4765-B6C0-94B944DEB8A0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Property", "SDK\Property\Property.vcxproj", "{3FEF5AED-07A3-48BD-875A-BB82C7D3CB63}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Utils", "SDK\Utils\Utils.vcxproj", "{2529A233-1D43-4D9E-B926-6D73F7738D20}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DecorativeCtrl", "Components\DecorativeCtrl\DecorativeCtrl.vcxproj", "{99D6D0C6-E7B0-477A-BE54-107D4E65F7EE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ViksoeCtrl", "Components\ViksoeCtrl\ViksoeCtrl.vcxproj", "{579D7EB2-842D-4EC4-808F-C198B5197F5B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WTLBuilderCtrl", "Components\WTLBuilderCtrl\WTLBuilderCtrl.vcxproj", "{BA53825D-79E6-4179-A3D8-4ED410EA966D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Form", "Forms\Form\Form.vcxproj", "{BB313C75-0D87-4125-A7F3-D534472995B9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StdCtrl", "Components\StdCtrl\StdCtrl.vcxproj", "{D8E484B5-2C56-4A69-A8E1-5CE887C69904}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2529A233-1D43-4D9E-B926-6D73F7738D20} = {2529A233-1D43-4D9E-B926-6D73F7738D20}
+		{3FEF5AED-07A3-48BD-875A-BB82C7D3CB63} = {3FEF5AED-07A3-48BD-875A-BB82C7D3CB63}
+		{657E60F5-4BC0-4765-B6C0-94B944DEB8A0} = {657E60F5-4BC0-4765-B6C0-94B944DEB8A0}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CED269A2-9C9F-4798-9D67-22B5DBD5DF8B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CED269A2-9C9F-4798-9D67-22B5DBD5DF8B}.Debug|Win32.Build.0 = Debug|Win32
+		{CED269A2-9C9F-4798-9D67-22B5DBD5DF8B}.Debug|x64.ActiveCfg = Debug|Win32
+		{CED269A2-9C9F-4798-9D67-22B5DBD5DF8B}.Release|Win32.ActiveCfg = Release|Win32
+		{CED269A2-9C9F-4798-9D67-22B5DBD5DF8B}.Release|Win32.Build.0 = Release|Win32
+		{CED269A2-9C9F-4798-9D67-22B5DBD5DF8B}.Release|x64.ActiveCfg = Release|Win32
+		{BEC7B932-5284-4733-8425-172782B40918}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BEC7B932-5284-4733-8425-172782B40918}.Debug|Win32.Build.0 = Debug|Win32
+		{BEC7B932-5284-4733-8425-172782B40918}.Debug|x64.ActiveCfg = Debug|Win32
+		{BEC7B932-5284-4733-8425-172782B40918}.Release|Win32.ActiveCfg = Release|Win32
+		{BEC7B932-5284-4733-8425-172782B40918}.Release|Win32.Build.0 = Release|Win32
+		{BEC7B932-5284-4733-8425-172782B40918}.Release|x64.ActiveCfg = Release|Win32
+		{657E60F5-4BC0-4765-B6C0-94B944DEB8A0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{657E60F5-4BC0-4765-B6C0-94B944DEB8A0}.Debug|Win32.Build.0 = Debug|Win32
+		{657E60F5-4BC0-4765-B6C0-94B944DEB8A0}.Debug|x64.ActiveCfg = Debug|Win32
+		{657E60F5-4BC0-4765-B6C0-94B944DEB8A0}.Release|Win32.ActiveCfg = Release|Win32
+		{657E60F5-4BC0-4765-B6C0-94B944DEB8A0}.Release|Win32.Build.0 = Release|Win32
+		{657E60F5-4BC0-4765-B6C0-94B944DEB8A0}.Release|x64.ActiveCfg = Release|Win32
+		{3FEF5AED-07A3-48BD-875A-BB82C7D3CB63}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3FEF5AED-07A3-48BD-875A-BB82C7D3CB63}.Debug|Win32.Build.0 = Debug|Win32
+		{3FEF5AED-07A3-48BD-875A-BB82C7D3CB63}.Debug|x64.ActiveCfg = Debug|Win32
+		{3FEF5AED-07A3-48BD-875A-BB82C7D3CB63}.Release|Win32.ActiveCfg = Release|Win32
+		{3FEF5AED-07A3-48BD-875A-BB82C7D3CB63}.Release|Win32.Build.0 = Release|Win32
+		{3FEF5AED-07A3-48BD-875A-BB82C7D3CB63}.Release|x64.ActiveCfg = Release|Win32
+		{2529A233-1D43-4D9E-B926-6D73F7738D20}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2529A233-1D43-4D9E-B926-6D73F7738D20}.Debug|Win32.Build.0 = Debug|Win32
+		{2529A233-1D43-4D9E-B926-6D73F7738D20}.Debug|x64.ActiveCfg = Debug|Win32
+		{2529A233-1D43-4D9E-B926-6D73F7738D20}.Release|Win32.ActiveCfg = Release|Win32
+		{2529A233-1D43-4D9E-B926-6D73F7738D20}.Release|Win32.Build.0 = Release|Win32
+		{2529A233-1D43-4D9E-B926-6D73F7738D20}.Release|x64.ActiveCfg = Release|Win32
+		{99D6D0C6-E7B0-477A-BE54-107D4E65F7EE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{99D6D0C6-E7B0-477A-BE54-107D4E65F7EE}.Debug|Win32.Build.0 = Debug|Win32
+		{99D6D0C6-E7B0-477A-BE54-107D4E65F7EE}.Debug|x64.ActiveCfg = Debug|Win32
+		{99D6D0C6-E7B0-477A-BE54-107D4E65F7EE}.Release|Win32.ActiveCfg = Release|Win32
+		{99D6D0C6-E7B0-477A-BE54-107D4E65F7EE}.Release|Win32.Build.0 = Release|Win32
+		{99D6D0C6-E7B0-477A-BE54-107D4E65F7EE}.Release|x64.ActiveCfg = Release|Win32
+		{579D7EB2-842D-4EC4-808F-C198B5197F5B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{579D7EB2-842D-4EC4-808F-C198B5197F5B}.Debug|Win32.Build.0 = Debug|Win32
+		{579D7EB2-842D-4EC4-808F-C198B5197F5B}.Debug|x64.ActiveCfg = Debug|Win32
+		{579D7EB2-842D-4EC4-808F-C198B5197F5B}.Release|Win32.ActiveCfg = Release|Win32
+		{579D7EB2-842D-4EC4-808F-C198B5197F5B}.Release|Win32.Build.0 = Release|Win32
+		{579D7EB2-842D-4EC4-808F-C198B5197F5B}.Release|x64.ActiveCfg = Release|Win32
+		{BA53825D-79E6-4179-A3D8-4ED410EA966D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BA53825D-79E6-4179-A3D8-4ED410EA966D}.Debug|Win32.Build.0 = Debug|Win32
+		{BA53825D-79E6-4179-A3D8-4ED410EA966D}.Debug|x64.ActiveCfg = Debug|Win32
+		{BA53825D-79E6-4179-A3D8-4ED410EA966D}.Release|Win32.ActiveCfg = Release|Win32
+		{BA53825D-79E6-4179-A3D8-4ED410EA966D}.Release|Win32.Build.0 = Release|Win32
+		{BA53825D-79E6-4179-A3D8-4ED410EA966D}.Release|x64.ActiveCfg = Release|Win32
+		{BB313C75-0D87-4125-A7F3-D534472995B9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BB313C75-0D87-4125-A7F3-D534472995B9}.Debug|Win32.Build.0 = Debug|Win32
+		{BB313C75-0D87-4125-A7F3-D534472995B9}.Debug|x64.ActiveCfg = Debug|Win32
+		{BB313C75-0D87-4125-A7F3-D534472995B9}.Release|Win32.ActiveCfg = Release|Win32
+		{BB313C75-0D87-4125-A7F3-D534472995B9}.Release|Win32.Build.0 = Release|Win32
+		{BB313C75-0D87-4125-A7F3-D534472995B9}.Release|x64.ActiveCfg = Release|Win32
+		{D8E484B5-2C56-4A69-A8E1-5CE887C69904}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D8E484B5-2C56-4A69-A8E1-5CE887C69904}.Debug|Win32.Build.0 = Debug|Win32
+		{D8E484B5-2C56-4A69-A8E1-5CE887C69904}.Debug|x64.ActiveCfg = Debug|Win32
+		{D8E484B5-2C56-4A69-A8E1-5CE887C69904}.Release|Win32.ActiveCfg = Release|Win32
+		{D8E484B5-2C56-4A69-A8E1-5CE887C69904}.Release|Win32.Build.0 = Release|Win32
+		{D8E484B5-2C56-4A69-A8E1-5CE887C69904}.Release|x64.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E86ECE4F-D1B1-4FF0-BC77-9F87FC99DC6D} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{FBC9FBAD-CFE4-4B65-9ED4-24F1D7065465} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{9CD01189-404A-4CE0-B153-6A78B656171A} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{63E762BB-9CBD-4D37-BF1E-C29E64AD86EC} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{6C305862-4B66-4A26-8DDD-31B9DB23CF93} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{91D72249-1B35-4886-A38C-9F2B63AD2895} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{76991CDB-8387-472B-A37A-84DB7ECEBED6} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{D8E1A09C-100C-4689-BF03-0F17195EC9BB} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{8D130FC4-D732-4A6A-A3B0-9D421A2E41B1} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{047C9037-C7C9-40DF-8D75-67FB16FEDCFF} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{9D52A555-B2D5-4A3A-8514-566EE5ABDDF0} = {7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}
+		{657E60F5-4BC0-4765-B6C0-94B944DEB8A0} = {B9665BF8-2528-4534-8891-9DBE20BFC576}
+		{3FEF5AED-07A3-48BD-875A-BB82C7D3CB63} = {B9665BF8-2528-4534-8891-9DBE20BFC576}
+		{2529A233-1D43-4D9E-B926-6D73F7738D20} = {B9665BF8-2528-4534-8891-9DBE20BFC576}
+		{99D6D0C6-E7B0-477A-BE54-107D4E65F7EE} = {5D3FC03D-DF7A-42B6-9E7F-FD90748FF7AA}
+		{579D7EB2-842D-4EC4-808F-C198B5197F5B} = {5D3FC03D-DF7A-42B6-9E7F-FD90748FF7AA}
+		{BA53825D-79E6-4179-A3D8-4ED410EA966D} = {5D3FC03D-DF7A-42B6-9E7F-FD90748FF7AA}
+		{BB313C75-0D87-4125-A7F3-D534472995B9} = {5AE638EF-D9C0-463E-A4E6-9FB6EA950B8D}
+		{D8E484B5-2C56-4A69-A8E1-5CE887C69904} = {5D3FC03D-DF7A-42B6-9E7F-FD90748FF7AA}
+	EndGlobalSection
+	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
+		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Form Page="Form" Class="CFrameWindowImpl" Name="CScriptEditor" ParentName="m_hWnd" UniqueID="0" Left="206" Width="683" Top="171" Height="567" Generate="true" CtrlWindowStyle="382664704" CtrlWindowStyleEx="256" ShowWindow="true" Caption="FrameWindowImpl0" Visible="true" ClientEdge="false" HScroll="false" VScroll="false" MinimizeBox="true" MaximizeBox="true" SysMenu="true" CaptionBar="true" Border="WS_THICKFRAME" Color="COLOR_WINDOW" ClientHeight="513" ClientWidth="675" ModalFrame="false" TopMost="false" Transparent="false" MDIChild="false" ToolWindow="false" ContextHelp="false" EnableLayout="false" NPositions="1" ClipSiblings="true" ClipChildren="true" AcceptFiles="false" WindowEdge="true" ControlParent="false" StaticEdge="false" AppWindow="false" WindowClassStyle="11" WindowClass="false" Grid="true" GSGuides="false" LocalizeName="" BaseCtrlID="1000" WndClient="m_edit" WndToolBar="NULL" WndStatusBar="m_statusbarctrl1" Menu="Menu2">
+	<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+	<Icon FileName="" ID="" ImageType="None"/>
+	<WindowClass ClassName="NULL" CommonResID="" CS_BYTEALIGNCLIENT="false" CS_BYTEALIGNWINDOW="false" CS_CLASSDC="false" CS_DBLCLKS="true" CS_GLOBALCLASS="false" CS_HREDRAW="true" CS_NOCLOSE="false" CS_OWNDC="false" CS_PARENTDC="false" CS_SAVEBITS="false" CS_VREDRAW="true"/>
+	<Grid GridWidth="6" GridHeight="6"/>
+	<GSGuides FromLeftToRight="true" FromTopToBottom="true" Moveable="false" OffsetX="0" OffsetY="0"/>
+	<Controls LastCtrlId="3">
+		<m_edit Page="StdCtl" Class="CEdit" Name="m_edit" ParentName="m_hWnd" UniqueID="0" Left="0" Width="675" Top="0" Height="490" Generate="true" TabIndex="1" CtrlWindowStyle="1345392836" CtrlWindowStyleEx="0" Border="false" Enabled="true" Visible="true" ClientEdge="false" ToolTip="" EnableToolTip="false" ID="IDC_EDIT" TabStop="true" Group="false" HScroll="true" VScroll="true" Font="false" Layout="false" Focus="true" Transparent="false" ClipSiblings="false" ClipChildren="false" AcceptFiles="false" ControlParent="false" DoContained="false" Localize="false" AutoHScroll="true" AutoVScroll="true" MultiLine="true" LowerCase="false" NoHideSel="false" Number="false" OemConvert="false" Password="false" ReadOnly="false" UpperCase="false" WantReturn="true" Text="" TextAlign="ES_LEFT">
+			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Layout>
+				<Left AttachForm="true" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Top AttachForm="true" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Right AttachForm="true" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Bottom AttachForm="true" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<HCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+			</Layout>
+			<DoContained MessageMapID="0"/>
+		</m_edit>
+		<m_statusbarctrl1 Page="StdCtl" Class="CStatusBarCtrl" Name="m_statusbarctrl1" ParentName="m_hWnd" UniqueID="1" Left="0" Width="675" Top="490" Height="23" Generate="true" TabIndex="2" CtrlWindowStyle="1342242816" CtrlWindowStyleEx="0" Border="false" Enabled="true" Visible="true" ClientEdge="false" ToolTip="" EnableToolTip="false" ID="IDC_CSCRIPTEDITOR_STATUSBARCTRL1" TabStop="true" Group="false" HScroll="false" VScroll="false" Font="false" Layout="false" Focus="false" Transparent="false" ClipSiblings="false" ClipChildren="false" AcceptFiles="false" ControlParent="false" DoContained="false" Localize="false">
+			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Layout>
+				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Right AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<Bottom AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<HCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
+			</Layout>
+			<DoContained MessageMapID="0"/>
+		</m_statusbarctrl1>
+		<Menu2 Page="StdCtl" Class="CMenu" Generate="true" Height="29" ID="IDR_SCRIPT_EDITOR" Left="372" Name="Menu2" ParentName="m_hWnd" Top="6" UniqueID="2" Width="29"/>
+	</Controls>
+</Form>

@@ -1,0 +1,151 @@
+// Copyright (C) FlatGlobus(wtlbuilder@gmail.com) All rights reserved.
+//
+// This file is a part of the WTLBuilder.
+// The use and distribution terms for this software are covered by the
+// Microsoft Public License (http://opensource.org/licenses/MS-PL)
+// which can be found in the file MS-PL.txt at the root folder.
+
+#include "StdAfx.h"
+#include "listviewctrl.h"
+#include "resource.h"
+#include "PropertyListEdit.h"
+//////////////////////////////////////////////////////////////////////////
+static void RegisterListViewCtrlStyles();
+typedef long ListViewStyle;
+typedef long ListAlignStyle;
+typedef long ListSortStyle;
+
+namespace StdCtrl
+{
+REGISTER_COMPONENT(CListViewCtrl,StdCtl,IDB_LISTVIEWCTRL)
+
+CListViewCtrl::CListViewCtrl(LPTSTR _name):ControlComponent<StdCtrl::CListViewCtrl>(_name)
+{
+	SetDefaultSize(120,128);
+	RegisterListViewCtrlStyles();
+}
+
+CListViewCtrl::~CListViewCtrl(void)
+{
+}
+
+BOOL CListViewCtrl::CreateComponent(Component * _Parent)
+{
+    SetComponentParent(_Parent);
+	CWindowImpl<StdCtrl::CListViewCtrl,WTL::CListViewCtrl>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
+	return ::IsWindow(m_hWnd);
+}
+
+void CListViewCtrl::InitProperty(void)
+{
+	ControlComponent<StdCtrl::CListViewCtrl>::InitProperty();
+	DEFINE_PROPERTY(AutoArrange,BOOL,CListViewCtrl,FALSE)
+	DEFINE_PROPERTY(EditLabels,BOOL,CListViewCtrl,FALSE)
+	DEFINE_PROPERTY(NoColumnHeader,BOOL,CListViewCtrl,FALSE)	
+	DEFINE_PROPERTY(NoLabelWrap,BOOL,CListViewCtrl,FALSE)	
+	DEFINE_PROPERTY(NoScroll,BOOL,CListViewCtrl,FALSE)	
+	DEFINE_PROPERTY(NoSortHeader,BOOL,CListViewCtrl,FALSE)	
+	DEFINE_PROPERTY(OwnerData,BOOL,CListViewCtrl,FALSE)	
+	DEFINE_PROPERTY(OwnerDrawFixed,BOOL,CListViewCtrl,FALSE)	
+	DEFINE_PROPERTY(ShareImageLists,BOOL,CListViewCtrl,FALSE)	
+	DEFINE_PROPERTY(ShowSelAlways,BOOL,CListViewCtrl,FALSE)	
+	DEFINE_PROPERTY(SingleSel,BOOL,CListViewCtrl,FALSE)	
+	DEFINE_PROPERTY(ListStyle,ListViewStyle,CListViewCtrl,LVS_LIST)
+	DEFINE_PROPERTY(Alignment,ListAlignStyle,CListViewCtrl,LVS_ALIGNTOP)
+	DEFINE_PROPERTY(Sort,ListSortStyle,CListViewCtrl,0)
+		///common styles
+	DEFINE_PROPERTY(NoDivider,BOOL,CListViewCtrl,FALSE)
+	DEFINE_PROPERTY(NoMoveY,BOOL,CListViewCtrl,FALSE)
+	DEFINE_PROPERTY(NoParentAlign,BOOL,CListViewCtrl,FALSE)
+	DEFINE_PROPERTY(NoResize,BOOL,CListViewCtrl,FALSE)
+	PUBLIC_PROPERTY(VScroll,TRUE)
+	PUBLIC_PROPERTY(HScroll,TRUE)
+
+    DEFINE_PROPERTY(CheckBoxes,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(GridLines,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(SubItemImages,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(TrackSelect,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(HeaderDragAndDrop,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(FullRowSelect,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(OneClickActivate,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(TwoClickActivate,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(FlatSB,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(Regional,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(InfoTip,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(UnderLineHot,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(UnderLineCold,BOOL,CListViewCtrl,FALSE)
+    DEFINE_PROPERTY(MultiWorkAreas,BOOL,CListViewCtrl,FALSE)
+}
+
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,AutoArrange,(LVS_AUTOARRANGE))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,EditLabels,(LVS_EDITLABELS))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,NoColumnHeader,(LVS_NOCOLUMNHEADER))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,NoLabelWrap,(LVS_NOLABELWRAP))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,NoScroll,(LVS_NOSCROLL))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,NoSortHeader,(LVS_NOSORTHEADER))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,OwnerData,(LVS_OWNERDATA))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,OwnerDrawFixed,(LVS_OWNERDRAWFIXED))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,ShareImageLists,(LVS_SHAREIMAGELISTS))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,ShowSelAlways,(LVS_SHOWSELALWAYS))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,SingleSel,(LVS_SINGLESEL))
+
+IMPLEMENT_WINSTYLE_PROPERTY(CListViewCtrl,ListStyle,(LVS_ICON|LVS_REPORT|LVS_SMALLICON|LVS_LIST))
+IMPLEMENT_WINSTYLE_PROPERTY(CListViewCtrl,Alignment,(LVS_ALIGNTOP|LVS_ALIGNLEFT))
+IMPLEMENT_WINSTYLE_PROPERTY(CListViewCtrl,Sort,(LVS_SORTASCENDING|LVS_SORTDESCENDING|0))
+///common styles
+//IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,Bottom,(CCS_BOTTOM))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,NoDivider,(CCS_NODIVIDER))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,NoMoveY,(CCS_NOMOVEY))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,NoParentAlign,(CCS_NOPARENTALIGN))
+IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,NoResize,(CCS_NORESIZE))
+
+
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,CheckBoxes,(LVS_EX_CHECKBOXES))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,GridLines,(LVS_EX_GRIDLINES))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,SubItemImages,(LVS_EX_SUBITEMIMAGES))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,TrackSelect,(LVS_EX_TRACKSELECT))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,HeaderDragAndDrop,(LVS_EX_HEADERDRAGDROP))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,FullRowSelect,(LVS_EX_FULLROWSELECT))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,OneClickActivate,(LVS_EX_ONECLICKACTIVATE))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,TwoClickActivate,(LVS_EX_TWOCLICKACTIVATE))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,FlatSB,(LVS_EX_FLATSB))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,Regional,(LVS_EX_REGIONAL))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,InfoTip,(LVS_EX_INFOTIP))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,UnderLineHot,(LVS_EX_UNDERLINEHOT))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,UnderLineCold,(LVS_EX_UNDERLINECOLD))
+IMPLEMENT_LISTVIEWEXSTYLE_BOOL_PROPERTY(CListViewCtrl,MultiWorkAreas,(LVS_EX_MULTIWORKAREAS))
+//IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,Top,(CCS_TOP))
+}
+//////////////////////////////////////////////////////////////////////////
+BEGIN_LIST_PROPERTY(ListViewStyle)
+LIST_ITEM_DECORATE(LVS_ICON,LVS_ICON,Icon)
+LIST_ITEM_DECORATE(LVS_REPORT,LVS_REPORT,Report)         
+LIST_ITEM_DECORATE(LVS_SMALLICON,LVS_SMALLICON,SmallIcon)
+LIST_ITEM_DECORATE(LVS_LIST,LVS_LIST,List)
+END_LIST_ITEM(ListViewStyle)
+
+BEGIN_LIST_PROPERTY(ListAlignStyle)
+LIST_ITEM_DECORATE(LVS_ALIGNTOP,LVS_ALIGNTOP,Top)
+LIST_ITEM_DECORATE(LVS_ALIGNLEFT,LVS_ALIGNLEFT,Left)
+END_LIST_ITEM(ListAlignStyle)
+
+BEGIN_LIST_PROPERTY(ListSortStyle)
+LIST_ITEM_DECORATE(LVS_SORTASCENDING,LVS_SORTASCENDING,Ascending)
+LIST_ITEM_DECORATE(LVS_SORTDESCENDING,LVS_SORTDESCENDING,Descending)
+LIST_ITEM_DECORATE(0,0,None)
+END_LIST_ITEM(ListSortStyle)
+
+//LIST_ITEM_DECORATE(LVS_EX_MULTIWORKAREAS   
+
+static void RegisterListViewCtrlStyles()
+{
+	static BOOL IsInited=FALSE;
+	if(IsInited==TRUE)
+		return;
+
+	REGISTER_LIST_PROPERTY(ListViewStyle)
+	REGISTER_LIST_PROPERTY(ListAlignStyle)
+	REGISTER_LIST_PROPERTY(ListSortStyle)
+
+	IsInited=TRUE;
+}

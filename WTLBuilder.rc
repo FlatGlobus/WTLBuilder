@@ -1,0 +1,481 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "atlres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral (Sys. Default) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUSD)
+LANGUAGE LANG_NEUTRAL, SUBLANG_SYS_DEFAULT
+#pragma code_page(1251)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\WTLBuilder.ico"
+
+#endif    // Neutral (Sys. Default) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_INFO_MSG            ICON                    "res\\infomsg.ico"
+
+IDI_WARN_MSG            ICON                    "res\\warnmsg.ico"
+
+IDI_CLOSE_FORM          ICON                    "res\\closeform.ico"
+
+IDI_SHOW_FORM           ICON                    "res\\showform.ico"
+
+IDI_SORT_FORM           ICON                    "res\\sortform.ico"
+
+IDI_HORIZ_ORDER_RIGHT   ICON                    "res\\HorizOrderRight.ico"
+
+IDI_VERT_ORDER_BOTTOM   ICON                    "res\\VertOrderBottom.ico"
+
+IDI_PROP_ICON           ICON                    "res\\prop.ico"
+
+IDI_ALIGN_RIGHT         ICON                    "res\\AigmentRight.ico"
+
+IDI_ALIGN_BOTTOM        ICON                    "res\\AligmentBottom.ico"
+
+IDI_ALIGN_LEFT          ICON                    "res\\AligmentLeft.ico"
+
+IDI_ALIGN_TOP           ICON                    "res\\AlignTop.ico"
+
+IDI_CENTER_HORIZ        ICON                    "res\\CenterHoriz.ico"
+
+IDI_CENTER_VERT         ICON                    "res\\CenterVert.ico"
+
+IDI_GS_HORIZ            ICON                    "res\\GSHoriz.ico"
+
+IDI_GS_VERT             ICON                    "res\\GSVert.ico"
+
+IDI_SAME_WIDTH          ICON                    "res\\HorizSize.ico"
+
+IDI_NEW                 ICON                    "res\\new.ico"
+
+IDI_OPEN                ICON                    "res\\Open.ico"
+
+IDI_SAME_SIZE           ICON                    "res\\SameSize.ico"
+
+IDI_SAVE                ICON                    "res\\Save.ico"
+
+IDI_SAVE_ALL            ICON                    "res\\SaveAll.ico"
+
+IDI_VERT_ORDER          ICON                    "res\\VertOrder.ico"
+
+IDI_SAME_HEIGHT         ICON                    "res\\VertSize.ico"
+
+IDI_HORIZ_ORDER         ICON                    "res\\HorizOrder.ico"
+
+IDI_TOPARENT            ICON                    "res\\ToParent.ico"
+
+IDI_TOBACKGROUND        ICON                    "res\\ToBackground.ico"
+
+IDI_TOFOREGROUND        ICON                    "res\\ToForeground.ico"
+
+IDI_CREATION_ORDER      ICON                    "res\\CreationOrder.ico"
+
+IDI_CENTER_GROUP_VERT   ICON                    "res\\CenterGroupVert.ico"
+
+IDI_DIST_GROUP_VERT     ICON                    "res\\DistGroupVert.ico"
+
+IDI_CENTER_GROUP_HORIZ  ICON                    "res\\CenterGroupHoriz.ico"
+
+IDI_DIST_GROUP_HORIZ    ICON                    "res\\DistGroupHoriz.ico"
+
+IDI_LEFT_SIDE           ICON                    "res\\LeftSide.ico"
+
+IDI_RIGHT_SIDE          ICON                    "res\\RightSide.ico"
+
+IDI_TOP_SIDE            ICON                    "res\\TopSide.ico"
+
+IDI_SHOW_GRID           ICON                    "res\\Grid.ico"
+
+IDI_SHOW_GSGRID         ICON                    "res\\GSGrid.ico"
+
+IDI_CHANGEPARENT        ICON                    "res\\ChangeParent.ico"
+
+IDI_TABORDER            ICON                    "res\\TabOrder.ico"
+
+IDI_ERROR_MSG           ICON                    "res\\icon4.ico"
+
+IDI_DEFAULT             ICON                    "res\\icon1.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_SCRIPT_EDITOR MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Save",                       ID_FILE_SAVE
+        MENUITEM "Save as...",                  ID_FILE_SAVEAS
+        MENUITEM "Close",                       ID_FILE_CLOSE
+    END
+    MENUITEM "Edit",                        0
+END
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "New...",                      ID_FILE_NEW_FORM
+        MENUITEM "Open...",                     57601
+        MENUITEM "Close",                       57602
+        MENUITEM SEPARATOR
+        MENUITEM "Save",                        57603
+        MENUITEM "Save All",                    ID_FILE_SAVEALL
+        MENUITEM "Save As...",                  57604
+        MENUITEM "Save As Template...",         ID_FILE_SAVEAS_TEMPLATE
+        MENUITEM SEPARATOR
+        MENUITEM "&Generate localization template file...", ID_FILE_GENERATE_LOC_FILE
+        MENUITEM SEPARATOR
+        POPUP "Recent &Files"
+        BEGIN
+            MENUITEM "(empty)",                     ID_FILE_MRU_FILE1, GRAYED
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl-Z",               ID_EDIT_UNDO, INACTIVE
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT, INACTIVE
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY, INACTIVE
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE, INACTIVE
+        MENUITEM "&Delete\tDel",                ID_EDIT_CLEAR, INACTIVE
+        MENUITEM SEPARATOR
+        MENUITEM "Select &All\tCtrl+A",         ID_EDIT_SELECT_ALL, INACTIVE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "Properties &Window\tAlt+Enter", ID_VIEW_PROPERTY
+        MENUITEM "&Output",                     ID_VIEW_OUTPUT
+    END
+    POPUP "&Options"
+    BEGIN
+        MENUITEM "&Options...",                 ID_OPTIONS_OPTIONS
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About WTLBuilder...",        ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_SCRIPT_EDITOR ACCELERATORS
+BEGIN
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+END
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    "A",            ID_EDIT_SELECT_ALL,     VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    VK_RETURN,      ID_VIEW_PROPERTY,       VIRTKEY, ALT, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "S",            IDI_FILE_SAVE,          VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LOGO                BITMAP                  "res\\logo.bmp"
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+IDB_ARROW               BITMAP                  "res\\arrow.bmp"
+
+IDB_DEFAULT             BITMAP                  "res\\default.bmp"
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""atlres.h""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_NULL DIALOGEX 0, 0, 56, 20
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+END
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 188, 103
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,138,82,50,14
+    CTEXT           "WTLBuilder Application \n\n(c) Copyright 2002-2003",IDC_STATIC,25,57,78,32
+    ICON            IDR_MAINFRAME,IDC_STATIC,63,25,20,20
+    GROUPBOX        "",IDC_STATIC,7,7,115,89
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_NULL, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 13
+    END
+
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,54,1,1
+ PRODUCTVERSION 0,54,1,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName", "WTLBuilder"
+            VALUE "FileDescription", "WTLBuilder GIU designer"
+            VALUE "FileVersion", "0.57"
+            VALUE "InternalName", "WTLBuilder"
+            VALUE "LegalCopyright", "Copyright 2007 Vlad Tembekov"
+            VALUE "LegalTrademarks", "WTLBuilder"
+            VALUE "OriginalFilename", "WTLBuilder.exe"
+            VALUE "ProductName", "WTLBuilder"
+            VALUE "ProductVersion", "0.57"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "WTLBuilder"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+END
+
+STRINGTABLE
+BEGIN
+    ATL_IDS_SCSIZE          "Change the window size"
+    ATL_IDS_SCMOVE          "Change the window position"
+    ATL_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    ATL_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    ATL_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    ATL_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    ATL_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE
+BEGIN
+    ATL_IDS_SCRESTORE       "Restore the window to normal size"
+    ATL_IDS_SCTASKLIST      "Activate Task List"
+    ATL_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE
+BEGIN
+    ATL_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE
+BEGIN
+    ATL_IDS_MRU_FILE        "Open this document"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
