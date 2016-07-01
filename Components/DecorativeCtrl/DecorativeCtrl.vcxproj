@@ -136,7 +136,6 @@
     <ClCompile Include="Masked.cpp" />
     <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Parseit.cpp" />
-    <ClCompile Include="ptlstore.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="StripedListView.cpp" />
     <ClCompile Include="TabPanel.cpp" />
@@ -155,8 +154,6 @@
     <ClInclude Include="PagesList.h" />
     <ClInclude Include="Panel.h" />
     <ClInclude Include="Parseit.h" />
-    <ClInclude Include="ptl.h" />
-    <ClInclude Include="ptlstore.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StripedListView.h" />

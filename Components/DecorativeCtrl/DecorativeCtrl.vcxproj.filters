@@ -34,9 +34,6 @@
     <ClCompile Include="Parseit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ptlstore.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -85,12 +82,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Parseit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ptl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ptlstore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">

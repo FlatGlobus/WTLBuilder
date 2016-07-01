@@ -7,7 +7,7 @@
 #ifndef _MASKDEFINE_
 #define _MASKDEFINE_
 
-#include "SimpleDate.h"
+//#include "SimpleDate.h"
 
 class CMaskEdit : public CWindowImpl<CMaskEdit, CEdit>
 {
