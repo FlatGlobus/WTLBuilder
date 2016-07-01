@@ -25,7 +25,10 @@ function MakeProgressBarCtrlStyle(component)
 function StdCtl_CProgressBarCtrl(form,component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CProgressBarCtrl"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);

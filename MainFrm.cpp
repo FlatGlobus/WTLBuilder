@@ -622,6 +622,7 @@ HANDLE CMainFrame::GetHandle(void)
 
 LRESULT CMainFrame::OnFileSave(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL&)
 {
+	SendEvent(evClearOutput);
 	EnableMsgPump(FALSE);
 	project.Save();
 	EnableMsgPump();
@@ -630,6 +631,7 @@ LRESULT CMainFrame::OnFileSave(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 
 LRESULT CMainFrame::OnFileSaveAll(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL&)
 {
+	SendEvent(evClearOutput);
     EnableMsgPump(FALSE);
     project.SaveAll();
     EnableMsgPump();
@@ -638,6 +640,7 @@ LRESULT CMainFrame::OnFileSaveAll(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWn
 
 LRESULT CMainFrame::OnFileSaveAs(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL&)
 {
+	SendEvent(evClearOutput);
 	EnableMsgPump(FALSE);
 	project.SaveAs();
 	EnableMsgPump();
@@ -870,6 +873,9 @@ LRESULT CMainFrame::OnFileRecent(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*
 
 void CMainFrame::OnEditCommand(WORD wID,Component *comp,CPoint * downPoint)
 {
+///////////////////////////////////////// to avoid app crash
+	return;
+////////////////////////////////////////
     if(project.Forms->Active==NULL)
         return ;
 

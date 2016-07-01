@@ -7,7 +7,10 @@
 
 function DecorativeCtrl_CMaskEdit(form,component)
 {
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CMaskEdit"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);

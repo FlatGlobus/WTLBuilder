@@ -15,6 +15,8 @@
 const UINT COutputWindow::_controlsToClip[] =
 {
 //{{WTLBUILDER_CTRLTOCLIP
+	IDC_LISTVIEW,
+	IDC_COUTPUTWINDOW_PANEL3,
 //}}WTLBUILDER_CTRLTOCLIP
     0
 };
@@ -25,6 +27,7 @@ COutputWindow::COutputWindow(void)
 {
     RegisterEvent(evOutput,this,&COutputWindow::OutputStr);
     RegisterEvent(evScriptError,this,&COutputWindow::OutputScriptError);
+	RegisterEvent(evClearOutput, this, &COutputWindow::ClearList);
 }
 
 COutputWindow::~COutputWindow(void)
@@ -47,14 +50,14 @@ LRESULT COutputWindow::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
     //{{WTLBUILDER_MEMBER_CREATION
 	m_formFont.CreateFont(-12,0,0,0,FW_NORMAL,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
 	SetFont((HFONT)m_formFont);
-	ResizeClient(805,230);
+	ResizeClient(805,144);
 	SetWindowText(_T("Output"));
 
-	m_listviewctrl.Create(m_hWnd,CRect(0,50,805,230),NULL,WS_CHILD|WS_VISIBLE|WS_TABSTOP|LVS_REPORT|LVS_SINGLESEL|LVS_NOLABELWRAP|LVS_ALIGNTOP|LVS_NOSORTHEADER,0,IDC_LISTVIEW);
+	m_listviewctrl.Create(m_hWnd,CRect(0,26,805,146),NULL,WS_CHILD|WS_VISIBLE|WS_HSCROLL|WS_TABSTOP|LVS_REPORT|LVS_NOLABELWRAP|LVS_ALIGNTOP|LVS_NOCOLUMNHEADER|LVS_NOSORTHEADER,0,IDC_LISTVIEW);
 	m_listviewctrl.SetFont((HFONT)m_formFont);
 	m_listviewctrl.SetExtendedListViewStyle(LVS_EX_GRIDLINES|LVS_EX_FULLROWSELECT|LVS_EX_INFOTIP,0);
 
-	m_panel3.Create(m_hWnd,CRect(0,0,805,50),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN,WS_EX_CONTROLPARENT,IDC_COUTPUTWINDOW_PANEL3);
+	m_panel3.Create(m_hWnd,CRect(0,0,805,26),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN,WS_EX_CONTROLPARENT,IDC_COUTPUTWINDOW_PANEL3);
 	m_panel3.SetFont((HFONT)m_formFont);
 	m_panel3.SetInnerBorder(0);
 	m_panel3.SetOuterBorder(0);
@@ -65,14 +68,13 @@ LRESULT COutputWindow::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 	m_panel3.SetVertTextAlign(DT_VCENTER);
 	m_panel3.SetSingleLine(true);
 
-	m_buttonst4.Create(m_panel3,CRect(0,0,66,48),_T("New file"),WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_PUSHBUTTON,0,IDC_COUTPUTWINDOW_BUTTONST4);
-	m_buttonst4.SetFont((HFONT)m_formFont);
-	m_buttonst4.SetFlat(true);
-	m_buttonst4.SetAlign(CButtonST::ST_ALIGN_VERT);
-	m_buttonst4.SetColor(CButtonST::BTNST_COLOR_FG_IN,GetSysColor(COLOR_WINDOWTEXT));
-	m_buttonst4.SetColor(CButtonST::BTNST_COLOR_FG_OUT,GetSysColor(COLOR_WINDOWTEXT));
-	m_buttonst4.SetColor(CButtonST::BTNST_COLOR_BK_IN,GetSysColor(COLOR_WINDOW));
-	m_buttonst4.SetColor(CButtonST::BTNST_COLOR_BK_OUT,GetSysColor(COLOR_WINDOW));
+	m_clear_list.Create(m_panel3,CRect(0,0,20,20),_T(""),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP|BS_PUSHBUTTON,0,IDC_CLEAR_LIST);
+	m_clear_list.SetFont((HFONT)m_formFont);
+	m_clear_list.SetFlat(true);
+	m_clear_list.SetAlign(CButtonST::ST_ALIGN_HORIZ);
+	m_clear_list.SetColor(CButtonST::BTNST_COLOR_BK_IN,GetSysColor(COLOR_BTNFACE));
+	m_clear_list.SetColor(CButtonST::BTNST_COLOR_BK_OUT,GetSysColor(COLOR_BTNFACE));
+	m_clear_list.SetIcon(IDI_CLEAR_ERR,IDI_CLEAR_ERR);
 
 //}}WTLBUILDER_MEMBER_CREATION
 
@@ -80,7 +82,7 @@ LRESULT COutputWindow::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 //}}WTLBUILDER_POST_CREATION
 
     //{{WTLBUILDER_TABSTOP
-	m_buttonst4.SetWindowPos(m_listviewctrl,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
+	m_clear_list.SetWindowPos(m_listviewctrl,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
 //}}WTLBUILDER_TABSTOP
 
     imageList.Create(16,16,ILC_COLOR8,0,0);
@@ -99,12 +101,29 @@ LRESULT COutputWindow::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 void COutputWindow::DefineLayout()
 {
     //{{WTLBUILDER_ATTACH_CONTROLS
+	AttachForm(m_listviewctrl,ATTACH_LEFT);
+	AttachWidget(m_listviewctrl,ATTACH_TOP,m_panel3);
+	AttachForm(m_listviewctrl,ATTACH_RIGHT);
+	AttachForm(m_listviewctrl,ATTACH_BOTTOM);
+	AttachForm(m_panel3,ATTACH_LEFT);
+	AttachForm(m_panel3,ATTACH_TOP);
+	AttachForm(m_panel3,ATTACH_RIGHT);
 //}}WTLBUILDER_ATTACH_CONTROLS
 }
 
 void COutputWindow::InitLayout()
 {
     //{{WTLBUILDER_INITLAYOUT
+	_minClientSize.cx = 805;
+	_minClientSize.cy = 144;
+	_prevClientSize = _minClientSize;
+
+	_minWindowSize.cx = 821;
+	_minWindowSize.cy = 182;
+
+	SetNPositions(1);
+	ShowHandle(false);
+	DefineLayout();
 //}}WTLBUILDER_INITLAYOUT
     //SetScrollSize(_minClientSize);
 }
@@ -164,20 +183,37 @@ HWND COutputWindow::Create(HWND Parent)
 
     rc.left=rc.Width()/2-desiredWidth/2;
     rc.right=rc.left+desiredWidth;
-    rc.top=rc.bottom-150;
+    rc.top=rc.bottom-300;
 
     thisClass::Create(Parent,rc);
-    //SetWindowPos(HWND_TOP,rc,SWP_SHOWWINDOW);
     return m_hWnd;
 }
 
 //called from script
-void __stdcall COutputWindow::put_Put(BSTR strText)
+void __stdcall COutputWindow::put_Info(BSTR strText)
 {
     USES_CONVERSION;
     LPCTSTR lpText = OLE2CT(strText);
-    m_listviewctrl.AddItem(m_listviewctrl.GetItemCount(),0,lpText,0);
+    //m_listviewctrl.AddItem(m_listviewctrl.GetItemCount(),0,lpText,0);
+	OutputStr(InfoMsg, lpText);
 }
+
+void __stdcall COutputWindow::put_Warn(BSTR strText)
+{
+	USES_CONVERSION;
+	LPCTSTR lpText = OLE2CT(strText);
+	//m_listviewctrl.AddItem(m_listviewctrl.GetItemCount(), 0, lpText, 0);
+	OutputStr(WarnMsg, lpText);
+}
+
+void __stdcall COutputWindow::put_Err(BSTR strText)
+{
+	USES_CONVERSION;
+	LPCTSTR lpText = OLE2CT(strText);
+	//m_listviewctrl.AddItem(m_listviewctrl.GetItemCount(), 0, lpText, 0);
+	OutputStr(ErrorMsg, lpText);
+}
+
 
 //called from program
 void COutputWindow::OutputStr(int msgType,LPCTSTR msg)
@@ -225,4 +261,15 @@ LRESULT COutputWindow::OnDblClick(int,LPNMHDR pnmh, BOOL&)
     }
 	
     return 0;
+}
+
+LRESULT COutputWindow::OnClearList(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	m_listviewctrl.DeleteAllItems();
+	return 0;
+}
+
+void COutputWindow::ClearList()
+{
+	m_listviewctrl.DeleteAllItems();
 }

@@ -25,7 +25,10 @@ function MakeImageListFlag(component)
 function StdCtl_CImageList(form,component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CImageList"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     

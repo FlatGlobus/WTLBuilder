@@ -7,7 +7,10 @@
 
 function WTLBuilderCtrl_CToolTab(form, component)
 {
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CToolTab"+"\t"+cmpName+";\n"; 
     
     var sourceStr="\t"+cmpName+".Create("+component.Item("ParentName")+",";

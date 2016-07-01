@@ -10,6 +10,8 @@ function StdCtl_CHyperLink(form, component)
     var codegen=form.Code;
     var cmpName=component.Item("Name");
     
+    CheckComponent(form, component);
+
     var headerStr=codegen.Format(component,"\tCHyperLink\t[!Name];\n"); 
     headerStr+=MakeContainedDecl(form,component);
     //headerStr+=MakeFontDeclaration(component);

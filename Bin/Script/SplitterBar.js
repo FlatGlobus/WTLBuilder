@@ -9,6 +9,9 @@ function ViksoeCtrl_CVertSplitterCtrl(form, component)
 {
   var codegen = form.Code;
   var cmpName = component.Item("Name");
+
+  CheckComponent(form, component);
+
   var headerStr = "\t" + "CVertSplitterCtrl" + "\t" + cmpName + ";\n";
   headerStr += MakeContainedDecl(form, component);
 

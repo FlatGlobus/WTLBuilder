@@ -10,6 +10,8 @@ function StdCtl_CPaneContainer(form, component)
     var codegen=form.Code;
     var cmpName=component.Item("Name");
     
+    CheckComponent(form, component);
+
     var headerStr="";
     headerStr=codegen.Format(component,"\tCPaneContainer\t[!Name];\n"); 
     headerStr+=MakeContainedDecl(form,component);

@@ -1041,11 +1041,12 @@ long __stdcall Component::get_Count(void)
 
 BSTR __stdcall Component::get_Class(void)
 {
-	CString cmpName;
-	CString cmpPage;
-	ExtractName(className,cmpPage,cmpName);
+	//CString cmpName;
+	//CString cmpPage;
+	//ExtractName(className,cmpPage,cmpName);
 
-	return cmpName.AllocSysString();
+	//return cmpName.AllocSysString();
+	return className.AllocSysString();
 }
 
 IDispatch * __stdcall Component::get_Components()

@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1D58
 		Bin\Script\CFrameWindowImpl.js = Bin\Script\CFrameWindowImpl.js
 		Bin\Script\CGridCtrl.js = Bin\Script\CGridCtrl.js
 		Bin\Script\CHeaderCtrl.js = Bin\Script\CHeaderCtrl.js
+		Bin\Script\checkProperty.js = Bin\Script\checkProperty.js
 		Bin\Script\CHotKeyCtrl.js = Bin\Script\CHotKeyCtrl.js
 		Bin\Script\CHyperLink.js = Bin\Script\CHyperLink.js
 		Bin\Script\CImageList.js = Bin\Script\CImageList.js

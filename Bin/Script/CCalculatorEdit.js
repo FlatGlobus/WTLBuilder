@@ -7,6 +7,8 @@
 
 function DecorativeCtrl_CCalculatorEdit(form,component)
 {
+    CheckComponent(form, component);
+
     var cmpName=component.Item("Name");
     var headerStr="\t"+"CCalculatorEdit"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);

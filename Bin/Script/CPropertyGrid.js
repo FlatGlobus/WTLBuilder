@@ -7,8 +7,11 @@
 
 function ViksoeCtrl_CPropertyGridCtrl(form,component)
 {
-    var cmpName=component.Item("Name");
-    var headerStr="\t"+"CPropertyGridCtrl"+"\t"+cmpName+";\n"; 
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
+    var headerStr = "\t" + "CPropertyGridCtrl" + "\t" + cmpName + ";\n";
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);
     

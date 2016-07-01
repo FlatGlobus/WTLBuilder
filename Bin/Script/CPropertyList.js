@@ -7,7 +7,10 @@
 
 function WTLBuilderCtrl_CPropertyList(form, component)
 {
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CPropertyList"+"\t*"+cmpName+";\n"; 
     
     var sourceStr="\t"+cmpName+"=CreatePropertyList("+component.Item("ParentName")+",";

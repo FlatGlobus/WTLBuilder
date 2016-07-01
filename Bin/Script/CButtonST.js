@@ -10,6 +10,8 @@ function DecorativeCtrl_CButtonST(form, component)
     var codegen=form.Code;
     var cmpName=component.Item("Name");
     
+    CheckComponent(form, component);
+
     var headerStr=codegen.Format(component,"\tCButtonST\t[!Name];\n"); 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);
@@ -33,26 +35,39 @@ function DecorativeCtrl_CButtonST(form, component)
 	sourceStr+="\t"+cmpName+".SetColor(CButtonST::BTNST_COLOR_BK_IN,"+MakeColor(component.Item("BkColorIn"))+");\n";
 	sourceStr+="\t"+cmpName+".SetColor(CButtonST::BTNST_COLOR_BK_OUT,"+MakeColor(component.Item("BkColorOut"))+");\n";
 
-    if ( component.Item("EnableToolTip")==true )
-        sourceStr+="\t"+cmpName+".SetTooltipText("+MakeLocalizedCStringEx(component.Item("ToolTip"),".t",component)+");\n";
+	if (component.Item("EnableToolTip") == true)
+	{
+	    sourceStr += "\t" + cmpName + ".SetTooltipText(" + MakeLocalizedCStringEx(component.Item("ToolTip"), ".t", component) + ");\n";
+	}
     
     imageFlag=false;
-    if ( component.Item("InImage.ImageType")=="Bitmap" && component.Item("InImage.ID")!="" )
+    if (component.Item("InImage.ImageType") == "Bitmap" && CheckProperty(form, component, "InImage.ID", "") == true)
     {
-        if ( component.Item("OutImage.ImageType")!="Bitmap" )
-            sourceStr+=codegen.Format(component,"\t[!Name].SetBitmaps([!InImage.ID],RGB(0,0,0),[!InImage.ID],RGB(0,0,0));\n");
+        if (component.Item("OutImage.ImageType") != "Bitmap")
+        {
+            sourceStr += codegen.Format(component, "\t[!Name].SetBitmaps([!InImage.ID],RGB(0,0,0),[!InImage.ID],RGB(0,0,0));\n");
+        }
         else
-            sourceStr+=codegen.Format(component,"\t[!Name].SetBitmaps([!InImage.ID],RGB(0,0,0),[!OutImage.ID],RGB(0,0,0));\n");
-        imageFlag=true;
+        {
+            sourceStr += codegen.Format(component, "\t[!Name].SetBitmaps([!InImage.ID],RGB(0,0,0),[!OutImage.ID],RGB(0,0,0));\n");
+        }
+        imageFlag = true;
     }
 
-    if ( component.Item("InImage.ImageType")=="Icon" && component.Item("InImage.ID")!="" )
+    if ( component.Item("InImage.ImageType")=="Icon" && CheckProperty(form, component, "InImage.ID", "") == true)
     {
-        if ( component.Item("OutImage.ImageType")!="Icon" )
-            sourceStr+=codegen.Format(component,"\t[!Name].SetIcon([!InImage.ID],[!InImage.ID]);\n");
+        if (component.Item("OutImage.ImageType") != "Icon")
+        {
+            sourceStr += codegen.Format(component, "\t[!Name].SetIcon([!InImage.ID],[!InImage.ID]);\n");
+        }
         else
-            sourceStr+=codegen.Format(component,"\t[!Name].SetIcon([!InImage.ID],[!OutImage.ID]);\n");
-        imageFlag=true;
+        {
+            if (checkProperty(form, component, "OutImage.ID", "") == true)
+            {
+                sourceStr += codegen.Format(component, "\t[!Name].SetIcon([!InImage.ID],[!OutImage.ID]);\n");
+            }
+        }
+        imageFlag = true;
     }
 	
 	if(component.Item("EnablePressed")==true)

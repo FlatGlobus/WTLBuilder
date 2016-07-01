@@ -27,7 +27,10 @@ function MakeSplitterStyle(component)
 function StdCtl_CSplitterWindow(form,component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CSplitterWindow"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     

@@ -22,6 +22,7 @@ enum iCommands
 	evLoadScriptFromFile,//(LPCSTR filename)
 	evOnCommand,//(UINT commandId)
     evOutput,//(outMsg, LPCTSTR) show text in the output window with icon
+	evClearOutput,//(void)
     evScriptError,
 	evGetComponentInfo,//
 	evCreateComponent,//

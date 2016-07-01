@@ -11,6 +11,8 @@ function MakeAnimateCtrlStyle(component)
     var ACS_AUTOPLAY=       0x0004;
     var ACS_TIMER=          0x0008;
 
+    CheckComponent(form, component);
+
     var style=parseInt(component.Item("InternalWindowStyle"),10);
     var styleStr=MakeWindowStyle(component);
 

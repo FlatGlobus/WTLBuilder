@@ -42,7 +42,10 @@ function MakeShellCtrlStyle(component)
 function ViksoeCtrl_CShellComboCtrl(form,component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CShellComboCtrl"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);

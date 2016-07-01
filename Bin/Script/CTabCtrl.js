@@ -95,7 +95,10 @@ function MakeTabCtrlStyle(component)
 
 function StdCtl_CTabCtrl(form,component)
 {
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CTabCtrl"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);

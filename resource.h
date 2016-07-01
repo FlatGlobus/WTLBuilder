@@ -74,6 +74,8 @@
 #define IDR_TYPELIB1                    267
 #define IDI_ICON11                      268
 #define IDI_PROP_ICON                   268
+#define IDI_ICON12                      270
+#define IDI_CLEAR_ERR                   270
 #define IDC_TAB1                        1006
 #define IDC_TAB2                        1007
 #define IDC_LIST1                       1008
@@ -113,7 +115,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        269
+#define _APS_NEXT_RESOURCE_VALUE        271
 #define _APS_NEXT_COMMAND_VALUE         32814
 #define _APS_NEXT_CONTROL_VALUE         1026
 #define _APS_NEXT_SYMED_VALUE           102

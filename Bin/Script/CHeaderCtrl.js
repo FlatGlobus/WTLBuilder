@@ -48,8 +48,11 @@ function MakeHeaderCtrlStyle(component)
 ////////////////////////////////////////////////////////////////////////////////
 function StdCtl_CHeaderCtrl(form,component)
 {
-    var cmpName=component.Item("Name");
-    var headerStr="\t"+"CHeaderCtrl"+"\t"+cmpName+";\n"; 
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
+    var headerStr = "\t" + "CHeaderCtrl" + "\t" + cmpName + ";\n";
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);
     

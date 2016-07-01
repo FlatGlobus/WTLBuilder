@@ -8,7 +8,10 @@
 function DecorativeCtrl_CSortListViewCtrl(form, component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     //var headerStr="\t"+"CSortListViewCtrl"+"\t"+cmpName+";\n"; 
 
     var headerStr=codegen.Format(component,"\tCSortListViewCtrl<[!ItemClass]>\t[!Name];\n");

@@ -76,7 +76,10 @@ function MakeTrackBarCtrlStyle(component)
 
 function StdCtl_CTrackBarCtrl(form,component)
 {
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CTrackBarCtrl"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);

@@ -46,7 +46,10 @@ function MakeDateTimePickerCtrlStyle(component)
 function StdCtl_CDateTimePickerCtrl(form,component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CDateTimePickerCtrl"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);

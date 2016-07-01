@@ -154,7 +154,10 @@ function MakeListViewCtrlStyleEx(component)
 
 function StdCtl_CListViewCtrl(form,component)
 {
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CListViewCtrl"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);

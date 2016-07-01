@@ -7,7 +7,10 @@
 
 function DecorativeCtrl_CWtlEditBrowserCtrl(form, component)
 {
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+    
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CWtlEditBrowserCtrl"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);

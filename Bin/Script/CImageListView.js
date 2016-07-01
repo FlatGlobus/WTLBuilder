@@ -39,6 +39,8 @@ function DecorativeCtrl_CImageListView(form,component)
     var codegen=form.Code;
     var cmpName=component.Item("Name");
 	
+    CheckComponent(form, component);
+
 	var szStr=codegen.Format(component,"[!Name]([!ImageSize.cx],[!ImageSize.cy])\n");
     InsertToConstructor(form, szStr);
 	   

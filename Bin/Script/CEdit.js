@@ -69,7 +69,10 @@ function MakeEditStyle(component)
 function StdCtl_CEdit(form,component)
 {
     var cmpName=component.Item("Name");
-    var headerStr="\t"+"CEdit"+"\t"+cmpName+";\n"; 
+    var headerStr = "\t" + "CEdit" + "\t" + cmpName + ";\n";
+
+    CheckComponent(form, component);
+
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);
     

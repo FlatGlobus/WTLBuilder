@@ -7,7 +7,10 @@
 
 function StdCtl_CWindow(form, component)
 {
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CWindowImpl"+"\t"+cmpName+";\n"; 
 
     headerStr+=MakeFontDeclaration(component);

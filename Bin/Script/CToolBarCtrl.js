@@ -89,7 +89,10 @@ function MakeToolBarCtrlStyle(component)
 
 function StdCtl_CToolBarCtrl(form,component)
 {
-    var cmpName=component.Item("Name");
+    var cmpName = component.Item("Name");
+
+    CheckComponent(form, component);
+
     var headerStr="\t"+"CToolBarCtrl"+"\t"+cmpName+";\n"; 
     headerStr+=MakeContainedDecl(form,component);
     headerStr+=MakeFontDeclaration(component);

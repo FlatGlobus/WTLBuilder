@@ -47,12 +47,12 @@ public:
 	virtual ~CCodeGenerator(void);
 
 	BEGIN_DISPATCH_MAP(CCodeGenerator)
-          DISP_PROP(Header,VT_BSTR)
-          DISP_PROP(Source,VT_BSTR)
-          DISP_PROP(Localize,VT_BSTR)
+		DISP_PROP(Header,VT_BSTR)
+		DISP_PROP(Source,VT_BSTR)
+		DISP_PROP(Localize,VT_BSTR)
 		DISP_METHOD(Insert,VT_EMPTY, 2, VTS_BSTR VTS_BSTR)
-                DISP_METHOD(IsEmptyHeader,VT_BOOL, 2, VTS_BSTR VTS_BSTR)
-                DISP_METHOD(IsEmptySource,VT_BOOL, 2, VTS_BSTR VTS_BSTR)
+		DISP_METHOD(IsEmptyHeader,VT_BOOL, 2, VTS_BSTR VTS_BSTR)
+		DISP_METHOD(IsEmptySource,VT_BOOL, 2, VTS_BSTR VTS_BSTR)
 		DISP_METHOD(ClearBetween,VT_EMPTY, 2, VTS_BSTR VTS_BSTR)
 		DISP_METHOD(Format,VT_BSTR, 2, VTS_DISPATCH VTS_BSTR)
         DISP_METHOD(AddInclude,VT_EMPTY, 2, VTS_BSTR VTS_BSTR)

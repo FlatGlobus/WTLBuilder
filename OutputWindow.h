@@ -14,13 +14,14 @@
 
 //{{WTLBUILDER_INCLUDE_DECLARATION
 #include "Panel.h"
+#include "resource.h"
 #include "ButtonST.h"
 //}}WTLBUILDER_INCLUDE_DECLARATION
 
 //{{WTLBUILDER_CONTROL_ID_DECLARATION
 #define	IDC_LISTVIEW	1001
 #define	IDC_COUTPUTWINDOW_PANEL3	1003
-#define	IDC_COUTPUTWINDOW_BUTTONST4	1004
+#define	IDC_CLEAR_LIST	1005
 //}}WTLBUILDER_CONTROL_ID_DECLARATION
 
 //{{WTLBUILDER_WINDOW_STYLE
@@ -36,7 +37,7 @@ class COutputWindow:public CFrameWindowImpl<COutputWindow,CWindow,COutputWindowW
 	CListViewCtrl	m_listviewctrl;
 	CImageList	imageList;
 	Panel::CPanel	m_panel3;
-	CButtonST	m_buttonst4;
+	CButtonST	m_clear_list;
 //}}WTLBUILDER_MEMBER_DECLARATION
 	void InitLayout(void);
 	virtual void DefineLayout();
@@ -61,6 +62,7 @@ public:
 		MESSAGE_HANDLER(WM_CREATE, OnCreate)
         //MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
         MESSAGE_HANDLER(WM_CLOSE,OnClose)
+		COMMAND_ID_HANDLER(IDC_CLEAR_LIST,OnClearList)
         NOTIFY_HANDLER(IDC_LISTVIEW,NM_DBLCLK,OnDblClick)
 		CHAIN_MSG_MAP(thisClass)
 		REFLECT_NOTIFICATIONS()
@@ -70,7 +72,9 @@ public:
         DISP_METHOD(Show,VT_EMPTY,0,VTS_EMPTY)
         DISP_METHOD(Hide,VT_EMPTY,0,VTS_EMPTY)
         DISP_METHOD(Clear,VT_EMPTY,0,VTS_EMPTY)
-        DISP_PROPPUT(Put,VT_BSTR)
+        DISP_PROPPUT(Info,VT_BSTR)
+		DISP_PROPPUT(Warn,VT_BSTR)
+		DISP_PROPPUT(Err,VT_BSTR)
     END_DISPATCH_MAP()
 
 	COutputWindow(void);
@@ -83,11 +87,17 @@ public:
     LRESULT OnClose(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
     LRESULT OnDblClick(int idCtrl, LPNMHDR pnmh, BOOL& bHandled);
 
+	LRESULT OnClearList(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+
+
     void __stdcall Show(void);
     void __stdcall Hide(void);
     void __stdcall Clear(void);
-    void __stdcall put_Put(BSTR);
+    void __stdcall put_Info(BSTR);
+	void __stdcall put_Warn(BSTR);
+	void __stdcall put_Err(BSTR);
     void OutputStr(int msgType,LPCTSTR msg);
     void OutputScriptError(CScriptError *);
+	void ClearList();
 };
 //////////////////////////////////////////////////////////////////////////
