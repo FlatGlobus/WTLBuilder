@@ -89,7 +89,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\Package\</Command>
+      <Command>md $(SolutionDir)Bin\Package
+copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\Package\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -114,7 +115,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\Package\</Command>
+      <Command>md $(SolutionDir)Bin\Package
+copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\Package\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
