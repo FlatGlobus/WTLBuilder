@@ -97,7 +97,6 @@ function MakeListViewCtrlStyleEx(component)
 {
     var styleStr="";
 
-
     if ( component.Item("GridLines")==true )
         styleStr+="|LVS_EX_GRIDLINES";
 

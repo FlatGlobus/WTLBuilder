@@ -8,8 +8,11 @@
 function StdCtl_CMenu(form, component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
-    
+    var cmpName = component.Item("Name");
+
+    CheckProperty(form, component, "Name", "");
+    CheckProperty(form, component, "ID", "");
+
     var headerStr="\t"+"CMenu"+"\t"+cmpName+";\n"; 
     var sourceStr="\t"+cmpName+".LoadMenu("+component.Item("ID")+");\n";
     sourceStr+="\n";

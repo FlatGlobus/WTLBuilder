@@ -34,11 +34,11 @@ function StdCtl_CImageList(form,component)
     
     var sourceStr="";
     
-    if ( component.Item("Bitmap.ImageType")=="Bitmap" && component.Item("Bitmap.ID")!="" )
+    if (component.Item("Bitmap.ImageType") == "Bitmap" && CheckProperty(form, component, "Bitmap.ID", "") == true)
     {
-        sourceStr="\t"+cmpName+".Create("+component.Item("Bitmap.ID")+","+
-                  component.Item("ImageSize.cx")+","+component.Item("Grow")+","+
-                  MakeColor(component.Item("Mask"))+");\n";
+        sourceStr = "\t" + cmpName + ".Create(" + component.Item("Bitmap.ID") + "," +
+                  component.Item("ImageSize.cx") + "," + component.Item("Grow") + "," +
+                  MakeColor(component.Item("Mask")) + ");\n";
     }
     //else
     //  {
