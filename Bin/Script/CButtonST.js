@@ -37,6 +37,7 @@ function DecorativeCtrl_CButtonST(form, component)
 
 	if (component.Item("EnableToolTip") == true)
 	{
+	    CheckProperty(form, component, "ToolTip", "");
 	    sourceStr += "\t" + cmpName + ".SetTooltipText(" + MakeLocalizedCStringEx(component.Item("ToolTip"), ".t", component) + ");\n";
 	}
     

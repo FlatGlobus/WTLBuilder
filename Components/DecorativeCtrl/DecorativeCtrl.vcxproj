@@ -127,7 +127,7 @@ copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\Package\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ButtonST.cpp" />
+    <ClCompile Include="CButtonST.cpp" />
     <ClCompile Include="CCellEditDlg.cpp" />
     <ClCompile Include="ColorButton.cpp" />
     <ClCompile Include="CPagesEdit.cpp" />
@@ -145,7 +145,7 @@ copy $(OutDir)$(TargetFileName) $(SolutionDir)Bin\Package\</Command>
     <ClCompile Include="WtlEditBrowserCtrl.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ButtonST.h" />
+    <ClInclude Include="CButtonST.h" />
     <ClInclude Include="CCellEditDlg.h" />
     <ClInclude Include="ColorButton.h" />
     <ClInclude Include="CPagesEdit.h" />

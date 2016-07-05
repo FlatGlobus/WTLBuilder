@@ -90,8 +90,10 @@ function StdCtl_CHScrollBarLocalize(form,component)
     var codegen=form.Code;
     var str="";
     var ID=MakeControlNameID(component);
-    if ( component.Item("EnableToolTip")==true )
-        str+=ID + codegen.Format(component,".t = [!ToolTip]\n");
+    if (component.Item("EnableToolTip") == true)
+    {
+        str += ID + codegen.Format(component, ".t = [!ToolTip]\n");
+    }
     codegen.Localize+=str;
 }
 
@@ -100,7 +102,9 @@ function StdCtl_CVScrollBarLocalize(form,component)
     var codegen=form.Code;
     var str="";
     var ID=MakeControlNameID(component);
-    if ( component.Item("EnableToolTip")==true )
-        str+=ID + codegen.Format(component,".t = [!ToolTip]\n");
+    if (component.Item("EnableToolTip") == true)
+    {
+        str += ID + codegen.Format(component, ".t = [!ToolTip]\n");
+    }
     codegen.Localize+=str;
 }

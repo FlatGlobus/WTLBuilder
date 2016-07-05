@@ -158,22 +158,22 @@ function StdCtl_CStatic(form,component)
                component.Item("ID")+");\n";    
 
 
-    if ( component.Item("Image.ImageType")=="Bitmap" && component.Item("Image.ID")!="" )
+    if ( component.Item("Image.ImageType")=="Bitmap" && CheckProperty(form, component, "Image.ID", "") == true )
     {
         headerStr+=codegen.Format(component,"\tCBitmap\t[!Name]Bitmap;\n"); 
         sourceStr+=codegen.Format(component,"\t[!Name]Bitmap.LoadBitmap([!Image.ID]);\n");
         sourceStr+=codegen.Format(component,"\t[!Name].SetBitmap([!Name]Bitmap);\n");
     }
     else
-        if ( component.Item("Image.ImageType")=="Icon" && component.Item("Image.ID")!="" )
-    {
-        headerStr+=codegen.Format(component,"\tHICON\t[!Name]Icon;\n"); 
-        sourceStr+=codegen.Format(component,"\t[!Name]Icon=AtlLoadIconImage([!Image.ID],LR_DEFAULTCOLOR | LR_DEFAULTSIZE,32,32);\n");
-        sourceStr+=codegen.Format(component,"\t[!Name].SetIcon([!Name]Icon);\n");
-        var destructionStr=codegen.Format(component,"\tif([!Name]Icon!=NULL)\n");
-        destructionStr+=codegen.Format(component,"\t\t::DeleteObject([!Name]Icon);\n");
-        codegen.Insert(endMemberDestruction,destructionStr);
-    }
+        if (component.Item("Image.ImageType") == "Icon" && CheckProperty(form, component, "Image.ID", "") == true)
+        {
+            headerStr+=codegen.Format(component,"\tHICON\t[!Name]Icon;\n"); 
+            sourceStr+=codegen.Format(component,"\t[!Name]Icon=AtlLoadIconImage([!Image.ID],LR_DEFAULTCOLOR | LR_DEFAULTSIZE,32,32);\n");
+            sourceStr+=codegen.Format(component,"\t[!Name].SetIcon([!Name]Icon);\n");
+            var destructionStr=codegen.Format(component,"\tif([!Name]Icon!=NULL)\n");
+            destructionStr+=codegen.Format(component,"\t\t::DeleteObject([!Name]Icon);\n");
+            codegen.Insert(endMemberDestruction,destructionStr);
+        }
 
     sourceStr+=MakeControlFont(component);
     sourceStr+=MakeToolTip(component);

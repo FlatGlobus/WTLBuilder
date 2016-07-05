@@ -113,12 +113,12 @@
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ButtonST.h" />
     <ClInclude Include="editlistbox.h" />
     <ClInclude Include="InitTempl.h" />
     <ClInclude Include="InterfaceWrapperTools.h" />
     <ClInclude Include="_util.h" />
     <ClInclude Include="atldispa.h" />
-    <ClInclude Include="ButtonST.h" />
     <ClInclude Include="CallBack.h" />
     <ClInclude Include="CFile.h" />
     <ClInclude Include="DOMXML.h" />

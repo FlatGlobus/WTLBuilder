@@ -6,13 +6,12 @@
 // which can be found in the file MS-PL.txt at the root folder.
 /////////////////////////////////////////////////////////////////////////////////////////////
 //проверка на наличие необходимой информации
-function CheckProperty(form, comp, prop, errVal)
+function CheckProperty(form, component, prop, errVal)
 {
-    var component = comp.Class;
-
-    if (comp.Item(prop) == errVal)
+    //var compClass = component.Class;
+    if (component.Item(prop) == errVal)
     {
-        Output.Err = "Form \"" + form.Item("Name") + "\", Component \"" + component + "\" has incorrect value. Property name \"" + prop + "\". Value \"" + errVal + "\"";
+        Output.Err = "Form \"" + form.Item("Name") + "\", Component \"" + component.Item("Name") + "\" has incorrect value. Property name = \"" + prop + "\". Value = \"" + errVal + "\"";
         return false;
     }
     return true;
