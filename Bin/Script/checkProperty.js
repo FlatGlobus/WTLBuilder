@@ -4,7 +4,7 @@
 // The use and distribution terms for this software are covered by the
 // Microsoft Public License (http://opensource.org/licenses/MS-PL)
 // which can be found in the file MS-PL.txt at the root folder.
-
+/////////////////////////////////////////////////////////////////////////////////////////////
 //проверка на наличие необходимой информации
 function CheckProperty(form, comp, prop, errVal)
 {

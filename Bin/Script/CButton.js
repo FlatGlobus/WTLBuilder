@@ -127,20 +127,22 @@ function StdCtl_CButton(form,component)
     
     if ( component.Item("Style")=="BS_BITMAP" )
     {
+        CheckProperty(form, component, "Image.ID", "");
         headerStr+=codegen.Format(component,"\tCBitmap\t[!Name]Bitmap;\n"); 
         sourceStr+=codegen.Format(component,"\t[!Name]Bitmap.LoadBitmap([!Image.ID]);\n");
         sourceStr+=codegen.Format(component,"\t[!Name].SetBitmap([!Name]Bitmap);\n");
     }
     else
         if ( component.Item("Style")=="BS_ICON" )
-    {
-        headerStr+=codegen.Format(component,"\tHICON\t[!Name]Icon;\n"); 
-        sourceStr+=codegen.Format(component,"\t[!Name]Icon=AtlLoadIcon([!Image.ID]);\n");
-        sourceStr+=codegen.Format(component,"\t[!Name].SetIcon([!Name]Icon);\n");
-        var destructionStr=codegen.Format(component,"\tif([!Name]Icon!=NULL)\n");
-        destructionStr+=codegen.Format(component,"\t\t::DeleteObject([!Name]Icon);\n");
-        codegen.Insert(endMemberDestruction,destructionStr);
-    }
+        {
+            CheckProperty(form, component, "Image.ID", "");
+            headerStr+=codegen.Format(component,"\tHICON\t[!Name]Icon;\n"); 
+            sourceStr+=codegen.Format(component,"\t[!Name]Icon=AtlLoadIcon([!Image.ID]);\n");
+            sourceStr+=codegen.Format(component,"\t[!Name].SetIcon([!Name]Icon);\n");
+            var destructionStr=codegen.Format(component,"\tif([!Name]Icon!=NULL)\n");
+            destructionStr+=codegen.Format(component,"\t\t::DeleteObject([!Name]Icon);\n");
+            codegen.Insert(endMemberDestruction,destructionStr);
+        }
     sourceStr+="\n";
 
     MakeSetFocus(form,component);
