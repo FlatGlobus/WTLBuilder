@@ -22,6 +22,8 @@
 /////////////////////////////////////////////////////////////////////////////
 // CDesignerCtrl
 long DistPointSeg(CPoint &point,CPoint &pn,CPoint &pk);
+
+
 CDesignerCtrl::CDesignerCtrl():components(NULL),isShowgrid(TRUE),gridDim(6,6),isGridPressed(FALSE),
 isShowGoldenGrid(FALSE),FromLeftToRight(TRUE),FromTopToBottom(TRUE),isGoldenGridMoveable(FALSE),
 componentCreated(FALSE),curentComp(NULL),offset(0,0),tabIndexMode(FALSE),tabIndex(0)
@@ -594,7 +596,7 @@ void CDesignerCtrl::BringToTop()
 	CRect rc;
 	::GetClientRect((HWND)GetParentForm()->GetHandle(),&rc);
 	SetWindowPos(HWND_TOPMOST/*HWND_TOP*/,rc.left,rc.top,rc.right,rc.bottom,SWP_NOMOVE|SWP_NOREDRAW|SWP_NOSIZE);
-	SetFocus();	
+	//SetFocus();	
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 unsigned long Distanse(CPoint & pt1,CPoint & pt2)
