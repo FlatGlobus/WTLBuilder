@@ -94,7 +94,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
     //{{WTLBUILDER_MEMBER_CREATION
 	m_formFont.CreateFont(-12,0,0,0,FW_NORMAL,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
 	SetFont((HFONT)m_formFont);
-	ResizeClient(774,123);
+	ResizeClient(774,121);
 	SetWindowText(_T("WTLBuilder"));
 
 	m_panel.Create(m_hWnd,CRect(0,0,774,30),NULL,WS_CHILD|WS_VISIBLE,0,IDC_PANEL);
@@ -276,7 +276,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	m_buttonst22.SetColor(CButtonST::BTNST_COLOR_BK_OUT,RGB(0xF4,0xF3,0xEE));
 	m_buttonst22.SetIcon(IDI_VERT_ORDER,IDI_VERT_ORDER);
 
-	m_new.Create(m_panel,CRect(6,6,26,26),_T(""),WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,0,ID_FILE_NEW_FORM);
+	m_new.Create(m_panel,CRect(6,6,26,26),_T(""),WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,0,ID_FILE_NEW);
 	m_new.SetFont((HFONT)m_formFont);
 	m_new.SetFlat(true);
 	m_new.SetAlign(CButtonST::ST_ALIGN_HORIZ);
@@ -378,7 +378,6 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	m_showgrid.SetColor(CButtonST::BTNST_COLOR_BK_OUT,RGB(0xF4,0xF3,0xEE));
 	m_showgrid.SetIcon(IDI_SHOW_GRID,IDI_SHOW_GRID);
 	m_showgrid.EnablePressedState(true);
-	m_showgrid.SetPressed(true);
 
 	m_static49.Create(m_panel1,CRect(29,9,35,23),_T("x"),WS_CHILD|WS_VISIBLE|SS_LEFT,0,IDC_CMAINFRAME_STATIC49);
 	m_static49.SetFont((HFONT)m_formFont);

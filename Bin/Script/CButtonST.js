@@ -63,7 +63,7 @@ function DecorativeCtrl_CButtonST(form, component)
         }
         else
         {
-            if (checkProperty(form, component, "OutImage.ID", "") == true)
+            if (CheckProperty(form, component, "OutImage.ID", "") == true)
             {
                 sourceStr += codegen.Format(component, "\t[!Name].SetIcon([!InImage.ID],[!OutImage.ID]);\n");
             }

@@ -171,7 +171,7 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "&File"
     BEGIN
-        MENUITEM "New...",                      ID_FILE_NEW_FORM
+        MENUITEM "New...",                      ID_FILE_NEW
         MENUITEM "Open...",                     57601
         MENUITEM "Close",                       57602
         MENUITEM SEPARATOR

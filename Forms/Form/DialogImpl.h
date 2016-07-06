@@ -18,17 +18,10 @@ public:
 	CDialogImpl(LPTSTR _name=NULL);
 	~CDialogImpl(void);
 
- //  BEGIN_MSG_MAP_EX(CDialogImpl)
-	//	CHAIN_MSG_MAP(CFormComponent<CDialogImpl>)
-	//	CHAIN_MSG_MAP(thisClass)
-	//	REFLECT_NOTIFICATIONS_EX()
-	//END_MSG_MAP()
-
 	virtual BOOL CreateComponent(Component *);
 	virtual void OnFinalMessage(HWND /*hWnd*/);
     virtual void InitProperty(void);
     virtual CRect GetMinRect();
-    //DECLARE_PROPERTY(Center,CString)
     
 };
 }
