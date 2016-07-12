@@ -13,13 +13,29 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Neutral (Default) resources
+// Russian (Russia) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
-#ifdef _WIN32
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_COLORBUTTON         BITMAP                  "colorbutton.bmp"
+
+#endif    // Russian (Russia) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -27,20 +43,27 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 IDB_CALENDAR            BITMAP                  "calendar.bmp"
-/////////////////////////////////////////////////////////////////////////////
-//
-// Bitmap
-//
 
 IDB_PANEL               BITMAP                  "panel.bmp"
+
 IDB_PANELHOST           BITMAP                  "panelhost.bmp"
+
 IDB_BUTTONST            BITMAP                  "buttonst.bmp"
+
 IDB_MASKEDIT            BITMAP                  "maskedit.bmp"
+
 IDB_DATEEDIT            BITMAP                  "dateedit.bmp"
+
 IDB_STRIPEDLISTVIEW     BITMAP                  "striplv.bmp"
+
 IDB_LISTVIEWCTRL        BITMAP                  "listview.bmp"
+
 IDB_GRIDCTRL            BITMAP                  "gridctrl.bmp"
+
 IDB_IMAGEVIEW           BITMAP                  "imageview.bmp"
+
+IDB_TABCTRL             BITMAP                  "tabctrl.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -60,7 +83,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_NULL, DIALOG
     BEGIN
@@ -72,13 +95,6 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // Russian resources
-/////////////////////////////////////////////////////////////////////////////
-//
-// Bitmap
-//
-
-IDB_TABCTRL             BITMAP                  "tabctrl.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -88,11 +104,16 @@ IDB_TABCTRL             BITMAP                  "tabctrl.bmp"
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_MINUS               ICON                    "minus.ico"
+
 IDI_PLUS                ICON                    "plus.ico"
+
 IDI_ARROWD              ICON                    "arrowd.ico"
+
 IDI_ARROWU              ICON                    "arrowu.ico"
+
 IDI_UPDATE              ICON                    "update.ico"
-/////////////////////////////////////////////////////////////////////////////
+
+
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -116,7 +137,9 @@ BEGIN
     "\0"
 END
 
-#endif    // English (U.S.) resources
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

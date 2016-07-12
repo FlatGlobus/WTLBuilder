@@ -257,7 +257,7 @@ public:
 
 	template <typename T> T GetPropValue(LPCTSTR name)
 	{
-		T ret;
+		T ret; //I know...
 		void * val = getPropValue(name);
 
 		if (val != NULL)

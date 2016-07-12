@@ -289,8 +289,9 @@ void ControlComponentBase::SetBoundsRect(CRect rc)
     Component::SetBoundsRect(rc);
     if(::IsWindow((HWND)GetHandle()))
     {
-        ::SetWindowPos((HWND)GetHandle(),NULL,bounds.left,bounds.top,bounds.Width(),bounds.Height(),
-            SWP_NOACTIVATE|SWP_NOZORDER|SWP_NOOWNERZORDER|SWP_NOCOPYBITS);
+        //::SetWindowPos((HWND)GetHandle(),NULL,rc.left,rc.top,rc.Width(),rc.Height(),
+        //    SWP_NOACTIVATE|SWP_NOZORDER|SWP_NOOWNERZORDER|SWP_NOCOPYBITS);
+		::MoveWindow((HWND)GetHandle(), rc.left, rc.top, rc.Width(), rc.Height(),TRUE);
     }
 }
 

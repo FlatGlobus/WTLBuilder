@@ -22,7 +22,6 @@ namespace DecorativeCtrl
    
    BOOL CButtonSTComp::CreateComponent(Component * _Parent)
    {
-		ADD_WIN_STYLE(BS_OWNERDRAW|WS_VISIBLE)
 		SetComponentParent(_Parent);
 		Create((HWND)_Parent->GetHandle(),GetBoundsRect(),get_Caption(),get_InternalWindowStyle(),get_InternalWindowStyleEx());
 		return ::IsWindow(m_hWnd);
@@ -38,6 +37,11 @@ namespace DecorativeCtrl
       
       ControlComponent<CButtonSTComp>::InitProperty();
 
+	  CButtonSTWinTraits tr;
+	  SET_PROP_VALUE(InternalWindowStyle, tr.GetWndStyle(0))
+	  SET_PROP_VALUE(InternalWindowStyleEx, tr.GetWndExStyle(0))
+	  ADD_WIN_STYLE(BS_OWNERDRAW | WS_VISIBLE)
+
       //DEFINE_PROPERTY(Style,ButtonSTStyle,CButtonSTComp,0)
       DEFINE_PROPERTY(Flat,BOOL,CButtonSTComp,FALSE)
       //DEFINE_PROPERTY(Transparent,BOOL,CButtonSTComp,FALSE)
@@ -52,11 +56,6 @@ namespace DecorativeCtrl
 
       inImage.AddProperty(_T("InImage"),objprop);
       outImage.AddProperty(_T("OutImage"),objprop);
-		
-	  CButtonSTWinTraits tr;
-	  SET_PROP_VALUE(InternalWindowStyle, tr.GetWndStyle(0))
-	  SET_PROP_VALUE(InternalWindowStyleEx, tr.GetWndExStyle(0))
-
    }
 
    void CButtonSTComp::OnInImageChange(CImage * )

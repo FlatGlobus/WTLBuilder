@@ -45,18 +45,6 @@ static void DrawEmptiBox(CDC & dc,CRect rc,COLORREF color=RGB(0,0,0x7F))
 	CSel _Brush(dc,NULL_BRUSH);
 	dc.Rectangle(rc.left,rc.top,rc.right,rc.bottom);
 }
-
-BOOL ExtractName(const CString &str,CString &cmpPage,CString &cmpName)
-{
-	int pos=str.Find(':');
-	if(pos==-1)
-		return FALSE;
-
-	cmpName=str.Right(str.GetLength()-(pos+1));
-	cmpPage=str.Left(pos);
-	return TRUE;
-}
-
 //////////////////////////////////////////////////////////////////////////
 BOOL PtInBox(CPoint &at,CPoint & pt)
 {
@@ -459,16 +447,12 @@ BOOL Component::MouseUp(CDC *dc,CPoint at,HintItem h)
 		pressed=FALSE;
 		if(GetState(csCreating))
 		{
-			Move(CPoint(at-deltaPoint),h);
-			if(bounds.Width() < 10 || bounds.Height() < 10)
-			{
-				bounds.right=bounds.left+defaultSize.cx;
-				bounds.bottom=bounds.top+defaultSize.cy;
-			}
+			Move(CPoint(at - deltaPoint),h);
 			SetState(csCreating,FALSE);
 			NormalizeRect(bounds);
 			SetBoundsRect(bounds);
-			SetState(csMoving,FALSE);
+			SetState(csMoving,FALSE);   
+
 		}
 
 		if(GetState(csMoving))
@@ -494,8 +478,8 @@ BOOL Component::MouseUp(CDC *dc,CPoint at,HintItem h)
 
 CRect Component::Move(CPoint &at,HintItem hint)
 {
-	if(at.x==0 && at.y==0)
-		return bounds;
+//	if(at.x==0 && at.y==0)
+//		return bounds;
 
 	BOOL modFlag=TRUE;
 
@@ -1189,7 +1173,7 @@ BOOL Component::EnableTabIndex()
 }
 //////////////////////////////////////////////////////////////////////////
 Components::Components(void):designer(NULL),currMode(cmSelect),
-id(0),hideall(FALSE),pressed(FALSE),freeze(FALSE)
+id(1000),hideall(FALSE),pressed(FALSE),freeze(FALSE)
 {
 	RegisterEvent(evSelectComponent,this,&Components::SelectComponent);
 	RegisterEvent(evAlignComponentsLeft,this,&Components::AlignLeft);

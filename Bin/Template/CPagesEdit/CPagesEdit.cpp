@@ -2,7 +2,7 @@
 #include "Panel.h"
 #include "CPagesEdit.h"
 //////////////////////////////////////////////////////////////////////////////
-const UINT [!CLASSNAME]::_controlsToClip[] =
+const UINT CPagesEdit::_controlsToClip[] =
 {
 //{{WTLBUILDER_CTRLTOCLIP
 //}}WTLBUILDER_CTRLTOCLIP

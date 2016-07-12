@@ -93,5 +93,16 @@ template <class T> inline int FindItem(const CSimpleArray<T> &array,const T &val
             return i;
     return -1;
 }
+
+inline BOOL ExtractName(const CString &str, CString &cmpPage, CString &cmpName)
+{
+	int pos = str.Find(':');
+	if (pos == -1)
+		return FALSE;
+
+	cmpName = str.Right(str.GetLength() - (pos + 1));
+	cmpPage = str.Left(pos);
+	return TRUE;
+}
 /////////////////////////////////////////////////////////////////////////////////////////
 #endif

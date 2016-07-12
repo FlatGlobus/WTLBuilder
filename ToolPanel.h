@@ -14,6 +14,7 @@ extern CAppModule _Module;
 #include <GDIUtil.h>
 #include <atlcrack.h>
 #include <atltheme.h>
+#include "_util.h"
 
 #define  _BUTTON_WIDTH 10
 #define  WM_SELCHANGEPANEL	WM_USER+255
@@ -169,8 +170,9 @@ public:
         if(sel!=curToolTipItem)
         {
             curToolTipItem = sel;
-            ATL::_U_STRINGorID strID((LPCTSTR)get_SelectedName(sel));
-            m_toolTip.UpdateTipText(strID,(HWND)*this,1);
+			CString cmpPage, cmpName;
+			ExtractName(get_SelectedName(sel), cmpPage, cmpName);
+            m_toolTip.UpdateTipText(ATL::_U_STRINGorID(cmpName),(HWND)*this,1);
         }
 		return 0;
 	}

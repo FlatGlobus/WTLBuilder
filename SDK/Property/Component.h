@@ -161,8 +161,8 @@ BOOL Class::get_##Name(void)\
 #define BOX_SIDE 3
 #define BOX_SIDE2 6
 
-#define DEF_SIZE_W	40
-#define DEF_SIZE_H	40
+#define DEF_SIZE_W	32
+#define DEF_SIZE_H	16
 
 enum HintItem {hiNone,hiLeftTop,hiTopMedium,hiRightTop,hiRightMedium,hiRightBottom,
 				hiBottomMedium,hiLeftBottom,hiLeftMedium,hiCaption,hiField,hiAll}; 

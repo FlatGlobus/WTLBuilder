@@ -1922,7 +1922,7 @@ int CColorButton::PickerHitTest (const POINT &pt)
 #ifdef __WTLBUILDER__
 namespace DecorativeCtrl
 {
-   REGISTER_COMPONENT_EX(CColorButton,CColorButtonComp,DecorativeCtrl,IDB_BUTTONST)
+   REGISTER_COMPONENT_EX(CColorButton,CColorButtonComp,DecorativeCtrl,IDB_COLORBUTTON)
       
    CColorButtonComp::CColorButtonComp(LPTSTR _name):ControlComponent<DecorativeCtrl::CColorButtonComp>(_name)
    {

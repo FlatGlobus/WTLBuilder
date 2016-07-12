@@ -21,13 +21,15 @@
 #define IDB_GRIDCTRL                    121
 #define IDB_IMAGEVIEW                   122
 #define IDB_STRIPEDLISTVIEW1            123
+#define IDB_BITMAP2                     123
+#define IDB_COLORBUTTON                 123
 #define IDD_NULL                        207
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        123
+#define _APS_NEXT_RESOURCE_VALUE        124
 #define _APS_NEXT_COMMAND_VALUE         40001
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
