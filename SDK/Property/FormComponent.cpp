@@ -98,7 +98,7 @@ void Undo::Reset()
 //////////////////////////////////////////////////////////////////////////
 CFormComponent::CFormComponent(LPTSTR _name):Component(_name),enableClose(FALSE),showWindow(TRUE),
 visible(TRUE),bkColor(COLOR_WINDOW),_controlsToClip(NULL),enableLayout(FALSE),nPositions(1),
-formIcon(ICON_TYPE),classStyle(CS_DBLCLKS|CS_HREDRAW|CS_VREDRAW),fromTemplate(TRUE),idBase(1000),
+formIcon(ICON_TYPE),classStyle(CS_DBLCLKS|CS_HREDRAW|CS_VREDRAW),fromTemplate(TRUE),idBase(0),
 caption(_T("")),sizeChanged(FALSE),showHandle(FALSE)
 {
 	RegisterEvent(evSaveForm,this,&CFormComponent::SaveForm,FORM_PRORITY);

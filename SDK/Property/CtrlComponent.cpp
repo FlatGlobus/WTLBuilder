@@ -287,12 +287,11 @@ BOOL ControlComponentBase::IsControl()
 void ControlComponentBase::SetBoundsRect(CRect rc)
 {
     Component::SetBoundsRect(rc);
-    if(::IsWindow((HWND)GetHandle()))
-    {
-        //::SetWindowPos((HWND)GetHandle(),NULL,rc.left,rc.top,rc.Width(),rc.Height(),
-        //    SWP_NOACTIVATE|SWP_NOZORDER|SWP_NOOWNERZORDER|SWP_NOCOPYBITS);
-		::MoveWindow((HWND)GetHandle(), rc.left, rc.top, rc.Width(), rc.Height(),TRUE);
-    }
+	if (::IsWindow((HWND)GetHandle()))
+	{
+		::SetWindowPos((HWND)GetHandle(), NULL, rc.left, rc.top, rc.Width(), rc.Height(),
+			SWP_NOACTIVATE | SWP_NOZORDER | SWP_NOOWNERZORDER | SWP_NOCOPYBITS);
+	}
 }
 
 CRect ControlComponentBase::GetBoundsRect(void)
