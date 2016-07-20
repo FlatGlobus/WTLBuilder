@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #include "resource.h"
 
-REGISTER_PAGE(StdCtl,IDB_STDCTRL)
+//REGISTER_PAGE(StdCtl,IDB_STDCTRL)
 
 BOOL APIENTRY DllMain( HANDLE hModule, 
 					  DWORD  ul_reason_for_call, 

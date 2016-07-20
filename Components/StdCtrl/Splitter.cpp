@@ -75,8 +75,8 @@ namespace StdCtrl
             {
                 leftPaneWnd->SetComponentParent(GetParentForm());
                 CPoint pt(get_Left(),get_Top());
-                ComponentToDesigner(pt);
-                leftPaneWnd->DesignerToComponent(pt);
+//                ComponentToDesigner(pt);
+//                leftPaneWnd->DesignerToComponent(pt);
                 leftPaneWnd->set_Left(pt.x);
                 leftPaneWnd->set_Top(pt.y);
                 leftPaneWnd->Changed.Reset();
@@ -133,8 +133,8 @@ namespace StdCtrl
                 GetSplitterPaneRect(SPLIT_PANE_RIGHT,&rc);
                 rc.left+=get_Left();
                 rc.top+=get_Top();
-                ComponentToDesigner(rc);
-                rightPaneWnd->DesignerToComponent(rc);
+//                ComponentToDesigner(rc);
+//                rightPaneWnd->DesignerToComponent(rc);
                 rightPaneWnd->set_Left(rc.left);
                 rightPaneWnd->set_Top(rc.top);
                 rightPaneWnd->Changed.Reset();
@@ -331,8 +331,8 @@ namespace StdCtrl
             {
                 topPaneWnd->SetComponentParent(GetParentForm());
                 CPoint pt(get_Left(),get_Top());
-                ComponentToDesigner(pt);
-                topPaneWnd->DesignerToComponent(pt);
+//                ComponentToDesigner(pt);
+//                topPaneWnd->DesignerToComponent(pt);
                 topPaneWnd->set_Left(pt.x);
                 topPaneWnd->set_Top(pt.y);
                 topPaneWnd->Changed.Reset();
@@ -389,8 +389,8 @@ namespace StdCtrl
                 GetSplitterPaneRect(SPLIT_PANE_BOTTOM,&rc);
                 rc.left+=get_Left();
                 rc.top+=get_Top();
-                ComponentToDesigner(rc);
-                bottomPaneWnd->DesignerToComponent(rc);
+//                ComponentToDesigner(rc);
+//                bottomPaneWnd->DesignerToComponent(rc);
                 bottomPaneWnd->set_Left(rc.left);
                 bottomPaneWnd->set_Top(rc.top);
                 bottomPaneWnd->Changed.Reset();

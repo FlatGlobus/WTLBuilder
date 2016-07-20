@@ -160,11 +160,14 @@ LRESULT CDesignerCtrl::OnLButtonDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lP
         }
         else
         {
+			::ClientToScreen(*this, &downPoint);
+			::ScreenToClient((HWND)Parent->GetHandle(), &downPoint);
+
             components->MouseDown(downPoint);
         }
     }
     SetCapture();
-	BringToTop();
+	//BringToTop();
 	return 0;
 }
 
@@ -173,6 +176,9 @@ LRESULT CDesignerCtrl::OnLButtonUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lPar
     if(isGridPressed==FALSE)
     {
         CPoint pt=LParamToPoint(lParam);
+		::ClientToScreen(*this, &pt);
+		::ScreenToClient((HWND)Parent->GetHandle(), &pt);
+
 	    components->MouseUp(pt);
         if(downPoint.x!=pt.x || downPoint.y!=pt.y || componentCreated == TRUE)
             SendEvent(evAddUndo,Parent);
@@ -209,6 +215,9 @@ LRESULT CDesignerCtrl::OnMouseMove(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lPar
     }
     else
     {
+		::ClientToScreen(*this, &currPoint);
+		::ScreenToClient((HWND)Parent->GetHandle(), &currPoint);
+
 	    components->MouseMove(currPoint);
     }
 	return 0;
@@ -399,6 +408,10 @@ void CDesignerCtrl::PaintGrid(CDC & dc,COLORREF bkColor)
 {
     CRect rc;
     ::GetClientRect(GetParent(),&rc);
+	::ClientToScreen(GetParent(), &rc.TopLeft());
+	::ClientToScreen(GetParent(), &rc.BottomRight());
+	ScreenToClient(rc);
+
     bkColor=::GetSysColor(bkColor);
 
     if(IsShowGrid()==TRUE && gridDim.cx > 0 && gridDim.cy >0)
@@ -406,7 +419,7 @@ void CDesignerCtrl::PaintGrid(CDC & dc,COLORREF bkColor)
         CPaintDCEx pdc(dc,rc);
         pdc.FillSolidRect(&rc,bkColor);
         pdc.SetROP2(R2_NOT);
-        for (int x = 0; x < rc.right; x += gridDim.cx)
+        for (int x = 0; x <= rc.right; x += gridDim.cx)
             for (int y = 0; y < rc.bottom; y += gridDim.cy)
                 pdc.SetPixel(x, y, RGB(0xFF,0xFF,0xFF));
     }
@@ -446,38 +459,50 @@ void CDesignerCtrl::ShowTabIndexes(CDC & dc)
         if(comp->EnableTabIndex()==TRUE && comp->IsControl() == TRUE)
         {
             rc=comp->GetBoundsRect();
-            comp->ComponentToDesigner(rc);
+            //comp->ComponentToDesigner(rc);
             str.Format(_T(" %u "),comp->get_TabIndex());
             dc.DrawText(str,str.GetLength(),&rc,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
         }
     }
 }
 
-void CDesignerCtrl::AlignToGrid(CRect & rc)
+CRect CDesignerCtrl::AlignToGrid(const CRect &rc)
 {
+	CRect ret(rc);
     if (IsShowGrid())
-    {
-        rc.left = rc.left / GetGridSize().cx * GetGridSize().cx;
-        rc.top = rc.top / GetGridSize().cy * GetGridSize().cy;
-        rc.right = rc.right / GetGridSize().cx * GetGridSize().cx;
-        rc.bottom = rc.bottom / GetGridSize().cy * GetGridSize().cy;
+    {   
+		CSize sz = GetGridSize();
+        ret.left = ((rc.left + sz.cx / 2 )/ sz.cx) * sz.cx;
+        ret.top = ((rc.top + sz.cy / 2) / sz.cy) * sz.cy;
+        ret.right = ((rc.right + sz.cx / 2) / sz.cx) * sz.cx;
+        ret.bottom = ((rc.bottom + sz.cy / 2) / sz.cy) * sz.cy;
     }
+	return rc;
 }
 
-void CDesignerCtrl::AlignToGrid(CPoint & xy)
+CPoint CDesignerCtrl::AlignToGrid(const CPoint &xy)
 {
+	CPoint ret(xy);
     if (IsShowGrid())
     {
-        xy.x = xy.x / GetGridSize().cx * GetGridSize().cx;
-        xy.y = xy.y / GetGridSize().cy * GetGridSize().cy;
+		CSize sz = GetGridSize();
+		ret.x = ((xy.x + sz.cx / 2) / sz.cx) * sz.cx;
+		ret.y = ((xy.y + sz.cy / 2) / sz.cy) * sz.cy;
     }
+	return ret;
 }
 
-void CDesignerCtrl::AlignToParent(CPoint & pt)
+void CDesignerCtrl::DrawFocusRect(const CRect& rc)
 {
-    ClientToScreen(&pt);
-    ::ScreenToClient((HWND)GetParentForm()->GetHandle(),&pt);
+	CClientDC dc(*this);
+	dc.DrawFocusRect(rc);
 }
+
+//void CDesignerCtrl::AlignToParent(CPoint & pt)
+//{
+//    ClientToScreen(&pt);
+//    ::ScreenToClient((HWND)GetParentForm()->GetHandle(),&pt);
+//}
 
 LRESULT CDesignerCtrl::OnUpdateDesigner(UINT /*uMsg*/, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/)
 {

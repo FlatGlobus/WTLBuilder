@@ -78,12 +78,12 @@ public:
     Components * GetComponents();
     Component  * GetParentForm();
     void PaintGrid(CDC &,COLORREF);
-    void AlignToGrid(CPoint & xy);
-    void AlignToGrid(CRect & rc);
-    void AlignToParent(CPoint & pt);
+    CPoint AlignToGrid(const CPoint &xy);
+    CRect  AlignToGrid(const CRect & rc);
     void SetTabIndexMode(BOOL);
     BOOL GetTabIndexMode();
 	void BringToTop();
+	void DrawFocusRect(const CRect&);
 protected:
     Component  * curentComp;
 	Components * components;

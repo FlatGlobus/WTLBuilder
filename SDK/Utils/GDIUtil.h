@@ -140,10 +140,7 @@ void RegisterGDIProp(void);
 typedef COLORREF CColorref;
 #endif
 //////////////////////////////////////////////////////////////////////////
-inline CPoint LParamToPoint(LPARAM lParam)
-{
-	return CPoint (GET_X_LPARAM(lParam),GET_Y_LPARAM(lParam));
-}
+#define LParamToPoint(lParam)  CPoint(GET_X_LPARAM(lParam),GET_Y_LPARAM(lParam));
 
 class CPenEx
 {

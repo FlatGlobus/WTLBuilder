@@ -418,10 +418,9 @@ BOOL Component::MouseMove(CDC *dc,CPoint at,HintItem h)
 		{
 			CRect rc(bounds);
 			ComponentToDesigner(rc);
-			if(designer && IsControl())
-				designer->AlignToGrid(rc);
 			dc->DrawFocusRect(&rc);
-			Move(CPoint(at-deltaPoint),h);
+
+			bounds=Move(CPoint(at-deltaPoint),h);
 		}
 		else
 			if(CPoint(at-deltaPoint)!=CPoint(0,0))
@@ -431,8 +430,6 @@ BOOL Component::MouseMove(CDC *dc,CPoint at,HintItem h)
 		{
 			CRect rc(bounds);
 			ComponentToDesigner(rc);
-			if(designer && IsControl())
-				designer->AlignToGrid(rc);
 			dc->DrawFocusRect(&rc);
 		}
 		deltaPoint=at;
@@ -447,7 +444,7 @@ BOOL Component::MouseUp(CDC *dc,CPoint at,HintItem h)
 		pressed=FALSE;
 		if(GetState(csCreating))
 		{
-			Move(CPoint(at - deltaPoint),h);
+			bounds=Move(CPoint(at - deltaPoint),h);
 			SetState(csCreating,FALSE);
 			NormalizeRect(bounds);
 			SetBoundsRect(bounds);
@@ -459,11 +456,11 @@ BOOL Component::MouseUp(CDC *dc,CPoint at,HintItem h)
 		{
 			CRect rc(bounds);
 			ComponentToDesigner(rc);
-			if(designer && IsControl())
-				designer->AlignToGrid(rc);
+			//if(designer && IsControl())
+			//	designer->AlignToGrid(rc);
 			
 			dc->DrawFocusRect(&rc);
-			Move(CPoint(at-deltaPoint),h);
+			bounds=Move(CPoint(at-deltaPoint),h);
 			SetBoundsRect(bounds);
 			SetState(csMoving,FALSE);
 		}
@@ -478,112 +475,101 @@ BOOL Component::MouseUp(CDC *dc,CPoint at,HintItem h)
 
 CRect Component::Move(CPoint &at,HintItem hint)
 {
-//	if(at.x==0 && at.y==0)
-//		return bounds;
+	if (at.x == 0 && at.y == 0)
+		return bounds;
 
-	BOOL modFlag=TRUE;
-
+	BOOL modFlag = TRUE;
 	CRect maxRC;
-	::GetClientRect((HWND)Parent->GetHandle(),&maxRC);
-	CWindow _w((HWND)Parent->GetHandle());
-	_w.ClientToScreen(&maxRC);
-	GetDesigner()->ScreenToClient(&maxRC);
-
-	CRect rc=bounds;
-	ComponentToDesigner(rc);
-
-	if(IsControl()==FALSE && IsForm()==FALSE && hint!=hiAll)
+	::GetClientRect((HWND)Parent->GetHandle(), &maxRC);
+	CRect rc = bounds;
+	if (IsControl() == FALSE && IsForm() == FALSE && hint != hiAll)
 	{
-		rc.right=rc.left+NONCONTROLW;
-		rc.bottom=rc.top+NONCONTROLH;
+		rc.right = rc.left + NONCONTROLW;
+		rc.bottom = rc.top + NONCONTROLH;
 	}
 	else
-		switch(hint)
-	{
+		switch (hint)
+		{
 		case hiLeftTop:
-			if(rc.top+at.y >= maxRC.top)
-				rc.top+=at.y;
+			if (rc.top + at.y >= maxRC.top)
+				rc.top += at.y;
 			else
-				rc.top=maxRC.top;
+				rc.top = maxRC.top;
 
-			if(rc.left+at.x >= maxRC.left)
-				rc.left+=at.x;
+			if (rc.left + at.x >= maxRC.left)
+				rc.left += at.x;
 			else
-				rc.left=maxRC.left;
+				rc.left = maxRC.left;
 			break;
 		case hiTopMedium:
-			if(rc.top+at.y >= maxRC.top)
-				rc.top+=at.y;
+			if (rc.top + at.y >= maxRC.top)
+				rc.top += at.y;
 			else
-				rc.top=maxRC.top;
+				rc.top = maxRC.top;
 			break;
 		case hiRightTop:
-			if(rc.top+at.y >= maxRC.top)
-				rc.top+=at.y;
+			if (rc.top + at.y >= maxRC.top)
+				rc.top += at.y;
 			else
-				rc.top=maxRC.top;
+				rc.top = maxRC.top;
 
-			if(rc.right+at.x <= maxRC.right)
-				rc.right+=at.x;
+			if (rc.right + at.x <= maxRC.right)
+				rc.right += at.x;
 			else
-				rc.right=maxRC.right;
+				rc.right = maxRC.right;
 			break;
 		case hiRightMedium:
-			if(rc.right+at.x <= maxRC.right)
-				rc.right+=at.x;
+			if (rc.right + at.x <= maxRC.right)
+				rc.right += at.x;
 			else
-				rc.right=maxRC.right;
+				rc.right = maxRC.right;
 			break;
 		case hiRightBottom:
-			if(rc.bottom+at.y <= maxRC.bottom)
-				rc.bottom+=at.y;
+			if (rc.bottom + at.y <= maxRC.bottom)
+				rc.bottom += at.y;
 			else
-				rc.bottom=maxRC.bottom;
+				rc.bottom = maxRC.bottom;
 
-			if(rc.right+at.x <= maxRC.right)
-				rc.right+=at.x;
+			if (rc.right + at.x <= maxRC.right)
+				rc.right += at.x;
 			else
-				rc.right=maxRC.right;
-
+				rc.right = maxRC.right;
 			break;
 		case hiBottomMedium:
-			if(rc.bottom+at.y <= maxRC.bottom)
-				rc.bottom+=at.y;
+			if (rc.bottom + at.y <= maxRC.bottom)
+				rc.bottom += at.y;
 			else
-				rc.bottom=maxRC.bottom;
-
+				rc.bottom = maxRC.bottom;
 			break;
 		case hiLeftBottom:
-			if(rc.bottom+at.y <= maxRC.bottom)
-				rc.bottom+=at.y;
+			if (rc.bottom + at.y <= maxRC.bottom)
+				rc.bottom += at.y;
 			else
-				rc.bottom=maxRC.bottom;
+				rc.bottom = maxRC.bottom;
 
-			if(rc.left+at.x >= maxRC.left)
-				rc.left+=at.x;
-			else	
-				rc.left=maxRC.left;   		
+			if (rc.left + at.x >= maxRC.left)
+				rc.left += at.x;
+			else
+				rc.left = maxRC.left;
 			break;
 		case hiLeftMedium:
-			if(rc.left+at.x >= maxRC.left)
-				rc.left+=at.x;
+			if (rc.left + at.x >= maxRC.left)
+				rc.left += at.x;
 			else
-				rc.left=maxRC.left;
+				rc.left = maxRC.left;
 			break;
 		case hiAll:
-			if(rc.left+at.x >= maxRC.left && rc.bottom+at.y <= maxRC.bottom && rc.top+at.y >= maxRC.top && rc.right+at.x <= maxRC.right)
-				rc+=at;
+			if (rc.left + at.x >= maxRC.left && rc.bottom + at.y <= maxRC.bottom && rc.top + at.y >= maxRC.top && rc.right + at.x <= maxRC.right)
+				rc += at;
 			else
-				modFlag=FALSE;
+				modFlag = FALSE;
 			break;
-	}
+		}
 
-	DesignerToComponent(rc);
-
-	if(modFlag==TRUE && CheckBounds(rc))
+	if (modFlag == TRUE && CheckBounds(rc))
 	{
-		bounds=rc;
-		UpdateBoundsProp(bounds);
+		bounds = rc;
+		//UpdateBoundsProp(bounds);
 	}
 	return bounds;
 }
@@ -598,7 +584,7 @@ void Component::Paint(CDC & dc)
 		if(ExtractName(className,cmpPage,cmpName))
 		{
 			CRect rc(bounds);
-			ComponentToDesigner(rc);
+//			ComponentToDesigner(rc);
 			SendEvent(evGetComponentBitmap,(LPCTSTR)cmpName,(LPCTSTR)cmpPage,&bitmap);
 			{
 				CPenEx pen(PS_SOLID,1,RGB(0,0,0));
@@ -624,7 +610,7 @@ void Component::PaintSelect(CDC & dc)
 		COLORREF color = FirstSelected == TRUE ? RGB(0x7F,0x7F,0x7F): RGB(0xFF,0xFF,0xFF);
 		CPoint at;
 		CRect rc(bounds);
-		ComponentToDesigner(rc);
+//		ComponentToDesigner(rc);
 
 		at.x=rc.left-BOX_SIDE;
 		at.y=rc.top-BOX_SIDE;
@@ -656,9 +642,7 @@ void Component::PaintSelect(CDC & dc)
 HintItem Component::GetHint(CPoint & pt)
 {
 	CPoint at;
-
 	CRect rc(bounds);
-	ComponentToDesigner(rc);
 
 	at.x=rc.left-BOX_SIDE;
 	at.y=rc.top-BOX_SIDE;
@@ -740,8 +724,7 @@ void Component::UpdateBoundsProp(CRect & rc)
 
 void Component::SetBoundsRect(CRect rc)
 {
-	//if(GetState(csCreating) == FALSE)
-		UpdateBoundsProp(rc);
+	UpdateBoundsProp(rc);
 	if(get_Layout()==TRUE && GetState(csLoading)==FALSE && GetState(csCreating)==FALSE)
 		::PostMessage((HWND)GetParentForm()->GetHandle(),WM_UPDATELAYOUT,0,0);
 }
@@ -758,38 +741,26 @@ void Component::Save(CXMLDOMNode & Node)
 
 void Component::DesignerToComponent(CRect & rc)
 {
-	if(IsControl() /*&& designer->GetParentForm()!=Parent*/)
-	{
-		designer->ClientToScreen(&rc);
-		CWindow((HWND)Parent->GetHandle()).ScreenToClient(&rc);
-	}
+	designer->ClientToScreen(&rc);
+	CWindow((HWND)Parent->GetHandle()).ScreenToClient(&rc);
 }
 
 void Component::ComponentToDesigner(CRect & rc)
 {
-	if(IsControl() /*&& designer->GetParentForm()!=Parent*/)
-	{
-		CWindow((HWND)Parent->GetHandle()).ClientToScreen(&rc);
-		designer->ScreenToClient(&rc);
-	}
+	CWindow((HWND)Parent->GetHandle()).ClientToScreen(&rc);
+	designer->ScreenToClient(&rc);
 }
 
 void Component::DesignerToComponent(CPoint & pt)
 {
-	if(IsControl() /*&& designer->GetParentForm()!=Parent*/)
-	{
-		designer->ClientToScreen(&pt);
-		CWindow((HWND)Parent->GetHandle()).ScreenToClient(&pt);
-	}
+	designer->ClientToScreen(&pt);
+	CWindow((HWND)Parent->GetHandle()).ScreenToClient(&pt);
 }
 
 void Component::ComponentToDesigner(CPoint & pt)
 {
-	if(IsControl())//&& designer->GetParentForm()!=Parent)
-	{
-		CWindow((HWND)Parent->GetHandle()).ClientToScreen(&pt);
-		designer->ScreenToClient(&pt);
-	}
+	CWindow((HWND)Parent->GetHandle()).ClientToScreen(&pt);
+	designer->ScreenToClient(&pt);
 }
 
 long Component::DesignerToComponentX(long val)
@@ -1087,7 +1058,6 @@ void Component::SetModified(CRect * rc)
 	else
 	{
 		CRect rc=GetBoundsRect();
-		ComponentToDesigner(rc);
 		GetParentForm()->SetModified(&rc);
 	}
 }
@@ -1257,7 +1227,7 @@ Component * Components::ComponentFromPt(CPoint & at,BOOL realBounds)
 		if(realBounds==FALSE)
 		{
 			rc=components[i]->GetBoundsRect();
-			components[i]->ComponentToDesigner(rc);
+//			components[i]->ComponentToDesigner(rc);
 		}
 		else
 		{
@@ -1322,8 +1292,9 @@ void Components::MouseDown(CPoint point)
 	if(currMode==cmCreate)
 	{
 		UnselectAll();
-		AlignToGrid(point);
-		CRect rc(point.x,point.y,point.x+1,point.y+1);
+		point = AlignToGrid(point);
+		CSize grid = GetDesigner()->IsShowGrid() == TRUE ? GetDesigner()->GetGridSize() : CSize(0, 0);
+		CRect rc(point.x,point.y,point.x + grid.cx,point.y + grid.cy);
 		Component * temp=Create(rc,shiftPressed);
 		if(temp)
 		{
@@ -1332,7 +1303,7 @@ void Components::MouseDown(CPoint point)
 			temp->Selected=TRUE;
 			temp->FirstSelected=TRUE;
 			hint=hiRightBottom;
-			temp->DesignerToComponent(point);
+			//temp->DesignerToComponent(point);
 			temp->MouseDown(&dc,point,hint);
 			temp->SetModified();
 			GetDesigner()->SetComponentCreated();
@@ -1362,7 +1333,7 @@ void Components::MouseDown(CPoint point)
 
 				pressed=TRUE;
 				hint=hiAll;
-				AlignToGrid(point);
+				point = AlignToGrid(point);
 				MouseDownAll(&dc,point);
 			}
 			else
@@ -1375,7 +1346,7 @@ void Components::MouseDown(CPoint point)
 				{
 					pressed=TRUE;
 					ShowCursor(hint);
-					AlignToGrid(point);
+					point = AlignToGrid(point);
 					MouseDownAll(&dc,point);
 				}
 			}
@@ -1402,7 +1373,7 @@ void Components::MouseUp(CPoint point)
 	Component * temp=NULL;
 	if(pressed==TRUE)
 	{
-		AlignToGrid(point);
+		point = AlignToGrid(point);
 		CClientDC dc(designer->m_hWnd);
 		if((temp=GetSingleSel())!=NULL)
 		{
@@ -1435,7 +1406,7 @@ void Components::MouseMove(CPoint point)
 
 	if(pressed)
 	{
-		AlignToGrid(point);
+		point = AlignToGrid(point);
 		CClientDC dc(designer->m_hWnd);
 		if((temp=GetSingleSel())!=NULL)
 		{
@@ -1658,7 +1629,7 @@ void Components::Paste(ComponentArray * comps, Component * comp,CPoint * downPoi
 		if(downPoint)
 		{
 			at=*downPoint;
-			ctrl->DesignerToComponent(at);
+//			ctrl->DesignerToComponent(at);
 		}
 
 		ctrl->set_Left(at.x + ctrl->get_Left() - pt.x);
@@ -1921,15 +1892,15 @@ void Components::SetStateAll(ComponentState cs,BOOL flag,BOOL SelectedOnly)
 	}
 }
 
-void Components::AlignToGrid(CPoint & xy)
+CPoint Components::AlignToGrid(CPoint xy)
 {
-	designer->AlignToGrid(xy);
+	return designer->AlignToGrid(xy);
 }
 
-void Components::AlignToParent(CPoint & pt)
-{
-	designer->AlignToParent(pt);
-}
+//void Components::AlignToParent(CPoint & pt)
+//{
+//	designer->AlignToParent(pt);
+//}
 
 void Components::HorizOrder(Component *from, long intend)
 {
@@ -1954,7 +1925,7 @@ void Components::HorizOrder(Component *from, long intend)
 	{
 		pt.y=0;
 		pt.x=firstSelected->get_Left();
-		firstSelected->ComponentToDesigner(pt);
+//		firstSelected->ComponentToDesigner(pt);
 		right = pt.x+firstSelected->get_Width()+intend;
 	}
 
@@ -1984,11 +1955,11 @@ void Components::HorizOrder(Component *from, long intend)
 
 			pt.y=0;
 			pt.x=right;
-			components[currIdx]->DesignerToComponent(pt);
+//			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Left(pt.x);
 			pt.x=components[currIdx]->get_Left();
 			pt.y=0;
-		    components[currIdx]->ComponentToDesigner(pt);
+//		    components[currIdx]->ComponentToDesigner(pt);
 		    right=pt.x+components[currIdx]->get_Width()+intend;
             if(shiftPressed == TRUE)
             {
@@ -2025,7 +1996,7 @@ void Components::HorizOrderRight(Component *from, long intend)
 	{
 		pt.y=0;
 		pt.x=firstSelected->get_Left();
-		firstSelected->ComponentToDesigner(pt);
+//		firstSelected->ComponentToDesigner(pt);
 		left = pt.x-intend;
 	}
 
@@ -2051,11 +2022,11 @@ void Components::HorizOrderRight(Component *from, long intend)
 
 			pt.y=0;
 			pt.x=left;
-			components[currIdx]->DesignerToComponent(pt);
+//			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Left(pt.x-components[currIdx]->get_Width());
 			pt.x=components[currIdx]->get_Left();
 			pt.y=0;
-		    components[currIdx]->ComponentToDesigner(pt);
+//		    components[currIdx]->ComponentToDesigner(pt);
 		    left=pt.x-intend;
 
             if(shiftPressed==TRUE)
@@ -2090,7 +2061,7 @@ void Components::VertOrder(Component *from, long intend)
 	{
 		pt.x=0;
 		pt.y=firstSelected->get_Top();
-		firstSelected->ComponentToDesigner(pt);
+//		firstSelected->ComponentToDesigner(pt);
 		bottom = pt.y+firstSelected->get_Height()+intend;
 	}
 
@@ -2118,11 +2089,11 @@ void Components::VertOrder(Component *from, long intend)
 
 			pt.y=bottom;
 			pt.x=0;
-			components[currIdx]->DesignerToComponent(pt);
+//			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Top(pt.y);
 			pt.y=components[currIdx]->get_Top();
 			pt.x=0;
-			components[currIdx]->ComponentToDesigner(pt);
+//			components[currIdx]->ComponentToDesigner(pt);
 			bottom=pt.y+components[currIdx]->get_Height()+intend;
 
             if(shiftPressed == TRUE)
@@ -2157,7 +2128,7 @@ void Components::VertOrderBottom(Component *from, long intend)
 	{
 		pt.x=0;
 		pt.y=firstSelected->get_Top();
-		firstSelected->ComponentToDesigner(pt);
+//		firstSelected->ComponentToDesigner(pt);
 		bottom = pt.y-intend;
 	}
 
@@ -2183,11 +2154,11 @@ void Components::VertOrderBottom(Component *from, long intend)
 
 			pt.y=bottom;
 			pt.x=0;
-			components[currIdx]->DesignerToComponent(pt);
+//			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Top(pt.y-components[currIdx]->get_Height());
 			pt.y=components[currIdx]->get_Top();
 			pt.x=0;
-			components[currIdx]->ComponentToDesigner(pt);
+//			components[currIdx]->ComponentToDesigner(pt);
 			bottom=pt.y-intend;
             if(shiftPressed == TRUE)
             {
@@ -2313,7 +2284,7 @@ void __stdcall Components::Remove(long Index)
 CRgnHandle MakeRgn(Component * component)
 {
 	CRect rc(component->GetBoundsRect());
-	component->ComponentToDesigner(rc);
+//	component->ComponentToDesigner(rc);
 
 	POINT at[]={
 		rc.left-BOX_SIDE-BOX_SIDE,rc.top+BOX_SIDE-BOX_SIDE,
@@ -2474,7 +2445,7 @@ int Components::FindLeftestIdx(int fromPos)
 			components[i]->IsControl() == TRUE)
 		{
 			pt.x=components[i]->get_Left();
-			components[i]->ComponentToDesigner(pt);
+//			components[i]->ComponentToDesigner(pt);
 			if(pt.x < left && pt.x >=fromPos)
 			{
 				idx=i;
@@ -2503,7 +2474,7 @@ int Components::FindRightestIdx(int fromPos)
 			components[i]->IsControl() == TRUE)
 		{
 			pt.x=components[i]->get_Left()+components[i]->get_Width();
-			components[i]->ComponentToDesigner(pt);
+//			components[i]->ComponentToDesigner(pt);
 			if(pt.x > right && pt.x >=fromPos)
 			{
 				idx=i;
@@ -2534,7 +2505,7 @@ int Components::FindTopestIdx(int fromPos)
 			components[i]->IsControl()==TRUE)
 		{
 			pt.y=components[i]->get_Top();
-			components[i]->ComponentToDesigner(pt);
+//			components[i]->ComponentToDesigner(pt);
 			if(pt.y < top && pt.y >=fromPos)
 			{
 				idx=(int)i;
@@ -2563,7 +2534,7 @@ int Components::FindBottomestIdx(int fromPos)
 			components[i]->IsControl()==TRUE)
 		{
 			pt.y=components[i]->get_Top()+components[i]->get_Height();
-			components[i]->ComponentToDesigner(pt);
+//			components[i]->ComponentToDesigner(pt);
 			if(pt.y > bottom && pt.y >=fromPos)
 			{
 				idx=(int)i;
@@ -2597,7 +2568,7 @@ void Components::AlignLeft(Component *from,long intend)
 	{
 		pt.y=0;
 		pt.x=firstSelected->get_Left();
-		firstSelected->ComponentToDesigner(pt);
+//		firstSelected->ComponentToDesigner(pt);
 		left = pt.x;
 	}
 
@@ -2609,7 +2580,7 @@ void Components::AlignLeft(Component *from,long intend)
 		{
 			if(components[i]->IsControl()==FALSE)
 				continue;
-			components[i]->DesignerToComponent(pt);
+//			components[i]->DesignerToComponent(pt);
 
             if(shiftPressed == TRUE)
                 rx=components[i]->GetBoundsRect().right;
@@ -2665,7 +2636,7 @@ void Components::AlignTop(Component *from,long intend)
 	{
 		pt.x=0;
 		pt.y=firstSelected->get_Top();
-		firstSelected->ComponentToDesigner(pt);
+//		firstSelected->ComponentToDesigner(pt);
 		top = pt.y;
 	}
 
@@ -2680,7 +2651,7 @@ void Components::AlignTop(Component *from,long intend)
 		{
 			if(components[i]->IsControl()==FALSE)
 				continue;
-			components[i]->DesignerToComponent(pt);
+//			components[i]->DesignerToComponent(pt);
 
             if(shiftPressed == TRUE)
                 ry=components[i]->GetBoundsRect().bottom;
@@ -2736,7 +2707,7 @@ void Components::AlignRight(Component *from,long intend)
 	{
 		pt.y=0;
 		pt.x=firstSelected->get_Left();
-		firstSelected->ComponentToDesigner(pt);
+//		firstSelected->ComponentToDesigner(pt);
 		right= pt.x+firstSelected->get_Width();
 	}
 	else
@@ -2764,7 +2735,7 @@ void Components::AlignRight(Component *from,long intend)
 			if(components[i]->IsControl()==FALSE)
 				continue;
 			pt.x=components[i]->get_Left();
-			components[i]->DesignerToComponent(pt);
+//			components[i]->DesignerToComponent(pt);
 
             if(shiftPressed == TRUE)
                 rx=components[i]->GetBoundsRect().left;
@@ -2820,7 +2791,7 @@ void Components::AlignBottom(Component *from,long intend)
 	{
 		pt.x=0;
 		pt.y=firstSelected->get_Top();
-		firstSelected->ComponentToDesigner(pt);
+//		firstSelected->ComponentToDesigner(pt);
 		bottom= pt.y+firstSelected->get_Height();
 	}
 	else
@@ -2851,7 +2822,7 @@ void Components::AlignBottom(Component *from,long intend)
 				continue;
 
 			pt.y=components[i]->get_Top();
-			components[i]->DesignerToComponent(pt);
+//			components[i]->DesignerToComponent(pt);
 
             if(shiftPressed == TRUE)
                 ry=components[i]->GetBoundsRect().top;
@@ -2908,7 +2879,7 @@ void Components::AlignHoriz(Component *from)//выравнивание по горизонтали
 	CPoint pt;
 	pt.y=0;
 	pt.x=temp->get_Left();
-	temp->ComponentToDesigner(pt);
+//	temp->ComponentToDesigner(pt);
 	int  middle= (pt.x+temp->get_Width()+pt.x)/2;
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
@@ -2918,13 +2889,13 @@ void Components::AlignHoriz(Component *from)//выравнивание по горизонтали
 			if(components[i]->IsControl() == FALSE)
 				continue;
 			pt.x=components[i]->get_Left();
-			components[i]->DesignerToComponent(pt);
+//			components[i]->DesignerToComponent(pt);
 			components[i]->set_Left(pt.x+(middle-(pt.x+pt.x+components[i]->get_Width())/2));
 			pt.y=0;
 		}
 	}
 	pt.x=temp->get_Left();
-	temp->DesignerToComponent(pt);
+//	temp->DesignerToComponent(pt);
 	temp->set_Left(pt.x+(middle-(pt.x+pt.x+temp->get_Width())/2));
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
@@ -2950,7 +2921,7 @@ void Components::AlignVert(Component *from)//выравнивание по вертикали
 	CPoint pt;
 	pt.x=0;
 	pt.y=temp->get_Top();
-	temp->ComponentToDesigner(pt);
+//	temp->ComponentToDesigner(pt);
 	int  middle= (pt.y+temp->get_Height()+pt.y)/2;
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
@@ -2960,13 +2931,13 @@ void Components::AlignVert(Component *from)//выравнивание по вертикали
 			if(components[i]->IsControl() == FALSE)
 				continue;
 			pt.y=components[i]->get_Top();
-			components[i]->DesignerToComponent(pt);
+//			components[i]->DesignerToComponent(pt);
 
 			components[i]->set_Top(pt.y+(middle-(pt.y+pt.y+components[i]->get_Height())/2));
 		}
 	}
 	pt.y=temp->get_Top();
-	temp->DesignerToComponent(pt);
+//	temp->DesignerToComponent(pt);
 
 	temp->set_Top(pt.y+(middle-(pt.y+pt.y+temp->get_Height())/2));
 	Invalidate();
@@ -3216,7 +3187,7 @@ void Components::CenterGroupHoriz(Component *form, long val)
 	CPoint pt;
 	pt.y=0;
 	pt.x=firstSelected->get_Left();
-	firstSelected->ComponentToDesigner(pt);
+//	firstSelected->ComponentToDesigner(pt);
 	int  middle= (pt.x+firstSelected->get_Width()+pt.x)/2;
 	Invalidate(TRUE);
 
@@ -3255,7 +3226,7 @@ void Components::CenterGroupHoriz(Component *form, long val)
 			}
 
 			pt.x=left;
-			components[currIdx]->DesignerToComponent(pt);
+//			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Left(pt.x);
 			left+=components[currIdx]->get_Width()+val;
 			i=0;
@@ -3287,7 +3258,7 @@ void Components::CenterGroupVert(Component *form, long val)
 	CPoint pt;
 	pt.x=0;
 	pt.y=firstSelected->get_Top();
-	firstSelected->ComponentToDesigner(pt);
+//	firstSelected->ComponentToDesigner(pt);
 	int  middle= (pt.y+firstSelected->get_Height()+pt.y)/2;
 	Invalidate(TRUE);
 
@@ -3325,7 +3296,7 @@ void Components::CenterGroupVert(Component *form, long val)
 				continue;
 			}
 			pt.y=top;
-			components[currIdx]->DesignerToComponent(pt);
+//			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Top(pt.y);
 			top+=components[currIdx]->get_Height()+val;
 			i=0;
@@ -3376,10 +3347,10 @@ void Components::ChangeComponentsParent(Component *form)
 				parent=firstSelected->GetComponentParent();
 
 			CRect bounds=components[i]->GetBoundsRect();
-			if(components[i]->GetComponentParent()!=GetParentForm())
-				components[i]->ComponentToDesigner(bounds);
+//			if(components[i]->GetComponentParent()!=GetParentForm())
+//				components[i]->ComponentToDesigner(bounds);
 			components[i]->SetComponentParent(parent);
-			components[i]->DesignerToComponent(bounds);
+//			components[i]->DesignerToComponent(bounds);
 			components[i]->SetBoundsRect(bounds);
 		}
 	}
@@ -3398,7 +3369,7 @@ ComponentArray * Components::Clone(BOOL onlySelected)
 			continue;
 		comp=components[i]->Clone(); 
 		rc=components[i]->GetBoundsRect();
-		components[i]->ComponentToDesigner(rc);
+//		components[i]->ComponentToDesigner(rc);
 		comp->SetBoundsRect(rc);
 		comps->push_back(comp);
 	}
@@ -3424,10 +3395,10 @@ void Components::ChangeParent(Component *parent)
 				continue;
 
 			CRect bounds=components[i]->GetBoundsRect();
-			if(components[i]->GetComponentParent()!=GetParentForm())
-				components[i]->ComponentToDesigner(bounds);
+//			if(components[i]->GetComponentParent()!=GetParentForm())
+//				components[i]->ComponentToDesigner(bounds);
 			components[i]->SetComponentParent(parent);
-			components[i]->DesignerToComponent(bounds);
+//			components[i]->DesignerToComponent(bounds);
 			components[i]->SetBoundsRect(bounds);
 		}
 	}
