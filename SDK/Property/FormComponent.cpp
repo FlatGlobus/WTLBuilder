@@ -177,9 +177,12 @@ LRESULT CFormComponent::OnActivate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL
 	if(LOWORD(wParam)!=WA_INACTIVE)
 	{
 		BringWindowToTop();
-		//PostEvent(evShowGrid,NULL,get_Grid());
-		//PostEvent(evSetGridSizeX,NULL,get_GridWidth());
-		//PostEvent(evSetGridSizeY,NULL,get_GridHeight());
+		if (GetState(csLoading) == FALSE)
+		{
+			PostEvent(evShowGrid, NULL, get_Grid());
+			PostEvent(evSetGridSizeX, NULL, get_GridWidth());
+			PostEvent(evSetGridSizeY, NULL, get_GridHeight());
+		}
 		undo.EnableUndo();
 		GetDesigner()->SetFocus();
 		fileName.SetCurDir();
@@ -388,8 +391,8 @@ void CFormComponent::InitProperty(void)
 
 		DEFINE_PROPERTY(Grid,BOOL,CFormComponent,TRUE)
 		BEGIN_SUB_PROPERTY(_T("Grid"),CFormComponent)
-			DEFINE_SUB_PROPERTY(GridWidth,long,CFormComponent,6)
-			DEFINE_SUB_PROPERTY(GridHeight,long,CFormComponent,6)
+			DEFINE_SUB_PROPERTY(GridWidth,long,CFormComponent,8)
+			DEFINE_SUB_PROPERTY(GridHeight,long,CFormComponent,8)
 		END_SUB_PROPERTY
 		PUBLIC_PROPERTY(Grid,FALSE)
 		PUBLIC_PROPERTY(Grid.GridWidth,FALSE)
@@ -761,6 +764,10 @@ void CFormComponent::LoadForm(Component *mainForm,Component ** formPtr,LPCTSTR f
 		}
 		designer->MoveWindow(0,0,clientWidth,clientHeight);
 		AddUndo(this);
+
+		PostEvent(evShowGrid, NULL, get_Grid());
+		PostEvent(evSetGridSizeX, NULL, get_GridWidth());
+		PostEvent(evSetGridSizeY, NULL, get_GridHeight());
 	}
 	catch (CComException *pE)
 	{
@@ -1195,6 +1202,11 @@ void CFormComponent::set_GridWidth(long cx)
 {
 	if(designer->GetGridSize().cx!=cx)
 	{
+		//if (GetState(csLoading))
+		//{
+		//	SendEvent(evSetGridSizeX, NULL, cx);
+		//}
+
 		designer->GetGridSize().cx=cx;
 		RedrawWindow(NULL,NULL,RDW_INVALIDATE|RDW_NOERASE|RDW_UPDATENOW|RDW_ALLCHILDREN|RDW_INTERNALPAINT);
 	}

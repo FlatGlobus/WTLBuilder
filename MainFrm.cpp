@@ -953,10 +953,10 @@ void CMainFrame::SetGridWidth(void *obj,long val)
 {
     if(obj==NULL)
     {
-        StopEvent(evSetGridSizeX);
         CString str;
         str.Format(_T("%d"),val);
         m_xedit.SetWindowText(str);
+		StopEvent(evSetGridSizeX);
     }
 }
 
@@ -964,10 +964,10 @@ void CMainFrame::SetGridHeight(void *obj,long val)
 {
     if(obj==NULL)
     {
-        StopEvent(evSetGridSizeY);
         CString str;
         str.Format(_T("%d"),val);
         m_yedit.SetWindowText(str);
+		StopEvent(evSetGridSizeY);
     }
 }
 
