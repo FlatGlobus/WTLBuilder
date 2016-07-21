@@ -302,7 +302,7 @@ CRect ControlComponentBase::GetBoundsRect(void)
     {
         ::GetWindowRect((HWND)GetHandle(),&rc);
         designer->ScreenToClient(&rc);
-//        DesignerToComponent(rc);
+        DesignerToComponent(rc);
     }
     else
         rc=Component::GetBoundsRect();

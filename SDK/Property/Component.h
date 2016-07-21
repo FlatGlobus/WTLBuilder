@@ -385,8 +385,6 @@ protected:
 
 	void ShowCursor(HintItem h);
 	CPoint AlignToGrid(CPoint);
-	//void AlignToParent(CPoint &);
-
 	void AlignLeft(Component *,long);
 	void AlignTop(Component *,long);
 	void AlignRight(Component *,long);

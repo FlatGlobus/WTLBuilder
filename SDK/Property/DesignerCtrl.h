@@ -83,7 +83,6 @@ public:
     void SetTabIndexMode(BOOL);
     BOOL GetTabIndexMode();
 	void BringToTop();
-	void DrawFocusRect(const CRect&);
 protected:
     Component  * curentComp;
 	Components * components;

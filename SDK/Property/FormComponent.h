@@ -48,8 +48,6 @@ class CXMLDOMDocument2;
 
 class PROPERTY_API CFormComponent:
     public CFrameWindowImpl<CFormComponent,CWindow>,
-    //public CScrollImpl<CFormComponent>,
-    //public LayoutMgr<CFormComponent>,
     public Component
 {
 protected:

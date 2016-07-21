@@ -160,9 +160,6 @@ LRESULT CDesignerCtrl::OnLButtonDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lP
         }
         else
         {
-			::ClientToScreen(*this, &downPoint);
-			::ScreenToClient((HWND)Parent->GetHandle(), &downPoint);
-
             components->MouseDown(downPoint);
         }
     }
@@ -176,9 +173,6 @@ LRESULT CDesignerCtrl::OnLButtonUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lPar
     if(isGridPressed==FALSE)
     {
         CPoint pt=LParamToPoint(lParam);
-		::ClientToScreen(*this, &pt);
-		::ScreenToClient((HWND)Parent->GetHandle(), &pt);
-
 	    components->MouseUp(pt);
         if(downPoint.x!=pt.x || downPoint.y!=pt.y || componentCreated == TRUE)
             SendEvent(evAddUndo,Parent);
@@ -215,9 +209,6 @@ LRESULT CDesignerCtrl::OnMouseMove(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lPar
     }
     else
     {
-		::ClientToScreen(*this, &currPoint);
-		::ScreenToClient((HWND)Parent->GetHandle(), &currPoint);
-
 	    components->MouseMove(currPoint);
     }
 	return 0;
@@ -408,9 +399,9 @@ void CDesignerCtrl::PaintGrid(CDC & dc,COLORREF bkColor)
 {
     CRect rc;
     ::GetClientRect(GetParent(),&rc);
-	::ClientToScreen(GetParent(), &rc.TopLeft());
-	::ClientToScreen(GetParent(), &rc.BottomRight());
-	ScreenToClient(rc);
+	  ::ClientToScreen(GetParent(), &rc.TopLeft());
+  	::ClientToScreen(GetParent(), &rc.BottomRight());
+  	ScreenToClient(rc);
 
     bkColor=::GetSysColor(bkColor);
 
@@ -459,7 +450,7 @@ void CDesignerCtrl::ShowTabIndexes(CDC & dc)
         if(comp->EnableTabIndex()==TRUE && comp->IsControl() == TRUE)
         {
             rc=comp->GetBoundsRect();
-            //comp->ComponentToDesigner(rc);
+            comp->ComponentToDesigner(rc);
             str.Format(_T(" %u "),comp->get_TabIndex());
             dc.DrawText(str,str.GetLength(),&rc,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
         }
@@ -491,18 +482,6 @@ CPoint CDesignerCtrl::AlignToGrid(const CPoint &xy)
     }
 	return ret;
 }
-
-void CDesignerCtrl::DrawFocusRect(const CRect& rc)
-{
-	CClientDC dc(*this);
-	dc.DrawFocusRect(rc);
-}
-
-//void CDesignerCtrl::AlignToParent(CPoint & pt)
-//{
-//    ClientToScreen(&pt);
-//    ::ScreenToClient((HWND)GetParentForm()->GetHandle(),&pt);
-//}
 
 LRESULT CDesignerCtrl::OnUpdateDesigner(UINT /*uMsg*/, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/)
 {
