@@ -384,7 +384,7 @@ protected:
 	void SetStateAll(ComponentState,BOOL flag=TRUE,BOOL SelectedOnly=TRUE);	 
 
 	void ShowCursor(HintItem h);
-	CPoint AlignToGrid(CPoint);
+	CPoint SnapToGrid(CPoint);
 	void AlignLeft(Component *,long);
 	void AlignTop(Component *,long);
 	void AlignRight(Component *,long);

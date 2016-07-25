@@ -78,7 +78,8 @@ enum iCommands
     evEnableUndo,
     evOnEditCommand,
     evTabIndex,
-    evIsFormChanged
+    evIsFormChanged,
+	evXYCursor // CPoint
 };
 
 //for evOutput message

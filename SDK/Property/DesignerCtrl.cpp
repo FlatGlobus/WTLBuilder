@@ -159,7 +159,7 @@ LRESULT CDesignerCtrl::OnLButtonDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lP
             isGridPressed=TRUE;
         }
         else
-        {
+		{
             components->MouseDown(downPoint);
         }
     }
@@ -172,7 +172,7 @@ LRESULT CDesignerCtrl::OnLButtonUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lPar
 {
     if(isGridPressed==FALSE)
     {
-        CPoint pt=LParamToPoint(lParam);
+		CPoint pt=LParamToPoint(lParam)
 	    components->MouseUp(pt);
         if(downPoint.x!=pt.x || downPoint.y!=pt.y || componentCreated == TRUE)
             SendEvent(evAddUndo,Parent);
@@ -198,6 +198,16 @@ LRESULT CDesignerCtrl::OnLButtonUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lPar
 LRESULT CDesignerCtrl::OnMouseMove(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lParam, BOOL& /*bHandled*/)
 {
     CPoint currPoint=LParamToPoint(lParam);
+
+	{
+		CPoint pt(currPoint);
+		ClientToScreen(&pt);
+		::ScreenToClient(GetParent(), &pt);
+
+		pt=SnapToGrid(pt);
+		PostEvent(evXYCursor, pt);
+	}
+
     if(isGridPressed==TRUE)
     {
         offset+=deltaPoint=currPoint-deltaPoint;
@@ -399,7 +409,7 @@ void CDesignerCtrl::PaintGrid(CDC & dc,COLORREF bkColor)
 {
     CRect rc;
     ::GetClientRect(GetParent(),&rc);
-	  ::ClientToScreen(GetParent(), &rc.TopLeft());
+	::ClientToScreen(GetParent(), &rc.TopLeft());
   	::ClientToScreen(GetParent(), &rc.BottomRight());
   	ScreenToClient(rc);
 
@@ -457,7 +467,7 @@ void CDesignerCtrl::ShowTabIndexes(CDC & dc)
     }
 }
 
-CRect CDesignerCtrl::AlignToGrid(const CRect &rc)
+CRect CDesignerCtrl::SnapToGrid(const CRect &rc)
 {
 	CRect ret(rc);
     if (IsShowGrid())
@@ -471,7 +481,7 @@ CRect CDesignerCtrl::AlignToGrid(const CRect &rc)
 	return rc;
 }
 
-CPoint CDesignerCtrl::AlignToGrid(const CPoint &xy)
+CPoint CDesignerCtrl::SnapToGrid(const CPoint &xy)
 {
 	CPoint ret(xy);
     if (IsShowGrid())

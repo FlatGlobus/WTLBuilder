@@ -23,61 +23,61 @@ class CFreeze
 {
 	BOOL &f;
 public:
-	CFreeze(BOOL &_f):f(_f){f=TRUE;}
-	~CFreeze(){f=FALSE;}
+	CFreeze(BOOL &_f) :f(_f) { f = TRUE; }
+	~CFreeze() { f = FALSE; }
 };
 //////////////////////////////////////////////////////////////////////////
-static void DrawBox(CDC & dc,CPoint at,COLORREF color=RGB(0x7F,0x7F,0x7F))
+static void DrawBox(CDC & dc, CPoint at, COLORREF color = RGB(0x7F, 0x7F, 0x7F))
 {
-	CPenEx Pen(PS_INSIDEFRAME,1,RGB(0,0,0));
-	CSel _Pen(dc,Pen);
+	CPenEx Pen(PS_INSIDEFRAME, 1, RGB(0, 0, 0));
+	CSel _Pen(dc, Pen);
 
 	CBrushEx Brush(color);
-	CSel _Brush(dc,Brush);
+	CSel _Brush(dc, Brush);
 
-	dc.Rectangle(at.x-BOX_SIDE,at.y+BOX_SIDE,at.x+BOX_SIDE,at.y-BOX_SIDE);
+	dc.Rectangle(at.x - BOX_SIDE, at.y + BOX_SIDE, at.x + BOX_SIDE, at.y - BOX_SIDE);
 }
 
-static void DrawEmptiBox(CDC & dc,CRect rc,COLORREF color=RGB(0,0,0x7F))
+static void DrawEmptiBox(CDC & dc, CRect rc, COLORREF color = RGB(0, 0, 0x7F))
 {
-	CPenEx Pen(PS_INSIDEFRAME,1,color);
-	CSel _Pen(dc,Pen);
-	CSel _Brush(dc,NULL_BRUSH);
-	dc.Rectangle(rc.left,rc.top,rc.right,rc.bottom);
+	CPenEx Pen(PS_INSIDEFRAME, 1, color);
+	CSel _Pen(dc, Pen);
+	CSel _Brush(dc, NULL_BRUSH);
+	dc.Rectangle(rc.left, rc.top, rc.right, rc.bottom);
 }
 //////////////////////////////////////////////////////////////////////////
-BOOL PtInBox(CPoint &at,CPoint & pt)
+BOOL PtInBox(CPoint &at, CPoint & pt)
 {
-	CRect rc(at.x-BOX_SIDE,at.y-BOX_SIDE,at.x+BOX_SIDE,at.y+BOX_SIDE);
-	return PtInRect(rc,pt);
+	CRect rc(at.x - BOX_SIDE, at.y - BOX_SIDE, at.x + BOX_SIDE, at.y + BOX_SIDE);
+	return PtInRect(rc, pt);
 }
 //////////////////////////////////////////////////////////////////////////
 //INIT_UNIQUE_CAT(long,Component);
 //INIT_UNIQUE_CAT(long);
-static long UniqueID=0;
+static long UniqueID = 0;
 //////////////////////////////////////////////////////////////////////////
-Component::Component(LPCTSTR _className):state(1),pressed(FALSE),selected(FALSE),
-className(_className),designer(NULL),Parent(NULL),objprop(_className,this),parentName(DEF_PARENT_NAME),
-defaultSize(DEF_SIZE_W,DEF_SIZE_H),bounds(0,0,40,40),minRC(0,0,0,0),tabIndex(-1),enableTabIndex(TRUE),uniqueID(UniqueID++)
+Component::Component(LPCTSTR _className) :state(1), pressed(FALSE), selected(FALSE),
+className(_className), designer(NULL), Parent(NULL), objprop(_className, this), parentName(DEF_PARENT_NAME),
+defaultSize(DEF_SIZE_W, DEF_SIZE_H), bounds(0, 0, 40, 40), minRC(0, 0, 0, 0), tabIndex(-1), enableTabIndex(TRUE), uniqueID(UniqueID++)
 {
 	SetState(csCreating);
 }
 
-Component::Component(const Component & comp):
-objprop(comp.objprop),
-selected(comp.selected),
-pressed(comp.pressed),
-deltaPoint(comp.deltaPoint),
-name(comp.name),
-designer(comp.designer),
-Parent(comp.Parent),
-state(comp.state),
-className(comp.className),
-bounds(comp.bounds),
-parentName(comp.parentName),
-uniqueID(comp.uniqueID),
-defaultSize(comp.defaultSize),
-tabIndex(comp.tabIndex)
+Component::Component(const Component & comp) :
+	objprop(comp.objprop),
+	selected(comp.selected),
+	pressed(comp.pressed),
+	deltaPoint(comp.deltaPoint),
+	name(comp.name),
+	designer(comp.designer),
+	Parent(comp.Parent),
+	state(comp.state),
+	className(comp.className),
+	bounds(comp.bounds),
+	parentName(comp.parentName),
+	uniqueID(comp.uniqueID),
+	defaultSize(comp.defaultSize),
+	tabIndex(comp.tabIndex)
 {
 
 }
@@ -87,33 +87,33 @@ Component::~Component(void)
 	UnRegisterEvent(this);
 }
 
-void Component::SetDefaultSize(int cx,int cy)
+void Component::SetDefaultSize(int cx, int cy)
 {
-	defaultSize.cx=cx;
-	defaultSize.cy=cy;
+	defaultSize.cx = cx;
+	defaultSize.cy = cy;
 }
 
 BOOL Component::CreateComponent(Component *_Parent)
 {
 	SetComponentParent(_Parent);
-	if(_Parent)
-		designer=Parent->GetDesigner();
+	if (_Parent)
+		designer = Parent->GetDesigner();
 
-	if(IsControl()==FALSE && IsForm()==FALSE)
+	if (IsControl() == FALSE && IsForm() == FALSE)
 	{
-		SetDefaultSize(NONCONTROLW,NONCONTROLH);
-		bounds.right=bounds.left+NONCONTROLW;
-		bounds.bottom=bounds.top+NONCONTROLH;
+		SetDefaultSize(NONCONTROLW, NONCONTROLH);
+		bounds.right = bounds.left + NONCONTROLW;
+		bounds.bottom = bounds.top + NONCONTROLH;
 		return TRUE;
 	}
-	return FALSE;	
+	return FALSE;
 }
 
 void Component::DeleteComponent()
 {
 	SetState(csDeleting);
 	RemoveProperties();
-	if(IsControl())
+	if (IsControl())
 	{
 		GetParentForm()->SetModified();
 		GetParentForm()->UnAttach(this);
@@ -129,39 +129,39 @@ CProperties * Component::GetProperty()
 
 Components *  Component::GetComponents()
 {
-	if(designer)
+	if (designer)
 		return designer->GetComponents();
 	return NULL;
 }
 
 void Component::InitProperty(void)
 {
-		DEFINE_PROPERTY(Name,CString,Component,name)
-		DEFINE_PROPERTY(ParentName,CString,Component,DEF_PARENT_NAME)
-        PUBLIC_PROPERTY(ParentName,FALSE)
+	DEFINE_PROPERTY(Name, CString, Component, name)
+		DEFINE_PROPERTY(ParentName, CString, Component, DEF_PARENT_NAME)
+		PUBLIC_PROPERTY(ParentName, FALSE)
 		//READONLY_PROPERTY(ParentName,TRUE)
 
-		DEFINE_PROPERTY(UniqueID,long,Component,uniqueID)
-		PUBLIC_PROPERTY(UniqueID,FALSE)
+		DEFINE_PROPERTY(UniqueID, long, Component, uniqueID)
+		PUBLIC_PROPERTY(UniqueID, FALSE)
 
-		DEFINE_PROPERTY(Left,long,Component,bounds.left)
-		DEFINE_PROPERTY(Width,long,Component,bounds.right)
-		DEFINE_PROPERTY(Top,long,Component,bounds.top)
-		DEFINE_PROPERTY(Height,long,Component,bounds.bottom)
-		DEFINE_PROPERTY_2(Generate,BOOL,Component,TRUE)
+		DEFINE_PROPERTY(Left, long, Component, bounds.left)
+		DEFINE_PROPERTY(Width, long, Component, bounds.right)
+		DEFINE_PROPERTY(Top, long, Component, bounds.top)
+		DEFINE_PROPERTY(Height, long, Component, bounds.bottom)
+		DEFINE_PROPERTY_2(Generate, BOOL, Component, TRUE)
 
-        if(IsForm()==FALSE)
-            DEFINE_PROPERTY_2(IncludePath,CString,Component,_T(""))
+		if (IsForm() == FALSE)
+			DEFINE_PROPERTY_2(IncludePath, CString, Component, _T(""))
 
-		if(IsControl())
-		{
-			DEFINE_PROPERTY(TabIndex,long,Component,-1)
-			PUBLIC_PROPERTY(TabIndex,FALSE)
-			//DEFINE_PROPERTY(Selected,BOOL,Component,FALSE)
-			//PUBLIC_PROPERTY(Selected,FALSE)
-			//DEFINE_PROPERTY(FirstSelected,BOOL,Component,FALSE)
-			//PUBLIC_PROPERTY(FirstSelected,FALSE)
-		}
+			if (IsControl())
+			{
+				DEFINE_PROPERTY(TabIndex, long, Component, -1)
+					PUBLIC_PROPERTY(TabIndex, FALSE)
+					//DEFINE_PROPERTY(Selected,BOOL,Component,FALSE)
+					//PUBLIC_PROPERTY(Selected,FALSE)
+					//DEFINE_PROPERTY(FirstSelected,BOOL,Component,FALSE)
+					//PUBLIC_PROPERTY(FirstSelected,FALSE)
+			}
 }
 
 void Component::ShowProperties(void)
@@ -176,22 +176,22 @@ void Component::ComponentCreated()
 
 void Component::set_Name(CString n)
 {
-	if(n!=name)
+	if (n != name)
 	{
-		if(IsControl()==TRUE && Find(n)!=NULL)
+		if (IsControl() == TRUE && Find(n) != NULL)
 			return;
-		name=n;
-		if(n.IsEmpty())
-			name=MakeDefaultName();
+		name = n;
+		if (n.IsEmpty())
+			name = MakeDefaultName();
 
-		CCodeGenerator * code=(CCodeGenerator *)get_Code();
-		if(code)
-			code->AddVar(_T("CLASSNAME"),name);
-		if(get_Selected()==TRUE)
-			PostEvent(evSetActiveForm,GetParentForm());
+		CCodeGenerator * code = (CCodeGenerator *)get_Code();
+		if (code)
+			code->AddVar(_T("CLASSNAME"), name);
+		if (get_Selected() == TRUE)
+			PostEvent(evSetActiveForm, GetParentForm());
 		SetModified();
 
-		if(state.GetBit(csCreating) || state.GetBit(csLoading))
+		if (state.GetBit(csCreating) || state.GetBit(csLoading))
 			return;
 		((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 	}
@@ -199,35 +199,35 @@ void Component::set_Name(CString n)
 
 CString Component::get_Name(void)
 {
-	if(state.GetBit(csLoading))
+	if (state.GetBit(csLoading))
 	{
-		name=GET_PROP_VALUE(CString, Name)
+		name = GET_PROP_VALUE(CString, Name)
 	}
 
-	if(name.IsEmpty())
-	{   
-		name=MakeDefaultName();
-		SET_PROP_VALUE(Name,name)
-		if(state.GetBit(csCreating) == FALSE)
-			SetModified();
+	if (name.IsEmpty())
+	{
+		name = MakeDefaultName();
+		SET_PROP_VALUE(Name, name)
+			if (state.GetBit(csCreating) == FALSE)
+				SetModified();
 	}
 	return name;
 }
 
 void Component::set_ParentName(CString str)
 {
-	parentName=str;
-	if(state.GetBit(csLoading))
+	parentName = str;
+	if (state.GetBit(csLoading))
 	{
-		if(str.IsEmpty() || str.Compare(DEF_PARENT_NAME)==0)
-			Parent=designer->GetParentForm();
+		if (str.IsEmpty() || str.Compare(DEF_PARENT_NAME) == 0)
+			Parent = designer->GetParentForm();
 		else
 		{
-			Parent=designer->GetComponents()->Find(CString(str));
-			if(Parent==NULL)
+			Parent = designer->GetComponents()->Find(CString(str));
+			if (Parent == NULL)
 			{
-				Parent=designer->GetParentForm();
-				parentName=Parent->get_Name();
+				Parent = designer->GetParentForm();
+				parentName = Parent->get_Name();
 			}
 		}
 	}
@@ -239,23 +239,23 @@ void Component::set_ParentName(CString str)
 
 CString Component::get_ParentName()
 {
-	if(designer && Parent!=designer->GetParentForm())
-		return parentName=Parent->get_Name();
-	return parentName=DEF_PARENT_NAME;
+	if (designer && Parent != designer->GetParentForm())
+		return parentName = Parent->get_Name();
+	return parentName = DEF_PARENT_NAME;
 }
 
 void Component::set_Left(long val)
 {
 	CRect rc(GetBoundsRect());
-	if(rc.left!=val || state.GetBit(csLoading))
+	if (rc.left != val || state.GetBit(csLoading))
 	{
-		int width=rc.Width();
-		rc.left=val;
-		rc.right=rc.left+width;
-		if(CheckBounds(rc))
+		int width = rc.Width();
+		rc.left = val;
+		rc.right = rc.left + width;
+		if (CheckBounds(rc))
 		{
-			if(IsControl()==TRUE && GetState(csLoading)==FALSE && GetState(csCreating)==FALSE &&
-				FirstSelected==TRUE)
+			if (IsControl() == TRUE && GetState(csLoading) == FALSE && GetState(csCreating) == FALSE &&
+				FirstSelected == TRUE)
 				GetComponents()->Invalidate(TRUE);
 			SetBoundsRect(rc);
 		}
@@ -264,7 +264,7 @@ void Component::set_Left(long val)
 
 long Component::get_Left(void)
 {
-	if(GetState(csMoving))
+	if (GetState(csMoving))
 		return bounds.left;
 	return GetBoundsRect().left;
 }
@@ -272,15 +272,15 @@ long Component::get_Left(void)
 void Component::set_Top(long val)
 {
 	CRect rc(GetBoundsRect());
-	if(rc.top!=val || state.GetBit(csLoading))
+	if (rc.top != val || state.GetBit(csLoading))
 	{
-		int height=rc.Height();
-		rc.top=val;
-		rc.bottom=rc.top+height;
-		if(CheckBounds(rc))
+		int height = rc.Height();
+		rc.top = val;
+		rc.bottom = rc.top + height;
+		if (CheckBounds(rc))
 		{
-			if(IsControl()==TRUE && GetState(csLoading)==FALSE && GetState(csCreating)==FALSE &&
-				FirstSelected==TRUE)
+			if (IsControl() == TRUE && GetState(csLoading) == FALSE && GetState(csCreating) == FALSE &&
+				FirstSelected == TRUE)
 				GetComponents()->Invalidate(TRUE);
 
 			SetBoundsRect(rc);
@@ -290,7 +290,7 @@ void Component::set_Top(long val)
 
 long Component::get_Top(void)
 {
-	if(GetState(csMoving))
+	if (GetState(csMoving))
 		return bounds.top;
 	return GetBoundsRect().top;
 }
@@ -298,13 +298,13 @@ long Component::get_Top(void)
 void Component::set_Width(long val)
 {
 	CRect rc(GetBoundsRect());
-	if(val != 0 || state.GetBit(csLoading))
+	if (val != 0 || state.GetBit(csLoading))
 	{
-		rc.right=rc.left+val;
-		if(CheckBounds(rc))
+		rc.right = rc.left + val;
+		if (CheckBounds(rc))
 		{
-			if(IsControl()==TRUE && GetState(csLoading)==FALSE && GetState(csCreating)==FALSE &&
-				FirstSelected==TRUE)
+			if (IsControl() == TRUE && GetState(csLoading) == FALSE && GetState(csCreating) == FALSE &&
+				FirstSelected == TRUE)
 				GetComponents()->Invalidate(TRUE);
 			SetBoundsRect(rc);
 		}
@@ -313,7 +313,7 @@ void Component::set_Width(long val)
 
 long Component::get_Width(void)
 {
-	if(GetState(csMoving))
+	if (GetState(csMoving))
 		return bounds.Width();
 	return GetBoundsRect().Width();
 }
@@ -321,13 +321,13 @@ long Component::get_Width(void)
 void Component::set_Height(long val)
 {
 	CRect rc(GetBoundsRect());
-	if(val != 0 || state.GetBit(csLoading))
+	if (val != 0 || state.GetBit(csLoading))
 	{
-		rc.bottom=rc.top+val;
-		if(CheckBounds(rc))
+		rc.bottom = rc.top + val;
+		if (CheckBounds(rc))
 		{
-			if(IsControl()==TRUE && GetState(csLoading)==FALSE && GetState(csCreating)==FALSE &&
-				FirstSelected==TRUE)
+			if (IsControl() == TRUE && GetState(csLoading) == FALSE && GetState(csCreating) == FALSE &&
+				FirstSelected == TRUE)
 				GetComponents()->Invalidate(TRUE);
 			SetBoundsRect(rc);
 		}
@@ -336,16 +336,16 @@ void Component::set_Height(long val)
 
 long Component::get_Height(void)
 {
-	if(GetState(csMoving))
+	if (GetState(csMoving))
 		return bounds.Height();
 	return GetBoundsRect().Height();
 }
 
 void Component::set_UniqueID(long val)
 {
-	uniqueID=val;
-	if(IsControl() && ::IsWindow((HWND)GetHandle()))
-		::SetWindowLong((HWND)GetHandle(),GWL_ID,uniqueID);
+	uniqueID = val;
+	if (IsControl() && ::IsWindow((HWND)GetHandle()))
+		::SetWindowLong((HWND)GetHandle(), GWL_ID, uniqueID);
 }
 
 long Component::get_UniqueID(void)
@@ -355,11 +355,11 @@ long Component::get_UniqueID(void)
 
 void Component::set_Selected(BOOL val)
 {
-	if(selected!=val)
+	if (selected != val)
 	{
-		selected=val;
-		if(selected==FALSE)
-			FirstSelected=FALSE;
+		selected = val;
+		if (selected == FALSE)
+			FirstSelected = FALSE;
 	}
 }
 
@@ -370,12 +370,12 @@ BOOL Component::get_Selected(void)
 
 void Component::set_FirstSelected(BOOL val)
 {
-	SetState(csFirstSelected,val);
-	if(val == TRUE)
+	SetState(csFirstSelected, val);
+	if (val == TRUE)
 	{
 		ShowProperties();
-		if(IsForm()==FALSE)
-			PostEvent(evSetActiveForm,GetParentForm());
+		if (IsForm() == FALSE)
+			PostEvent(evSetActiveForm, GetParentForm());
 	}
 }
 
@@ -386,93 +386,90 @@ BOOL Component::get_FirstSelected(void)
 
 BOOL Component::CheckBounds(CRect rc)
 {
-	if(Parent && IsControl()==TRUE)
+	if (Parent && IsControl() == TRUE)
 	{
 		CRect RC;
-		::GetClientRect((HWND)Parent->GetHandle(),&RC);
-		BOOL dimFlag = rc.left >= RC.left && rc.top >=RC.top && rc.right <= RC.right && rc.bottom <= RC.bottom;
+		::GetClientRect((HWND)Parent->GetHandle(), &RC);
+		BOOL dimFlag = rc.left >= RC.left && rc.top >= RC.top && rc.right <= RC.right && rc.bottom <= RC.bottom;
 
 		BOOL minRCFlag = TRUE;
-		if(minRC.IsRectNull() == FALSE)
-			minRCFlag = rc.Width() >= minRC.Width() && rc.Height() >=minRC.Height();
+		if (minRC.IsRectNull() == FALSE)
+			minRCFlag = rc.Width() >= minRC.Width() && rc.Height() >= minRC.Height();
 
 		return dimFlag && minRCFlag;
 	}
 	return TRUE;
 }
 
-BOOL Component::MouseDown(CDC *dc,CPoint at,HintItem h)
+BOOL Component::MouseDown(CDC *dc, CPoint at, HintItem h)
 {
-	deltaPoint=at;
-	pressed=TRUE;
+	deltaPoint = at;
+	pressed = TRUE;
 	designer->GetComponents()->Invalidate(TRUE);
-	minRC=GetMinRect();
+	minRC = GetMinRect();
 	return TRUE;
 }
 
-BOOL Component::MouseMove(CDC *dc,CPoint at,HintItem h)
+BOOL Component::MouseMove(CDC *dc, CPoint at, HintItem h)
 {
-	if(pressed==TRUE && ((deltaPoint-at)!=CSize(0,0)))
+	if (pressed == TRUE && ((deltaPoint - at) != CSize(0, 0)))
 	{
-		if(GetState(csMoving))
+		if (GetState(csMoving))
 		{
 			CRect rc(bounds);
 			ComponentToDesigner(rc);
 			dc->DrawFocusRect(&rc);
 
-			bounds=Move(CPoint(at-deltaPoint),h);
+			bounds = Move(CPoint(at - deltaPoint), h);
 		}
 		else
-			if(CPoint(at-deltaPoint)!=CPoint(0,0))
-				SetState(csMoving,TRUE);
+			if (CPoint(at - deltaPoint) != CPoint(0, 0))
+				SetState(csMoving, TRUE);
 
-		if(GetState(csMoving))
+		if (GetState(csMoving))
 		{
 			CRect rc(bounds);
 			ComponentToDesigner(rc);
 			dc->DrawFocusRect(&rc);
 		}
-		deltaPoint=at;
+		deltaPoint = at;
 	}
 	return TRUE;
 }
 
-BOOL Component::MouseUp(CDC *dc,CPoint at,HintItem h)
+BOOL Component::MouseUp(CDC *dc, CPoint at, HintItem h)
 {
-	if(pressed==TRUE)
+	if (pressed == TRUE)
 	{
-		pressed=FALSE;
-		if(GetState(csCreating))
+		pressed = FALSE;
+		if (GetState(csCreating))
 		{
-			bounds=Move(CPoint(at - deltaPoint),h);
-			SetState(csCreating,FALSE);
+			bounds = Move(CPoint(at - deltaPoint), h);
+			SetState(csCreating, FALSE);
 			NormalizeRect(bounds);
 			SetBoundsRect(bounds);
-			SetState(csMoving,FALSE);   
+			SetState(csMoving, FALSE);
 		}
 
-		if(GetState(csMoving))
+		if (GetState(csMoving))
 		{
 			CRect rc(bounds);
 			ComponentToDesigner(rc);
-			//if(designer && IsControl())
-			//	designer->AlignToGrid(rc);
-			
 			dc->DrawFocusRect(&rc);
-			bounds=Move(CPoint(at-deltaPoint),h);
+			bounds = Move(CPoint(at - deltaPoint), h);
 			SetBoundsRect(bounds);
-			SetState(csMoving,FALSE);
+			SetState(csMoving, FALSE);
 		}
 
-		if(IsControl()==FALSE && IsForm()==FALSE)
-		{         
-			::RedrawWindow((HWND)designer->GetParentForm()->GetHandle(),NULL,NULL,RDW_INVALIDATE|RDW_NOERASE|RDW_UPDATENOW|RDW_ALLCHILDREN|RDW_INTERNALPAINT);
+		if (IsControl() == FALSE && IsForm() == FALSE)
+		{
+			::RedrawWindow((HWND)designer->GetParentForm()->GetHandle(), NULL, NULL, RDW_INVALIDATE | RDW_NOERASE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_INTERNALPAINT);
 		}
 	}
 	return TRUE;
 }
 
-CRect Component::Move(CPoint &at,HintItem hint)
+CRect Component::Move(CPoint &at, HintItem hint)
 {
 	if (at.x == 0 && at.y == 0)
 		return bounds;
@@ -480,13 +477,13 @@ CRect Component::Move(CPoint &at,HintItem hint)
 	BOOL modFlag = TRUE;
 
 	CRect maxRC;
-	::GetClientRect((HWND)Parent->GetHandle(),&maxRC);
+	::GetClientRect((HWND)Parent->GetHandle(), &maxRC);
 	CWindow _w((HWND)Parent->GetHandle());
 	_w.ClientToScreen(&maxRC);
 	GetDesigner()->ScreenToClient(&maxRC);
 
 	CRect rc = bounds;
-  ComponentToDesigner(rc);
+	ComponentToDesigner(rc);
 
 	if (IsControl() == FALSE && IsForm() == FALSE && hint != hiAll)
 	{
@@ -572,7 +569,7 @@ CRect Component::Move(CPoint &at,HintItem hint)
 			break;
 		}
 
-  DesignerToComponent(rc);
+	DesignerToComponent(rc);
 	if (modFlag == TRUE && CheckBounds(rc))
 	{
 		bounds = rc;
@@ -583,66 +580,66 @@ CRect Component::Move(CPoint &at,HintItem hint)
 
 void Component::Paint(CDC & dc)
 {
-	if(IsControl()==FALSE && IsForm()==FALSE && GetState(csMoving)==FALSE)
+	if (IsControl() == FALSE && IsForm() == FALSE && GetState(csMoving) == FALSE)
 	{
-		HBITMAP bitmap=NULL;
+		HBITMAP bitmap = NULL;
 		CString cmpName;
 		CString cmpPage;
-		if(ExtractName(className,cmpPage,cmpName))
+		if (ExtractName(className, cmpPage, cmpName))
 		{
 			CRect rc(bounds);
 			ComponentToDesigner(rc);
-			SendEvent(evGetComponentBitmap,(LPCTSTR)cmpName,(LPCTSTR)cmpPage,&bitmap);
+			SendEvent(evGetComponentBitmap, (LPCTSTR)cmpName, (LPCTSTR)cmpPage, &bitmap);
 			{
-				CPenEx pen(PS_SOLID,1,RGB(0,0,0));
-				CSel selPen(dc,pen);
+				CPenEx pen(PS_SOLID, 1, RGB(0, 0, 0));
+				CSel selPen(dc, pen);
 				dc.Rectangle(&rc);
 			}
-			rc.DeflateRect(1,1);
-			dc.DrawFrameControl(&rc,DFC_BUTTON,DFCS_BUTTONPUSH);
-			rc.DeflateRect(1,1);
-			if(bitmap)
-				DrawTransparentBitmap(dc,bitmap,rc.left,rc.top,RGB(192,192,192));
+			rc.DeflateRect(1, 1);
+			dc.DrawFrameControl(&rc, DFC_BUTTON, DFCS_BUTTONPUSH);
+			rc.DeflateRect(1, 1);
+			if (bitmap)
+				DrawTransparentBitmap(dc, bitmap, rc.left, rc.top, RGB(192, 192, 192));
 		}
 	}
 
-	if(selected==TRUE)
+	if (selected == TRUE)
 		PaintSelect(dc);
 }
 
 void Component::PaintSelect(CDC & dc)
 {
-	if(pressed==FALSE && GetComponents()->hideall==FALSE)
+	if (pressed == FALSE && GetComponents()->hideall == FALSE)
 	{
-		COLORREF color = FirstSelected == TRUE ? RGB(0x7F,0x7F,0x7F): RGB(0xFF,0xFF,0xFF);
+		COLORREF color = FirstSelected == TRUE ? RGB(0x7F, 0x7F, 0x7F) : RGB(0xFF, 0xFF, 0xFF);
 		CPoint at;
 		CRect rc(bounds);
 		ComponentToDesigner(rc);
 
-		at.x=rc.left-BOX_SIDE;
-		at.y=rc.top-BOX_SIDE;
-		DrawBox(dc,at,color);
+		at.x = rc.left - BOX_SIDE;
+		at.y = rc.top - BOX_SIDE;
+		DrawBox(dc, at, color);
 
-		at.x=(rc.left+rc.right)/2;
-		DrawBox(dc,at,color);
+		at.x = (rc.left + rc.right) / 2;
+		DrawBox(dc, at, color);
 
-		at.x=rc.right+BOX_SIDE;
-		DrawBox(dc,at,color);
+		at.x = rc.right + BOX_SIDE;
+		DrawBox(dc, at, color);
 
-		at.y=(rc.top+rc.bottom)/2;
-		DrawBox(dc,at,color);
+		at.y = (rc.top + rc.bottom) / 2;
+		DrawBox(dc, at, color);
 
-		at.y=rc.bottom+BOX_SIDE;
-		DrawBox(dc,at,color);
+		at.y = rc.bottom + BOX_SIDE;
+		DrawBox(dc, at, color);
 
-		at.x=(rc.left+rc.right)/2;
-		DrawBox(dc,at,color);
+		at.x = (rc.left + rc.right) / 2;
+		DrawBox(dc, at, color);
 
-		at.x=rc.left-BOX_SIDE;
-		DrawBox(dc,at,color);
+		at.x = rc.left - BOX_SIDE;
+		DrawBox(dc, at, color);
 
-		at.y=(rc.top+rc.bottom)/2;
-		DrawBox(dc,at,color);
+		at.y = (rc.top + rc.bottom) / 2;
+		DrawBox(dc, at, color);
 	}
 }
 
@@ -650,74 +647,74 @@ HintItem Component::GetHint(CPoint & pt)
 {
 	CPoint at;
 	CRect rc(bounds);
-  ComponentToDesigner(rc);
+	ComponentToDesigner(rc);
 
-	at.x=rc.left-BOX_SIDE;
-	at.y=rc.top-BOX_SIDE;
-	if(PtInBox(at,pt))
+	at.x = rc.left - BOX_SIDE;
+	at.y = rc.top - BOX_SIDE;
+	if (PtInBox(at, pt))
 		return hiLeftTop;
 
-	at.x=(rc.left+rc.right)/2;
-	if(PtInBox(at,pt))
+	at.x = (rc.left + rc.right) / 2;
+	if (PtInBox(at, pt))
 		return hiTopMedium;
 
-	at.x=rc.right+BOX_SIDE;
-	if(PtInBox(at,pt))
+	at.x = rc.right + BOX_SIDE;
+	if (PtInBox(at, pt))
 		return hiRightTop;
 
-	at.y=(rc.top+rc.bottom)/2;
-	if(PtInBox(at,pt))
+	at.y = (rc.top + rc.bottom) / 2;
+	if (PtInBox(at, pt))
 		return hiRightMedium;
 
-	at.y=rc.bottom+BOX_SIDE;
-	if(PtInBox(at,pt))
+	at.y = rc.bottom + BOX_SIDE;
+	if (PtInBox(at, pt))
 		return hiRightBottom;
 
-	at.x=(rc.left+rc.right)/2;
-	if(PtInBox(at,pt))
+	at.x = (rc.left + rc.right) / 2;
+	if (PtInBox(at, pt))
 		return hiBottomMedium;
 
-	at.x=rc.left-BOX_SIDE;
-	if(PtInBox(at,pt))
+	at.x = rc.left - BOX_SIDE;
+	if (PtInBox(at, pt))
 		return hiLeftBottom;
 
-	at.y=(rc.top+rc.bottom)/2;
-	if(PtInBox(at,pt))
+	at.y = (rc.top + rc.bottom) / 2;
+	if (PtInBox(at, pt))
 		return hiLeftMedium;
 
-	return PtInRect(rc,pt) ? hiAll: hiNone;
+	return PtInRect(rc, pt) ? hiAll : hiNone;
 }
 
 CRect  Component::GetBoundsRect(void)
 {
-	if(state.GetBit(csLoading))
+	if (state.GetBit(csLoading))
 	{
-		bounds.left=GET_PROP_VALUE(long, Left)
-		bounds.top= GET_PROP_VALUE(long, Top)
-		bounds.right=bounds.left + GET_PROP_VALUE(long, Width)
-		bounds.bottom=bounds.top + GET_PROP_VALUE(long, Height)
+		bounds.left = GET_PROP_VALUE(long, Left)
+			bounds.top = GET_PROP_VALUE(long, Top)
+			bounds.right = bounds.left + GET_PROP_VALUE(long, Width)
+			bounds.bottom = bounds.top + GET_PROP_VALUE(long, Height)
 	}
 	return bounds;
 }
 
 void Component::UpdateBoundsProp(CRect & rc)
 {
-	bounds=rc;
-	SET_PROP_VALUE(Left,bounds.left)
-	SET_PROP_VALUE(Top,bounds.top)
-	long temp=bounds.Width();
+	bounds = rc;
+	SET_PROP_VALUE(Left, bounds.left)
+		SET_PROP_VALUE(Top, bounds.top)
+		long temp = bounds.Width();
 	SET_PROP_VALUE(Width, temp)
-	temp=bounds.Height();
-	SET_PROP_VALUE(Height,temp)
-	if(selected==TRUE || IsControl()==FALSE)
-	{
-		::UpdateProperty(_T("Left"));
-		::UpdateProperty(_T("Top"));
-		::UpdateProperty(_T("Width"));
-		::UpdateProperty(_T("Height"));
-	}
+		temp = bounds.Height();
+	SET_PROP_VALUE(Height, temp)
+		if (selected == TRUE || IsControl() == FALSE)
+		{
+			::UpdateProperty(_T("Left"));
+			::UpdateProperty(_T("Top"));
+			::UpdateProperty(_T("Width"));
+			::UpdateProperty(_T("Height"));
+		}
 
-	if(IsForm()==TRUE)
+	if (IsForm() == TRUE)
 	{
 		::UpdateProperty(_T("Left"));
 		::UpdateProperty(_T("Top"));
@@ -733,8 +730,8 @@ void Component::UpdateBoundsProp(CRect & rc)
 void Component::SetBoundsRect(CRect rc)
 {
 	UpdateBoundsProp(rc);
-	if(get_Layout()==TRUE && GetState(csLoading)==FALSE && GetState(csCreating)==FALSE)
-		::PostMessage((HWND)GetParentForm()->GetHandle(),WM_UPDATELAYOUT,0,0);
+	if (get_Layout() == TRUE && GetState(csLoading) == FALSE && GetState(csCreating) == FALSE)
+		::PostMessage((HWND)GetParentForm()->GetHandle(), WM_UPDATELAYOUT, 0, 0);
 }
 
 void Component::Load(CXMLDOMNode & Node)
@@ -749,71 +746,71 @@ void Component::Save(CXMLDOMNode & Node)
 
 void Component::DesignerToComponent(CRect & rc)
 {
-	if(IsControl())
+	if (IsControl())
 	{
-	designer->ClientToScreen(&rc);
-	CWindow((HWND)Parent->GetHandle()).ScreenToClient(&rc);
+		designer->ClientToScreen(&rc);
+		CWindow((HWND)Parent->GetHandle()).ScreenToClient(&rc);
 	}
 }
 
 void Component::ComponentToDesigner(CRect & rc)
 {
-	if(IsControl() )
+	if (IsControl())
 	{
-	CWindow((HWND)Parent->GetHandle()).ClientToScreen(&rc);
-	designer->ScreenToClient(&rc);
-}
+		CWindow((HWND)Parent->GetHandle()).ClientToScreen(&rc);
+		designer->ScreenToClient(&rc);
+	}
 }
 
 void Component::DesignerToComponent(CPoint & pt)
 {
-	if(IsControl())
+	if (IsControl())
 	{
 		designer->ClientToScreen(&pt);
-	CWindow((HWND)Parent->GetHandle()).ScreenToClient(&pt);
-}
+		CWindow((HWND)Parent->GetHandle()).ScreenToClient(&pt);
+	}
 }
 
 void Component::ComponentToDesigner(CPoint & pt)
 {
-	if(IsControl())
+	if (IsControl())
 	{
-	CWindow((HWND)Parent->GetHandle()).ClientToScreen(&pt);
-	designer->ScreenToClient(&pt);
-}
+		CWindow((HWND)Parent->GetHandle()).ClientToScreen(&pt);
+		designer->ScreenToClient(&pt);
+	}
 }
 
 long Component::DesignerToComponentX(long val)
 {
-    CPoint pt(val,0);
-    DesignerToComponent(pt);
-    return pt.x;
+	CPoint pt(val, 0);
+	DesignerToComponent(pt);
+	return pt.x;
 }
 
 long Component::ComponentToDesignerX(long val)
 {
-    CPoint pt(val,0);
-    ComponentToDesigner(pt);
-    return pt.x;
+	CPoint pt(val, 0);
+	ComponentToDesigner(pt);
+	return pt.x;
 }
 
 long Component::DesignerToComponentY(long val)
 {
-    CPoint pt(0,val);
-    DesignerToComponent(pt);
-    return pt.y;
+	CPoint pt(0, val);
+	DesignerToComponent(pt);
+	return pt.y;
 }
 
 long Component::ComponentToDesignerY(long val)
 {
-    CPoint pt(0,val);
-    ComponentToDesigner(pt);
-    return pt.y;
+	CPoint pt(0, val);
+	ComponentToDesigner(pt);
+	return pt.y;
 }
 
-void Component::SetState(ComponentState cs,BOOL flag)
+void Component::SetState(ComponentState cs, BOOL flag)
 {
-	state.SetBit(cs,flag);
+	state.SetBit(cs, flag);
 }
 
 BOOL Component::GetState(ComponentState cs)
@@ -843,50 +840,50 @@ HANDLE Component::GetHandle(void)
 
 Component	*Component::GetComponentParent()
 {
-	if(state.GetBit(csLoading))
+	if (state.GetBit(csLoading))
 	{
-		CString str=GET_PROP_VALUE(CString,ParentName)
-		if(str.IsEmpty() || str==DEF_PARENT_NAME)
-			Parent=designer->GetParentForm();
-		else
-		{
-			Parent=designer->GetComponents()->Find(str);
-			if(Parent==NULL)
-				Parent=designer->GetParentForm();
-		}
+		CString str = GET_PROP_VALUE(CString, ParentName)
+			if (str.IsEmpty() || str == DEF_PARENT_NAME)
+				Parent = designer->GetParentForm();
+			else
+			{
+				Parent = designer->GetComponents()->Find(str);
+				if (Parent == NULL)
+					Parent = designer->GetParentForm();
+			}
 	}
 	return Parent;
 }
 
 void Component::SetComponentParent(Component* newParent)
 {
-	if(newParent==NULL || newParent==Parent)
+	if (newParent == NULL || newParent == Parent)
 		return;
-    
-    Component * oldParent=Parent;
-	Parent=newParent;
-	if(state.GetBit(csLoading)==FALSE && IsForm()==FALSE && IsControl()==TRUE && 
+
+	Component * oldParent = Parent;
+	Parent = newParent;
+	if (state.GetBit(csLoading) == FALSE && IsForm() == FALSE && IsControl() == TRUE &&
 		::IsWindow((HWND)GetHandle()) && ::IsWindow((HWND)newParent->GetHandle()))
-		::SetParent((HWND)GetHandle(),(HWND)newParent->GetHandle());
+		::SetParent((HWND)GetHandle(), (HWND)newParent->GetHandle());
 
-	CString str=newParent->get_Name();
-    if(GetState(csCreating)==FALSE &&
-       IsForm() == FALSE &&
-       str==GetParentForm()->get_Name())
-        str = DEF_PARENT_NAME;
+	CString str = newParent->get_Name();
+	if (GetState(csCreating) == FALSE &&
+		IsForm() == FALSE &&
+		str == GetParentForm()->get_Name())
+		str = DEF_PARENT_NAME;
 
-	SET_PROP_VALUE(ParentName,str)
-	parentName=str;
-    if(oldParent!=NULL && ::IsWindow((HWND)oldParent->GetHandle()))
-    {
-        ::SetWindowPos((HWND)GetHandle(),(HWND)oldParent->GetHandle(),0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
-        GetDesigner()->BringToTop();
-    }
+	SET_PROP_VALUE(ParentName, str)
+		parentName = str;
+	if (oldParent != NULL && ::IsWindow((HWND)oldParent->GetHandle()))
+	{
+		::SetWindowPos((HWND)GetHandle(), (HWND)oldParent->GetHandle(), 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+		GetDesigner()->BringToTop();
+	}
 }
 
 Component* Component::GetParentForm()
 {
-	if(GetDesigner())
+	if (GetDesigner())
 		return GetDesigner()->GetParentForm();
 	return NULL;
 }
@@ -898,29 +895,29 @@ CDesignerCtrl * Component::GetDesigner()
 
 void Component::SetDesigner(CDesignerCtrl * d)
 {
-	designer=d;
+	designer = d;
 }
 
 CString Component::MakeDefaultName(void)
 {
 	CString str;
-	if(className.IsEmpty()==FALSE)
+	if (className.IsEmpty() == FALSE)
 	{
 		CString cmpName;
 		CString cmpPage;
-		if(ExtractName(className,cmpPage,cmpName))
+		if (ExtractName(className, cmpPage, cmpName))
 		{
-			if(cmpName[0]=='c' || cmpName[0]=='C')
+			if (cmpName[0] == 'c' || cmpName[0] == 'C')
 				cmpName.Delete(0);
 
-			if(IsControl()==TRUE)
+			if (IsControl() == TRUE)
 			{
 				cmpName.MakeLower();
-				str.Format(_T("m_%s%d"),(LPCTSTR)cmpName,uniqueID);
+				str.Format(_T("m_%s%d"), (LPCTSTR)cmpName, uniqueID);
 			}
 			else
 			{
-				str.Format(_T("%s%d"),(LPCTSTR)cmpName,uniqueID);
+				str.Format(_T("%s%d"), (LPCTSTR)cmpName, uniqueID);
 			}
 		}
 	}
@@ -988,7 +985,7 @@ BOOL Component::get_Focus()
 _variant_t __stdcall Component::Item(BSTR propName)
 {
 	USES_CONVERSION;
-	CString str=objprop.GetPropValueStr(CString(propName));
+	CString str = objprop.GetPropValueStr(CString(propName));
 
 	if (str == _T("true"))
 	{
@@ -1051,10 +1048,10 @@ BOOL __stdcall Component::get_IsForm()
 
 Component * Component::Find(const CString & val)
 {
-	Components * cmps=static_cast<Components *>(designer->GetComponents());
-	for(int i=0;i < cmps->GetCount();i++)
+	Components * cmps = static_cast<Components *>(designer->GetComponents());
+	for (int i = 0; i < cmps->GetCount(); i++)
 	{
-		if(cmps->GetAt(i)->get_Name()==val)
+		if (cmps->GetAt(i)->get_Name() == val)
 			return static_cast<Component *>(cmps->GetAt(i));
 	}
 	return NULL;
@@ -1067,17 +1064,17 @@ CString Component::GetComponetKind()
 
 void Component::SetModified(CRect * rc)
 {
-	if(GetState(csLoading) ||  GetState(csCreating))
+	if (GetState(csLoading) || GetState(csCreating))
 		return;
 
-	if(IsForm()==TRUE)
+	if (IsForm() == TRUE)
 	{
-		if(designer->IsShowGSGuides())
-			::RedrawWindow((HWND)GetHandle(),rc,NULL,RDW_NOERASE|RDW_UPDATENOW|RDW_INVALIDATE|RDW_INTERNALPAINT/*|RDW_ALLCHILDREN*/);
+		if (designer->IsShowGSGuides())
+			::RedrawWindow((HWND)GetHandle(), rc, NULL, RDW_NOERASE | RDW_UPDATENOW | RDW_INVALIDATE | RDW_INTERNALPAINT/*|RDW_ALLCHILDREN*/);
 	}
 	else
 	{
-		CRect rc=GetBoundsRect();
+		CRect rc = GetBoundsRect();
 		ComponentToDesigner(rc);
 		GetParentForm()->SetModified(&rc);
 	}
@@ -1085,17 +1082,17 @@ void Component::SetModified(CRect * rc)
 //координаты контрола в координатах дезигнера!!!
 Component * Component::Clone()
 {
-	Component * ctrl=NULL;
+	Component * ctrl = NULL;
 	CString cmpPage;
 	CString cmpName;
-	ExtractName(className,cmpPage,cmpName);
-	SendEvent(evCreateComponent,(LPCTSTR)cmpName,(LPCTSTR)cmpPage,&ctrl);
-	if(ctrl != NULL)
+	ExtractName(className, cmpPage, cmpName);
+	SendEvent(evCreateComponent, (LPCTSTR)cmpName, (LPCTSTR)cmpPage, &ctrl);
+	if (ctrl != NULL)
 	{
-		ctrl->SetState(csCreating,TRUE);
-		ctrl->SetState(csLoading,TRUE);
+		ctrl->SetState(csCreating, TRUE);
+		ctrl->SetState(csLoading, TRUE);
 		ctrl->InitProperty();
-		ctrl->objprop=objprop;
+		ctrl->objprop = objprop;
 	}
 	else
 	{
@@ -1107,35 +1104,35 @@ Component * Component::Clone()
 CRect Component::GetMinRect()
 {
 	CRect minRc;
-	Components * components=GetComponents();
-	if(components==NULL)
+	Components * components = GetComponents();
+	if (components == NULL)
 		return minRc;
 	Component *  comp;
-	minRc.left=0;
-	minRc.top=0;
-	minRc.right=0;
-	minRc.bottom=0;
+	minRc.left = 0;
+	minRc.top = 0;
+	minRc.right = 0;
+	minRc.bottom = 0;
 
-	BOOL flag=FALSE;
-	for(size_t i=0; i < (size_t)components->GetCount(); i++)
+	BOOL flag = FALSE;
+	for (size_t i = 0; i < (size_t)components->GetCount(); i++)
 	{
-		comp=components->GetAt((int)i);
-		if(comp->IsControl() && this == comp->GetComponentParent())
+		comp = components->GetAt((int)i);
+		if (comp->IsControl() && this == comp->GetComponentParent())
 		{
-			Component *comp=components->GetAt((int)i);
-			CRect rc=comp->GetBoundsRect();
-			minRc.right=max(minRc.right,rc.right);
-			minRc.bottom=max(minRc.bottom,rc.bottom);
-			flag=TRUE;
+			Component *comp = components->GetAt((int)i);
+			CRect rc = comp->GetBoundsRect();
+			minRc.right = max(minRc.right, rc.right);
+			minRc.bottom = max(minRc.bottom, rc.bottom);
+			flag = TRUE;
 		}
 	}
 
-	if(flag==FALSE)
+	if (flag == FALSE)
 		minRc.SetRectEmpty();
 	else
 	{
-		minRc.left=0;
-		minRc.top=0;
+		minRc.left = 0;
+		minRc.top = 0;
 	}
 
 	return minRc;
@@ -1143,12 +1140,12 @@ CRect Component::GetMinRect()
 
 void Component::set_TabIndex(long val)
 {
-	if(tabIndex!=val)
+	if (tabIndex != val)
 	{
-		if(enableTabIndex == TRUE)
-			tabIndex=val;
+		if (enableTabIndex == TRUE)
+			tabIndex = val;
 		else
-			tabIndex=-1;
+			tabIndex = -1;
 		SetModified();
 	}
 }
@@ -1163,30 +1160,30 @@ BOOL Component::EnableTabIndex()
 	return enableTabIndex;
 }
 //////////////////////////////////////////////////////////////////////////
-Components::Components(void):designer(NULL),currMode(cmSelect),
-id(1000),hideall(FALSE),pressed(FALSE),freeze(FALSE)
+Components::Components(void) :designer(NULL), currMode(cmSelect),
+id(1000), hideall(FALSE), pressed(FALSE), freeze(FALSE)
 {
-	RegisterEvent(evSelectComponent,this,&Components::SelectComponent);
-	RegisterEvent(evAlignComponentsLeft,this,&Components::AlignLeft);
-	RegisterEvent(evAlignComponentsTop,this,&Components::AlignTop);
-	RegisterEvent(evAlignComponentsRight,this,&Components::AlignRight);
-	RegisterEvent(evAlignComponentsBottom,this,&Components::AlignBottom);
-	RegisterEvent(evAlignComponentsHoriz,this,&Components::AlignHoriz);
-	RegisterEvent(evAlignComponentsVert,this,&Components::AlignVert);
-	RegisterEvent(evMakeSameWidth,this,&Components::MakeSameWidth);
-	RegisterEvent(evMakeSameHeight,this,&Components::MakeSameHeight);
-	RegisterEvent(evMakeSameSize,this,&Components::MakeSameSize);
-	RegisterEvent(evToParent,this,&Components::ToParent);
-	RegisterEvent(evHorizOrder,this,&Components::HorizOrder);
-	RegisterEvent(evVertOrder,this,&Components::VertOrder);
-	RegisterEvent(evHorizOrderRight,this,&Components::HorizOrderRight);
-	RegisterEvent(evVertOrderBottom,this,&Components::VertOrderBottom);
+	RegisterEvent(evSelectComponent, this, &Components::SelectComponent);
+	RegisterEvent(evAlignComponentsLeft, this, &Components::AlignLeft);
+	RegisterEvent(evAlignComponentsTop, this, &Components::AlignTop);
+	RegisterEvent(evAlignComponentsRight, this, &Components::AlignRight);
+	RegisterEvent(evAlignComponentsBottom, this, &Components::AlignBottom);
+	RegisterEvent(evAlignComponentsHoriz, this, &Components::AlignHoriz);
+	RegisterEvent(evAlignComponentsVert, this, &Components::AlignVert);
+	RegisterEvent(evMakeSameWidth, this, &Components::MakeSameWidth);
+	RegisterEvent(evMakeSameHeight, this, &Components::MakeSameHeight);
+	RegisterEvent(evMakeSameSize, this, &Components::MakeSameSize);
+	RegisterEvent(evToParent, this, &Components::ToParent);
+	RegisterEvent(evHorizOrder, this, &Components::HorizOrder);
+	RegisterEvent(evVertOrder, this, &Components::VertOrder);
+	RegisterEvent(evHorizOrderRight, this, &Components::HorizOrderRight);
+	RegisterEvent(evVertOrderBottom, this, &Components::VertOrderBottom);
 	//RegisterEvent(evToBackground,this,&Components::ToBackGround);
 	//RegisterEvent(evToForeground,this,&Components::ToForeGround);
-	RegisterEvent(evCenterGroupHoriz,this,&Components::CenterGroupHoriz);
-	RegisterEvent(evCenterGroupVert,this,&Components::CenterGroupVert);
-	RegisterEvent(evChangeParent,this,&Components::ChangeComponentsParent);
-	RegisterEvent(evSelectAll,this,&Components::SelectAll);
+	RegisterEvent(evCenterGroupHoriz, this, &Components::CenterGroupHoriz);
+	RegisterEvent(evCenterGroupVert, this, &Components::CenterGroupVert);
+	RegisterEvent(evChangeParent, this, &Components::ChangeComponentsParent);
+	RegisterEvent(evSelectAll, this, &Components::SelectAll);
 }
 
 Components::~Components(void)
@@ -1200,7 +1197,7 @@ Components::~Components(void)
 
 void Components::SetDesigner(CDesignerCtrl *p)
 {
-	designer=p;
+	designer = p;
 }
 
 CDesignerCtrl *	Components::GetDesigner(void)
@@ -1215,75 +1212,75 @@ Component*Components::GetParentForm()
 
 void Components::SetSelectMode(BOOL m)
 {
-	if(m==TRUE)
-		currMode=cmSelect;
+	if (m == TRUE)
+		currMode = cmSelect;
 	else
-		currMode=cmCreate;
+		currMode = cmCreate;
 }
 
 BOOL Components::IsSelectMode()
 {
-	return currMode==cmSelect;
+	return currMode == cmSelect;
 }
 
 void Components::Paint(CDC & dc)
 {
-	if(freeze == TRUE)
+	if (freeze == TRUE)
 		return;
 
-	if(hideall==FALSE)
-		for(unsigned int i=0; i < components.size(); i++)
+	if (hideall == FALSE)
+		for (unsigned int i = 0; i < components.size(); i++)
 			components[i]->Paint(dc);
 }
 
-Component * Components::ComponentFromPt(CPoint & at,BOOL realBounds)
+Component * Components::ComponentFromPt(CPoint & at, BOOL realBounds)
 {
-	if(freeze == TRUE)
+	if (freeze == TRUE)
 		return NULL;
 	CRect rc;
-	for(int i=(int)components.size()-1; i >=0 ; i--)
+	for (int i = (int)components.size() - 1; i >= 0; i--)
 	{
-		if(components[i]->IsControl() && ::IsWindowVisible((HWND)components[i]->GetHandle())==FALSE)
+		if (components[i]->IsControl() && ::IsWindowVisible((HWND)components[i]->GetHandle()) == FALSE)
 			continue;
-		if(realBounds==FALSE)
+		if (realBounds == FALSE)
 		{
-			rc=components[i]->GetBoundsRect();
+			rc = components[i]->GetBoundsRect();
 			components[i]->ComponentToDesigner(rc);
 		}
 		else
 		{
-			::GetWindowRect((HWND)components[i]->GetHandle(),&rc);
+			::GetWindowRect((HWND)components[i]->GetHandle(), &rc);
 			designer->ScreenToClient(&rc);
 		}
-		if(rc.PtInRect(at))
+		if (rc.PtInRect(at))
 			return components[i];
 	}
 	return NULL;
 }
 
-Component * Components::SelectComponentFromPt(CPoint & at,BOOL selected)
+Component * Components::SelectComponentFromPt(CPoint & at, BOOL selected)
 {
 	CRect rc;
-	Component * comp=NULL;
+	Component * comp = NULL;
 	HintItem hint;
 
-	if(freeze == TRUE)
+	if (freeze == TRUE)
 		return NULL;
 
-	for(int i=(int)components.size()-1; i >=0 ; i--)
+	for (int i = (int)components.size() - 1; i >= 0; i--)
 	{
-		if((hint=components[i]->GetHint(at))!=hiNone )
+		if ((hint = components[i]->GetHint(at)) != hiNone)
 		{
-			if(components[i]->IsControl()==FALSE && components[i]->IsForm()==FALSE)
+			if (components[i]->IsControl() == FALSE && components[i]->IsForm() == FALSE)
 				return components[i];
-			if(::IsWindow((HWND)components[i]->GetHandle()) && ::IsWindowVisible((HWND)components[i]->GetHandle())==FALSE)
+			if (::IsWindow((HWND)components[i]->GetHandle()) && ::IsWindowVisible((HWND)components[i]->GetHandle()) == FALSE)
 				continue;
-			if(selected==TRUE && components[i]->get_Selected()==FALSE)
+			if (selected == TRUE && components[i]->get_Selected() == FALSE)
 				continue;//из-за панели, невозможно выбрать
-			if(selected==TRUE && hint==hiAll)
+			if (selected == TRUE && hint == hiAll)
 				continue;
 			//if(comp==NULL)
-			comp=components[i];
+			comp = components[i];
 			break;
 		}
 	}
@@ -1296,168 +1293,168 @@ void Components::UnselectAll(void)
 	Invalidate(TRUE);
 	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 			components[i]->set_Selected(FALSE);
 	}
 }
 
 void Components::MouseDown(CPoint point)
 {
-	if(freeze == TRUE)
+	if (freeze == TRUE)
 		return;
 
 	CClientDC dc(designer->m_hWnd);
 
-	BOOL shiftPressed=((GetKeyState(VK_LSHIFT) & 0x100) || (GetKeyState(VK_RSHIFT) & 0x100)) ? TRUE : FALSE;
+	BOOL shiftPressed = ((GetKeyState(VK_LSHIFT) & 0x100) || (GetKeyState(VK_RSHIFT) & 0x100)) ? TRUE : FALSE;
 
-	if(currMode==cmCreate)
+	if (currMode == cmCreate)
 	{
 		UnselectAll();
-		point = AlignToGrid(point);
+		point = SnapToGrid(point);
 		CSize grid = GetDesigner()->IsShowGrid() == TRUE ? GetDesigner()->GetGridSize() : CSize(0, 0);
-		CRect rc(point.x,point.y,point.x + grid.cx,point.y + grid.cy);
-		Component * temp=Create(rc,shiftPressed);
-		if(temp)
+		CRect rc(point.x, point.y, point.x + grid.cx, point.y + grid.cy);
+		Component * temp = Create(rc, shiftPressed);
+		if (temp)
 		{
-			SetStateAll(csFirstSelected,FALSE);
+			SetStateAll(csFirstSelected, FALSE);
 			components.push_back(temp);
-			temp->Selected=TRUE;
-			temp->FirstSelected=TRUE;
-			hint=hiRightBottom;
+			temp->Selected = TRUE;
+			temp->FirstSelected = TRUE;
+			hint = hiRightBottom;
 			temp->DesignerToComponent(point);
-			temp->MouseDown(&dc,point,hint);
+			temp->MouseDown(&dc, point, hint);
 			temp->SetModified();
 			GetDesigner()->SetComponentCreated();
-			temp->set_TabIndex(FindMaxTabIndex()+1);
-			pressed=TRUE;
+			temp->set_TabIndex(FindMaxTabIndex() + 1);
+			pressed = TRUE;
 		}
-		PostEvent(evSetActiveForm,temp->GetParentForm());
+		PostEvent(evSetActiveForm, temp->GetParentForm());
 		return;
 	}
 
-	if(currMode==cmSelect)
+	if (currMode == cmSelect)
 	{
-		Component * temp=SelectComponentFromPt(point,TRUE);
-		if(temp==NULL)
-			temp=SelectComponentFromPt(point);
+		Component * temp = SelectComponentFromPt(point, TRUE);
+		if (temp == NULL)
+			temp = SelectComponentFromPt(point);
 
-		if(temp)
+		if (temp)
 		{
-			if(shiftPressed==TRUE)
+			if (shiftPressed == TRUE)
 			{
 				temp->set_Selected(TRUE);
-				if(GetSelCount() == 1)
+				if (GetSelCount() == 1)
 				{
-					temp->FirstSelected=TRUE;
+					temp->FirstSelected = TRUE;
 					RemoveProperties();
 				}
 
-				pressed=TRUE;
-				hint=hiAll;
-				point = AlignToGrid(point);
-				MouseDownAll(&dc,point);
+				pressed = TRUE;
+				hint = hiAll;
+				point = SnapToGrid(point);
+				MouseDownAll(&dc, point);
 			}
 			else
 			{
 				UnselectAll();
-				temp->Selected=TRUE;
-				temp->FirstSelected=TRUE;
-				hint=temp->GetHint(point);
-				if(hint!=hiNone)
+				temp->Selected = TRUE;
+				temp->FirstSelected = TRUE;
+				hint = temp->GetHint(point);
+				if (hint != hiNone)
 				{
-					pressed=TRUE;
+					pressed = TRUE;
 					ShowCursor(hint);
-					point = AlignToGrid(point);
-					MouseDownAll(&dc,point);
+					point = SnapToGrid(point);
+					MouseDownAll(&dc, point);
 				}
 			}
-			pressed=TRUE;
+			pressed = TRUE;
 		}
 		else
 		{
-			if(shiftPressed==FALSE)
+			if (shiftPressed == FALSE)
 				UnselectAll();
-			::SendMessage((HWND)designer->GetParentForm()->GetHandle(),WM_LBUTTONDOWN,0,MAKELONG(point.x,point.y));
+			::SendMessage((HWND)designer->GetParentForm()->GetHandle(), WM_LBUTTONDOWN, 0, MAKELONG(point.x, point.y));
 		}
 	}
-	PostEvent(evSetActiveForm,designer->GetParentForm());
+	PostEvent(evSetActiveForm, designer->GetParentForm());
 }
 
 void Components::MouseUp(CPoint point)
 {
-	if(freeze == TRUE)
+	if (freeze == TRUE)
 		return;
 
-	if(currMode==cmCreate && (GetKeyState(VK_LSHIFT) & 0x100 || GetKeyState(VK_RSHIFT) & 0x100)==FALSE)
+	if (currMode == cmCreate && (GetKeyState(VK_LSHIFT) & 0x100 || GetKeyState(VK_RSHIFT) & 0x100) == FALSE)
 		PostEvent(evResetSelectedComponent);
 
-	Component * temp=NULL;
-	if(pressed==TRUE)
+	Component * temp = NULL;
+	if (pressed == TRUE)
 	{
-		point = AlignToGrid(point);
+		point = SnapToGrid(point);
 		CClientDC dc(designer->m_hWnd);
-		if((temp=GetSingleSel())!=NULL)
+		if ((temp = GetSingleSel()) != NULL)
 		{
-			temp->MouseUp(&dc,point,hint);
+			temp->MouseUp(&dc, point, hint);
 		}
 		else
-			MouseUpAll(&dc,point);
+			MouseUpAll(&dc, point);
 	}
 	else
 	{
-		temp=SelectComponentFromPt(point,TRUE);
-		if(temp && temp->get_Selected())
+		temp = SelectComponentFromPt(point, TRUE);
+		if (temp && temp->get_Selected())
 		{
 			ShowCursor(temp->GetHint(point));
 		}
 	}
-	hint=hiNone;
-	pressed=FALSE;
+	hint = hiNone;
+	pressed = FALSE;
 
-	::PostMessage((HWND)GetParentForm()->GetHandle(),WM_UPDATELAYOUT,0,0);
+	::PostMessage((HWND)GetParentForm()->GetHandle(), WM_UPDATELAYOUT, 0, 0);
 	Invalidate();
 }
 
 void Components::MouseMove(CPoint point)
 {
-	if(freeze == TRUE)
+	if (freeze == TRUE)
 		return;
 
-	Component * temp=NULL;
+	Component * temp = NULL;
 
-	if(pressed)
+	if (pressed)
 	{
-		point = AlignToGrid(point);
+		point = SnapToGrid(point);
 		CClientDC dc(designer->m_hWnd);
-		if((temp=GetSingleSel())!=NULL)
+		if ((temp = GetSingleSel()) != NULL)
 		{
-			temp->MouseMove(&dc,point,hint);
-			if(currMode!=cmCreate)
+			temp->MouseMove(&dc, point, hint);
+			if (currMode != cmCreate)
 				ShowCursor(hint);
 			return;
 		}
 		else
 		{
-			MouseMoveAll(&dc,point);
+			MouseMoveAll(&dc, point);
 			return;
 		}
 	}
 	else
 	{
-		Component * temp=SelectComponentFromPt(point,TRUE);
-		if(temp )
+		Component * temp = SelectComponentFromPt(point, TRUE);
+		if (temp)
 			ShowCursor(temp->GetHint(point));
 	}
 }
 
 int	Components::GetSelCount(void)
 {
-	int selcount=0;
-	for(unsigned int i=0; i < components.size(); i++)
+	int selcount = 0;
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Selected())
+		if (components[i]->get_Selected())
 		{
-			selcount+=1;
+			selcount += 1;
 		}
 	}
 
@@ -1466,13 +1463,13 @@ int	Components::GetSelCount(void)
 
 Component * Components::GetSingleSel(void)
 {
-	Component * temp=NULL;
-	for(unsigned int i=0; i < components.size(); i++)
+	Component * temp = NULL;
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Selected())
+		if (components[i]->get_Selected())
 		{
-			if(temp==NULL)
-				temp=components[i];
+			if (temp == NULL)
+				temp = components[i];
 			else
 				return NULL;
 		}
@@ -1482,9 +1479,9 @@ Component * Components::GetSingleSel(void)
 
 Component * Components::GetFirstSel(void)
 {
-	for(unsigned int i=0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->FirstSelected)
+		if (components[i]->FirstSelected)
 			return components[i];
 	}
 	return NULL;
@@ -1492,50 +1489,50 @@ Component * Components::GetFirstSel(void)
 
 int Components::GetFirstSelIdx(void)
 {
-	for(unsigned int i=0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->FirstSelected)
+		if (components[i]->FirstSelected)
 			return i;
 	}
 	return -1;
 }
 
-void Components::MouseDownAll(CDC *dc,CPoint at)
+void Components::MouseDownAll(CDC *dc, CPoint at)
 {
-	if(freeze == TRUE)
+	if (freeze == TRUE)
 		return;
 
-	for(unsigned int i=0; i < components.size(); ++i)
-		if(components[i]->get_Selected())
-			components[i]->MouseDown(dc,at,hint);
+	for (unsigned int i = 0; i < components.size(); ++i)
+		if (components[i]->get_Selected())
+			components[i]->MouseDown(dc, at, hint);
 }
 
-void Components::MouseMoveAll(CDC *dc,CPoint at)
+void Components::MouseMoveAll(CDC *dc, CPoint at)
 {
-	if(freeze == TRUE)
+	if (freeze == TRUE)
 		return;
 
-	for(unsigned int i=0; i < components.size(); ++i)
-		if(components[i]->get_Selected())
-			components[i]->MouseMove(dc,at,hint);
+	for (unsigned int i = 0; i < components.size(); ++i)
+		if (components[i]->get_Selected())
+			components[i]->MouseMove(dc, at, hint);
 }
 
-void Components::MouseUpAll(CDC *dc,CPoint at)
+void Components::MouseUpAll(CDC *dc, CPoint at)
 {
-	if(freeze == TRUE)
+	if (freeze == TRUE)
 		return;
 
-	for(unsigned int i=0; i < components.size(); ++i)
-		if(GetAt(i)->get_Selected())
-			GetAt(i)->MouseUp(dc,at,hint);
+	for (unsigned int i = 0; i < components.size(); ++i)
+		if (GetAt(i)->get_Selected())
+			GetAt(i)->MouseUp(dc, at, hint);
 }
 
 void Components::ShowCursor(HintItem h)
 {
-	if(currMode!=cmCreate)
+	if (currMode != cmCreate)
 	{
-		HCURSOR Cursor=NULL;
-		switch(h)
+		HCURSOR Cursor = NULL;
+		switch (h)
 		{
 		case hiLeftTop:
 		case hiRightBottom:
@@ -1566,138 +1563,138 @@ void Components::ShowCursor(HintItem h)
 void Components::Load(CXMLDOMNode & controlNode)
 {
 	CXMLDOMNodeList controls(controlNode.GetChildNodes());
-	if(controls==NULL)
+	if (controls == NULL)
 		return;
 
-	CXMLDOMNode LastId=controlNode.GetAttributes().GetNamedItem(_T("LastCtrlId"));
-	if(LastId!=NULL)
+	CXMLDOMNode LastId = controlNode.GetAttributes().GetNamedItem(_T("LastCtrlId"));
+	if (LastId != NULL)
 	{
-		_variant_t val=LastId.GetNodeValue();
-		id=val;
+		_variant_t val = LastId.GetNodeValue();
+		id = val;
 	}
 
-	long Count=controls.GetLength();
-	for(long i=0; i < Count;i++)
+	long Count = controls.GetLength();
+	for (long i = 0; i < Count; i++)
 	{
-		CString cmpName=controls.GetItem(i).GetAttributes().GetNamedItem(_T("Class")).GetText();
-		CString cmpPage=controls.GetItem(i).GetAttributes().GetNamedItem(_T("Page")).GetText();
-		if(cmpName.IsEmpty()==FALSE && cmpPage.IsEmpty()==FALSE)
+		CString cmpName = controls.GetItem(i).GetAttributes().GetNamedItem(_T("Class")).GetText();
+		CString cmpPage = controls.GetItem(i).GetAttributes().GetNamedItem(_T("Page")).GetText();
+		if (cmpName.IsEmpty() == FALSE && cmpPage.IsEmpty() == FALSE)
 		{
-			Component * ctrl=NULL;
-			SendEvent(evCreateComponent,(LPCTSTR)cmpName,(LPCTSTR)cmpPage,&ctrl);
+			Component * ctrl = NULL;
+			SendEvent(evCreateComponent, (LPCTSTR)cmpName, (LPCTSTR)cmpPage, &ctrl);
 			if (ctrl == NULL)
 			{
 				SendEvent(evOutput, ErrorMsg, (LPCSTR)MakeString(_T("Component Page = %s, Name = %s not found."), (LPCTSTR)cmpPage, (LPCTSTR)cmpName));
 				return;
 			}
-			ctrl->SetState(csLoading,TRUE);
-			CRect rc(0,0,0,0);
+			ctrl->SetState(csLoading, TRUE);
+			CRect rc(0, 0, 0, 0);
 
 			ctrl->InitProperty();
 			ctrl->SetDesigner(designer);
 			ctrl->Load(controls.GetItem(i));
-			rc=ctrl->GetBoundsRect();
+			rc = ctrl->GetBoundsRect();
 			ctrl->SetBoundsRect(rc);
 			ctrl->CreateComponent(ctrl->GetComponentParent());
 			components.push_back(ctrl);
-            ctrl->SetState(csCreating,FALSE);
+			ctrl->SetState(csCreating, FALSE);
 		}
 	}
 
-	for(size_t j=0; j <  components.size(); j++)
+	for (size_t j = 0; j < components.size(); j++)
 	{
 		components[j]->ComponentCreated();
-		components[j]->SetState(csLoading,FALSE);
+		components[j]->SetState(csLoading, FALSE);
 	}
 	designer->BringWindowToTop();
 }
 
 static CPoint findTopLeftCorner(ComponentArray * comps)
 {
-	CPoint pt(0xFFFF,0xFFFF);
-	for(int i=0; i < (int)comps->size(); i++)
+	CPoint pt(0xFFFF, 0xFFFF);
+	for (int i = 0; i < (int)comps->size(); i++)
 	{
-		if((*comps)[i]->IsControl() == FALSE)
+		if ((*comps)[i]->IsControl() == FALSE)
 			continue;
-        pt.x= min(pt.x,(*comps)[i]->get_Left());
-		pt.y= min(pt.y,(*comps)[i]->get_Top());
+		pt.x = min(pt.x, (*comps)[i]->get_Left());
+		pt.y = min(pt.y, (*comps)[i]->get_Top());
 	}
 	return pt;
 }
 
-void Components::Paste(ComponentArray * comps, Component * comp,CPoint * downPoint)
+void Components::Paste(ComponentArray * comps, Component * comp, CPoint * downPoint)
 {
 	CFreeze fr(freeze);
-	Component * ctrl=NULL;
-	CPoint pt(0,0);
+	Component * ctrl = NULL;
+	CPoint pt(0, 0);
 
-	if(downPoint)
-		pt=findTopLeftCorner(comps);
+	if (downPoint)
+		pt = findTopLeftCorner(comps);
 
-	for(unsigned int i=0; i < comps->size(); i++)
+	for (unsigned int i = 0; i < comps->size(); i++)
 	{
-		ctrl=(*comps)[i]->Clone();
+		ctrl = (*comps)[i]->Clone();
 		ctrl->SetDesigner(designer);
-		ctrl->SetState(csLoading,TRUE);
-		Component * par=comp;
-		if(par==NULL)
-			par=GetParentForm();//или если нечто заселектировано то туда хотя вопрос
+		ctrl->SetState(csLoading, TRUE);
+		Component * par = comp;
+		if (par == NULL)
+			par = GetParentForm();//или если нечто заселектировано то туда хотя вопрос
 
 		ctrl->CreateComponent(par);//надо искать парента куда ткнули!!!
 		UnselectAll();
 		components.push_back(ctrl);
-		CPoint at(0,0);
-		if(downPoint)
+		CPoint at(0, 0);
+		if (downPoint)
 		{
-			at=*downPoint;
+			at = *downPoint;
 			ctrl->DesignerToComponent(at);
 		}
 
 		ctrl->set_Left(at.x + ctrl->get_Left() - pt.x);
-		ctrl->set_Top(at.y + ctrl->get_Top()- pt.y);
-        ctrl->SetState(csCreating,FALSE);
+		ctrl->set_Top(at.y + ctrl->get_Top() - pt.y);
+		ctrl->SetState(csCreating, FALSE);
 		ctrl->ComponentCreated();
-		ctrl->SetState(csLoading,FALSE);
+		ctrl->SetState(csLoading, FALSE);
 	}
 }
 
-void Components::Save(CXMLDOMNode &controls,BOOL onlySelected)
+void Components::Save(CXMLDOMNode &controls, BOOL onlySelected)
 {
 	CFreeze fr(freeze);
 	CXMLDOMAttribute LastId(controls.GetOwnerDocument().CreateAttribute(_T("LastCtrlId")));
 	LastId.SetValue(id);
 	controls.GetAttributes().SetNamedItem(LastId);
 
-	long count=0;
-	for(unsigned int i=0; i < components.size();i++)
+	long count = 0;
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(onlySelected == TRUE && components[i]->get_Selected()==FALSE)
+		if (onlySelected == TRUE && components[i]->get_Selected() == FALSE)
 			continue;
 
-		CXMLDOMNode Item(controls.GetOwnerDocument().CreateNode((long)NODE_ELEMENT,components[i]->get_Name(),NULL));
+		CXMLDOMNode Item(controls.GetOwnerDocument().CreateNode((long)NODE_ELEMENT, components[i]->get_Name(), NULL));
 		controls.AppendChild(Item);
 
-		components[i]->SetState(csSaving,TRUE);
+		components[i]->SetState(csSaving, TRUE);
 		components[i]->Save(Item);
-		components[i]->SetState(csSaving,FALSE);
+		components[i]->SetState(csSaving, FALSE);
 	}
 }
 
-Component * Components::Create(CRect & rc,BOOL multiCreate)
+Component * Components::Create(CRect & rc, BOOL multiCreate)
 {
 	CString cmpName;
 	CString cmpPage;
-	if(ExtractName(newComponentName,cmpPage,cmpName)==FALSE)
+	if (ExtractName(newComponentName, cmpPage, cmpName) == FALSE)
 		return NULL;
-	Component * newCtrl=NULL;
-	SendEvent(evCreateComponent,(LPCTSTR)cmpName,(LPCTSTR)cmpPage,&newCtrl);
-	if(newCtrl)
+	Component * newCtrl = NULL;
+	SendEvent(evCreateComponent, (LPCTSTR)cmpName, (LPCTSTR)cmpPage, &newCtrl);
+	if (newCtrl)
 	{
-		Component * curParent=NULL;
-		if(newCtrl->IsControl()==FALSE)
-			curParent=designer->GetParentForm();
+		Component * curParent = NULL;
+		if (newCtrl->IsControl() == FALSE)
+			curParent = designer->GetParentForm();
 		else
-			curParent=GetCurrentParent(rc.TopLeft());
+			curParent = GetCurrentParent(rc.TopLeft());
 
 		designer->ClientToScreen(&rc);
 		CWindow((HWND)curParent->GetHandle()).ScreenToClient(&rc);
@@ -1705,8 +1702,8 @@ Component * Components::Create(CRect & rc,BOOL multiCreate)
 		newCtrl->InitProperty();
 		newCtrl->SetBoundsRect(rc);
 		newCtrl->CreateComponent(curParent);
-        //newCtrl->SetState(csCreating,FALSE);
-        newCtrl->ComponentCreated();
+		//newCtrl->SetState(csCreating,FALSE);
+		newCtrl->ComponentCreated();
 	}
 	else
 	{
@@ -1715,22 +1712,22 @@ Component * Components::Create(CRect & rc,BOOL multiCreate)
 	return newCtrl;
 }
 
-Component * Components::Create(Component *Parent,LPCTSTR newCmpName,CRect & rc)
+Component * Components::Create(Component *Parent, LPCTSTR newCmpName, CRect & rc)
 {
 	CString cmpName;
 	CString cmpPage;
-	if(ExtractName(CString(newCmpName),cmpPage,cmpName)==FALSE)
+	if (ExtractName(CString(newCmpName), cmpPage, cmpName) == FALSE)
 		return NULL;
-	Component * newCtrl=NULL;
-	SendEvent(evCreateComponent,(LPCTSTR)cmpName,(LPCTSTR)cmpPage,&newCtrl);
-	if(newCtrl)
+	Component * newCtrl = NULL;
+	SendEvent(evCreateComponent, (LPCTSTR)cmpName, (LPCTSTR)cmpPage, &newCtrl);
+	if (newCtrl)
 	{
 		newCtrl->set_UniqueID(GetNextId());
 		newCtrl->InitProperty();
 		newCtrl->SetBoundsRect(rc);
 		newCtrl->CreateComponent(Parent);
-        //newCtrl->SetState(csCreating,FALSE);
-        newCtrl->ComponentCreated();
+		//newCtrl->SetState(csCreating,FALSE);
+		newCtrl->ComponentCreated();
 		Add(newCtrl);
 	}
 	return newCtrl;
@@ -1743,17 +1740,17 @@ long Components::GetNextId(void)
 
 Component * Components::GetCurrentParent(CPoint & point)
 {
-	Component * temp=ComponentFromPt(point,TRUE);
+	Component * temp = ComponentFromPt(point, TRUE);
 
-	if(temp)
+	if (temp)
 	{
-		if(::IsWindow((HWND)temp->GetHandle()) && ::IsWindowVisible((HWND)temp->GetHandle()))
+		if (::IsWindow((HWND)temp->GetHandle()) && ::IsWindowVisible((HWND)temp->GetHandle()))
 			return temp;
 		else
 		{
-			while(temp=temp->GetComponentParent())
+			while (temp = temp->GetComponentParent())
 			{
-				if(::IsWindow((HWND)temp->GetHandle()) && ::IsWindowVisible((HWND)temp->GetHandle()))
+				if (::IsWindow((HWND)temp->GetHandle()) && ::IsWindowVisible((HWND)temp->GetHandle()))
 					return temp;
 			}
 		}
@@ -1761,20 +1758,20 @@ Component * Components::GetCurrentParent(CPoint & point)
 	return designer->GetParentForm();
 }
 
-void Components::IncrementMove(long x,long y)
+void Components::IncrementMove(long x, long y)
 {
-	BOOL flag=FALSE;
+	BOOL flag = FALSE;
 	Invalidate(TRUE);
-	for(unsigned int i=0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Selected())
+		if (components[i]->get_Selected())
 		{
 			//	CRect rc=components[i]->GetBoundsRect();
 			//	rc.left-=x;
 			//	rc.top-=y;
 			//	components[i]->set_Left(rc.left);
 			//	components[i]->set_Top(rc.top);
-			components[i]->SetBoundsRect(components[i]->Move(CPoint(x,y),hiAll));
+			components[i]->SetBoundsRect(components[i]->Move(CPoint(x, y), hiAll));
 			//if(components[i]->IsControl()==FALSE && components[i]->IsForm()==FALSE)
 			//    flag=TRUE;
 		}
@@ -1784,24 +1781,24 @@ void Components::IncrementMove(long x,long y)
 	//        ::RedrawWindow((HWND)GetParentForm()->GetHandle(),NULL,NULL,RDW_INVALIDATE|RDW_NOERASE|RDW_UPDATENOW|RDW_ALLCHILDREN);
 	//  else    
 	Invalidate();
-	::PostMessage((HWND)GetParentForm()->GetHandle(),WM_UPDATELAYOUT,0,0);
+	::PostMessage((HWND)GetParentForm()->GetHandle(), WM_UPDATELAYOUT, 0, 0);
 }
 
-void Components::IncrementSize(long x,long y,BOOL rightBottom)
+void Components::IncrementSize(long x, long y, BOOL rightBottom)
 {
 	Invalidate(TRUE);
-	for(unsigned int i=0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Selected() && (components[i]->IsControl()==TRUE || components[i]->IsForm()==TRUE))
+		if (components[i]->get_Selected() && (components[i]->IsControl() == TRUE || components[i]->IsForm() == TRUE))
 		{
-			if(rightBottom == TRUE)
-				components[i]->SetBoundsRect(components[i]->Move(CPoint(x,y),hiRightBottom));
+			if (rightBottom == TRUE)
+				components[i]->SetBoundsRect(components[i]->Move(CPoint(x, y), hiRightBottom));
 			else
-				components[i]->SetBoundsRect(components[i]->Move(CPoint(x,y),hiLeftTop));
+				components[i]->SetBoundsRect(components[i]->Move(CPoint(x, y), hiLeftTop));
 		}
 	}
 	Invalidate();
-	::PostMessage((HWND)GetParentForm()->GetHandle(),WM_UPDATELAYOUT,0,0);
+	::PostMessage((HWND)GetParentForm()->GetHandle(), WM_UPDATELAYOUT, 0, 0);
 }
 
 void Components::Delete()
@@ -1810,49 +1807,49 @@ void Components::Delete()
 
 	Invalidate(TRUE);
 	//CRect rc;
-	BOOL flag=FALSE;
-	for(int i=0; i < (int)components.size();)
+	BOOL flag = FALSE;
+	for (int i = 0; i < (int)components.size();)
 	{
-		if(components[i]->get_Selected())
+		if (components[i]->get_Selected())
 		{
-			Component * tempComp=components[i];
-			components.erase(components.begin()+i);
-			Delete(tempComp,FALSE);
-			i=0;
+			Component * tempComp = components[i];
+			components.erase(components.begin() + i);
+			Delete(tempComp, FALSE);
+			i = 0;
 			tempComp->DeleteComponent();
-			flag=TRUE;
+			flag = TRUE;
 		}
 		else
 			i++;
 	}
 
-	if(flag)
+	if (flag)
 	{
 		ReSetTabIndex();
-//		if(components.size())
-//		{
-//			components[0]->Selected=TRUE;
-//			components[0]->FirstSelected=TRUE;
-//		}
+		//		if(components.size())
+		//		{
+		//			components[0]->Selected=TRUE;
+		//			components[0]->FirstSelected=TRUE;
+		//		}
 	}
 }
 
 BOOL Components::Delete(Component * comp, BOOL deleteSelf)
 {
 	CFreeze fr(freeze);
-	BOOL flag=FALSE;
-	if(comp == NULL)
+	BOOL flag = FALSE;
+	if (comp == NULL)
 		return flag;
 
-	while(components.size()!=0)
+	while (components.size() != 0)
 	{
-		Component * temp=FindByParent(comp);
-		if(temp)
+		Component * temp = FindByParent(comp);
+		if (temp)
 		{
-			Delete(temp,FALSE);
-			components.erase(components.begin()+FindIndex(temp));
+			Delete(temp, FALSE);
+			components.erase(components.begin() + FindIndex(temp));
 			temp->DeleteComponent();
-			flag=TRUE;
+			flag = TRUE;
 			GetParentForm()->SetModified();
 			continue;
 		}
@@ -1860,16 +1857,16 @@ BOOL Components::Delete(Component * comp, BOOL deleteSelf)
 			break;
 	}
 
-	if(deleteSelf)
+	if (deleteSelf)
 	{
 		int index = FindIndex(comp);
-		if(index!=-1)
-			components.erase(components.begin()+index);
+		if (index != -1)
+			components.erase(components.begin() + index);
 		comp->DeleteComponent();
 	}
 
-	if(flag)
-		ReSetTabIndex();   
+	if (flag)
+		ReSetTabIndex();
 
 	return flag;
 }
@@ -1877,7 +1874,7 @@ BOOL Components::Delete(Component * comp, BOOL deleteSelf)
 void Components::RemoveAll(void)
 {
 	CFreeze fr(freeze);
-	for(;components.size();)
+	for (; components.size();)
 	{
 		components[0]->DeleteComponent();
 		components.erase(components.begin());
@@ -1889,9 +1886,9 @@ void Components::RemoveAll(void)
 
 Component * Components::Find(const CString & str)
 {
-	for(unsigned int i=0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Name()==str)
+		if (components[i]->get_Name() == str)
 		{
 			return components[i];
 		}
@@ -1899,295 +1896,295 @@ Component * Components::Find(const CString & str)
 	return NULL;
 }
 
-void Components::SetStateAll(ComponentState cs,BOOL flag,BOOL SelectedOnly)
+void Components::SetStateAll(ComponentState cs, BOOL flag, BOOL SelectedOnly)
 {
-	for(unsigned int i=0; i < components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(SelectedOnly==TRUE)
+		if (SelectedOnly == TRUE)
 		{
-			if(components[i]->get_Selected()==TRUE)
-				components[i]->SetState(cs,flag);
+			if (components[i]->get_Selected() == TRUE)
+				components[i]->SetState(cs, flag);
 		}
 		else
-			components[i]->SetState(cs,flag);
+			components[i]->SetState(cs, flag);
 	}
 }
 
-CPoint Components::AlignToGrid(CPoint xy)
+CPoint Components::SnapToGrid(CPoint xy)
 {
-	return designer->AlignToGrid(xy);
+	return designer->SnapToGrid(xy);
 }
 
 void Components::HorizOrder(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evHorizOrder);
 
-	CPoint pt(0,0);
-	int right=0;
-	Component * firstSelected=GetFirstSel();
+	CPoint pt(0, 0);
+	int right = 0;
+	Component * firstSelected = GetFirstSel();
 
-	if(firstSelected == NULL)
+	if (firstSelected == NULL)
 		return;
 
-	if(firstSelected->IsControl() == FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
-    BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
+	BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
 
-    //ищется самая правая координата компонента
-	if(GetSelCount() > 1)
+	//ищется самая правая координата компонента
+	if (GetSelCount() > 1)
 	{
-		pt.y=0;
-		pt.x=firstSelected->get_Left();
+		pt.y = 0;
+		pt.x = firstSelected->get_Left();
 		firstSelected->ComponentToDesigner(pt);
-		right = pt.x+firstSelected->get_Width()+intend;
+		right = pt.x + firstSelected->get_Width() + intend;
 	}
 
 	Invalidate(TRUE);
 
-    int rx=0;
+	int rx = 0;
 
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE && components[i]!=firstSelected)
+		if (components[i]->get_Selected() == TRUE && components[i] != firstSelected)
 		{
-			int currIdx=FindLeftestIdx(0);
-			if(currIdx==-1)
+			int currIdx = FindLeftestIdx(0);
+			if (currIdx == -1)
 				continue;
 
-			if(components[currIdx]==firstSelected)
+			if (components[currIdx] == firstSelected)
 			{
-				i=0;
+				i = 0;
 				continue;
 			}
 
-			if(components[currIdx]->IsControl() == FALSE)
+			if (components[currIdx]->IsControl() == FALSE)
 				continue;
 
-            if(shiftPressed == TRUE)
-                rx=components[currIdx]->GetBoundsRect().right;
+			if (shiftPressed == TRUE)
+				rx = components[currIdx]->GetBoundsRect().right;
 
-			pt.y=0;
-			pt.x=right;
+			pt.y = 0;
+			pt.x = right;
 			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Left(pt.x);
-			pt.x=components[currIdx]->get_Left();
-			pt.y=0;
-		    components[currIdx]->ComponentToDesigner(pt);
-		    right=pt.x+components[currIdx]->get_Width()+intend;
-            if(shiftPressed == TRUE)
-            {
-                CRect r=components[currIdx]->GetBoundsRect();
-                r.right=rx;
-                components[currIdx]->SetBoundsRect(r);
-            }
-			i=0;
+			pt.x = components[currIdx]->get_Left();
+			pt.y = 0;
+			components[currIdx]->ComponentToDesigner(pt);
+			right = pt.x + components[currIdx]->get_Width() + intend;
+			if (shiftPressed == TRUE)
+			{
+				CRect r = components[currIdx]->GetBoundsRect();
+				r.right = rx;
+				components[currIdx]->SetBoundsRect(r);
+			}
+			i = 0;
 		}
 	}
 
 	Invalidate();
-	SetStateAll(csReserved1,FALSE,FALSE);
+	SetStateAll(csReserved1, FALSE, FALSE);
 }
 
 void Components::HorizOrderRight(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evHorizOrder);//заменить на evHorizOrderRight
 
-	CPoint pt(0,0);
-	int left=0;
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	CPoint pt(0, 0);
+	int left = 0;
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
 
-	if(firstSelected->IsControl() == FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
-    BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
+	BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
 
-	if(GetSelCount() > 1)
+	if (GetSelCount() > 1)
 	{
-		pt.y=0;
-		pt.x=firstSelected->get_Left();
+		pt.y = 0;
+		pt.x = firstSelected->get_Left();
 		firstSelected->ComponentToDesigner(pt);
-		left = pt.x-intend;
+		left = pt.x - intend;
 	}
 
 	Invalidate(TRUE);
-    int rx=0; 
+	int rx = 0;
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE && components[i]!=firstSelected)
+		if (components[i]->get_Selected() == TRUE && components[i] != firstSelected)
 		{
-			int currIdx=FindRightestIdx(0);
-			if(currIdx==-1)
+			int currIdx = FindRightestIdx(0);
+			if (currIdx == -1)
 				continue;
-			if(components[currIdx]->IsControl() == FALSE)
+			if (components[currIdx]->IsControl() == FALSE)
 				continue;
-			if(components[currIdx]==firstSelected)
+			if (components[currIdx] == firstSelected)
 			{
-				i=0;
+				i = 0;
 				continue;
 			}
 
-            if(shiftPressed == TRUE)
-                rx=components[currIdx]->GetBoundsRect().left;
+			if (shiftPressed == TRUE)
+				rx = components[currIdx]->GetBoundsRect().left;
 
-			pt.y=0;
-			pt.x=left;
+			pt.y = 0;
+			pt.x = left;
 			components[currIdx]->DesignerToComponent(pt);
-			components[currIdx]->set_Left(pt.x-components[currIdx]->get_Width());
-			pt.x=components[currIdx]->get_Left();
-			pt.y=0;
-		    components[currIdx]->ComponentToDesigner(pt);
-		    left=pt.x-intend;
+			components[currIdx]->set_Left(pt.x - components[currIdx]->get_Width());
+			pt.x = components[currIdx]->get_Left();
+			pt.y = 0;
+			components[currIdx]->ComponentToDesigner(pt);
+			left = pt.x - intend;
 
-            if(shiftPressed==TRUE)
-            {
-                CRect r=components[i]->GetBoundsRect();
-                r.left=rx;
-                components[i]->SetBoundsRect(r);
-            }
-			i=0;
+			if (shiftPressed == TRUE)
+			{
+				CRect r = components[i]->GetBoundsRect();
+				r.left = rx;
+				components[i]->SetBoundsRect(r);
+			}
+			i = 0;
 		}
 	}
 
 	Invalidate();
-	SetStateAll(csReserved1,FALSE,FALSE);
+	SetStateAll(csReserved1, FALSE, FALSE);
 }
 
 void Components::VertOrder(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evVertOrder);
 
-	CPoint pt(0,0);
-	int bottom=0;
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected == NULL)
+	CPoint pt(0, 0);
+	int bottom = 0;
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl() == FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
-    BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
-	if(GetSelCount() > 1)
+	BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
+	if (GetSelCount() > 1)
 	{
-		pt.x=0;
-		pt.y=firstSelected->get_Top();
+		pt.x = 0;
+		pt.y = firstSelected->get_Top();
 		firstSelected->ComponentToDesigner(pt);
-		bottom = pt.y+firstSelected->get_Height()+intend;
+		bottom = pt.y + firstSelected->get_Height() + intend;
 	}
 
 	Invalidate(TRUE);
-    int ry=0;
+	int ry = 0;
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
 
-			int currIdx=FindTopestIdx(0);
-			if(currIdx==-1)
+			int currIdx = FindTopestIdx(0);
+			if (currIdx == -1)
 				continue;
 
-			if(components[currIdx]==firstSelected)
+			if (components[currIdx] == firstSelected)
 			{
-				i=0;
+				i = 0;
 				continue;
 			}
 
-            if(shiftPressed == TRUE)
-                ry=components[currIdx]->GetBoundsRect().bottom;
+			if (shiftPressed == TRUE)
+				ry = components[currIdx]->GetBoundsRect().bottom;
 
-			pt.y=bottom;
-			pt.x=0;
+			pt.y = bottom;
+			pt.x = 0;
 			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Top(pt.y);
-			pt.y=components[currIdx]->get_Top();
-			pt.x=0;
+			pt.y = components[currIdx]->get_Top();
+			pt.x = 0;
 			components[currIdx]->ComponentToDesigner(pt);
-			bottom=pt.y+components[currIdx]->get_Height()+intend;
+			bottom = pt.y + components[currIdx]->get_Height() + intend;
 
-            if(shiftPressed == TRUE)
-            {
-                CRect r=components[currIdx]->GetBoundsRect();
-                r.bottom=ry;
-                components[currIdx]->SetBoundsRect(r);
-            }
-			i=0;
+			if (shiftPressed == TRUE)
+			{
+				CRect r = components[currIdx]->GetBoundsRect();
+				r.bottom = ry;
+				components[currIdx]->SetBoundsRect(r);
+			}
+			i = 0;
 		}
 	}
 
 	Invalidate();
-	SetStateAll(csReserved1,FALSE,FALSE);
+	SetStateAll(csReserved1, FALSE, FALSE);
 }
 
 void Components::VertOrderBottom(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evVertOrderBottom);
 
-	CPoint pt(0,0);
-	int bottom=0;
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected == NULL)
+	CPoint pt(0, 0);
+	int bottom = 0;
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl() == FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
-    BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
-	if(GetSelCount() > 1)
+	BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
+	if (GetSelCount() > 1)
 	{
-		pt.x=0;
-		pt.y=firstSelected->get_Top();
+		pt.x = 0;
+		pt.y = firstSelected->get_Top();
 		firstSelected->ComponentToDesigner(pt);
-		bottom = pt.y-intend;
+		bottom = pt.y - intend;
 	}
 
 	Invalidate(TRUE);
-    int ry=0;
+	int ry = 0;
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 		{
-			int currIdx=FindBottomestIdx(0);
-			if(currIdx==-1)
+			int currIdx = FindBottomestIdx(0);
+			if (currIdx == -1)
 				continue;
-			if(components[currIdx]->IsControl() == FALSE)
+			if (components[currIdx]->IsControl() == FALSE)
 				continue;
-			if(components[currIdx]==firstSelected)
+			if (components[currIdx] == firstSelected)
 			{
-				i=0;
+				i = 0;
 				continue;
 			}
 
-            if(shiftPressed == TRUE)
-                ry=components[currIdx]->GetBoundsRect().top;
+			if (shiftPressed == TRUE)
+				ry = components[currIdx]->GetBoundsRect().top;
 
-			pt.y=bottom;
-			pt.x=0;
+			pt.y = bottom;
+			pt.x = 0;
 			components[currIdx]->DesignerToComponent(pt);
-			components[currIdx]->set_Top(pt.y-components[currIdx]->get_Height());
-			pt.y=components[currIdx]->get_Top();
-			pt.x=0;
+			components[currIdx]->set_Top(pt.y - components[currIdx]->get_Height());
+			pt.y = components[currIdx]->get_Top();
+			pt.x = 0;
 			components[currIdx]->ComponentToDesigner(pt);
-			bottom=pt.y-intend;
-            if(shiftPressed == TRUE)
-            {
-                CRect r=components[currIdx]->GetBoundsRect();
-                r.top=ry;
-                components[currIdx]->SetBoundsRect(r);
-            }
-			i=0;
+			bottom = pt.y - intend;
+			if (shiftPressed == TRUE)
+			{
+				CRect r = components[currIdx]->GetBoundsRect();
+				r.top = ry;
+				components[currIdx]->SetBoundsRect(r);
+			}
+			i = 0;
 		}
 	}
 
 	Invalidate();
-	SetStateAll(csReserved1,FALSE,FALSE);
+	SetStateAll(csReserved1, FALSE, FALSE);
 }
 
 Component * Components::GetAt(int idx)
@@ -2202,9 +2199,9 @@ int Components::GetCount(void)
 
 Component * Components::FindByParent(Component * parentComp)
 {
-	for(unsigned int i=0; i <components.size(); i++ )
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->GetComponentParent()==parentComp)
+		if (components[i]->GetComponentParent() == parentComp)
 			return components[i];
 	}
 	return NULL;
@@ -2212,9 +2209,9 @@ Component * Components::FindByParent(Component * parentComp)
 
 int Components::FindIndex(Component * comp)
 {
-	for(unsigned int i=0; i <components.size(); i++ )
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]==comp)
+		if (components[i] == comp)
 			return i;
 	}
 	return -1;
@@ -2222,18 +2219,18 @@ int Components::FindIndex(Component * comp)
 
 int Components::FindParentIndex(Component * comp)
 {
-	for(unsigned int i=0; i <components.size(); i++ )
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Name()==comp->get_ParentName())
+		if (components[i]->get_Name() == comp->get_ParentName())
 			return i;
 	}
 	return -1;
 }
 int Components::FindByHandle(HWND wnd)
 {
-	for(unsigned int i=0; i <components.size(); i++)
+	for (unsigned int i = 0; i < components.size(); i++)
 	{
-		if((HWND)components[i]->GetHandle()==wnd)
+		if ((HWND)components[i]->GetHandle() == wnd)
 			return i;
 	}
 	return -1;
@@ -2241,16 +2238,16 @@ int Components::FindByHandle(HWND wnd)
 
 void Components::SelectComponent(LPCTSTR str)
 {
-	newComponentName=str;
-	if(newComponentName.IsEmpty())
-		currMode=cmSelect;
+	newComponentName = str;
+	if (newComponentName.IsEmpty())
+		currMode = cmSelect;
 	else
-		currMode=cmCreate;
+		currMode = cmCreate;
 }
 
 IDispatch* __stdcall Components::Item(long Index)//Component * 
 {
-	if(Index < (long)components.size())
+	if (Index < (long)components.size())
 		return components[Index];
 
 	return NULL;
@@ -2263,30 +2260,30 @@ long __stdcall Components::get_Count(void)
 
 LPUNKNOWN __stdcall Components::get__NewEnum()
 {
-	long count=(long)components.size();
+	long count = (long)components.size();
 
-	VARIANT * pVar=new VARIANT[count];
-	for(int i=0; i < count; i++)
+	VARIANT * pVar = new VARIANT[count];
+	for (int i = 0; i < count; i++)
 	{
-		pVar[i].vt=VT_DISPATCH;
-		pVar[i].pdispVal=components[i];
+		pVar[i].vt = VT_DISPATCH;
+		pVar[i].pdispVal = components[i];
 	}
 
 	typedef CComEnum<IEnumVARIANT, &IID_IEnumVARIANT, VARIANT,
 		_Copy<VARIANT> > VarArrEnum;
 	typedef CComObject<VarArrEnum> enumVar;
 
-	enumVar * pEnumVar=new enumVar;
-	pEnumVar->Init(&pVar[0],&pVar[count],NULL,AtlFlagCopy);
+	enumVar * pEnumVar = new enumVar;
+	pEnumVar->Init(&pVar[0], &pVar[count], NULL, AtlFlagCopy);
 	delete pVar;
-	LPUNKNOWN pVal=NULL;
-	pEnumVar->QueryInterface(IID_IUnknown,(void**)pVal);
+	LPUNKNOWN pVal = NULL;
+	pEnumVar->QueryInterface(IID_IUnknown, (void**)pVal);
 	return pVal;
 }
 
 void __stdcall Components::Add(Component * cmp)
 {
-	if(cmp)
+	if (cmp)
 	{
 		components.push_back(cmp);
 		GetParentForm()->SetModified();
@@ -2302,573 +2299,573 @@ CRgnHandle MakeRgn(Component * component)
 	CRect rc(component->GetBoundsRect());
 	component->ComponentToDesigner(rc);
 
-	POINT at[]={
-		rc.left-BOX_SIDE-BOX_SIDE,rc.top+BOX_SIDE-BOX_SIDE,
-		rc.left+BOX_SIDE-BOX_SIDE,rc.top+BOX_SIDE-BOX_SIDE,
-		rc.left+BOX_SIDE-BOX_SIDE,rc.top-BOX_SIDE-BOX_SIDE,
-		rc.left-BOX_SIDE-BOX_SIDE,rc.top-BOX_SIDE-BOX_SIDE,
+	POINT at[] = {
+		rc.left - BOX_SIDE - BOX_SIDE,rc.top + BOX_SIDE - BOX_SIDE,
+		rc.left + BOX_SIDE - BOX_SIDE,rc.top + BOX_SIDE - BOX_SIDE,
+		rc.left + BOX_SIDE - BOX_SIDE,rc.top - BOX_SIDE - BOX_SIDE,
+		rc.left - BOX_SIDE - BOX_SIDE,rc.top - BOX_SIDE - BOX_SIDE,
 
-		(rc.left+rc.right)/2-BOX_SIDE,rc.top+BOX_SIDE-BOX_SIDE,
-		(rc.left+rc.right)/2+BOX_SIDE,rc.top+BOX_SIDE-BOX_SIDE,
-		(rc.left+rc.right)/2+BOX_SIDE,rc.top-BOX_SIDE-BOX_SIDE,
-		(rc.left+rc.right)/2-BOX_SIDE,rc.top-BOX_SIDE-BOX_SIDE,
+		(rc.left + rc.right) / 2 - BOX_SIDE,rc.top + BOX_SIDE - BOX_SIDE,
+		(rc.left + rc.right) / 2 + BOX_SIDE,rc.top + BOX_SIDE - BOX_SIDE,
+		(rc.left + rc.right) / 2 + BOX_SIDE,rc.top - BOX_SIDE - BOX_SIDE,
+		(rc.left + rc.right) / 2 - BOX_SIDE,rc.top - BOX_SIDE - BOX_SIDE,
 
-		rc.right-BOX_SIDE+BOX_SIDE,rc.top+BOX_SIDE-BOX_SIDE,
-		rc.right+BOX_SIDE+BOX_SIDE,rc.top+BOX_SIDE-BOX_SIDE,
-		rc.right+BOX_SIDE+BOX_SIDE,rc.top-BOX_SIDE-BOX_SIDE,
-		rc.right-BOX_SIDE+BOX_SIDE,rc.top-BOX_SIDE-BOX_SIDE,
+		rc.right - BOX_SIDE + BOX_SIDE,rc.top + BOX_SIDE - BOX_SIDE,
+		rc.right + BOX_SIDE + BOX_SIDE,rc.top + BOX_SIDE - BOX_SIDE,
+		rc.right + BOX_SIDE + BOX_SIDE,rc.top - BOX_SIDE - BOX_SIDE,
+		rc.right - BOX_SIDE + BOX_SIDE,rc.top - BOX_SIDE - BOX_SIDE,
 
-		rc.right-BOX_SIDE+BOX_SIDE,(rc.top+rc.bottom)/2+BOX_SIDE,
-		rc.right+BOX_SIDE+BOX_SIDE,(rc.top+rc.bottom)/2+BOX_SIDE,
-		rc.right+BOX_SIDE+BOX_SIDE,(rc.top+rc.bottom)/2-BOX_SIDE,
-		rc.right-BOX_SIDE+BOX_SIDE,(rc.top+rc.bottom)/2-BOX_SIDE,
+		rc.right - BOX_SIDE + BOX_SIDE,(rc.top + rc.bottom) / 2 + BOX_SIDE,
+		rc.right + BOX_SIDE + BOX_SIDE,(rc.top + rc.bottom) / 2 + BOX_SIDE,
+		rc.right + BOX_SIDE + BOX_SIDE,(rc.top + rc.bottom) / 2 - BOX_SIDE,
+		rc.right - BOX_SIDE + BOX_SIDE,(rc.top + rc.bottom) / 2 - BOX_SIDE,
 
-		rc.right-BOX_SIDE+BOX_SIDE,rc.bottom+BOX_SIDE+BOX_SIDE,
-		rc.right+BOX_SIDE+BOX_SIDE,rc.bottom+BOX_SIDE+BOX_SIDE,
-		rc.right+BOX_SIDE+BOX_SIDE,rc.bottom-BOX_SIDE+BOX_SIDE,
-		rc.right-BOX_SIDE+BOX_SIDE,rc.bottom-BOX_SIDE+BOX_SIDE,
+		rc.right - BOX_SIDE + BOX_SIDE,rc.bottom + BOX_SIDE + BOX_SIDE,
+		rc.right + BOX_SIDE + BOX_SIDE,rc.bottom + BOX_SIDE + BOX_SIDE,
+		rc.right + BOX_SIDE + BOX_SIDE,rc.bottom - BOX_SIDE + BOX_SIDE,
+		rc.right - BOX_SIDE + BOX_SIDE,rc.bottom - BOX_SIDE + BOX_SIDE,
 
-		(rc.left+rc.right)/2-BOX_SIDE,rc.bottom+BOX_SIDE+BOX_SIDE,
-		(rc.left+rc.right)/2+BOX_SIDE,rc.bottom+BOX_SIDE+BOX_SIDE,
-		(rc.left+rc.right)/2+BOX_SIDE,rc.bottom-BOX_SIDE+BOX_SIDE,
-		(rc.left+rc.right)/2-BOX_SIDE,rc.bottom-BOX_SIDE+BOX_SIDE,
+		(rc.left + rc.right) / 2 - BOX_SIDE,rc.bottom + BOX_SIDE + BOX_SIDE,
+		(rc.left + rc.right) / 2 + BOX_SIDE,rc.bottom + BOX_SIDE + BOX_SIDE,
+		(rc.left + rc.right) / 2 + BOX_SIDE,rc.bottom - BOX_SIDE + BOX_SIDE,
+		(rc.left + rc.right) / 2 - BOX_SIDE,rc.bottom - BOX_SIDE + BOX_SIDE,
 
 
-		rc.left-BOX_SIDE-BOX_SIDE,rc.bottom+BOX_SIDE+BOX_SIDE,
-		rc.left+BOX_SIDE-BOX_SIDE,rc.bottom+BOX_SIDE+BOX_SIDE,
-		rc.left+BOX_SIDE-BOX_SIDE,rc.bottom-BOX_SIDE+BOX_SIDE,
-		rc.left-BOX_SIDE-BOX_SIDE,rc.bottom-BOX_SIDE+BOX_SIDE,
+		rc.left - BOX_SIDE - BOX_SIDE,rc.bottom + BOX_SIDE + BOX_SIDE,
+		rc.left + BOX_SIDE - BOX_SIDE,rc.bottom + BOX_SIDE + BOX_SIDE,
+		rc.left + BOX_SIDE - BOX_SIDE,rc.bottom - BOX_SIDE + BOX_SIDE,
+		rc.left - BOX_SIDE - BOX_SIDE,rc.bottom - BOX_SIDE + BOX_SIDE,
 
-		rc.left-BOX_SIDE-BOX_SIDE,(rc.top+rc.bottom)/2+BOX_SIDE,
-		rc.left+BOX_SIDE-BOX_SIDE,(rc.top+rc.bottom)/2+BOX_SIDE,
-		rc.left+BOX_SIDE-BOX_SIDE,(rc.top+rc.bottom)/2-BOX_SIDE,
-		rc.left-BOX_SIDE-BOX_SIDE,(rc.top+rc.bottom)/2-BOX_SIDE,
+		rc.left - BOX_SIDE - BOX_SIDE,(rc.top + rc.bottom) / 2 + BOX_SIDE,
+		rc.left + BOX_SIDE - BOX_SIDE,(rc.top + rc.bottom) / 2 + BOX_SIDE,
+		rc.left + BOX_SIDE - BOX_SIDE,(rc.top + rc.bottom) / 2 - BOX_SIDE,
+		rc.left - BOX_SIDE - BOX_SIDE,(rc.top + rc.bottom) / 2 - BOX_SIDE,
 	};
 
-	int counts[]={4,4,4,4,4,4,4,4};
+	int counts[] = { 4,4,4,4,4,4,4,4 };
 
 	CRgnHandle result;
-	return result.CreatePolyPolygonRgn(at,counts,8,WINDING);
+	return result.CreatePolyPolygonRgn(at, counts, 8, WINDING);
 }
 
 void Components::Invalidate(BOOL hideSelMarks)
 {
 	CRgn rgn;
-	hideall=hideSelMarks;
-	for(size_t i=0; i < components.size();i++)
+	hideall = hideSelMarks;
+	for (size_t i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 		{
-			CRgnHandle cmpRgn=MakeRgn(components[i]);
-			if(rgn.IsNull())
+			CRgnHandle cmpRgn = MakeRgn(components[i]);
+			if (rgn.IsNull())
 			{
-				rgn=cmpRgn;
+				rgn = cmpRgn;
 			}
 			else
 			{
-				rgn.CombineRgn(rgn,cmpRgn,RGN_OR);
+				rgn.CombineRgn(rgn, cmpRgn, RGN_OR);
 				cmpRgn.DeleteObject();
 			}
 		}
 	}
 
-	if(rgn.IsNull()==FALSE)
-		::RedrawWindow((HWND)designer->GetParentForm()->GetHandle(),NULL,rgn,RDW_NOERASE|RDW_INVALIDATE|RDW_UPDATENOW|RDW_ALLCHILDREN|RDW_INTERNALPAINT);
+	if (rgn.IsNull() == FALSE)
+		::RedrawWindow((HWND)designer->GetParentForm()->GetHandle(), NULL, rgn, RDW_NOERASE | RDW_INVALIDATE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_INTERNALPAINT);
 
-	hideall=FALSE;
+	hideall = FALSE;
 }
 
-void Components::SelectControl(int idx,Component * active)
+void Components::SelectControl(int idx, Component * active)
 {
-	if(active==designer->GetParentForm())
+	if (active == designer->GetParentForm())
 	{
-		SetStateAll(csFirstSelected,FALSE);
+		SetStateAll(csFirstSelected, FALSE);
 		UnselectAll();
-		if(idx==-1)
+		if (idx == -1)
 			designer->GetParentForm()->ShowProperties();
 		else
 		{
-			if((size_t)idx < components.size())
+			if ((size_t)idx < components.size())
 			{
-				components[idx]->Selected=TRUE;
-				components[idx]->FirstSelected=TRUE;
+				components[idx]->Selected = TRUE;
+				components[idx]->FirstSelected = TRUE;
 				Invalidate();
 			}
 		}
 	}
 }
 
-void Components::MoveAfter(Component *comp,Component *after,BOOL childrenToo)
+void Components::MoveAfter(Component *comp, Component *after, BOOL childrenToo)
 {
-	UINT compIdx=FindIndex(comp);
-	if(compIdx==-1)
+	UINT compIdx = FindIndex(comp);
+	if (compIdx == -1)
 		return;
 
-	UINT afterIdx; 
+	UINT afterIdx;
 
-	if(after==NULL)
-		afterIdx=GetCount()-1;//засунем в самый конец
+	if (after == NULL)
+		afterIdx = GetCount() - 1;//засунем в самый конец
 	else
-		afterIdx=FindIndex(after);
+		afterIdx = FindIndex(after);
 
-	if((int)afterIdx==-1)
+	if ((int)afterIdx == -1)
 		return;
-    
-    if(compIdx > afterIdx)
-        return;
 
-	components.erase(components.begin()+compIdx);
+	if (compIdx > afterIdx)
+		return;
+
+	components.erase(components.begin() + compIdx);
 	//InsertAt(afterIdx+1,comp);
-    InsertAt(afterIdx,comp);
-    //if(comp->IsControl() && after->IsControl())
-    //    ::SetWindowPos((HWND)comp->GetHandle(),(HWND)after->GetHandle(),0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
+	InsertAt(afterIdx, comp);
+	//if(comp->IsControl() && after->IsControl())
+	//    ::SetWindowPos((HWND)comp->GetHandle(),(HWND)after->GetHandle(),0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
 
-    if(childrenToo==TRUE)
-    {
-        for(size_t i=0; i < components.size(); i++)
-        {
-            Component * temp=components[i];
-            compIdx=FindIndex(comp);
-            UINT tempIdx= FindIndex(temp);
-            if(temp->GetComponentParent()==comp && tempIdx < compIdx)
-            {
-                MoveAfter(temp,comp);
-                i=0;
-            }
-        }
-    }
+	if (childrenToo == TRUE)
+	{
+		for (size_t i = 0; i < components.size(); i++)
+		{
+			Component * temp = components[i];
+			compIdx = FindIndex(comp);
+			UINT tempIdx = FindIndex(temp);
+			if (temp->GetComponentParent() == comp && tempIdx < compIdx)
+			{
+				MoveAfter(temp, comp);
+				i = 0;
+			}
+		}
+	}
 }
 
-void Components::InsertAt(int idx,Component * comp)
+void Components::InsertAt(int idx, Component * comp)
 {
-	components.insert(components.begin()+idx,1,comp);
+	components.insert(components.begin() + idx, 1, comp);
 }
 
 int Components::FindLeftestIdx(int fromPos)
 {
-	size_t idx=-1;
-	CPoint pt(0,0);
+	size_t idx = -1;
+	CPoint pt(0, 0);
 
 	CRect rc;
-	::GetClientRect((HWND)GetParentForm()->GetHandle(),&rc);
-	int left=rc.right;
+	::GetClientRect((HWND)GetParentForm()->GetHandle(), &rc);
+	int left = rc.right;
 
-	for(size_t i=0; i < components.size(); i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
-		if(components[i]->Selected &&
-			components[i]->FirstSelected==FALSE &&
-			components[i]->GetState(csReserved1)==FALSE &&
+		if (components[i]->Selected &&
+			components[i]->FirstSelected == FALSE &&
+			components[i]->GetState(csReserved1) == FALSE &&
 			components[i]->IsControl() == TRUE)
 		{
-			pt.x=components[i]->get_Left();
+			pt.x = components[i]->get_Left();
 			components[i]->ComponentToDesigner(pt);
-			if(pt.x < left && pt.x >=fromPos)
+			if (pt.x < left && pt.x >= fromPos)
 			{
-				idx=i;
-				left=pt.x;
+				idx = i;
+				left = pt.x;
 			}
 		}
 	}
-	if(idx!=-1)
-		components[idx]->SetState(csReserved1,TRUE);
+	if (idx != -1)
+		components[idx]->SetState(csReserved1, TRUE);
 
 	return (int)idx;
 }
 
 int Components::FindRightestIdx(int fromPos)
 {
-	size_t idx=-1;
-	CPoint pt(0,0);
+	size_t idx = -1;
+	CPoint pt(0, 0);
 
-	int right=0;
+	int right = 0;
 
-	for(size_t i=0; i < components.size(); i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
-		if(components[i]->Selected &&
-			components[i]->FirstSelected==FALSE &&
-			components[i]->GetState(csReserved1)==FALSE &&
+		if (components[i]->Selected &&
+			components[i]->FirstSelected == FALSE &&
+			components[i]->GetState(csReserved1) == FALSE &&
 			components[i]->IsControl() == TRUE)
 		{
-			pt.x=components[i]->get_Left()+components[i]->get_Width();
+			pt.x = components[i]->get_Left() + components[i]->get_Width();
 			components[i]->ComponentToDesigner(pt);
-			if(pt.x > right && pt.x >=fromPos)
+			if (pt.x > right && pt.x >= fromPos)
 			{
-				idx=i;
-				right=pt.x;
+				idx = i;
+				right = pt.x;
 			}
 		}
 	}
-	if(idx!=-1)
-		components[idx]->SetState(csReserved1,TRUE);
+	if (idx != -1)
+		components[idx]->SetState(csReserved1, TRUE);
 
 	return (int)idx;
 }
 
 int Components::FindTopestIdx(int fromPos)
 {
-	int idx=-1;
-	CPoint pt(0,0);
+	int idx = -1;
+	CPoint pt(0, 0);
 
 	CRect rc;
-	::GetClientRect((HWND)GetParentForm()->GetHandle(),&rc);
-	int top=rc.bottom;
+	::GetClientRect((HWND)GetParentForm()->GetHandle(), &rc);
+	int top = rc.bottom;
 
-	for(size_t i=0; i < components.size(); i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
-		if(components[i]->Selected &&
-			components[i]->FirstSelected==FALSE &&
-			components[i]->GetState(csReserved1)==FALSE &&
-			components[i]->IsControl()==TRUE)
+		if (components[i]->Selected &&
+			components[i]->FirstSelected == FALSE &&
+			components[i]->GetState(csReserved1) == FALSE &&
+			components[i]->IsControl() == TRUE)
 		{
-			pt.y=components[i]->get_Top();
+			pt.y = components[i]->get_Top();
 			components[i]->ComponentToDesigner(pt);
-			if(pt.y < top && pt.y >=fromPos)
+			if (pt.y < top && pt.y >= fromPos)
 			{
-				idx=(int)i;
-				top=pt.y;
+				idx = (int)i;
+				top = pt.y;
 			}
 		}
 	}
-	if(idx!=-1)
-		components[idx]->SetState(csReserved1,TRUE);
+	if (idx != -1)
+		components[idx]->SetState(csReserved1, TRUE);
 
 	return idx;
 }
 
 int Components::FindBottomestIdx(int fromPos)
 {
-	int idx=-1;
-	CPoint pt(0,0);
+	int idx = -1;
+	CPoint pt(0, 0);
 
-	int bottom=0;
+	int bottom = 0;
 
-	for(size_t i=0; i < components.size(); i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
-		if(components[i]->Selected &&
-			components[i]->FirstSelected==FALSE &&
-			components[i]->GetState(csReserved1)==FALSE &&
-			components[i]->IsControl()==TRUE)
+		if (components[i]->Selected &&
+			components[i]->FirstSelected == FALSE &&
+			components[i]->GetState(csReserved1) == FALSE &&
+			components[i]->IsControl() == TRUE)
 		{
-			pt.y=components[i]->get_Top()+components[i]->get_Height();
+			pt.y = components[i]->get_Top() + components[i]->get_Height();
 			components[i]->ComponentToDesigner(pt);
-			if(pt.y > bottom && pt.y >=fromPos)
+			if (pt.y > bottom && pt.y >= fromPos)
 			{
-				idx=(int)i;
-				bottom=pt.y;
+				idx = (int)i;
+				bottom = pt.y;
 			}
 		}
 	}
-	if(idx!=-1)
-		components[idx]->SetState(csReserved1,TRUE);
+	if (idx != -1)
+		components[idx]->SetState(csReserved1, TRUE);
 
 	return idx;
 }
 
 //////////////////////////////////////////////////////////////////////////
-void Components::AlignLeft(Component *from,long intend)
+void Components::AlignLeft(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evAlignComponentsLeft);
-	CPoint pt(0,0);
-	int left=0;
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	CPoint pt(0, 0);
+	int left = 0;
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl()==FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
-    BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
+	BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
 
-	if(GetSelCount() > 1)
+	if (GetSelCount() > 1)
 	{
-		pt.y=0;
-		pt.x=firstSelected->get_Left();
+		pt.y = 0;
+		pt.x = firstSelected->get_Left();
 		firstSelected->ComponentToDesigner(pt);
 		left = pt.x;
 	}
 
 	Invalidate(TRUE);
-    int rx=0;
+	int rx = 0;
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE && components[i]!=firstSelected)
+		if (components[i]->get_Selected() == TRUE && components[i] != firstSelected)
 		{
-			if(components[i]->IsControl()==FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
 			components[i]->DesignerToComponent(pt);
 
-            if(shiftPressed == TRUE)
-                rx=components[i]->GetBoundsRect().right;
+			if (shiftPressed == TRUE)
+				rx = components[i]->GetBoundsRect().right;
 
-			components[i]->set_Left(pt.x+intend);
+			components[i]->set_Left(pt.x + intend);
 
-            if(shiftPressed == TRUE)
-            {
-                CRect r=components[i]->GetBoundsRect();
-                r.right=rx;
-                components[i]->SetBoundsRect(r);
-            }
+			if (shiftPressed == TRUE)
+			{
+				CRect r = components[i]->GetBoundsRect();
+				r.right = rx;
+				components[i]->SetBoundsRect(r);
+			}
 
-			pt.x=left;
+			pt.x = left;
 		}
 	}
 
-	if(firstSelected && GetSelCount() == 1)
+	if (firstSelected && GetSelCount() == 1)
 	{
-        if(shiftPressed == TRUE)
-            rx=firstSelected->GetBoundsRect().right;
+		if (shiftPressed == TRUE)
+			rx = firstSelected->GetBoundsRect().right;
 
-		firstSelected->set_Left(pt.x+intend);
+		firstSelected->set_Left(pt.x + intend);
 
-        if(shiftPressed == TRUE)
-        {
-            CRect r=firstSelected->GetBoundsRect();
-            r.right=rx;
-            firstSelected->SetBoundsRect(r);
-        }
-	}   
+		if (shiftPressed == TRUE)
+		{
+			CRect r = firstSelected->GetBoundsRect();
+			r.right = rx;
+			firstSelected->SetBoundsRect(r);
+		}
+	}
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
-void Components::AlignTop(Component *from,long intend)
+void Components::AlignTop(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evAlignComponentsTop);
-	CPoint pt(0,0);
-	int top=0;
+	CPoint pt(0, 0);
+	int top = 0;
 
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl()==FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
-    BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
+	BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
 
-	if(GetSelCount() > 1)
+	if (GetSelCount() > 1)
 	{
-		pt.x=0;
-		pt.y=firstSelected->get_Top();
+		pt.x = 0;
+		pt.y = firstSelected->get_Top();
 		firstSelected->ComponentToDesigner(pt);
 		top = pt.y;
 	}
 
-    int ry=0;
+	int ry = 0;
 
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
 	{
-		pt.y=top;
-		pt.x=0;
-		if(components[i]->get_Selected()==TRUE && components[i]!=firstSelected)
+		pt.y = top;
+		pt.x = 0;
+		if (components[i]->get_Selected() == TRUE && components[i] != firstSelected)
 		{
-			if(components[i]->IsControl()==FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
 			components[i]->DesignerToComponent(pt);
 
-            if(shiftPressed == TRUE)
-                ry=components[i]->GetBoundsRect().bottom;
+			if (shiftPressed == TRUE)
+				ry = components[i]->GetBoundsRect().bottom;
 
-			components[i]->set_Top(pt.y+intend);
+			components[i]->set_Top(pt.y + intend);
 
-            if(shiftPressed == TRUE)
-            {
-                CRect r=components[i]->GetBoundsRect();
-                r.bottom=ry;
-                components[i]->SetBoundsRect(r);
-            }
+			if (shiftPressed == TRUE)
+			{
+				CRect r = components[i]->GetBoundsRect();
+				r.bottom = ry;
+				components[i]->SetBoundsRect(r);
+			}
 		}
 	}
 
-	if(firstSelected && GetSelCount() == 1)
+	if (firstSelected && GetSelCount() == 1)
 	{
-        if(shiftPressed == TRUE)
-            ry=firstSelected->GetBoundsRect().bottom;
+		if (shiftPressed == TRUE)
+			ry = firstSelected->GetBoundsRect().bottom;
 
-		pt.y=top;
-		pt.x=0;
-		firstSelected->set_Top(pt.y+intend);
+		pt.y = top;
+		pt.x = 0;
+		firstSelected->set_Top(pt.y + intend);
 
-        if(shiftPressed == TRUE)
-        {
-            CRect r=firstSelected->GetBoundsRect();
-            r.bottom=ry;
-            firstSelected->SetBoundsRect(r);
-        }
+		if (shiftPressed == TRUE)
+		{
+			CRect r = firstSelected->GetBoundsRect();
+			r.bottom = ry;
+			firstSelected->SetBoundsRect(r);
+		}
 	}
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
-void Components::AlignRight(Component *from,long intend)
+void Components::AlignRight(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evAlignComponentsRight);
 
-	CPoint pt(0,0);
-	int  right=0;
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	CPoint pt(0, 0);
+	int  right = 0;
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl()==FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
-    BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
+	BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
 
-	if(GetSelCount() > 1)
+	if (GetSelCount() > 1)
 	{
-		pt.y=0;
-		pt.x=firstSelected->get_Left();
+		pt.y = 0;
+		pt.x = firstSelected->get_Left();
 		firstSelected->ComponentToDesigner(pt);
-		right= pt.x+firstSelected->get_Width();
+		right = pt.x + firstSelected->get_Width();
 	}
 	else
 	{
-		if(firstSelected==NULL)
+		if (firstSelected == NULL)
 			return;
 
-		if(firstSelected->GetComponentParent()->IsControl())
-			right=firstSelected->GetComponentParent()->get_Width();
+		if (firstSelected->GetComponentParent()->IsControl())
+			right = firstSelected->GetComponentParent()->get_Width();
 
-		if(firstSelected->GetComponentParent()->IsForm())
+		if (firstSelected->GetComponentParent()->IsForm())
 		{
 			CRect rc;
-			::GetClientRect((HWND)firstSelected->GetComponentParent()->GetHandle(),&rc);
-			right=rc.Width();
+			::GetClientRect((HWND)firstSelected->GetComponentParent()->GetHandle(), &rc);
+			right = rc.Width();
 		}
 	}
 
 	Invalidate(TRUE);
-    int rx = 0;
+	int rx = 0;
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected() && components[i]!=firstSelected)
+		if (components[i]->get_Selected() && components[i] != firstSelected)
 		{
-			if(components[i]->IsControl()==FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			pt.x=components[i]->get_Left();
+			pt.x = components[i]->get_Left();
 			components[i]->DesignerToComponent(pt);
 
-            if(shiftPressed == TRUE)
-                rx=components[i]->GetBoundsRect().left;
+			if (shiftPressed == TRUE)
+				rx = components[i]->GetBoundsRect().left;
 
-			components[i]->set_Left(right-components[i]->get_Width()-intend);
+			components[i]->set_Left(right - components[i]->get_Width() - intend);
 
-            if(shiftPressed == TRUE)
-            {
-                CRect r=components[i]->GetBoundsRect();
-                r.left=rx;
-                components[i]->SetBoundsRect(r);
-            }
-			pt.y=0;
+			if (shiftPressed == TRUE)
+			{
+				CRect r = components[i]->GetBoundsRect();
+				r.left = rx;
+				components[i]->SetBoundsRect(r);
+			}
+			pt.y = 0;
 		}
 	}
 
-	if(firstSelected && GetSelCount() == 1)
+	if (firstSelected && GetSelCount() == 1)
 	{
-        if(shiftPressed == TRUE)
-            rx=firstSelected->GetBoundsRect().left;
+		if (shiftPressed == TRUE)
+			rx = firstSelected->GetBoundsRect().left;
 
-		pt.x=firstSelected->get_Left();
-		firstSelected->set_Left(right-firstSelected->get_Width()-intend);
+		pt.x = firstSelected->get_Left();
+		firstSelected->set_Left(right - firstSelected->get_Width() - intend);
 
-        if(shiftPressed == TRUE)
-        {
-            CRect r=firstSelected->GetBoundsRect();
-            r.left=rx;
-            firstSelected->SetBoundsRect(r);
-        }
+		if (shiftPressed == TRUE)
+		{
+			CRect r = firstSelected->GetBoundsRect();
+			r.left = rx;
+			firstSelected->SetBoundsRect(r);
+		}
 	}
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
-void Components::AlignBottom(Component *from,long intend)
+void Components::AlignBottom(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evAlignComponentsBottom);
 
-	CPoint pt(0,0);
-	int  bottom=0;
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	CPoint pt(0, 0);
+	int  bottom = 0;
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl()==FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
-    BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
+	BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
 
-	if(GetSelCount() > 1)
+	if (GetSelCount() > 1)
 	{
-		pt.x=0;
-		pt.y=firstSelected->get_Top();
+		pt.x = 0;
+		pt.y = firstSelected->get_Top();
 		firstSelected->ComponentToDesigner(pt);
-		bottom= pt.y+firstSelected->get_Height();
+		bottom = pt.y + firstSelected->get_Height();
 	}
 	else
 	{
-		if(firstSelected==NULL)
+		if (firstSelected == NULL)
 			return;
 
-		if(firstSelected->GetComponentParent()->IsControl())
-			bottom=firstSelected->GetComponentParent()->get_Height();
+		if (firstSelected->GetComponentParent()->IsControl())
+			bottom = firstSelected->GetComponentParent()->get_Height();
 
-		if(firstSelected->GetComponentParent()->IsForm())
+		if (firstSelected->GetComponentParent()->IsForm())
 		{
 			CRect rc;
-			::GetClientRect((HWND)firstSelected->GetComponentParent()->GetHandle(),&rc);
-			bottom=rc.Height();
+			::GetClientRect((HWND)firstSelected->GetComponentParent()->GetHandle(), &rc);
+			bottom = rc.Height();
 		}
 	}
 
 	Invalidate(TRUE);
-    int ry=0;
+	int ry = 0;
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected() && components[i]!=firstSelected)
+		if (components[i]->get_Selected() && components[i] != firstSelected)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			if((components[i]==firstSelected && GetSelCount() > 1))
+			if ((components[i] == firstSelected && GetSelCount() > 1))
 				continue;
 
-			pt.y=components[i]->get_Top();
+			pt.y = components[i]->get_Top();
 			components[i]->DesignerToComponent(pt);
 
-            if(shiftPressed == TRUE)
-                ry=components[i]->GetBoundsRect().top;
+			if (shiftPressed == TRUE)
+				ry = components[i]->GetBoundsRect().top;
 
-			components[i]->set_Top(bottom-components[i]->get_Height()-intend);
+			components[i]->set_Top(bottom - components[i]->get_Height() - intend);
 
-            if(shiftPressed == TRUE)
-            {
-                CRect r=components[i]->GetBoundsRect();
-                r.top=ry;
-                components[i]->SetBoundsRect(r);
-            }
-			pt.x=0;
+			if (shiftPressed == TRUE)
+			{
+				CRect r = components[i]->GetBoundsRect();
+				r.top = ry;
+				components[i]->SetBoundsRect(r);
+			}
+			pt.x = 0;
 		}
 	}
 
-	if(firstSelected && GetSelCount() == 1)
+	if (firstSelected && GetSelCount() == 1)
 	{
-        if(shiftPressed == TRUE)
-            ry=firstSelected->GetBoundsRect().top;
+		if (shiftPressed == TRUE)
+			ry = firstSelected->GetBoundsRect().top;
 
-		pt.y=firstSelected->get_Top();
-		firstSelected->set_Top(bottom-firstSelected->get_Height()-intend);
+		pt.y = firstSelected->get_Top();
+		firstSelected->set_Top(bottom - firstSelected->get_Height() - intend);
 
-        if(shiftPressed == TRUE)
-        {
-            CRect r=firstSelected->GetBoundsRect();
-            r.top=ry;
-            firstSelected->SetBoundsRect(r);
-        }
+		if (shiftPressed == TRUE)
+		{
+			CRect r = firstSelected->GetBoundsRect();
+			r.top = ry;
+			firstSelected->SetBoundsRect(r);
+		}
 	}
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
@@ -2876,170 +2873,170 @@ void Components::AlignBottom(Component *from,long intend)
 
 void Components::AlignHoriz(Component *from)//выравнивание по горизонтали
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evAlignComponentsHoriz);
 
-	if(GetSelCount()==1)
+	if (GetSelCount() == 1)
 	{
 		CenterHoriz();
 		return;
 	}
 
-	Component * temp=GetFirstSel();
-	if(temp==NULL)
+	Component * temp = GetFirstSel();
+	if (temp == NULL)
 		return;
-	if(temp->IsControl() == FALSE)
+	if (temp->IsControl() == FALSE)
 		return;
 
 	CPoint pt;
-	pt.y=0;
-	pt.x=temp->get_Left();
+	pt.y = 0;
+	pt.x = temp->get_Left();
 	temp->ComponentToDesigner(pt);
-	int  middle= (pt.x+temp->get_Width()+pt.x)/2;
+	int  middle = (pt.x + temp->get_Width() + pt.x) / 2;
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->Selected==TRUE && components[i]->FirstSelected==FALSE)
+		if (components[i]->Selected == TRUE && components[i]->FirstSelected == FALSE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			pt.x=components[i]->get_Left();
+			pt.x = components[i]->get_Left();
 			components[i]->DesignerToComponent(pt);
-			components[i]->set_Left(pt.x+(middle-(pt.x+pt.x+components[i]->get_Width())/2));
-			pt.y=0;
+			components[i]->set_Left(pt.x + (middle - (pt.x + pt.x + components[i]->get_Width()) / 2));
+			pt.y = 0;
 		}
 	}
-	pt.x=temp->get_Left();
+	pt.x = temp->get_Left();
 	temp->DesignerToComponent(pt);
-	temp->set_Left(pt.x+(middle-(pt.x+pt.x+temp->get_Width())/2));
+	temp->set_Left(pt.x + (middle - (pt.x + pt.x + temp->get_Width()) / 2));
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
 void Components::AlignVert(Component *from)//выравнивание по вертикали
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evAlignComponentsVert);
 
-	if(GetSelCount()==1)
+	if (GetSelCount() == 1)
 	{
 		CenterVert();
 		return;
 	}
 
-	Component * temp=GetFirstSel();
-	if(temp==NULL)
+	Component * temp = GetFirstSel();
+	if (temp == NULL)
 		return;
-	if(temp->IsControl() == FALSE)
+	if (temp->IsControl() == FALSE)
 		return;
 	CPoint pt;
-	pt.x=0;
-	pt.y=temp->get_Top();
+	pt.x = 0;
+	pt.y = temp->get_Top();
 	temp->ComponentToDesigner(pt);
-	int  middle= (pt.y+temp->get_Height()+pt.y)/2;
+	int  middle = (pt.y + temp->get_Height() + pt.y) / 2;
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->Selected==TRUE && components[i]->FirstSelected==FALSE)
+		if (components[i]->Selected == TRUE && components[i]->FirstSelected == FALSE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			pt.y=components[i]->get_Top();
+			pt.y = components[i]->get_Top();
 			components[i]->DesignerToComponent(pt);
 
-			components[i]->set_Top(pt.y+(middle-(pt.y+pt.y+components[i]->get_Height())/2));
+			components[i]->set_Top(pt.y + (middle - (pt.y + pt.y + components[i]->get_Height()) / 2));
 		}
 	}
-	pt.y=temp->get_Top();
+	pt.y = temp->get_Top();
 	temp->DesignerToComponent(pt);
 
-	temp->set_Top(pt.y+(middle-(pt.y+pt.y+temp->get_Height())/2));
+	temp->set_Top(pt.y + (middle - (pt.y + pt.y + temp->get_Height()) / 2));
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
 void Components::MakeSameWidth(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evMakeSameWidth);
 
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl()==FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
-	int  width=0;
-	int selCount=GetSelCount();
-	if(selCount > 1)
-		width= firstSelected->get_Width();
+	int  width = 0;
+	int selCount = GetSelCount();
+	if (selCount > 1)
+		width = firstSelected->get_Width();
 	else
-		{
-			CRect rc;
-			::GetClientRect((HWND)firstSelected->GetComponentParent()->GetHandle(),&rc);
-			width=rc.Width();
-		}
-	
+	{
+		CRect rc;
+		::GetClientRect((HWND)firstSelected->GetComponentParent()->GetHandle(), &rc);
+		width = rc.Width();
+	}
+
 	Invalidate(TRUE);
 
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected())
+		if (components[i]->get_Selected())
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
 
-			if((components[i]==firstSelected && selCount > 1))
+			if ((components[i] == firstSelected && selCount > 1))
 				continue;
 
-			if(selCount == 1)
+			if (selCount == 1)
 				components[i]->set_Left(intend);
 
-			components[i]->set_Width(width-intend*2);
+			components[i]->set_Width(width - intend * 2);
 		}
 	}
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
-void Components::MakeSameHeight(Component *from,long intend)
+void Components::MakeSameHeight(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evMakeSameHeight);
 
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl()==FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
-	int selCount=GetSelCount();
-	int  height=0;
-	if(selCount > 1)
-		height= firstSelected->get_Height();
+	int selCount = GetSelCount();
+	int  height = 0;
+	if (selCount > 1)
+		height = firstSelected->get_Height();
 	else
-		{
-			CRect rc;
-			::GetClientRect((HWND)firstSelected->GetComponentParent()->GetHandle(),&rc);
-			height=rc.Height();
-		}
+	{
+		CRect rc;
+		::GetClientRect((HWND)firstSelected->GetComponentParent()->GetHandle(), &rc);
+		height = rc.Height();
+	}
 
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			if((components[i]==firstSelected && selCount > 1))
+			if ((components[i] == firstSelected && selCount > 1))
 				continue;
 
-			if(selCount == 1)
+			if (selCount == 1)
 				components[i]->set_Top(intend);
-			components[i]->set_Height(height-intend*2);
+			components[i]->set_Height(height - intend * 2);
 		}
 	}
 	Invalidate();
@@ -3048,24 +3045,24 @@ void Components::MakeSameHeight(Component *from,long intend)
 
 void Components::MakeSameSize(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evMakeSameSize);
 
-	Component * temp=GetFirstSel();
-	if(temp==NULL)
+	Component * temp = GetFirstSel();
+	if (temp == NULL)
 		return;
-	if(temp->IsControl() == FALSE)
+	if (temp->IsControl() == FALSE)
 		return;
 
-	int  width= temp->get_Width()+intend;
-	int  height= temp->get_Height()+intend;
+	int  width = temp->get_Width() + intend;
+	int  height = temp->get_Height() + intend;
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->Selected==TRUE && components[i]->FirstSelected==FALSE)
+		if (components[i]->Selected == TRUE && components[i]->FirstSelected == FALSE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
 			components[i]->set_Height(height);
 			components[i]->set_Width(width);
@@ -3081,12 +3078,12 @@ void Components::MakeGoldenSectionWidht()
 	double delta;
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			delta=components[i]->get_Height();
-			delta=_round((delta/0.382)*0.618);
+			delta = components[i]->get_Height();
+			delta = _round((delta / 0.382)*0.618);
 			components[i]->set_Width(_round(delta));
 		}
 	}
@@ -3100,12 +3097,12 @@ void Components::MakeGoldenSectionHeight()
 	double delta;
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			delta=components[i]->get_Width();
-			delta=(delta/0.382)*0.618;
+			delta = components[i]->get_Width();
+			delta = (delta / 0.382)*0.618;
 			components[i]->set_Height(_round(delta));
 		}
 	}
@@ -3119,13 +3116,13 @@ void Components::CenterHoriz()
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			::GetClientRect((HWND)components[i]->GetComponentParent()->GetHandle(),&rc);
-			int centerX=rc.Width()/2;
-			components[i]->set_Left(centerX-(components[i]->get_Width()/2));
+			::GetClientRect((HWND)components[i]->GetComponentParent()->GetHandle(), &rc);
+			int centerX = rc.Width() / 2;
+			components[i]->set_Left(centerX - (components[i]->get_Width() / 2));
 		}
 	}
 	Invalidate();
@@ -3138,43 +3135,43 @@ void Components::CenterVert()
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			::GetClientRect((HWND)components[i]->GetComponentParent()->GetHandle(),&rc);
-			int centerY=rc.Height()/2;
-			components[i]->set_Top(centerY-(components[i]->get_Height()/2));
+			::GetClientRect((HWND)components[i]->GetComponentParent()->GetHandle(), &rc);
+			int centerY = rc.Height() / 2;
+			components[i]->set_Top(centerY - (components[i]->get_Height() / 2));
 		}
 	}
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
-void Components::ToParent(Component *from,long intend)
+void Components::ToParent(Component *from, long intend)
 {
-	if(from!=designer->GetParentForm())
+	if (from != designer->GetParentForm())
 		return;
 	StopEvent(evToParent);
-	Component * temp=GetFirstSel();
-	if(temp==NULL)
+	Component * temp = GetFirstSel();
+	if (temp == NULL)
 		return;
-	if(temp->IsControl() == FALSE)
+	if (temp->IsControl() == FALSE)
 		return;
 
 	Invalidate(TRUE);
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->get_Selected()==TRUE)
+		if (components[i]->get_Selected() == TRUE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
 			CRect rc;
-			::GetClientRect((HWND)components[i]->GetComponentParent()->GetHandle(),rc);
+			::GetClientRect((HWND)components[i]->GetComponentParent()->GetHandle(), rc);
 			components[i]->set_Left(intend);
 			components[i]->set_Top(intend);
-			components[i]->set_Height(rc.Height()-intend*2);
-			components[i]->set_Width(rc.Width()-intend*2);
+			components[i]->set_Height(rc.Height() - intend * 2);
+			components[i]->set_Width(rc.Width() - intend * 2);
 		}
 	}
 	Invalidate();
@@ -3183,169 +3180,169 @@ void Components::ToParent(Component *from,long intend)
 
 void Components::CenterGroupHoriz(Component *form, long val)
 {
-	if(form!=designer->GetParentForm())
+	if (form != designer->GetParentForm())
 		return;
 	StopEvent(evCenterGroupHoriz);
 
-	if(GetSelCount()==1)
+	if (GetSelCount() == 1)
 	{
 		CenterHoriz();
 		return;
 	}
 
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
 
-	if(firstSelected->IsControl() == FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
 	CPoint pt;
-	pt.y=0;
-	pt.x=firstSelected->get_Left();
+	pt.y = 0;
+	pt.x = firstSelected->get_Left();
 	firstSelected->ComponentToDesigner(pt);
-	int  middle= (pt.x+firstSelected->get_Width()+pt.x)/2;
+	int  middle = (pt.x + firstSelected->get_Width() + pt.x) / 2;
 	Invalidate(TRUE);
 
-	double commonWidth=0;
+	double commonWidth = 0;
 	for (int count = 0; count < GetCount(); count++)
 	{
-		if(components[count]->Selected==TRUE && components[count]->FirstSelected==FALSE &&
+		if (components[count]->Selected == TRUE && components[count]->FirstSelected == FALSE &&
 			components[count]->IsControl() == TRUE)
-			commonWidth+=(double)components[count]->get_Width()+(double)val/2;
+			commonWidth += (double)components[count]->get_Width() + (double)val / 2;
 	}
 
 	CRect rc;
-	::GetClientRect((HWND)GetParentForm()->GetHandle(),&rc);
-	if(_round(commonWidth) > rc.Width())
+	::GetClientRect((HWND)GetParentForm()->GetHandle(), &rc);
+	if (_round(commonWidth) > rc.Width())
 		return;
 
-	int left=middle-_round(commonWidth/2);
-	if(left < 0)
+	int left = middle - _round(commonWidth / 2);
+	if (left < 0)
 		return;
 
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->Selected==TRUE && components[i]->FirstSelected==FALSE)
+		if (components[i]->Selected == TRUE && components[i]->FirstSelected == FALSE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
 
-			int currIdx=FindLeftestIdx(0);
-			if(currIdx==-1)
+			int currIdx = FindLeftestIdx(0);
+			if (currIdx == -1)
 				continue;
 
-			if(components[currIdx]==firstSelected)
+			if (components[currIdx] == firstSelected)
 			{
-				i=0;
+				i = 0;
 				continue;
 			}
 
-			pt.x=left;
+			pt.x = left;
 			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Left(pt.x);
-			left+=components[currIdx]->get_Width()+val;
-			i=0;
+			left += components[currIdx]->get_Width() + val;
+			i = 0;
 		}
 	}
-	SetStateAll(csReserved1,FALSE,FALSE);
+	SetStateAll(csReserved1, FALSE, FALSE);
 	Invalidate();
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
 void Components::CenterGroupVert(Component *form, long val)
 {
-	if(form!=designer->GetParentForm())
+	if (form != designer->GetParentForm())
 		return;
 	StopEvent(evCenterGroupVert);
 
-	if(GetSelCount()==1)
+	if (GetSelCount() == 1)
 	{
 		CenterVert();
 		return;
 	}
 
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl() == FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
 	CPoint pt;
-	pt.x=0;
-	pt.y=firstSelected->get_Top();
+	pt.x = 0;
+	pt.y = firstSelected->get_Top();
 	firstSelected->ComponentToDesigner(pt);
-	int  middle= (pt.y+firstSelected->get_Height()+pt.y)/2;
+	int  middle = (pt.y + firstSelected->get_Height() + pt.y) / 2;
 	Invalidate(TRUE);
 
-	double commonHeight=0;
+	double commonHeight = 0;
 	for (int count = 0; count < GetCount(); count++)
 	{
-		if(components[count]->Selected==TRUE && components[count]->FirstSelected==FALSE &&
+		if (components[count]->Selected == TRUE && components[count]->FirstSelected == FALSE &&
 			components[count]->IsControl() == TRUE)
-			commonHeight+=(double)components[count]->get_Height()+(double)val/2;
+			commonHeight += (double)components[count]->get_Height() + (double)val / 2;
 	}
 
 	CRect rc;
-	::GetClientRect((HWND)GetParentForm()->GetHandle(),&rc);
-	if(_round(commonHeight) > rc.Height())
+	::GetClientRect((HWND)GetParentForm()->GetHandle(), &rc);
+	if (_round(commonHeight) > rc.Height())
 		return;
 
-	int top=middle-_round(commonHeight/2);
-	if(top < 0)
+	int top = middle - _round(commonHeight / 2);
+	if (top < 0)
 		return;
 
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->Selected==TRUE && components[i]->FirstSelected==FALSE)
+		if (components[i]->Selected == TRUE && components[i]->FirstSelected == FALSE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
 
-			int currIdx=FindTopestIdx(0);
-			if(currIdx==-1)
+			int currIdx = FindTopestIdx(0);
+			if (currIdx == -1)
 				continue;
 
-			if(components[currIdx]==firstSelected)
+			if (components[currIdx] == firstSelected)
 			{
-				i=0;
+				i = 0;
 				continue;
 			}
-			pt.y=top;
+			pt.y = top;
 			components[currIdx]->DesignerToComponent(pt);
 			components[currIdx]->set_Top(pt.y);
-			top+=components[currIdx]->get_Height()+val;
-			i=0;
+			top += components[currIdx]->get_Height() + val;
+			i = 0;
 		}
 	}
 	Invalidate();
-	SetStateAll(csReserved1,FALSE,FALSE);
+	SetStateAll(csReserved1, FALSE, FALSE);
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
 void Components::ChangeComponentsParent(Component *form)
 {
-	if(form!=designer->GetParentForm())
+	if (form != designer->GetParentForm())
 		return;
 	StopEvent(evChangeParent);
 
-	Component * firstSelected=GetFirstSel();
-	if(firstSelected==NULL)
+	Component * firstSelected = GetFirstSel();
+	if (firstSelected == NULL)
 		return;
-	if(firstSelected->IsControl() ==FALSE)
+	if (firstSelected->IsControl() == FALSE)
 		return;
 
-	if(GetSelCount()==1)
+	if (GetSelCount() == 1)
 	{
 		ChangeParent(GetParentForm());
 		return;
 	}
 
 	//если в детку пихаем родителя, то отваливаем
-	int idx=FindParentIndex(firstSelected);
-	if(idx!=-1)
+	int idx = FindParentIndex(firstSelected);
+	if (idx != -1)
 	{
-		if(components[idx]->get_Selected())
+		if (components[idx]->get_Selected())
 			return;
 	}
 
@@ -3353,17 +3350,17 @@ void Components::ChangeComponentsParent(Component *form)
 
 	for (int i = 0; i < GetCount(); i++)
 	{
-		if(components[i]->Selected==TRUE && components[i]->FirstSelected==FALSE)
+		if (components[i]->Selected == TRUE && components[i]->FirstSelected == FALSE)
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
 
-			Component * parent=firstSelected;
-			if(components[i]->GetComponentParent() == parent)
-				parent=firstSelected->GetComponentParent();
+			Component * parent = firstSelected;
+			if (components[i]->GetComponentParent() == parent)
+				parent = firstSelected->GetComponentParent();
 
-			CRect bounds=components[i]->GetBoundsRect();
-			if(components[i]->GetComponentParent()!=GetParentForm())
+			CRect bounds = components[i]->GetBoundsRect();
+			if (components[i]->GetComponentParent() != GetParentForm())
 				components[i]->ComponentToDesigner(bounds);
 			components[i]->SetComponentParent(parent);
 			components[i]->DesignerToComponent(bounds);
@@ -3378,13 +3375,13 @@ ComponentArray * Components::Clone(BOOL onlySelected)
 {
 	CRect rc;
 	Component *comp;
-	ComponentArray * comps=new ComponentArray;
-	for(size_t i=0; i < components.size(); i++)
+	ComponentArray * comps = new ComponentArray;
+	for (size_t i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Selected()==FALSE &&  onlySelected==TRUE)
+		if (components[i]->get_Selected() == FALSE &&  onlySelected == TRUE)
 			continue;
-		comp=components[i]->Clone(); 
-		rc=components[i]->GetBoundsRect();
+		comp = components[i]->Clone();
+		rc = components[i]->GetBoundsRect();
 		components[i]->ComponentToDesigner(rc);
 		comp->SetBoundsRect(rc);
 		comps->push_back(comp);
@@ -3394,24 +3391,24 @@ ComponentArray * Components::Clone(BOOL onlySelected)
 
 ComponentArray * Components::Clone(Component * comp)
 {
-	ComponentArray * comps=new ComponentArray;
+	ComponentArray * comps = new ComponentArray;
 	comps->push_back(comp->Clone());
 	return comps;
 }
 
 void Components::ChangeParent(Component *parent)
 {
-	for(size_t i=0; i < components.size(); i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
-		if(components[i]->get_Selected())
+		if (components[i]->get_Selected())
 		{
-			if(components[i]->IsControl() == FALSE)
+			if (components[i]->IsControl() == FALSE)
 				continue;
-			if(components[i]->GetComponentParent() == parent)
+			if (components[i]->GetComponentParent() == parent)
 				continue;
 
-			CRect bounds=components[i]->GetBoundsRect();
-			if(components[i]->GetComponentParent()!=GetParentForm())
+			CRect bounds = components[i]->GetBoundsRect();
+			if (components[i]->GetComponentParent() != GetParentForm())
 				components[i]->ComponentToDesigner(bounds);
 			components[i]->SetComponentParent(parent);
 			components[i]->DesignerToComponent(bounds);
@@ -3422,33 +3419,33 @@ void Components::ChangeParent(Component *parent)
 
 int Components::ControlsCount()
 {
-	int count=0;
-	for(size_t i=0; i < components.size(); i++)
-		if(components[i]->IsControl())
+	int count = 0;
+	for (size_t i = 0; i < components.size(); i++)
+		if (components[i]->IsControl())
 			count++;
 	return count;
 }
 
 BOOL Components::SetTabIndex(CPoint & pt, long & val)
 {
-	Component * comp=ComponentFromPt(pt);
-	return SetTabIndex(comp,val);
+	Component * comp = ComponentFromPt(pt);
+	return SetTabIndex(comp, val);
 }
 
-BOOL Components::SetTabIndex(Component *comp,long &val)
+BOOL Components::SetTabIndex(Component *comp, long &val)
 {
-	if(comp)
+	if (comp)
 	{
-		if(comp->IsControl()==FALSE)
+		if (comp->IsControl() == FALSE)
 			return FALSE;
-		long count=ControlsCount();
+		long count = ControlsCount();
 		val++;
-		if(val > count)
-			val=1;
-		long tempNum=comp->get_TabIndex();
-		for(int i=0; i < GetCount(); i++)
+		if (val > count)
+			val = 1;
+		long tempNum = comp->get_TabIndex();
+		for (int i = 0; i < GetCount(); i++)
 		{
-			if(GetAt(i)->get_TabIndex()==val)
+			if (GetAt(i)->get_TabIndex() == val)
 			{
 				GetAt(i)->set_TabIndex(tempNum);
 				break;
@@ -3462,56 +3459,56 @@ BOOL Components::SetTabIndex(Component *comp,long &val)
 
 void Components::ReSetTabIndex()
 {
-	long index,index2;
+	long index, index2;
 	BOOL flag;
-	for(int j=0; j < GetCount() ; j++)
+	for (int j = 0; j < GetCount(); j++)
 	{
-		flag=FALSE;
-		index=1;
-		for(long i=0; i < GetCount(); i++)
+		flag = FALSE;
+		index = 1;
+		for (long i = 0; i < GetCount(); i++)
 		{
-			if(FindByTabIndex(index)==-1)
+			if (FindByTabIndex(index) == -1)
 			{
-				flag=TRUE;
+				flag = TRUE;
 				break;
 			}
-			index++; 
+			index++;
 		}
 
-		if(flag==FALSE)
+		if (flag == FALSE)
 			return;
 
-		index2=FindNextTabIndex(index);
-		if(index2==-1)
+		index2 = FindNextTabIndex(index);
+		if (index2 == -1)
 			break;
-		int idx=FindByTabIndex(index2);
-		if(idx!=-1)
+		int idx = FindByTabIndex(index2);
+		if (idx != -1)
 		{
 			GetAt(idx)->set_TabIndex(index);
-			j=0;
+			j = 0;
 		}
 	}
 }
 
 long Components::FindMaxTabIndex()
 {
-	long maxTab=0;
-	for(long i=0; i < GetCount(); i++)
+	long maxTab = 0;
+	for (long i = 0; i < GetCount(); i++)
 	{
-		if(maxTab < GetAt(i)->get_TabIndex())
-			maxTab=GetAt(i)->get_TabIndex();
+		if (maxTab < GetAt(i)->get_TabIndex())
+			maxTab = GetAt(i)->get_TabIndex();
 	}
 	return maxTab;
 }
 
 long Components::FindNextTabIndex(long index)
 {
-	long maxTab=FindMaxTabIndex();
-	for(long nextTab=index+1; nextTab <= maxTab; nextTab++)
+	long maxTab = FindMaxTabIndex();
+	for (long nextTab = index + 1; nextTab <= maxTab; nextTab++)
 	{
-		for(long j=0; j < GetCount(); j++)
+		for (long j = 0; j < GetCount(); j++)
 		{
-			if(nextTab == GetAt(j)->get_TabIndex())
+			if (nextTab == GetAt(j)->get_TabIndex())
 				return nextTab;
 		}
 	}
@@ -3520,20 +3517,20 @@ long Components::FindNextTabIndex(long index)
 
 long Components::FindMinTabIndex()
 {
-	long minTab=0xFFFF;
-	for(long i=0; i < GetCount(); i++)
+	long minTab = 0xFFFF;
+	for (long i = 0; i < GetCount(); i++)
 	{
-		if(minTab > GetAt(i)->get_TabIndex())
-			minTab=GetAt(i)->get_TabIndex();
+		if (minTab > GetAt(i)->get_TabIndex())
+			minTab = GetAt(i)->get_TabIndex();
 	}
 	return minTab;
 }
 
 int Components::FindByTabIndex(long tab)
 {
-	for(int i=0; i < GetCount(); i++)
+	for (int i = 0; i < GetCount(); i++)
 	{
-		if(GetAt(i)->get_TabIndex()==tab)
+		if (GetAt(i)->get_TabIndex() == tab)
 			return i;
 	}
 	return -1;
@@ -3541,7 +3538,7 @@ int Components::FindByTabIndex(long tab)
 
 void Components::SelectAll(Component* form)
 {
-	if(form!=designer->GetParentForm())
+	if (form != designer->GetParentForm())
 		return;
 	StopEvent(evSelectAll);
 	BOOL firstSelectedFlag = FALSE;
@@ -3549,14 +3546,14 @@ void Components::SelectAll(Component* form)
 	for (int count = 0; count < GetCount(); count++)
 	{
 		firstSelectedFlag |= components[count]->FirstSelected;
-		components[count]->Selected=TRUE;
+		components[count]->Selected = TRUE;
 	}
 
-	if(firstSelectedFlag == FALSE && GetCount() != 0)
+	if (firstSelectedFlag == FALSE && GetCount() != 0)
 	{
-		components[0]->FirstSelected=TRUE;
+		components[0]->FirstSelected = TRUE;
 	}
 	Invalidate();
-	PostEvent(evSetActiveForm,GetParentForm());
+	PostEvent(evSetActiveForm, GetParentForm());
 }
 //////////////////////////////////////////////////////////////////////////

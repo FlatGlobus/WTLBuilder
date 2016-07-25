@@ -66,6 +66,10 @@
 #define	IDC_TABORDER	1059
 #define	IDC_HORIZ_ORDER_RIGHT	1060
 #define	IDC_VERT_ORDER_BOTTOM	1061
+#define	IDC_CMAINFRAME_STATIC62	1062
+#define	IDC_XCURSOR	1063
+#define	IDC_STATICY	1064
+#define	IDC_YCURSOR	1065
 //}}WTLBUILDER_CONTROL_ID_DECLARATION
 
 
@@ -133,6 +137,10 @@ class CMainFrame : public CFrameWindowImpl<CMainFrame, CWindow, CMainFrameWinTra
 	CButtonST	m_tabOrder;
 	CButtonST	m_buttonst60;
 	CButtonST	m_buttonst61;
+	CStatic	m_static62;
+	CStatic	m_XCursor;
+	CStatic	m_static64;
+	CStatic	m_YCursor;
 //}}WTLBUILDER_MEMBER_DECLARATION
 
 	CUserMenuMap userMenuMap;
@@ -296,6 +304,7 @@ public:
 	virtual HANDLE GetHandle(void);
 	long CalcWindowSize();
 	void LoadFormFromFile(LPCSTR);
+	void XYCursor(CPoint);
 	////////////////////////////////
 	BEGIN_DISPATCH_MAP(CMainFrame)
 		DISP_METHOD(InsertPopupItem, VT_EMPTY, 2, VTS_BSTR VTS_BSTR)

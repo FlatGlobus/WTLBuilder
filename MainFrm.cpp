@@ -46,6 +46,7 @@ CMainFrame::CMainFrame(void):project(this),enableUndo(FALSE),userMenuCount(MIN_U
     RegisterEvent(evAddUndo, this,&CMainFrame::SetActiveForm);
     RegisterEvent(evUndo, this,&CMainFrame::SetActiveForm);
 	RegisterEvent(evLoadScriptFromFile, this, &CMainFrame::LoadScriptFromFile);
+	RegisterEvent(evXYCursor, this, &CMainFrame::XYCursor);
 }
 
 CMainFrame::~CMainFrame(void)
@@ -396,7 +397,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	m_yedit.Create(m_panel1,CRect(100,6,139,26),_T("8"),WS_CHILD|WS_VISIBLE,WS_EX_CLIENTEDGE,IDC_YEDIT);
 	m_yedit.SetFont((HFONT)m_formFont);
 
-	m_panel55.Create(m_panel1,CRect(144,6,146,24),NULL,WS_CHILD,0,IDC_CMAINFRAME_PANEL55);
+	m_panel55.Create(m_panel1,CRect(144,6,146,24),NULL,WS_CHILD|WS_VISIBLE,0,IDC_CMAINFRAME_PANEL55);
 	m_panel55.SetFont((HFONT)m_formFont);
 	m_panel55.SetInnerBorder(BDR_RAISEDINNER);
 	m_panel55.SetOuterBorder(BDR_SUNKENOUTER);
@@ -407,7 +408,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	m_panel55.SetVertTextAlign(DT_VCENTER);
 	m_panel55.SetSingleLine(true);
 
-	m_buttonst56.Create(m_panel1,CRect(151,6,171,26),_T(""),WS_CHILD|BS_PUSHBUTTON,0,IDC_SHOW_GSGRID);
+	m_buttonst56.Create(m_panel1,CRect(538,4,558,24),_T(""),WS_CHILD|BS_PUSHBUTTON,0,IDC_SHOW_GSGRID);
 	m_buttonst56.SetFont((HFONT)m_formFont);
 	m_buttonst56.SetFlat(true);
 	m_buttonst56.SetAlign(CButtonST::ST_ALIGN_HORIZ);
@@ -416,7 +417,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	m_buttonst56.SetIcon(IDI_SHOW_GSGRID,IDI_SHOW_GSGRID);
 	m_buttonst56.EnablePressedState(true);
 
-	m_updownctrl57.Create(m_panel1,CRect(126,6,143,26),NULL,WS_CHILD|WS_VISIBLE|UDS_SETBUDDYINT|UDS_ALIGNRIGHT|UDS_ARROWKEYS,0,IDC_CMAINFRAME_UPDOWNCTRL57);
+	m_updownctrl57.Create(m_panel1,CRect(126,6,141,26),NULL,WS_CHILD|WS_VISIBLE|UDS_SETBUDDYINT|UDS_ALIGNRIGHT|UDS_ARROWKEYS,0,IDC_CMAINFRAME_UPDOWNCTRL57);
 	m_updownctrl57.SetBase(10);
 	m_updownctrl57.SetRange(1,99);
 	m_updownctrl57.SetPos(6);
@@ -454,6 +455,18 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	m_buttonst61.SetColor(CButtonST::BTNST_COLOR_BK_IN,RGB(0xF4,0xF3,0xEE));
 	m_buttonst61.SetColor(CButtonST::BTNST_COLOR_BK_OUT,RGB(0xF4,0xF3,0xEE));
 	m_buttonst61.SetIcon(IDI_VERT_ORDER_BOTTOM,IDI_VERT_ORDER_BOTTOM);
+
+	m_static62.Create(m_panel1,CRect(154,9,162,23),_T("X"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_CMAINFRAME_STATIC62);
+	m_static62.SetFont((HFONT)m_formFont);
+
+	m_XCursor.Create(m_panel1,CRect(170,9,189,23),_T("0"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_XCURSOR);
+	m_XCursor.SetFont((HFONT)m_formFont);
+
+	m_static64.Create(m_panel1,CRect(197,9,205,23),_T("Y"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_STATICY);
+	m_static64.SetFont((HFONT)m_formFont);
+
+	m_YCursor.Create(m_panel1,CRect(213,9,232,23),_T("0"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_YCURSOR);
+	m_YCursor.SetFont((HFONT)m_formFont);
 
 //}}WTLBUILDER_MEMBER_CREATION
 //{{WTLBUILDER_POST_CREATION
@@ -1112,4 +1125,13 @@ LRESULT CMainFrame::OnFileNewControl(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*
 void CMainFrame::LoadScriptFromFile(LPCSTR file)
 {
 	m_ScriptHost.LoadScriptFromFile(_bstr_t(file));
+}
+
+void CMainFrame::XYCursor(CPoint pt)
+{
+	CString str;
+	str.Format("%d", pt.x);
+	m_XCursor.SetWindowText(str);
+	str.Format("%d", pt.y);
+	m_YCursor.SetWindowText(str);
 }

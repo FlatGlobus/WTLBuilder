@@ -213,7 +213,7 @@ LRESULT CFormComponent::OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam,
 			delta.x = wndRc.Width()-clientRC.Width();
 			delta.y = wndRc.Height()-clientRC.Height();
 			if(GetDesigner()!=NULL)
-				delta = GetDesigner()->AlignToGrid(delta);
+				delta = GetDesigner()->SnapToGrid(delta);
 			((MINMAXINFO*)lParam)->ptMinTrackSize.x=minRC.Width()+delta.x;
 			((MINMAXINFO*)lParam)->ptMinTrackSize.y=minRC.Height()+delta.y;
 			return FALSE;
