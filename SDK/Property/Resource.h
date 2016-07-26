@@ -8,7 +8,7 @@
 #define IDR_FORM                        104
 #define IDD_NULL                        207
 //#define ID_EDIT_DELETE                  40001
-#define ID_EDIT_SELECTALL               40002
+//#define ID_EDIT_SELECTALL               40002
 
 // Next default values for new objects
 // 

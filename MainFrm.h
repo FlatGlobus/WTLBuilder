@@ -126,9 +126,11 @@ class CMainFrame : public CFrameWindowImpl<CMainFrame, CWindow, CMainFrameWinTra
 	CButtonST	m_buttonst38;
 	CButtonST	m_showgrid;
 	CStatic	m_static49;
+	CFont	m_static49Font;
 	CEdit	m_xedit;
 	CUpDownCtrl	m_updownctrl51;
 	CStatic	m_static52;
+	CFont	m_static52Font;
 	CEdit	m_yedit;
 	Panel::CPanel	m_panel55;
 	CButtonST	m_buttonst56;
@@ -138,8 +140,10 @@ class CMainFrame : public CFrameWindowImpl<CMainFrame, CWindow, CMainFrameWinTra
 	CButtonST	m_buttonst60;
 	CButtonST	m_buttonst61;
 	CStatic	m_static62;
+	CFont	m_static62Font;
 	CStatic	m_XCursor;
 	CStatic	m_static64;
+	CFont	m_static64Font;
 	CStatic	m_YCursor;
 //}}WTLBUILDER_MEMBER_DECLARATION
 

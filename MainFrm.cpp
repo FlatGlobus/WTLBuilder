@@ -381,7 +381,8 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	m_showgrid.EnablePressedState(true);
 
 	m_static49.Create(m_panel1,CRect(29,9,35,23),_T("x"),WS_CHILD|WS_VISIBLE|SS_LEFT,0,IDC_CMAINFRAME_STATIC49);
-	m_static49.SetFont((HFONT)m_formFont);
+	m_static49Font.CreateFont(-12,0,0,0,FW_BOLD,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
+	m_static49.SetFont((HFONT)m_static49Font);
 
 	m_xedit.Create(m_panel1,CRect(42,6,81,26),_T("8"),WS_CHILD|WS_VISIBLE,WS_EX_CLIENTEDGE,IDC_XEDIT);
 	m_xedit.SetFont((HFONT)m_formFont);
@@ -392,7 +393,8 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	m_updownctrl51.SetPos(6);
 
 	m_static52.Create(m_panel1,CRect(87,9,93,23),_T("y"),WS_CHILD|WS_VISIBLE|SS_LEFT,0,IDC_CMAINFRAME_STATIC52);
-	m_static52.SetFont((HFONT)m_formFont);
+	m_static52Font.CreateFont(-12,0,0,0,FW_BOLD,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
+	m_static52.SetFont((HFONT)m_static52Font);
 
 	m_yedit.Create(m_panel1,CRect(100,6,139,26),_T("8"),WS_CHILD|WS_VISIBLE,WS_EX_CLIENTEDGE,IDC_YEDIT);
 	m_yedit.SetFont((HFONT)m_formFont);
@@ -456,16 +458,18 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 	m_buttonst61.SetColor(CButtonST::BTNST_COLOR_BK_OUT,RGB(0xF4,0xF3,0xEE));
 	m_buttonst61.SetIcon(IDI_VERT_ORDER_BOTTOM,IDI_VERT_ORDER_BOTTOM);
 
-	m_static62.Create(m_panel1,CRect(154,9,162,23),_T("X"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_CMAINFRAME_STATIC62);
-	m_static62.SetFont((HFONT)m_formFont);
+	m_static62.Create(m_panel1,CRect(154,9,162,23),_T("x"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_CMAINFRAME_STATIC62);
+	m_static62Font.CreateFont(-12,0,0,0,FW_BOLD,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
+	m_static62.SetFont((HFONT)m_static62Font);
 
-	m_XCursor.Create(m_panel1,CRect(170,9,189,23),_T("0"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_XCURSOR);
+	m_XCursor.Create(m_panel1,CRect(170,9,195,23),_T("0"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_XCURSOR);
 	m_XCursor.SetFont((HFONT)m_formFont);
 
-	m_static64.Create(m_panel1,CRect(197,9,205,23),_T("Y"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_STATICY);
-	m_static64.SetFont((HFONT)m_formFont);
+	m_static64.Create(m_panel1,CRect(203,9,211,23),_T("y"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_STATICY);
+	m_static64Font.CreateFont(-12,0,0,0,FW_BOLD,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
+	m_static64.SetFont((HFONT)m_static64Font);
 
-	m_YCursor.Create(m_panel1,CRect(213,9,232,23),_T("0"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_YCURSOR);
+	m_YCursor.Create(m_panel1,CRect(219,9,245,23),_T("0"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_YCURSOR);
 	m_YCursor.SetFont((HFONT)m_formFont);
 
 //}}WTLBUILDER_MEMBER_CREATION
@@ -885,9 +889,6 @@ LRESULT CMainFrame::OnFileRecent(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*
 
 void CMainFrame::OnEditCommand(WORD wID,Component *comp,CPoint * downPoint)
 {
-///////////////////////////////////////// to avoid app crash
-	return;
-////////////////////////////////////////
     if(project.Forms->Active==NULL)
         return ;
 

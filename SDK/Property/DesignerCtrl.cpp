@@ -22,7 +22,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CDesignerCtrl
 long DistPointSeg(CPoint &point,CPoint &pn,CPoint &pk);
-
+PROPERTY_API BOOL IsPasteEnabled();
 
 CDesignerCtrl::CDesignerCtrl():components(NULL),isShowgrid(TRUE),gridDim(6,6),isGridPressed(FALSE),
 isShowGoldenGrid(FALSE),FromLeftToRight(TRUE),FromTopToBottom(TRUE),isGoldenGridMoveable(FALSE),
@@ -502,14 +502,26 @@ LRESULT CDesignerCtrl::OnUpdateDesigner(UINT /*uMsg*/, WPARAM wParam, LPARAM lPa
 void CDesignerCtrl::CustomizeMenu(CMenuHandle & menu,CPoint & at)
 {
     downPoint=at;
-    curentComp=components->ComponentFromPt(downPoint);
+	ClientToScreen(&at);
+	::ScreenToClient(GetParent(), &at);
+
+	components->UnselectAll();
+	curentComp = components->SelectComponentFromPt(downPoint);
+	if (curentComp)
+	{
+		curentComp->Selected = TRUE;
+		curentComp->FirstSelected = TRUE;
+	}
+
+
+	menu.EnableMenuItem(ID_EDIT_CUT, (curentComp != NULL ? MF_ENABLED : MF_DISABLED | MF_GRAYED) | MF_BYCOMMAND);
+	menu.EnableMenuItem(ID_EDIT_COPY, (curentComp != NULL ? MF_ENABLED : MF_DISABLED | MF_GRAYED) | MF_BYCOMMAND);
+	menu.EnableMenuItem(ID_EDIT_CLEAR, (curentComp != NULL ? MF_ENABLED : MF_DISABLED | MF_GRAYED) | MF_BYCOMMAND);
+	menu.EnableMenuItem(ID_EDIT_SELECT_ALL, (components->GetCount() != 0 ? MF_ENABLED : MF_DISABLED | MF_GRAYED) | MF_BYCOMMAND);
+
     if(curentComp==NULL)
         curentComp=Parent;
-    //menu.EnableMenuItem(ID_EDIT_CUT,(IsThereChecked()!=0 ? MF_ENABLED : MF_DISABLED | MF_GRAYED )|MF_BYCOMMAND);
-    //ID_EDIT_COPY
-    //ID_EDIT_PASTE
-    //ID_EDIT_CLEAR
-    //ID_EDIT_SELECT_ALL
+	menu.EnableMenuItem(ID_EDIT_PASTE, (IsPasteEnabled() ? MF_ENABLED : MF_DISABLED | MF_GRAYED) | MF_BYCOMMAND);
 }
 
 LRESULT CDesignerCtrl::OnEditCommand(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/)

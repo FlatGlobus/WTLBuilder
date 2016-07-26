@@ -707,8 +707,9 @@ CProperties  & CProperties::operator =(const CProperties& p)
     for (PropertyVectorIter iter = ((CProperties&)p).properties.begin( ); iter != p.properties.end( ); iter++ )
     {
 		PropertyBase * prop=FindByName((*iter)->GetName());
-		if(prop)
-			prop->FromString((*iter)->ToString());
+		if (prop)
+			//prop->FromString((*iter)->ToString());
+			prop->SetValue((*iter)->GetValue(false),false);
 
 		if((*iter)->HasChild())
             CopyChild(*iter);
@@ -724,7 +725,8 @@ void CProperties::CopyChild(PropertyBase * parent)
     {
         PropertyBase * prop=FindByName((*iter)->GetName());
         if(prop)
-            prop->FromString((*iter)->ToString());
+			prop->SetValue((*iter)->GetValue(false), false);
+            //prop->FromString((*iter)->ToString());
         
         if((*iter)->HasChild())
             CopyChild(*iter);

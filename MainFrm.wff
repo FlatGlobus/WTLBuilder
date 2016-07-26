@@ -450,9 +450,9 @@
 			</Layout>
 			<OutImage FileName=".\res\Grid.ico" ID="IDI_SHOW_GRID" ImageType="Icon" Width="16" Height="16"/>
 		</m_showgrid>
-		<m_static49 Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="x" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_CMAINFRAME_STATIC49" IncludePath="" InternalWindowStyle="1342177280" InternalWindowStyleEx="0" Layout="false" Left="29" Localize="false" Name="m_static49" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="49" VScroll="false" Visible="true" Width="6" WordWrap="false">
+		<m_static49 Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="x" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="true" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_CMAINFRAME_STATIC49" IncludePath="" InternalWindowStyle="1342177280" InternalWindowStyleEx="0" Layout="false" Left="29" Localize="false" Name="m_static49" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="49" VScroll="false" Visible="true" Width="6" WordWrap="false">
 			<DoContained MessageMapID="0"/>
-			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Font Height="-12" Bold="true" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
 			<Layout>
 				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
 				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
@@ -486,9 +486,9 @@
 				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
 			</Layout>
 		</m_updownctrl51>
-		<m_static52 Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="y" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_CMAINFRAME_STATIC52" IncludePath="" InternalWindowStyle="1342177280" InternalWindowStyleEx="0" Layout="false" Left="87" Localize="false" Name="m_static52" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="52" VScroll="false" Visible="true" Width="6" WordWrap="false">
+		<m_static52 Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="y" ClientEdge="false" ClipChildren="false" ClipSiblings="false" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="true" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_CMAINFRAME_STATIC52" IncludePath="" InternalWindowStyle="1342177280" InternalWindowStyleEx="0" Layout="false" Left="87" Localize="false" Name="m_static52" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="52" VScroll="false" Visible="true" Width="6" WordWrap="false">
 			<DoContained MessageMapID="0"/>
-			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Font Height="-12" Bold="true" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
 			<Layout>
 				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
 				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
@@ -606,9 +606,9 @@
 			</Layout>
 			<OutImage FileName=".\res\VertOrderBottom.ico" ID="IDI_VERT_ORDER_BOTTOM" ImageType="Icon" Width="16" Height="16"/>
 		</m_buttonst61>
-		<m_static62 Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="X" ClientEdge="false" ClipChildren="true" ClipSiblings="true" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_CMAINFRAME_STATIC62" IncludePath="" InternalWindowStyle="1442840576" InternalWindowStyleEx="0" Layout="false" Left="154" Localize="true" Name="m_static62" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="62" VScroll="false" Visible="true" Width="8" WordWrap="false">
+		<m_static62 Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="x" ClientEdge="false" ClipChildren="true" ClipSiblings="true" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="true" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_CMAINFRAME_STATIC62" IncludePath="" InternalWindowStyle="1442840576" InternalWindowStyleEx="0" Layout="false" Left="154" Localize="true" Name="m_static62" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="62" VScroll="false" Visible="true" Width="8" WordWrap="false">
 			<DoContained MessageMapID="0"/>
-			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Font Height="-12" Bold="true" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
 			<Layout>
 				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
 				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
@@ -618,7 +618,7 @@
 				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
 			</Layout>
 		</m_static62>
-		<m_XCursor Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="0" ClientEdge="false" ClipChildren="true" ClipSiblings="true" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_XCURSOR" IncludePath="" InternalWindowStyle="1442840576" InternalWindowStyleEx="0" Layout="false" Left="170" Localize="true" Name="m_XCursor" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="63" VScroll="false" Visible="true" Width="19" WordWrap="false">
+		<m_XCursor Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="0" ClientEdge="false" ClipChildren="true" ClipSiblings="true" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_XCURSOR" IncludePath="" InternalWindowStyle="1442840576" InternalWindowStyleEx="0" Layout="false" Left="170" Localize="true" Name="m_XCursor" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="63" VScroll="false" Visible="true" Width="25" WordWrap="false">
 			<DoContained MessageMapID="0"/>
 			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
 			<Layout>
@@ -630,9 +630,9 @@
 				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
 			</Layout>
 		</m_XCursor>
-		<m_static64 Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="Y" ClientEdge="false" ClipChildren="true" ClipSiblings="true" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_STATICY" IncludePath="" InternalWindowStyle="1442840576" InternalWindowStyleEx="0" Layout="false" Left="197" Localize="true" Name="m_static64" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="64" VScroll="false" Visible="true" Width="8" WordWrap="false">
+		<m_static64 Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="y" ClientEdge="false" ClipChildren="true" ClipSiblings="true" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="true" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_STATICY" IncludePath="" InternalWindowStyle="1442840576" InternalWindowStyleEx="0" Layout="false" Left="203" Localize="true" Name="m_static64" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="64" VScroll="false" Visible="true" Width="8" WordWrap="false">
 			<DoContained MessageMapID="0"/>
-			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
+			<Font Height="-12" Bold="true" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
 			<Layout>
 				<Left AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
 				<Top AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
@@ -642,7 +642,7 @@
 				<VCenter AttachForm="false" AttachOppositeForm="false" AttachChild="false" AttachOppositeChild="false" AttachPosition="false" AttachSelf="false" AttachNone="false" Child="None" Position="0"/>
 			</Layout>
 		</m_static64>
-		<m_YCursor Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="0" ClientEdge="false" ClipChildren="true" ClipSiblings="true" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_YCURSOR" IncludePath="" InternalWindowStyle="1442840576" InternalWindowStyleEx="0" Layout="false" Left="213" Localize="true" Name="m_YCursor" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="65" VScroll="false" Visible="true" Width="19" WordWrap="false">
+		<m_YCursor Page="StdCtl" Class="CStatic" AcceptFiles="false" Border="false" Caption="0" ClientEdge="false" ClipChildren="true" ClipSiblings="true" ControlParent="false" DoContained="false" EnableToolTip="false" Enabled="true" Etched="false" Focus="false" Font="false" Generate="true" Group="false" HScroll="false" Height="14" ID="IDC_YCURSOR" IncludePath="" InternalWindowStyle="1442840576" InternalWindowStyleEx="0" Layout="false" Left="219" Localize="true" Name="m_YCursor" NoPrefix="true" Notify="false" ParentName="m_panel1" Simple="false" TabIndex="-1" TabStop="false" TextAlign="SS_LEFT" ToolTip="" Top="9" Transparent="false" UniqueID="65" VScroll="false" Visible="true" Width="26" WordWrap="false">
 			<DoContained MessageMapID="0"/>
 			<Font Height="-12" Bold="false" Italic="false" Underline="false" StrikeOut="false" CharSet="DEFAULT_CHARSET" FaceName="MS Sans Serif"/>
 			<Layout>

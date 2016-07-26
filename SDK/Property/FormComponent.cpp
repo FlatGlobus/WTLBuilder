@@ -857,6 +857,10 @@ void CFormComponent::CloseForm(Component * cmp,BOOL * remove)
 	}
 }
 
+CString CFormComponent::GetFileName()
+{
+	return (LPCTSTR)fileName;
+}
 
 void CFormComponent::GetFormFileName(Component * cmp,CString* formFileName)
 {

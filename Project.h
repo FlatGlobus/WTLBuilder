@@ -46,6 +46,7 @@ public:
 	void __stdcall set_Active(Component *);
 	__declspec(property(get=get_Active, put=set_Active)) Component *Active;
 	BOOL RemoveAll();
+	Component *  Find(const CString &);
 };
 //////////////////////////////////////////////////////////////////////////
 

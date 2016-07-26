@@ -216,6 +216,7 @@ public:
 	void LoadForm(Component *mainForm,Component ** formPtr,LPCTSTR formFileName,BOOL _fromTemplate);
 	void CloseForm(Component * cmp,BOOL * remove);
 	void GetFormFileName(Component * cmp,CString* formFileName);
+	CString GetFileName();
 	void GenerateCode();
     void GenerateLocFile(LPCTSTR fileName);
 	DWORD get_InternalWindowStyle();

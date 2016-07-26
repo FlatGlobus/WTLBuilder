@@ -440,8 +440,7 @@ LRESULT CToolBoxWnd::OnShowForm(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/
 	if(idx!=-1)
 	{
 		activeForm=(Component *)m_formList.GetItemDataPtr(idx);
-		::ShowWindow((HWND)activeForm->GetHandle(),SW_SHOW);
-		::ShowWindow((HWND)activeForm->GetHandle(),SW_SHOWNA);
+		::ShowWindow((HWND)activeForm->GetHandle(), SW_SHOWNORMAL);
 		SendEvent(evSetActiveForm,activeForm);
 	}
 	return 0;

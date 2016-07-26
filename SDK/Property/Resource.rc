@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Neutral (Default) resources
+// English (United States) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
-#ifdef _WIN32
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -27,15 +25,18 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 //
 
 IDB_PLUS                BITMAP                  "Res\\plus.bmp"
+
 IDB_MINUS               BITMAP                  "Res\\minus.bmp"
+
 IDB_BUTTON              BITMAP                  "Res\\button.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu
 //
 
-IDR_FORM MENU 
+IDR_FORM MENU
 BEGIN
     POPUP ""
     BEGIN
@@ -44,9 +45,10 @@ BEGIN
         MENUITEM "&Paste",                      57637
         MENUITEM "&Delete",                     ID_EDIT_CLEAR
         MENUITEM SEPARATOR
-        MENUITEM "Select &All",                 ID_EDIT_CLEAR_ALL
+        MENUITEM "Select &All",                 ID_EDIT_SELECT_ALL
     END
 END
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -92,7 +94,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_NULL, DIALOG
     BEGIN
@@ -103,7 +105,7 @@ BEGIN
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif   
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

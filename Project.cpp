@@ -13,6 +13,8 @@
 #include "FormType.h"
 #include <_util.h>
 #include <direct.h>
+#include "FormComponent.h"
+
 //////////////////////////////////////////////////////////////////////////
 BOOL PROPERTY_API PreReadForm(const CString &fn,CString &page,CString &cmpName);
 BOOL PROPERTY_API ExtractName(CString &str,CString &cmpPage,CString &cmpName);
@@ -61,6 +63,14 @@ BOOL __stdcall CProject::Open(BSTR fn)
 
     if(fileName.GetExt()==_T("wff"))
     {
+		Component *tmp = NULL;
+		if ((tmp=forms.Find((LPCSTR)fileName)) != NULL)
+		{
+			::ShowWindow((HWND)tmp->GetHandle(), SW_SHOWNORMAL);
+			SendEvent(evSetActiveForm, tmp);
+			return TRUE;
+		}
+
         if(PreReadForm(fileName.GetPath(),page,cmpName)==FALSE)
         {	
             ::MessageBox(NULL,MakeString(_T("Error loading form file %s."),(LPCTSTR)fileName),_T("WTLBuilder"),MB_OK);
@@ -394,4 +404,14 @@ void CForms::AddUndo(Component *form)
         SendEvent(evAddUndo,active);
         StopEvent(evAddUndo);
     }
+}
+
+Component * CForms::Find(const CString & str)
+{
+	for (long i = 0; i < (long)forms.size(); i++)
+	{
+		if (str.CompareNoCase(((CFormComponent *)forms.at(i))->GetFileName()) == 0)
+			return forms.at(i);
+	}
+	return NULL;
 }
