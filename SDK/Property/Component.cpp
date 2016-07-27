@@ -56,7 +56,7 @@ BOOL PtInBox(CPoint &at, CPoint & pt)
 //INIT_UNIQUE_CAT(long);
 static long UniqueID = 0;
 //////////////////////////////////////////////////////////////////////////
-Component::Component(LPCTSTR _className) :state(1), pressed(FALSE), selected(FALSE),
+Component::Component(LPCTSTR _className) :state(1), pressed(FALSE),
 className(_className), designer(NULL), Parent(NULL), objprop(_className, this), parentName(DEF_PARENT_NAME),
 defaultSize(DEF_SIZE_W, DEF_SIZE_H), bounds(0, 0, 40, 40), minRC(0, 0, 0, 0), tabIndex(-1), enableTabIndex(TRUE), uniqueID(UniqueID++)
 {
@@ -65,7 +65,6 @@ defaultSize(DEF_SIZE_W, DEF_SIZE_H), bounds(0, 0, 40, 40), minRC(0, 0, 0, 0), ta
 
 Component::Component(const Component & comp) :
 	objprop(comp.objprop),
-	selected(comp.selected),
 	pressed(comp.pressed),
 	deltaPoint(comp.deltaPoint),
 	name(comp.name),
@@ -137,31 +136,30 @@ Components *  Component::GetComponents()
 void Component::InitProperty(void)
 {
 	DEFINE_PROPERTY(Name, CString, Component, name)
-		DEFINE_PROPERTY(ParentName, CString, Component, DEF_PARENT_NAME)
-		PUBLIC_PROPERTY(ParentName, FALSE)
-		//READONLY_PROPERTY(ParentName,TRUE)
+	DEFINE_PROPERTY(ParentName, CString, Component, DEF_PARENT_NAME)
+	PUBLIC_PROPERTY(ParentName, FALSE)
 
-		DEFINE_PROPERTY(UniqueID, long, Component, uniqueID)
-		PUBLIC_PROPERTY(UniqueID, FALSE)
+	DEFINE_PROPERTY(UniqueID, long, Component, uniqueID)
+	PUBLIC_PROPERTY(UniqueID, FALSE)
 
-		DEFINE_PROPERTY(Left, long, Component, bounds.left)
-		DEFINE_PROPERTY(Width, long, Component, bounds.right)
-		DEFINE_PROPERTY(Top, long, Component, bounds.top)
-		DEFINE_PROPERTY(Height, long, Component, bounds.bottom)
-		DEFINE_PROPERTY_2(Generate, BOOL, Component, TRUE)
+	DEFINE_PROPERTY(Left, long, Component, bounds.left)
+	DEFINE_PROPERTY(Width, long, Component, bounds.right)
+	DEFINE_PROPERTY(Top, long, Component, bounds.top)
+	DEFINE_PROPERTY(Height, long, Component, bounds.bottom)
+	DEFINE_PROPERTY_2(Generate, BOOL, Component, TRUE)
 
-		if (IsForm() == FALSE)
-			DEFINE_PROPERTY_2(IncludePath, CString, Component, _T(""))
+	if (IsForm() == FALSE)
+		DEFINE_PROPERTY_2(IncludePath, CString, Component, _T(""))
 
-			if (IsControl())
-			{
-				DEFINE_PROPERTY(TabIndex, long, Component, -1)
-					PUBLIC_PROPERTY(TabIndex, FALSE)
-					//DEFINE_PROPERTY(Selected,BOOL,Component,FALSE)
-					//PUBLIC_PROPERTY(Selected,FALSE)
-					//DEFINE_PROPERTY(FirstSelected,BOOL,Component,FALSE)
-					//PUBLIC_PROPERTY(FirstSelected,FALSE)
-			}
+	if (IsControl())
+	{
+		DEFINE_PROPERTY(TabIndex, long, Component, -1)
+		PUBLIC_PROPERTY(TabIndex, FALSE)
+		DEFINE_PROPERTY(Selected,BOOL,Component,FALSE)
+		PUBLIC_PROPERTY(Selected,FALSE)
+		DEFINE_PROPERTY(FirstSelected,BOOL,Component,FALSE)
+		PUBLIC_PROPERTY(FirstSelected,FALSE)
+	}
 }
 
 void Component::ShowProperties(void)
@@ -187,10 +185,7 @@ void Component::set_Name(CString n)
 		CCodeGenerator * code = (CCodeGenerator *)get_Code();
 		if (code)
 			code->AddVar(_T("CLASSNAME"), name);
-		if (get_Selected() == TRUE)
-			PostEvent(evSetActiveForm, GetParentForm());
 		SetModified();
-
 		if (state.GetBit(csCreating) || state.GetBit(csLoading))
 			return;
 		((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
@@ -355,22 +350,19 @@ long Component::get_UniqueID(void)
 
 void Component::set_Selected(BOOL val)
 {
-	if (selected != val)
-	{
-		selected = val;
-		if (selected == FALSE)
-			FirstSelected = FALSE;
-	}
+	SET_PROP_VALUE(Selected, val)
+	if (val == FALSE)
+		FirstSelected = FALSE;
 }
 
 BOOL Component::get_Selected(void)
 {
-	return selected;
+	return GET_PROP_VALUE(BOOL, Selected)
 }
 
 void Component::set_FirstSelected(BOOL val)
 {
-	SetState(csFirstSelected, val);
+	SET_PROP_VALUE(FirstSelected, val)
 	if (val == TRUE)
 	{
 		ShowProperties();
@@ -381,7 +373,7 @@ void Component::set_FirstSelected(BOOL val)
 
 BOOL Component::get_FirstSelected(void)
 {
-	return GetState(csFirstSelected);
+	return GET_PROP_VALUE(BOOL,FirstSelected)
 }
 
 BOOL Component::CheckBounds(CRect rc)
@@ -603,7 +595,7 @@ void Component::Paint(CDC & dc)
 		}
 	}
 
-	if (selected == TRUE)
+	if (Selected == TRUE)
 		PaintSelect(dc);
 }
 
@@ -701,25 +693,19 @@ void Component::UpdateBoundsProp(CRect & rc)
 {
 	bounds = rc;
 	SET_PROP_VALUE(Left, bounds.left)
-		SET_PROP_VALUE(Top, bounds.top)
-		long temp = bounds.Width();
+	SET_PROP_VALUE(Top, bounds.top)
+	long temp = bounds.Width();
 	SET_PROP_VALUE(Width, temp)
-		temp = bounds.Height();
+	temp = bounds.Height();
 	SET_PROP_VALUE(Height, temp)
-		if (selected == TRUE || IsControl() == FALSE)
-		{
-			::UpdateProperty(_T("Left"));
-			::UpdateProperty(_T("Top"));
-			::UpdateProperty(_T("Width"));
-			::UpdateProperty(_T("Height"));
-		}
 
-	if (IsForm() == TRUE)
+	::UpdateProperty(_T("Left"));
+	::UpdateProperty(_T("Top"));
+	::UpdateProperty(_T("Width"));
+	::UpdateProperty(_T("Height"));
+
+	if(IsForm() == TRUE)
 	{
-		::UpdateProperty(_T("Left"));
-		::UpdateProperty(_T("Top"));
-		::UpdateProperty(_T("Width"));
-		::UpdateProperty(_T("Height"));
 		::UpdateProperty(_T("ClientWidth"));
 		::UpdateProperty(_T("ClientHeight"));
 	}
@@ -1094,10 +1080,6 @@ Component * Component::Clone()
 		ctrl->InitProperty();
 		ctrl->objprop = objprop;
 	}
-	else
-	{
-		SendEvent(evOutput, ErrorMsg, (LPCSTR)MakeString(_T("Component Page = %s, Name = %s not found."), (LPCTSTR)cmpPage, (LPCTSTR)cmpName));
-	}
 	return ctrl;
 }
 
@@ -1316,7 +1298,7 @@ void Components::MouseDown(CPoint point)
 		Component * temp = Create(rc, shiftPressed);
 		if (temp)
 		{
-			SetStateAll(csFirstSelected, FALSE);
+			//SetStateAll(csFirstSelected, FALSE);
 			components.push_back(temp);
 			temp->Selected = TRUE;
 			temp->FirstSelected = TRUE;
@@ -2379,7 +2361,7 @@ void Components::SelectControl(int idx, Component * active)
 {
 	if (active == designer->GetParentForm())
 	{
-		SetStateAll(csFirstSelected, FALSE);
+		//SetStateAll(csFirstSelected, FALSE);
 		UnselectAll();
 		if (idx == -1)
 			designer->GetParentForm()->ShowProperties();

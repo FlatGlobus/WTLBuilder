@@ -166,14 +166,14 @@ BOOL Class::get_##Name(void)\
 
 enum HintItem {hiNone,hiLeftTop,hiTopMedium,hiRightTop,hiRightMedium,hiRightBottom,
 				hiBottomMedium,hiLeftBottom,hiLeftMedium,hiCaption,hiField,hiAll}; 
-enum ComponentState {csCreating,csDeleting,csLoading,csSaving,csMoving,csFirstSelected,csReserved1,csReserved2};
+enum ComponentState {csCreating,csDeleting,csLoading,csSaving,csMoving,csReserved1,csReserved2};
 class Components;
 //////////////////////////////////////////////////////////////////////////
 class PROPERTY_API Component:public IDispDynImpl<Component>
 {
 protected:
 	CProperties objprop;
-	BOOL		selected;
+//	BOOL		selected;
 	BOOL		pressed;	
 	CPoint		deltaPoint;
 	CString		name;

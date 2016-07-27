@@ -84,7 +84,7 @@ LRESULT ControlComponentBase::OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 
 LRESULT ControlComponentBase::OnPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	if (selected)
+	if (Selected == TRUE)
 	{
 		CClientDC dc(designer->m_hWnd);
 		Paint(dc);

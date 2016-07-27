@@ -16,14 +16,6 @@ namespace Form
     REGISTER_FORM(CMDIChildWindowImpl,Form)
     CMDIChildWindowImpl::CMDIChildWindowImpl(LPTSTR _name):CFormComponent(_name)
     {
-        int xScreen=::GetSystemMetrics(SM_CXSCREEN);
-        int yScreen=::GetSystemMetrics(SM_CYSCREEN);
-        bounds.left=_round(xScreen/3.5);
-        bounds.right=xScreen/2;
-        bounds.top=yScreen/3;
-        bounds.bottom=_round(bounds.right*0.75);
-        SetBoundsRect(bounds);
-	
         m_hWndClient=NULL;
         bkColor=COLOR_WINDOW;
     }
@@ -52,6 +44,14 @@ namespace Form
 		SET_PROP_VALUE(InternalWindowStyleEx, tr.GetWndExStyle(0))
 		SET_PROP_VALUE(WindowStyle, WS_CHILD)
 		SET_PROP_VALUE(BorderStyle, WS_THICKFRAME)
+
+		int xScreen = ::GetSystemMetrics(SM_CXSCREEN);
+		int yScreen = ::GetSystemMetrics(SM_CYSCREEN);
+		bounds.left = _round(xScreen / 3.5);
+		bounds.right = xScreen / 2;
+		bounds.top = yScreen / 3;
+		bounds.bottom = _round(bounds.right*0.75);
+		SetBoundsRect(bounds);
     }
 
     CRect CMDIChildWindowImpl::GetMinRect()
