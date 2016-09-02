@@ -373,7 +373,7 @@ protected:
 	void InsertAt(int idx,Component * comp);
 	int FindIndex(Component *);
     int FindParentIndex(Component *);
-    //returns 0 if not found
+    //return 0 if not found
     long FindMaxTabIndex();
     long FindMinTabIndex();
     long FindNextTabIndex(long);
