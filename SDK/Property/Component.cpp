@@ -682,9 +682,9 @@ CRect  Component::GetBoundsRect(void)
 	if (state.GetBit(csLoading))
 	{
 		bounds.left = GET_PROP_VALUE(long, Left)
-			bounds.top = GET_PROP_VALUE(long, Top)
-			bounds.right = bounds.left + GET_PROP_VALUE(long, Width)
-			bounds.bottom = bounds.top + GET_PROP_VALUE(long, Height)
+		bounds.top = GET_PROP_VALUE(long, Top)
+		bounds.right = bounds.left + GET_PROP_VALUE(long, Width)
+		bounds.bottom = bounds.top + GET_PROP_VALUE(long, Height)
 	}
 	return bounds;
 }

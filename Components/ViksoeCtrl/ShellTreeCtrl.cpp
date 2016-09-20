@@ -41,10 +41,7 @@ void CShellTreeCtrlComp::InitProperty(void)
 {
 	ControlComponent<CShellTreeCtrlComp>::InitProperty();
 			///common styles
-	DEFINE_PROPERTY(NoDivider,BOOL,CShellTreeCtrlComp,FALSE)
-	DEFINE_PROPERTY(NoMoveY,BOOL,CShellTreeCtrlComp,FALSE)
-	DEFINE_PROPERTY(NoParentAlign,BOOL,CShellTreeCtrlComp,FALSE)
-	DEFINE_PROPERTY(NoResize,BOOL,CShellTreeCtrlComp,FALSE)
+
 	PUBLIC_PROPERTY(VScroll,TRUE)
 	PUBLIC_PROPERTY(HScroll,TRUE)
     DEFINE_PROPERTY(Path,CString,CShellTreeCtrlComp,_T(""))
@@ -58,34 +55,27 @@ void CShellTreeCtrlComp::InitProperty(void)
         DEFINE_SUB_PROPERTY(NoRoot,BOOL,CShellTreeCtrlComp,FALSE)
     END_SUB_PROPERTY
 
-
-		DEFINE_PROPERTY(CheckBoxes, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(DisableDragAndDrop, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(EditLabels, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(FullRowSelect, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(HasButtons, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(HasLines, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(InfoTip, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(LinesAtRoot, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(NoHScroll, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(NoNevenHeight, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(NoScroll, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(NoToolTips, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(RTLReading, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(ShowSelAlways, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(SingleExpand, BOOL, CShellTreeCtrlComp, FALSE)
-		DEFINE_PROPERTY(TrackSelect, BOOL, CShellTreeCtrlComp, FALSE)
-
+	BEGIN_SUB_PROPERTY(_T("ControlStyle"), _T(""))
+		DEFINE_SUB_PROPERTY(CheckBoxes, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(DisableDragAndDrop, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(EditLabels, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(FullRowSelect, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(HasButtons, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(HasLines, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(InfoTip, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(LinesAtRoot, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(NoHScroll, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(NoNevenHeight, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(NoScroll, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(NoToolTips, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(RTLReading, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(ShowSelAlways, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(SingleExpand, BOOL, CShellTreeCtrlComp, FALSE)
+		DEFINE_SUB_PROPERTY(TrackSelect, BOOL, CShellTreeCtrlComp, FALSE)
+	END_SUB_PROPERTY
 
 }
 ///common styles
-//IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,Bottom,(CCS_BOTTOM))
-IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CShellTreeCtrlComp,NoDivider,(CCS_NODIVIDER))
-IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CShellTreeCtrlComp,NoMoveY,(CCS_NOMOVEY))
-IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CShellTreeCtrlComp,NoParentAlign,(CCS_NOPARENTALIGN))
-IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CShellTreeCtrlComp,NoResize,(CCS_NORESIZE))
-	//IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CListViewCtrl,Top,(CCS_TOP))
-
 
 	IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CShellTreeCtrlComp, CheckBoxes, (TVS_CHECKBOXES))
 	IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CShellTreeCtrlComp, DisableDragAndDrop, (TVS_DISABLEDRAGDROP))

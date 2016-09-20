@@ -30,10 +30,6 @@ namespace ViksoeCtrl
 
 		virtual void InitProperty(void);
 		///common styles
-		DECLARE_WINSTYLE_BOOL_PROPERTY(NoDivider)
-		DECLARE_WINSTYLE_BOOL_PROPERTY(NoMoveY)
-		DECLARE_WINSTYLE_BOOL_PROPERTY(NoParentAlign)
-		DECLARE_WINSTYLE_BOOL_PROPERTY(NoResize)
 
         DECLARE_PROPERTY(NoFolders,BOOL)      
         DECLARE_PROPERTY(NoFiles,BOOL)

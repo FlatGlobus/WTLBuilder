@@ -66,8 +66,7 @@ void Class::set_##Name(BOOL val)\
 BOOL Class::get_##Name(void)\
 {\
 	DWORD windowStyle=get_InternalWindowStyle();\
-	DWORD val=get_InternalWindowStyle();\
-	return (val & (Style))==Style;\
+	return (windowStyle & (Style))==Style;\
 }
 
 #define IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(Name,Style)\
@@ -79,8 +78,8 @@ BOOL Class::get_##Name(void)\
 }\
 	BOOL get_##Name(void)\
 {\
-	DWORD val=get_InternalWindowStyle();\
-	return (val & (Style))==Style;\
+	DWORD windowStyle=get_InternalWindowStyle();\
+	return (windowStyle & (Style))==Style;\
 }
 
 #define IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(Name,Style)\
@@ -105,8 +104,8 @@ BOOL Class::get_##Name(void)\
 }\
 	BOOL Class::get_##Name(void)\
 {\
-	DWORD val=get_InternalWindowStyle();\
-	return (val & (Style))==FALSE;\
+	DWORD windowStyle=get_InternalWindowStyle();\
+	return (windowStyle & (Style))==FALSE;\
 }
 
 #define IMPLEMENT_WINSTYLE_BOOL_PROPERTY_NOT_I(Name,Style)\
@@ -118,8 +117,8 @@ BOOL Class::get_##Name(void)\
 }\
 	BOOL get_##Name(void)\
 {\
-	DWORD val=get_InternalWindowStyle();\
-	return (val & (Style))==FALSE;\
+	DWORD windowStyle=get_InternalWindowStyle();\
+	return (windowStyle & (Style))==FALSE;\
 }
 
 #define IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_NOT(Class,Name,Style)\
@@ -131,8 +130,8 @@ BOOL Class::get_##Name(void)\
 }\
 	BOOL Class::get_##Name(void)\
 {\
-	DWORD val=get_InternalWindowStyleEx();\
-	return (val & (Style))==FALSE;\
+	DWORD windowStyle=get_InternalWindowStyleEx();\
+	return (windowStyle & (Style))==FALSE;\
 }
 
 #define ADD_WIN_STYLE(Style)\
