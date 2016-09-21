@@ -17,7 +17,7 @@ function StdCtl_CStatusBarCtrl(form, component)
     
     var sourceStr="\t"+cmpName+".Create("+component.Item("ParentName")+",";
     sourceStr+=MakeRect(component)+",NULL,"+
-               MakeCommonControlStyle(component, styleStrMakeWindowStyle(component))+","+
+               MakeCommonControlStyle(component, MakeWindowStyle(component))+","+
                MakeExWindowStyle(component)+","+
                component.Item("ID")+");\n";    
     sourceStr+=MakeControlFont(component);

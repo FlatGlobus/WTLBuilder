@@ -1060,9 +1060,9 @@ void Component::SetModified(CRect * rc)
 	}
 	else
 	{
-		CRect rc = GetBoundsRect();
-		ComponentToDesigner(rc);
-		GetParentForm()->SetModified(&rc);
+		CRect rect = GetBoundsRect();
+		ComponentToDesigner(rect);
+		GetParentForm()->SetModified(&rect);
 	}
 }
 //координаты контрола в координатах дезигнера!!!

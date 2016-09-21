@@ -60,6 +60,7 @@ class ATL_NO_VTABLE CScriptHandler :
 	CScriptletVector scriplets;
 	CString scriptsDir;
 	size_t currScriplet;
+	CString calledFunc;
 public:
 
 	HWND m_hWnd;
@@ -81,6 +82,7 @@ public:
 
 	BOOL Execute(LPCWSTR pstrFunc,VARIANT* Params, LONG Count, VARIANT* RetValue,BOOL * retFlag)
 	{
+		calledFunc = pstrFunc;
 		*retFlag=TRUE;
 		if( ::lstrlenW(pstrFunc) == 0 )
 			return *retFlag=FALSE;
@@ -299,7 +301,7 @@ public:
 		pse->GetSourcePosition(&dwContext, &ulLine, &lPos);
 		pse->GetSourceLineText(&text);
         CString scriptFile = scriplets.size() < currScriplet ? CString(OLE2CT(scriplets[currScriplet].getFile())) : _T("");
-		CScriptError *se = new CScriptError(scriptFile,CString(OLE2CT(text)), CString(OLE2CT(e.bstrDescription)), ulLine+1, lPos);
+		CScriptError *se = new CScriptError(scriptFile,CString(OLE2CT(text)), CString(OLE2CT(e.bstrDescription)), calledFunc, ulLine+2, lPos);
 		errors.push_back(se);
 		PostEvent(evScriptError,se);
 		scriplets.clear();

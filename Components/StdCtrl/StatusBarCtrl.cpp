@@ -56,7 +56,22 @@ namespace StdCtrl
 	IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CStatusBarCtrl, NoParentAlign, (CCS_NOPARENTALIGN));
 	IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CStatusBarCtrl, NoResize, (CCS_NORESIZE));
 	IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CStatusBarCtrl, Adjustable, (CCS_ADJUSTABLE))
-	IMPLEMENT_WINSTYLE_PROPERTY(CStatusBarCtrl, Position, (CCS_LEFT| CCS_TOP| CCS_RIGHT| CCS_BOTTOM))
+
+	//	IMPLEMENT_WINSTYLE_PROPERTY(CStatusBarCtrl, Position, (CCS_LEFT| CCS_TOP| CCS_RIGHT| CCS_BOTTOM))
+	void CStatusBarCtrl::set_Position(long val)
+	{
+		DWORD windowStyle = get_InternalWindowStyle();
+		windowStyle &= ~(CCS_LEFT | CCS_TOP | CCS_RIGHT | CCS_BOTTOM);
+		windowStyle |= val;
+		GetComponents()->Invalidate(TRUE);
+		set_InternalWindowStyle(windowStyle);
+	}
+
+	long CStatusBarCtrl::get_Position(void)
+	{
+		return get_InternalWindowStyle() & (CCS_LEFT | CCS_TOP | CCS_RIGHT | CCS_BOTTOM);
+	}
+
 
 	BEGIN_LIST_PROPERTY(CCPosition)
 		LIST_ITEM(CCS_LEFT, Left)
