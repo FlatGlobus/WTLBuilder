@@ -205,7 +205,6 @@ LRESULT CDesignerCtrl::OnMouseMove(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lPar
 		::ScreenToClient(GetParent(), &pt);
 
 		pt=SnapToGrid(pt);
-		PostEvent(evXYCursor, pt);
 	}
 
     if(isGridPressed==TRUE)

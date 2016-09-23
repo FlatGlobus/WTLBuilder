@@ -1282,6 +1282,7 @@ void Components::UnselectAll(void)
 
 void Components::MouseDown(CPoint point)
 {
+	ShowCursorPos(point);
 	if (freeze == TRUE)
 		return;
 
@@ -1359,11 +1360,13 @@ void Components::MouseDown(CPoint point)
 			::SendMessage((HWND)designer->GetParentForm()->GetHandle(), WM_LBUTTONDOWN, 0, MAKELONG(point.x, point.y));
 		}
 	}
+	
 	PostEvent(evSetActiveForm, designer->GetParentForm());
 }
 
 void Components::MouseUp(CPoint point)
 {
+	ShowCursorPos(point);
 	if (freeze == TRUE)
 		return;
 
@@ -1392,13 +1395,14 @@ void Components::MouseUp(CPoint point)
 	}
 	hint = hiNone;
 	pressed = FALSE;
-
+	
 	::PostMessage((HWND)GetParentForm()->GetHandle(), WM_UPDATELAYOUT, 0, 0);
 	Invalidate();
 }
 
 void Components::MouseMove(CPoint point)
 {
+	ShowCursorPos(point);
 	if (freeze == TRUE)
 		return;
 
@@ -1423,10 +1427,27 @@ void Components::MouseMove(CPoint point)
 	}
 	else
 	{
-		Component * temp = SelectComponentFromPt(point, TRUE);
+		temp = SelectComponentFromPt(point, TRUE);
 		if (temp)
+		{
 			ShowCursor(temp->GetHint(point));
+		}
 	}
+}
+
+void Components::ShowCursorPos(const CPoint& pt)
+{
+	CPoint point(pt);
+	Component *temp = ComponentFromPt(point, TRUE);
+	if (temp)
+	{
+		if (temp->IsControl())
+		{
+			designer->ClientToScreen(&point);
+			CWindow((HWND)temp->GetHandle()).ScreenToClient(&point);
+		}
+	}
+	PostEvent(evXYCursor, point);
 }
 
 int	Components::GetSelCount(void)

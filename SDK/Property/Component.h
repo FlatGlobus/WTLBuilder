@@ -406,6 +406,7 @@ protected:
     void ReSetTabIndex();
     int  FindByTabIndex(long);
 	void SelectAll(Component*);
+	void ShowCursorPos(const CPoint&);
     
 
 	ComponentArray	components;

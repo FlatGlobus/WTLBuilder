@@ -21,7 +21,7 @@ BOOL ModifyStyle(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags = 0)
     if(nFlags != 0)
     {
         ::SetWindowPos(hWnd, NULL, 0, 0, 0, 0,
-            /*SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER |*/ SWP_NOACTIVATE | nFlags);
+            /*SWP_NOSIZE | SWP_NOMOVE |*/ SWP_NOZORDER | SWP_NOACTIVATE | nFlags);
     }
     return TRUE;
 }
@@ -37,7 +37,7 @@ BOOL ModifyStyleEx(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags = 0)
     if(nFlags != 0)
     {
         ::SetWindowPos(hWnd, NULL, 0, 0, 0, 0,
-            /*SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER |*/ SWP_NOACTIVATE | nFlags);
+            /*SWP_NOSIZE | SWP_NOMOVE |*/ SWP_NOZORDER | SWP_NOACTIVATE | nFlags);
     }
 
     return TRUE;

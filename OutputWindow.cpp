@@ -237,10 +237,9 @@ LRESULT COutputWindow::OnClose(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam
 
 void COutputWindow::OutputScriptError(CScriptError *se)
 {
-    CString errStr = MakeString(" %s %s   function:%s line:%u col:%u",(LPCTSTR)se->GetError(),
-        (LPCTSTR)se->GetDescr(), (LPCTSTR)se->GetFunc(), se->GetLine(),se->GetPos());
-    CString str=MakeString(_T("Script error: %s; %s"),(LPCSTR)(se->GetFile().IsEmpty() ? _T("Unknown file") : se->GetFile()),(LPCTSTR)errStr);
-    int idx = m_listviewctrl.AddItem(m_listviewctrl.GetItemCount(),0,str,ErrorMsg);
+    CString errStr = MakeString("Script error: function name %s line %u  %s %s", (LPCTSTR)se->GetFunc(), se->GetLine(), (LPCTSTR)se->GetError(), (LPCTSTR)se->GetDescr());
+    
+    int idx = m_listviewctrl.AddItem(m_listviewctrl.GetItemCount(),0,errStr,ErrorMsg);
     if(idx != -1)
         m_listviewctrl.SetItemData(idx,(DWORD_PTR)se);
 
