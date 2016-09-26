@@ -30,7 +30,7 @@ namespace ViksoeCtrl
 
 		virtual void InitProperty(void);
 		///common styles
-
+		
         DECLARE_PROPERTY(NoFolders,BOOL)      
         DECLARE_PROPERTY(NoFiles,BOOL)
         DECLARE_PROPERTY(ShowHidden,BOOL)

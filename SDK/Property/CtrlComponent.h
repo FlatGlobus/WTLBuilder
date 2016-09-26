@@ -120,6 +120,9 @@ public:
         return static_cast<T*>(this)->m_hWnd;
     }
 };
+PROPERTY_API BOOL ModifyWndStyle(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags = SWP_NOSIZE | SWP_NOMOVE);
+PROPERTY_API BOOL ModifyWndStyleEx(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags = SWP_NOSIZE | SWP_NOMOVE);
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif
 

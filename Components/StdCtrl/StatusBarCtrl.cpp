@@ -64,7 +64,13 @@ namespace StdCtrl
 		windowStyle &= ~(CCS_LEFT | CCS_TOP | CCS_RIGHT | CCS_BOTTOM);
 		windowStyle |= val;
 		GetComponents()->Invalidate(TRUE);
-		set_InternalWindowStyle(windowStyle);
+
+//////////set_InternalWindowStyle(windowStyle);////////////////////////////
+		ModifyWndStyle((HWND)GetHandle(), 0xFFFFFFFFL, windowStyle | WS_VISIBLE, SWP_NOOWNERZORDER | SWP_SHOWWINDOW | SWP_FRAMECHANGED | SWP_NOACTIVATE | SWP_NOCOPYBITS);
+
+		SET_PROP_VALUE(InternalWindowStyle, windowStyle)
+		SetModified();
+//////////////////////////////////////////////////////////////////////////
 	}
 
 	long CStatusBarCtrl::get_Position(void)

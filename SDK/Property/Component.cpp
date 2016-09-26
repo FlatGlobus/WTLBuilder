@@ -1438,7 +1438,7 @@ void Components::MouseMove(CPoint point)
 void Components::ShowCursorPos(const CPoint& pt)
 {
 	CPoint point(pt);
-	Component *temp = ComponentFromPt(point, TRUE);
+	Component *temp = ComponentFromPt(point, FALSE);
 	if (temp)
 	{
 		if (temp->IsControl())
