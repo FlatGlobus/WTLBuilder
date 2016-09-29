@@ -200,7 +200,8 @@ LRESULT CPropertyList::OnKeyDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& 
 LRESULT CPropertyList::OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& handled)
 {
 	LRESULT lRes = DefWindowProc(uMsg, wParam, lParam);
-	if(GetFocus()!=m_hWnd)
+	//destroy prop editor
+	if(GetFocus()!=m_hWnd && ::IsWindow(GetWindow(GW_CHILD)))
 		SetFocus();
 
 	CPoint point;
@@ -463,8 +464,7 @@ void CPropertyList::InsertProperty(CProperties * p)
     
 	if(properties != NULL)
 		properties->SetTopIndex(GetTopIndex());
-
-	//p->Sort();????????????
+	
 	CListBox::ResetContent();
 	m_SelectedIndex=-1;
 	m_ButtonPressed=FALSE;
@@ -575,18 +575,6 @@ LRESULT CPropertyList::OnMouseWheel(UINT uMsg, WPARAM wParam, LPARAM lParam, BOO
     if (zDelta>0)
         SendMessage(WM_VSCROLL,SB_LINEDOWN,0);
 
-    //LRESULT res =DefWindowProc();
-    //if(::IsWindow(m_propEdit))
-    //{
-    //    int idx=GetCurSel();
-    //    if(idx!=-1)
-    //    {
-    //        CRect rc;
-    //        GetItemRect(idx,&rc);
-    //        rc.left=m_Tracker.GetPos();
-    //        ::MoveWindow(m_propEdit,rc.left,rc.top,rc.Width(),rc.Height(),TRUE);
-    //    }
-    //}
     bHandled = TRUE;
     return 0;
 }

@@ -1282,6 +1282,7 @@ void Components::UnselectAll(void)
 
 void Components::MouseDown(CPoint point)
 {
+	Component * temp = NULL;
 	ShowCursorPos(point);
 	if (freeze == TRUE)
 		return;
@@ -1296,7 +1297,7 @@ void Components::MouseDown(CPoint point)
 		point = SnapToGrid(point);
 		CSize grid = GetDesigner()->IsShowGrid() == TRUE ? GetDesigner()->GetGridSize() : CSize(0, 0);
 		CRect rc(point.x, point.y, point.x + grid.cx, point.y + grid.cy);
-		Component * temp = Create(rc, shiftPressed);
+		temp = Create(rc, shiftPressed);
 		if (temp)
 		{
 			//SetStateAll(csFirstSelected, FALSE);
@@ -1317,7 +1318,7 @@ void Components::MouseDown(CPoint point)
 
 	if (currMode == cmSelect)
 	{
-		Component * temp = SelectComponentFromPt(point, TRUE);
+		temp = SelectComponentFromPt(point, TRUE);
 		if (temp == NULL)
 			temp = SelectComponentFromPt(point);
 
@@ -1352,6 +1353,7 @@ void Components::MouseDown(CPoint point)
 				}
 			}
 			pressed = TRUE;
+			return;
 		}
 		else
 		{
@@ -1809,7 +1811,6 @@ void Components::Delete()
 	CFreeze fr(freeze);
 
 	Invalidate(TRUE);
-	//CRect rc;
 	BOOL flag = FALSE;
 	for (int i = 0; i < (int)components.size();)
 	{
@@ -1829,11 +1830,6 @@ void Components::Delete()
 	if (flag)
 	{
 		ReSetTabIndex();
-		//		if(components.size())
-		//		{
-		//			components[0]->Selected=TRUE;
-		//			components[0]->FirstSelected=TRUE;
-		//		}
 	}
 }
 

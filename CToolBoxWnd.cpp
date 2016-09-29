@@ -292,48 +292,42 @@ LRESULT CToolBoxWnd::OnClose(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
 
 void CToolBoxWnd::SetActiveForm(Component *form)
 {
-	try
+	if (form == NULL)
 	{
-		if(form==NULL)
-        {
-            SetWindowText(_T(""));
-			return;
-        }
-
-		activeForm=form;
-		if(::IsWindow(m_components.m_hWnd)==FALSE)
-			return;
-
-		if(::IsWindow(m_formList.m_hWnd)==FALSE)
-			return;
-        
-		m_components.ResetContent();
-		int idx=m_components.AddString((LPCTSTR)activeForm->get_Name());
-		m_components.SetItemDataPtr(idx,activeForm);
-		m_components.SetCurSel(idx);
-        SetWindowText(activeForm->GetClassName());
-
-		if((idx=FindForm(activeForm))==-1)
-		{
-			idx=m_formList.AddString((LPCTSTR)activeForm->get_Name());
-			m_formList.SetItemDataPtr(idx,activeForm);
-		}	
-		
-		m_formList.SetCurSel(FindForm(activeForm));
-
-		for(int i=0; i < activeForm->GetComponents()->GetCount();i++)
-		{
-			idx=m_components.AddString((LPCTSTR)activeForm->GetComponents()->GetAt(i)->get_Name());
-			m_components.SetItemDataPtr(idx,activeForm->GetComponents()->GetAt(i));
-			if(activeForm->GetComponents()->GetAt(i)->FirstSelected)
-            {
-				m_components.SetCurSel(idx);
-                SetWindowText(activeForm->GetComponents()->GetAt(i)->GetClassName());
-            }
-		}
+		SetWindowText(_T(""));
+		return;
 	}
-	catch(...)
+
+	activeForm = form;
+	if (::IsWindow(m_components.m_hWnd) == FALSE)
+		return;
+
+	if (::IsWindow(m_formList.m_hWnd) == FALSE)
+		return;
+
+	m_components.ResetContent();
+	int idx = m_components.AddString((LPCTSTR)activeForm->get_Name());
+	m_components.SetItemDataPtr(idx, activeForm);
+	m_components.SetCurSel(idx);
+	SetWindowText(activeForm->GetClassName());
+
+	if ((idx = FindForm(activeForm)) == -1)
 	{
+		idx = m_formList.AddString((LPCTSTR)activeForm->get_Name());
+		m_formList.SetItemDataPtr(idx, activeForm);
+	}
+
+	m_formList.SetCurSel(FindForm(activeForm));
+
+	for (int i = 0; i < activeForm->GetComponents()->GetCount(); i++)
+	{
+		idx = m_components.AddString((LPCTSTR)activeForm->GetComponents()->GetAt(i)->get_Name());
+		m_components.SetItemDataPtr(idx, activeForm->GetComponents()->GetAt(i));
+		if (activeForm->GetComponents()->GetAt(i)->FirstSelected)
+		{
+			m_components.SetCurSel(idx);
+			SetWindowText(activeForm->GetComponents()->GetAt(i)->GetClassName());
+		}
 	}
 }
 
@@ -352,7 +346,7 @@ LRESULT CToolBoxWnd::OnComponentChange(WORD /*wNotifyCode*/, WORD /*wID*/, HWND 
         }
         temp->ShowProperties();
         SetWindowText(temp->GetClassName());
-        ::BringWindowToTop((HWND)activeForm->GetHandle());
+        //::BringWindowToTop((HWND)activeForm->GetHandle());
     }
     else
         SetWindowText(_T(""));
