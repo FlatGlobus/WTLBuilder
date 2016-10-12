@@ -23,9 +23,8 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 //{{WTLBUILDER_MEMBER_CREATION
 	m_formFont.CreateFont(-12,0,0,0,FW_NORMAL,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
 	SetFont((HFONT)m_formFont);
-	ModifyStyle(GetStyle(),WS_POPUP|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_CAPTION|WS_SYSMENU);
-	ModifyStyleEx(GetExStyle(),WS_EX_WINDOWEDGE);
-	ResizeClient(412,103);
+	ModifyStyle(GetStyle(),WS_POPUP|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_SYSMENU);
+	ResizeClient(456,103);
 	HICON hIcon = (HICON)::LoadImage(_Module.GetResourceInstance(), MAKEINTRESOURCE(IDR_MAINFRAME),
 	   IMAGE_ICON, ::GetSystemMetrics(SM_CXICON), ::GetSystemMetrics(SM_CYICON), LR_DEFAULTCOLOR);
 	SetIcon(hIcon, TRUE);
@@ -33,21 +32,21 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 	   IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), LR_DEFAULTCOLOR);
 	SetIcon(hIconSmall, TRUE);
 
-	m_button2.Create(m_hWnd,CRect(328,68,411,92),_T("&OK"),WS_CHILD|WS_VISIBLE|BS_TEXT|BS_CENTER|BS_VCENTER,0,IDOK);
+	m_button2.Create(m_hWnd,CRect(356,73,439,97),_T("&OK"),WS_CHILD|WS_VISIBLE|BS_TEXT|BS_CENTER|BS_VCENTER,0,IDOK);
 	m_button2.SetFont((HFONT)m_formFont);
 
 	m_picture5.Create(m_hWnd,CRect(10,10,210,66),NULL,WS_CHILD|WS_VISIBLE|WS_TABSTOP|SS_LEFT|SS_RIGHT|SS_BLACKRECT|SS_WHITERECT|SS_GRAYFRAME|SS_USERITEM|SS_LEFTNOWORDWRAP|SS_BITMAP|SS_CENTERIMAGE,0,IDC_CABOUTDLG_PICTURE5);
 	m_picture5Bitmap.LoadBitmap(IDB_LOGO);
 	m_picture5.SetBitmap(m_picture5Bitmap);
 
-	m_static8.Create(m_hWnd,CRect(219,18,417,33),_T("Copyright ©"),WS_CHILD|WS_VISIBLE|WS_TABSTOP|SS_LEFT,0,IDC_CABOUTDLG_STATIC8);
+	m_static8.Create(m_hWnd,CRect(218,18,442,33),_T("Copyright © FlatGlobus (wtlbuilder@gmail.com)"),WS_CHILD|WS_VISIBLE|WS_TABSTOP|SS_LEFT,0,IDC_CABOUTDLG_STATIC8);
 	m_static8.SetFont((HFONT)m_formFont);
 
-	m_static9.Create(m_hWnd,CRect(10,78,123,92),_T("Version 0.54 (beta)"),WS_CHILD|WS_VISIBLE|WS_TABSTOP|SS_LEFT,0,IDC_CABOUTDLG_STATIC9);
+	m_static9.Create(m_hWnd,CRect(10,78,82,92),_T("Version 0.0"),WS_CHILD|WS_VISIBLE|WS_TABSTOP|SS_LEFT,0,IDC_CABOUTDLG_STATIC9);
 	m_static9Font.CreateFont(-12,0,0,0,FW_BOLD,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
 	m_static9.SetFont((HFONT)m_static9Font);
 
-	m_panel10.Create(m_hWnd,CRect(129,85,317,87),NULL,WS_CHILD|WS_VISIBLE|WS_TABSTOP,WS_EX_CONTROLPARENT,IDC_CABOUTDLG_PANEL10);
+	m_panel10.Create(m_hWnd,CRect(86,85,345,87),NULL,WS_CHILD|WS_VISIBLE|WS_TABSTOP,WS_EX_CONTROLPARENT,IDC_CABOUTDLG_PANEL10);
 	m_panel10.SetFont((HFONT)m_formFont);
 	m_panel10.SetInnerBorder(BDR_RAISEDINNER);
 	m_panel10.SetOuterBorder(BDR_SUNKENOUTER);
@@ -72,4 +71,4 @@ LRESULT CAboutDlg::OnCloseCmd(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, 
 //}}WTLBUILDER_MEMBER_DESTRUCTION
 	return 0;
 }
-//////////////////////////////////////////////////////////////
+

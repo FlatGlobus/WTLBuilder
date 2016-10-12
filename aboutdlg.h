@@ -39,7 +39,6 @@ public:
 	typedef CDialogImpl<CAboutDlg> thisClass;
 
 	BEGIN_MSG_MAP(CAboutDlg)
-		//CHAIN_MSG_MAP(thisClass)
 		MESSAGE_HANDLER(WM_INITDIALOG, OnInitDialog)
 		COMMAND_ID_HANDLER(IDOK, OnCloseCmd)
 		COMMAND_ID_HANDLER(IDCANCEL, OnCloseCmd)
