@@ -399,11 +399,11 @@ void CForms::GetActiveForm(Component **form)
 
 void CForms::AddUndo(Component *form)
 {
-    //if(form==NULL)
-    //{
-    //    SendEvent(evAddUndo,active);
-    //    StopEvent(evAddUndo);
-   // }
+    if(form==NULL && active != NULL)
+    {
+        SendEvent(evAddUndo,active);
+		StopEvent(evAddUndo);
+    }
 }
 
 Component * CForms::Find(const CString & str)

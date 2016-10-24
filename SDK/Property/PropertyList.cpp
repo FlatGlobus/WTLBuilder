@@ -15,7 +15,8 @@
 #include "PropertyList.h"
 #include "resource.h"
 
-#define RIGHT_SHIFT 5
+
+#define RIGHT_SHIFT 10
 #define ITEM_HEIGHT 16
 
 /////////////////////////////////////////////////////////////////////////////
@@ -260,14 +261,6 @@ void CPropertyList::DeleteItem(DELETEITEMSTRUCT *lpdis)
 
 void CPropertyList::MeasureItem(MEASUREITEMSTRUCT * lpMeasureItemStruct)
 {
-	//CRect rc;
-	//CClientDC dc(m_hWnd);
-	//SIZE size;
-	//::GetTextExtentPoint32(dc,"A",1, &size);
-	//GetClientRect(&rc);
-	//lpMeasureItemStruct->itemHeight = size.cy+6;//+2;
-	//lpMeasureItemStruct->itemWidth = rc.Width();
-	//ITEM_HEIGHT
 }
 
 void CPropertyList::DrawItem(DRAWITEMSTRUCT * lpdis)
