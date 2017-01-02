@@ -1065,7 +1065,7 @@ void Component::SetModified(CRect * rc)
 		GetParentForm()->SetModified(&rect);
 	}
 }
-//координаты контрола в координатах дезигнера!!!
+
 Component * Component::Clone()
 {
 	Component * ctrl = NULL;
@@ -1258,7 +1258,7 @@ Component * Components::SelectComponentFromPt(CPoint & at, BOOL selected)
 			if (::IsWindow((HWND)components[i]->GetHandle()) && ::IsWindowVisible((HWND)components[i]->GetHandle()) == FALSE)
 				continue;
 			if (selected == TRUE && components[i]->get_Selected() == FALSE)
-				continue;//из-за панели, невозможно выбрать
+				continue;
 			if (selected == TRUE && hint == hiAll)
 				continue;
 			//if(comp==NULL)
@@ -1643,9 +1643,9 @@ void Components::Paste(ComponentArray * comps, Component * comp, CPoint * downPo
 		ctrl->SetState(csLoading, TRUE);
 		Component * par = comp;
 		if (par == NULL)
-			par = GetParentForm();//или если нечто заселектировано то туда хотя вопрос
+			par = GetParentForm();
 
-		ctrl->CreateComponent(par);//надо искать парента куда ткнули!!!
+		ctrl->CreateComponent(par);
 		UnselectAll();
 		components.push_back(ctrl);
 		CPoint at(0, 0);
@@ -1932,7 +1932,6 @@ void Components::HorizOrder(Component *from, long intend)
 
 	BOOL shiftPressed = GetKeyState(VK_SHIFT) < 0;
 
-	//ищется самая правая координата компонента
 	if (GetSelCount() > 1)
 	{
 		pt.y = 0;
@@ -1991,7 +1990,7 @@ void Components::HorizOrderRight(Component *from, long intend)
 {
 	if (from != designer->GetParentForm())
 		return;
-	StopEvent(evHorizOrder);//заменить на evHorizOrderRight
+	StopEvent(evHorizOrder);
 
 	CPoint pt(0, 0);
 	int left = 0;
@@ -2403,7 +2402,7 @@ void Components::MoveAfter(Component *comp, Component *after, BOOL childrenToo)
 	UINT afterIdx;
 
 	if (after == NULL)
-		afterIdx = GetCount() - 1;//засунем в самый конец
+		afterIdx = GetCount() - 1;
 	else
 		afterIdx = FindIndex(after);
 
@@ -2870,7 +2869,7 @@ void Components::AlignBottom(Component *from, long intend)
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
-void Components::AlignHoriz(Component *from)//выравнивание по горизонтали
+void Components::AlignHoriz(Component *from)
 {
 	if (from != designer->GetParentForm())
 		return;
@@ -2913,7 +2912,7 @@ void Components::AlignHoriz(Component *from)//выравнивание по горизонтали
 	((CFormComponent *)GetParentForm())->AddUndo(GetParentForm());
 }
 
-void Components::AlignVert(Component *from)//выравнивание по вертикали
+void Components::AlignVert(Component *from)
 {
 	if (from != designer->GetParentForm())
 		return;
@@ -3337,7 +3336,6 @@ void Components::ChangeComponentsParent(Component *form)
 		return;
 	}
 
-	//если в детку пихаем родителя, то отваливаем
 	int idx = FindParentIndex(firstSelected);
 	if (idx != -1)
 	{

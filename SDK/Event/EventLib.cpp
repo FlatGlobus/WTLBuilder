@@ -756,7 +756,7 @@ LRESULT WINAPI ThreadBridge::wndproc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM 
 	return DefWindowProc(hWnd, Msg, wParam, lParam);
 }
 
-VOID CALLBACK ThreadBridge::BridgeTimerProc(HWND,UINT,UINT_PTR,DWORD currentTickCount)// проверку на 49 дней
+VOID CALLBACK ThreadBridge::BridgeTimerProc(HWND,UINT,UINT_PTR,DWORD currentTickCount)
 {
 	SimpleLock lock(TRUE);
 	//currentTickCount=GetTickCount();

@@ -425,7 +425,6 @@ void CFormComponent::InitProperty(void)
 		//DEFINE_PROPERTY(WndClient,ComponentName,CFormComponent,_T("NULL"))
 //		DEFINE_PROPERTY(WndToolBar,ComponentName,CFormComponent,_T("NULL"))
 //		DEFINE_PROPERTY(WndStatusBar,ComponentName,CFormComponent,_T("NULL"))
-	    //пока полностью не реализовано, убрать, чтоб не мешалось
 		//DEFINE_PROPERTY(Menu,ComponentName,CFormComponent,_T("NULL"))
 }
 
@@ -1075,8 +1074,7 @@ void CFormComponent::DefineLayout()
 		Component *temp=NULL;
 		Component * component=GetComponents()->GetAt(i);
 
-		if(component->IsControl()==FALSE)//просто компоненты не учитывать
-			//они не окошки
+		if(component->IsControl()==FALSE)
 			continue;
 
 		_id=component->get_UniqueID();

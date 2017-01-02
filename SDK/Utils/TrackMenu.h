@@ -77,7 +77,6 @@ public:
 	}
 
 	virtual void CustomizeMenu(CMenuHandle & menu,CPoint &)
-	//координаты мышки передаются в клиентских координатах
 	{
 	}
 };

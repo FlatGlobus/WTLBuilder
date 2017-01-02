@@ -631,10 +631,8 @@ unsigned long Distanse(CPoint & pt1,CPoint & pt2)
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////
 long DistPointSeg(CPoint &point,CPoint &pn,CPoint &pk)
-// point - точка, pn,pk - начало и конец отрезка, prj - проекция точки на прямую (pn,pk)
-// return: расстояние от точки до отрезка
 {
-    CPoint ppr;  // проекция точки на прямую (pn,pk)
+    CPoint ppr;
     long dx,dy;
     double delta,delta1,delta2;
     
@@ -650,10 +648,10 @@ long DistPointSeg(CPoint &point,CPoint &pn,CPoint &pk)
     ppr.x=(unsigned long)((delta2*(double)pn.x+delta1*(double)pk.x)/delta);
     ppr.y=(unsigned long)((delta2*(double)pn.y+delta1*(double)pk.y)/delta);
     
-    if (ppr.x >= min(pn.x,pk.x) && ppr.x <= max(pn.x,pk.x) && // проекция точки
-        ppr.y >= min(pn.y,pk.y) && ppr.y <= max(pn.y,pk.y))   // лежит на отрезке
+    if (ppr.x >= min(pn.x,pk.x) && ppr.x <= max(pn.x,pk.x) &&
+        ppr.y >= min(pn.y,pk.y) && ppr.y <= max(pn.y,pk.y))
         return Distanse(point,ppr);
-    else  // проекция точки не лежит на отрезке
+    else
         return min(Distanse(point,pn),Distanse(point,pk));
 }  
 

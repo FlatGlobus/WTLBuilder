@@ -32,7 +32,7 @@ class PROPERTY_API CCustomVal
 public:
 	long  id;
 	LPTSTR name;
-	LPTSTR decorate;//для представления в проперти контроле
+	LPTSTR decorate;
 };
 
 class PROPERTY_API PropertyBase;
@@ -123,7 +123,7 @@ protected:
 	BOOL			published;
     BOOL            readOnly;
     CProperties*    objprop;
-	bool inited; // true если значение было установлено в компонент, устанавливается в компонент после  вызова update
+	bool inited;
 };
 
 inline bool compare( const PropertyBase* l, const PropertyBase* r ) { return *l < *r; }

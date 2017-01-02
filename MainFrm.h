@@ -318,4 +318,3 @@ public:
 	void __stdcall InsertPopupItem(BSTR after, BSTR popitem);
 	void __stdcall AppendItem(BSTR popup, BSTR item, BSTR scriptName);
 };
-//todo вставить,копировать не работает с пропертиедит, разобраться с акселератором

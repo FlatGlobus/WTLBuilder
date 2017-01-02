@@ -1602,12 +1602,10 @@ void CXMLDOMDocument2::Save(_variant_t destination)
 {
     CComBSTR bstrXML( L"" );
     HRESULT	 hr = P()->get_xml( &bstrXML );
-    // вставляем переводы строки
     CString sXml = CW2CT( bstrXML );
     sXml.Replace( _T("><"), _T(">\n<") );
     bstrXML = sXml.GetBuffer( 0 );
 
-    // загружаем взад
     VARIANT_BOOL bSuccess;
     hr = P()->loadXML( bstrXML, &bSuccess );
 

@@ -68,8 +68,7 @@ protected:
 	long			nPositions;
     CImage          formIcon;
     BOOL            fromTemplate;
-    long            idBase;//для каждой формы задается базовый номер для вычисления ID контрола
-    //ctrlID+idBase таким образом ID контрола становится уникальным в приложении   
+    long            idBase;
 	//CBrushEx		bkBrush;
     Undo            undo;
     CString			viewCtrl;
@@ -180,7 +179,6 @@ public:
 
 
     DECLARE_PROPERTY(WndClient,CString)
-	//пока полностью не реализовано, убрать, чтоб не мешалось
     //DECLARE_PROPERTY(WndToolBar,CString)
     //DECLARE_PROPERTY(WndStatusBar,CString)
     //DECLARE_PROPERTY(Menu,CString)

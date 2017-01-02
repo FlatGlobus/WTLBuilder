@@ -11,7 +11,6 @@
 
 namespace StdCtrl
 {
-//пока полностью не реализовано, убрать, чтоб не мешалось
 //    REGISTER_COMPONENT(CMenu,StdCtl,IDB_MENU)
 
     CMenu::CMenu(LPTSTR _name):Component(_name)

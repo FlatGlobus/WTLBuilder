@@ -67,12 +67,12 @@ public:
    	BSTR __stdcall get_Localize();
 	void __stdcall put_Localize(BSTR);
 
-	void __stdcall Insert(BSTR,BSTR);//вставляет текст между скобками
-	void __stdcall ClearBetween(BSTR,BSTR);//удаляет содержимое между скобками
-	BSTR __stdcall Format(Component *,BSTR);//форматирует строку
+	void __stdcall Insert(BSTR,BSTR);
+	void __stdcall ClearBetween(BSTR,BSTR);
+	BSTR __stdcall Format(Component *,BSTR);
     BOOL __stdcall IsEmptyHeader(BSTR,BSTR);
     BOOL __stdcall IsEmptySource(BSTR,BSTR);
-    void __stdcall AddInclude(BSTR,BSTR);//добавляет include
+    void __stdcall AddInclude(BSTR,BSTR);
 
 	BOOL LoadSource(const CString &);
 	BOOL LoadHeader(const CString &);

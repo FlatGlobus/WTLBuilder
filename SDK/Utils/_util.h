@@ -9,7 +9,6 @@
 
 #define KEYDOWN(Key) ((GetKeyState(Key)&0x8000)!=0)
 /////////////////////////////////////////////////////////////////////////////////////////
-//замечательное округление
 template <class T> inline long _round(T val)
 {
 	return val > 0 ? (long)(val+.5) : (long)(val-.5);
@@ -27,18 +26,14 @@ template <class T> inline int sign(T val)
 	return val >= 0 ? 1 : -1;
 }
 
-//расстояние между точками
 unsigned long Distanse(CPoint & pt1,CPoint & pt2);
-//расстояние между точкой и отрезком
 unsigned long Distanse(CPoint &pt,CPoint &pt1,CPoint &pt2);
 
-//попадание точки в прямоугольник
 inline BOOL PtInRect(CRect &rc,CPoint& point)
 {
 	return point.x >= rc.left && point.x <= rc.right
 		&& point.y >= rc.top && point.y <= rc.bottom;
 }
-//попадание прямоугольника rc2 в прямоугольник rc1
 inline BOOL RectInRect(CRect &rc1,CRect& rc2)
 {
 	return rc2.left >= rc1.left && rc2.right <= rc1.right

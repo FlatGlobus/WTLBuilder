@@ -7,7 +7,6 @@
 
 #include "stdafx.h"
 #include "Register.h"
-//добавить обработку нулевого имени и страницы
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //__RegisterComponent::__RegisterComponent(LPCSTR Name, LPCSTR Cp,UINT ID,CAppModule *m):page(Cp),name(Name),bitmap(NULL),resID(ID),
 //module(m)

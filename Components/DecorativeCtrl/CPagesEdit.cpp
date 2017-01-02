@@ -106,7 +106,6 @@ LRESULT CPagesEdit::OnAcceptChanges(int, LPNMHDR _hdr, BOOL& )
     {
         CEdit edit(editWindow);
         edit.GetWindowText(text);
-        //название должно быть уникальным и быть идентификатором
         return m_pagesedit.FindItemExact(text)==LB_ERR? !IsIdentifier(text):TRUE;
     }
     return TRUE;

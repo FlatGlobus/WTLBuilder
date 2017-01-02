@@ -887,7 +887,6 @@ void CProperties::SaveChild(CXMLDOMNode &Node,PropertyBase * Parentprop)
 	}
 }
 
-//надо искать и в субпропертях !!
 PropertyBase * CProperties::FindByName(LPCTSTR n)
 {
 	//PropertyNameDecorator propName(n);
