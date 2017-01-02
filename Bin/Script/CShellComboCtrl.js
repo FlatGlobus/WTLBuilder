@@ -30,12 +30,23 @@ function MakeShellCtrlStyle(component)
     if(component.Item("ShellStyle.NoRoot") == true)
         str += "|SCT_EX_NOROOT";
     
-    if (str.charAt(0)=='|' )
+    if (str.length != 0)
     {
-        str=str.substr(1,str.length);
-        str = "\t"+component.Item("Name")+".SetShellStyle("+str+");\n";
-        return str;
+        if (str.charAt(0) == '|')
+        {
+            str = str.substr(1, str.length);
+        }
     }
+    else
+    {
+        str = "0";
+    }
+
+    str = "\t"+component.Item("Name")+".SetShellStyle("+str+");\n";
+    return str;
+    
+
+
     return str = "\t"+component.Item("Name")+".SetShellStyle(0);\n";
 }
 /////////////////////////////////////////////////////////////////////////////////

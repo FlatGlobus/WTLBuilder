@@ -10,7 +10,7 @@
 //////////////////////////////////////////////////////////////////////////
 long CorrectControlID(LPCTSTR ID);
 //////////////////////////////////////////////////////////////////////////
-BOOL ModifyStyle(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags = 0)
+BOOL ModifyWndStyle(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags )
 {
     DWORD dwStyle = ::GetWindowLong(hWnd, GWL_STYLE);
     DWORD dwNewStyle = (dwStyle & ~dwRemove) | dwAdd;
@@ -21,12 +21,12 @@ BOOL ModifyStyle(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags = 0)
     if(nFlags != 0)
     {
         ::SetWindowPos(hWnd, NULL, 0, 0, 0, 0,
-            SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE | nFlags);
+             SWP_NOZORDER | SWP_NOACTIVATE | nFlags);
     }
     return TRUE;
 }
 
-BOOL ModifyStyleEx(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags = 0)
+BOOL ModifyWndStyleEx(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags )
 {
     DWORD dwStyle = ::GetWindowLong(hWnd, GWL_EXSTYLE);
     DWORD dwNewStyle = (dwStyle & ~dwRemove) | dwAdd;
@@ -37,7 +37,7 @@ BOOL ModifyStyleEx(HWND hWnd, DWORD dwRemove, DWORD dwAdd, UINT nFlags = 0)
     if(nFlags != 0)
     {
         ::SetWindowPos(hWnd, NULL, 0, 0, 0, 0,
-            SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE | nFlags);
+             SWP_NOZORDER | SWP_NOACTIVATE | nFlags);
     }
 
     return TRUE;
@@ -317,7 +317,7 @@ DWORD ControlComponentBase::get_InternalWindowStyle()
 void ControlComponentBase::set_InternalWindowStyle(DWORD s)
 {
     if(::IsWindow((HWND)GetHandle()))	
-        ModifyStyle((HWND)GetHandle(),0xFFFFFFFFL,s|WS_VISIBLE,SWP_NOSIZE|SWP_NOOWNERZORDER|SWP_SHOWWINDOW|SWP_FRAMECHANGED|SWP_NOACTIVATE|SWP_NOCOPYBITS);
+        ModifyWndStyle((HWND)GetHandle(),0xFFFFFFFFL,s|WS_VISIBLE,SWP_NOSIZE|SWP_NOMOVE|SWP_NOOWNERZORDER|SWP_SHOWWINDOW|SWP_FRAMECHANGED|SWP_NOACTIVATE|SWP_NOCOPYBITS);
 	
     SET_PROP_VALUE(InternalWindowStyle,s)
     SetModified();
@@ -331,7 +331,7 @@ DWORD ControlComponentBase::get_InternalWindowStyleEx()
 void ControlComponentBase::set_InternalWindowStyleEx(DWORD s)
 {
     if(::IsWindow((HWND)GetHandle()))	
-        ModifyStyleEx((HWND)GetHandle(),0xFFFFFFFFL,s,SWP_NOSIZE|SWP_NOOWNERZORDER|SWP_SHOWWINDOW|SWP_FRAMECHANGED|SWP_NOACTIVATE|SWP_NOCOPYBITS);
+        ModifyWndStyleEx((HWND)GetHandle(),0xFFFFFFFFL,s,SWP_NOSIZE|SWP_NOMOVE|SWP_NOOWNERZORDER|SWP_SHOWWINDOW|SWP_FRAMECHANGED|SWP_NOACTIVATE|SWP_NOCOPYBITS);
 	SET_PROP_VALUE(InternalWindowStyleEx, s)
     SetModified();
 }

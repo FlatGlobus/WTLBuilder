@@ -42,7 +42,7 @@ HWND CDesignerCtrl::Create(Component * _Parent,Components * c)
 	if (CWindowImpl<CDesignerCtrl, CWindow>::Create((HWND)Parent->GetHandle(),rc,NULL,WS_CHILD|WS_VISIBLE,WS_EX_TOPMOST|WS_EX_TRANSPARENT,DESIGNERCTRL_ID)!=NULL)
 	{
 		components=c;
-		SetFocus();
+		//SetFocus();
         CalculateGoldenXY();
         EnableTrackMenu(TRUE);
         SetMenuID(IDR_FORM);
@@ -205,7 +205,6 @@ LRESULT CDesignerCtrl::OnMouseMove(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lPar
 		::ScreenToClient(GetParent(), &pt);
 
 		pt=SnapToGrid(pt);
-		PostEvent(evXYCursor, pt);
 	}
 
     if(isGridPressed==TRUE)

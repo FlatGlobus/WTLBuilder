@@ -26,12 +26,14 @@ namespace StdCtrl
         virtual CString     GetComponetKind(){return _T("TOOLBAR");}
 		virtual void InitProperty(void);
 		///common styles
-		DECLARE_WINSTYLE_PROPERTY(CtrlAlign)
+
 		DECLARE_WINSTYLE_BOOL_PROPERTY(NoDivider)
 		DECLARE_WINSTYLE_BOOL_PROPERTY(NoMoveY)
+		DECLARE_WINSTYLE_BOOL_PROPERTY(NoMoveX)
 		DECLARE_WINSTYLE_BOOL_PROPERTY(NoParentAlign)
 		DECLARE_WINSTYLE_BOOL_PROPERTY(NoResize)
-
+		DECLARE_WINSTYLE_BOOL_PROPERTY(Adjustable)
+		DECLARE_PROPERTY(Position, long)
 	};
 }
 //////////////////////////////////////////////////////////////////////////

@@ -8,7 +8,7 @@
 #ifndef __COMMANDS_H
 #define __COMMANDS_H
 //////////////////////////////////////////////////////////////////////////
-enum iCommands
+enum Commands
 {
 	evStartingUp,//(void)
 	evShutDown,//(void)

@@ -682,9 +682,9 @@ CRect  Component::GetBoundsRect(void)
 	if (state.GetBit(csLoading))
 	{
 		bounds.left = GET_PROP_VALUE(long, Left)
-			bounds.top = GET_PROP_VALUE(long, Top)
-			bounds.right = bounds.left + GET_PROP_VALUE(long, Width)
-			bounds.bottom = bounds.top + GET_PROP_VALUE(long, Height)
+		bounds.top = GET_PROP_VALUE(long, Top)
+		bounds.right = bounds.left + GET_PROP_VALUE(long, Width)
+		bounds.bottom = bounds.top + GET_PROP_VALUE(long, Height)
 	}
 	return bounds;
 }
@@ -1060,9 +1060,9 @@ void Component::SetModified(CRect * rc)
 	}
 	else
 	{
-		CRect rc = GetBoundsRect();
-		ComponentToDesigner(rc);
-		GetParentForm()->SetModified(&rc);
+		CRect rect = GetBoundsRect();
+		ComponentToDesigner(rect);
+		GetParentForm()->SetModified(&rect);
 	}
 }
 //координаты контрола в координатах дезигнера!!!
@@ -1282,6 +1282,8 @@ void Components::UnselectAll(void)
 
 void Components::MouseDown(CPoint point)
 {
+	Component * temp = NULL;
+	ShowCursorPos(point);
 	if (freeze == TRUE)
 		return;
 
@@ -1295,7 +1297,7 @@ void Components::MouseDown(CPoint point)
 		point = SnapToGrid(point);
 		CSize grid = GetDesigner()->IsShowGrid() == TRUE ? GetDesigner()->GetGridSize() : CSize(0, 0);
 		CRect rc(point.x, point.y, point.x + grid.cx, point.y + grid.cy);
-		Component * temp = Create(rc, shiftPressed);
+		temp = Create(rc, shiftPressed);
 		if (temp)
 		{
 			//SetStateAll(csFirstSelected, FALSE);
@@ -1316,7 +1318,7 @@ void Components::MouseDown(CPoint point)
 
 	if (currMode == cmSelect)
 	{
-		Component * temp = SelectComponentFromPt(point, TRUE);
+		temp = SelectComponentFromPt(point, TRUE);
 		if (temp == NULL)
 			temp = SelectComponentFromPt(point);
 
@@ -1351,6 +1353,7 @@ void Components::MouseDown(CPoint point)
 				}
 			}
 			pressed = TRUE;
+			return;
 		}
 		else
 		{
@@ -1359,11 +1362,13 @@ void Components::MouseDown(CPoint point)
 			::SendMessage((HWND)designer->GetParentForm()->GetHandle(), WM_LBUTTONDOWN, 0, MAKELONG(point.x, point.y));
 		}
 	}
+	
 	PostEvent(evSetActiveForm, designer->GetParentForm());
 }
 
 void Components::MouseUp(CPoint point)
 {
+	ShowCursorPos(point);
 	if (freeze == TRUE)
 		return;
 
@@ -1392,13 +1397,14 @@ void Components::MouseUp(CPoint point)
 	}
 	hint = hiNone;
 	pressed = FALSE;
-
+	
 	::PostMessage((HWND)GetParentForm()->GetHandle(), WM_UPDATELAYOUT, 0, 0);
 	Invalidate();
 }
 
 void Components::MouseMove(CPoint point)
 {
+	ShowCursorPos(point);
 	if (freeze == TRUE)
 		return;
 
@@ -1423,10 +1429,27 @@ void Components::MouseMove(CPoint point)
 	}
 	else
 	{
-		Component * temp = SelectComponentFromPt(point, TRUE);
+		temp = SelectComponentFromPt(point, TRUE);
 		if (temp)
+		{
 			ShowCursor(temp->GetHint(point));
+		}
 	}
+}
+
+void Components::ShowCursorPos(const CPoint& pt)
+{
+	CPoint point(pt);
+	Component *temp = ComponentFromPt(point, FALSE);
+	if (temp)
+	{
+		if (temp->IsControl())
+		{
+			designer->ClientToScreen(&point);
+			CWindow((HWND)temp->GetHandle()).ScreenToClient(&point);
+		}
+	}
+	PostEvent(evXYCursor, point);
 }
 
 int	Components::GetSelCount(void)
@@ -1788,7 +1811,6 @@ void Components::Delete()
 	CFreeze fr(freeze);
 
 	Invalidate(TRUE);
-	//CRect rc;
 	BOOL flag = FALSE;
 	for (int i = 0; i < (int)components.size();)
 	{
@@ -1808,11 +1830,6 @@ void Components::Delete()
 	if (flag)
 	{
 		ReSetTabIndex();
-		//		if(components.size())
-		//		{
-		//			components[0]->Selected=TRUE;
-		//			components[0]->FirstSelected=TRUE;
-		//		}
 	}
 }
 

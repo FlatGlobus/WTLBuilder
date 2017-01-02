@@ -367,7 +367,7 @@ public:
          si.nPage = cxClient;
          si.nPos  = GetScrollPos(SB_HORZ);   // Preserve scroller position
          SetScrollInfo(SB_HORZ, &si, TRUE);  // Setup scrollbar params
-         ModifyStyle(0, WS_HSCROLL, SWP_FRAMECHANGED);
+         ModifyWndStyle(0, WS_HSCROLL, SWP_FRAMECHANGED);
          m_nOffset = -si.nPos;    // Save scrollbar position for correct drawing
          if( si.nPos ) {          // Scroll position is non-zero. code is stolen from OnHScroll()
             RECT rcHeader, rcTree;
@@ -383,7 +383,7 @@ public:
       }
       else {
          SetScrollPos(SB_HORZ, 0, TRUE);
-         ModifyStyle(WS_HSCROLL, 0, SWP_FRAMECHANGED);
+         ModifyWndStyle(WS_HSCROLL, 0, SWP_FRAMECHANGED);
          m_nOffset = 0;
          Invalidate();
       }

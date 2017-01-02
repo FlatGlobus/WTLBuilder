@@ -99,7 +99,7 @@ function StdCtl_CToolBarCtrl(form,component)
     
     var sourceStr="\t"+cmpName+".Create("+component.Item("ParentName")+",";
     sourceStr+=MakeRect(component)+",NULL,"+
-               MakeEditStyle(component)+","+
+               MakeCommonControlStyle(component, MakeToolBarCtrlStyle(component)) + "," +
                MakeExWindowStyle(component)+","+
                component.Item("ID")+");\n";    
     sourceStr+=MakeControlFont(component);

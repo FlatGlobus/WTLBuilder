@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1D589EED-3287-4B38-8BF6-FCAC355A2C10}"
 	ProjectSection(SolutionItems) = preProject
@@ -59,6 +59,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1D58
 		Bin\Script\SplitterBar.js = Bin\Script\SplitterBar.js
 		Bin\Script\Util.js = Bin\Script\Util.js
 		Bin\Script\WindowClass.js = Bin\Script\WindowClass.js
+		Bin\Script\WindowStyles.js = Bin\Script\WindowStyles.js
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{7667AD59-FA2F-44BF-B450-AAF2B3BF97F0}"

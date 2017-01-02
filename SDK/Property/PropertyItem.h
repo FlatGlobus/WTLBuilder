@@ -257,7 +257,7 @@ public:
 
 	template <typename T> T GetPropValue(LPCTSTR name)
 	{
-		T ret; //I know...
+		T ret; //hide prop instead of remowing it
 		void * val = getPropValue(name);
 
 		if (val != NULL)

@@ -73,13 +73,8 @@ public:
 		MESSAGE_HANDLER(WM_MOUSEMOVE, OnMouseMove)
 		MESSAGE_HANDLER(WM_LBUTTONDBLCLK,OnLButtonDblClk)
 		MESSAGE_HANDLER(WM_PAINT, OnPaint)
-		//MESSAGE_HANDLER(WM_ERASEBKGND, OnEraseBackground)
 		MESSAGE_HANDLER(WM_SIZE, OnSize)
-		
-		//REFLECTED_NOTIFY_CODE_HANDLER_EX(TTN_GETDISPINFO,OnNeedText)
 		REFLECTED_NOTIFY_CODE_HANDLER_EX(TTN_NEEDTEXTW,OnNeedText)
-		REFLECT_NOTIFICATIONS_EX()
-        
 	END_MSG_MAP()
 
 	HWND Create(HWND Parent,CRect & rc,UINT id)
@@ -90,11 +85,9 @@ public:
 		::SetClassLong(m_hWnd,GCL_STYLE,clsStyle);
 
 		images.Create(colWidth-2,colHeight-2,ILC_COLOR8|ILC_MASK,0,1);
-        
          
 		images.SetBkColor(RGB(192,192,192)/*CLR_NONE*/ /*::GetSysColor(COLOR_BTNFACE)*/);
 		CalculateVisibleCount();
-
 
         m_toolTip.Create(*this,NULL,NULL,TTS_ALWAYSTIP,WS_EX_TOPMOST);
         // Create inactive
@@ -234,12 +227,7 @@ public:
 		GetClientRect(clientRect);
 		CPaintDCEx	dc(pdc,clientRect);
 		PaintGrid(dc);
-		return TRUE;
-	}
-
-	LRESULT OnEraseBackground(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-	{
-		return TRUE;
+		return FALSE;
 	}
 
 	LRESULT OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
@@ -255,7 +243,6 @@ public:
 	{
         if(cmdName.IsEmpty()==FALSE)
             return name+_T(":")+cmdName;
-
         return _T("");
 	}
 	
@@ -326,16 +313,6 @@ public:
 			DrawRightScroolButton(dc);
 		}
 	}
-
-	//void SetSize(int cx)
-	//{
-	//	if(::IsWindow(m_hWnd))
-	//	{
-	//		int x=(cx/colWidth) * colWidth;
-	//		MoveWindow(0,0,x,colHeight,TRUE);	
-	//		CalculateVisibleCount();			
-	//	}
-	//}
 
 	long IndexFromPoint(CPoint & point)
 	{
@@ -540,7 +517,6 @@ public:
 		MESSAGE_HANDLER(WM_SIZE, OnSize)
 		MESSAGE_HANDLER(WM_SELCHANGEPANEL,OnChange);
 		REFLECTED_NOTIFY_CODE_HANDLER_EX(TCN_SELCHANGE, OnTabSelect)
-    	REFLECT_NOTIFICATIONS_EX()
 	END_MSG_MAP()
 		
 	CToolTab():m_hWndClient(NULL),currentPanel(-1)
@@ -603,9 +579,10 @@ public:
 		GetClientRect(&client);
 
 		client.top = item.bottom+1;		
-        //client.bottom-=5;
+        
 		if(::IsWindow(hwndNew))
 			::MoveWindow(hwndNew,client.left,client.top,client.Width(),client.Height(), FALSE);
+
 		::ShowWindow(hwndOld, SW_HIDE);
 		::ShowWindow(hwndNew, SW_SHOW);
 		return 0;
@@ -649,7 +626,6 @@ public:
 		GetItemRect(cur,&item);
 		GetClientRect(&client);
 		client.top = item.bottom+1;
-        //client.bottom-=1;
 		temp->Create(m_hWnd, client,100+cur);
 		temp->AddImage(IDB_ARROW,_T(""));
 		if(GetItemCount()==1)
@@ -660,6 +636,7 @@ public:
 			SetCurSel(0);
 			pages[currentPanel]->ShowWindow(SW_SHOW);
 		}
+		
 		return temp;
 	}
 
