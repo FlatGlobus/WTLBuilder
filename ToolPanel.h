@@ -75,6 +75,8 @@ public:
 		MESSAGE_HANDLER(WM_PAINT, OnPaint)
 		//MESSAGE_HANDLER(WM_ERASEBKGND, OnEraseBackground)
 		MESSAGE_HANDLER(WM_SIZE, OnSize)
+		
+		//REFLECTED_NOTIFY_CODE_HANDLER_EX(TTN_GETDISPINFO,OnNeedText)
 		REFLECTED_NOTIFY_CODE_HANDLER_EX(TTN_NEEDTEXTW,OnNeedText)
 		REFLECT_NOTIFICATIONS_EX()
         
@@ -538,6 +540,7 @@ public:
 		MESSAGE_HANDLER(WM_SIZE, OnSize)
 		MESSAGE_HANDLER(WM_SELCHANGEPANEL,OnChange);
 		REFLECTED_NOTIFY_CODE_HANDLER_EX(TCN_SELCHANGE, OnTabSelect)
+    	REFLECT_NOTIFICATIONS_EX()
 	END_MSG_MAP()
 		
 	CToolTab():m_hWndClient(NULL),currentPanel(-1)
@@ -558,7 +561,7 @@ public:
         //imageList.SetBkColor(RGB(192,192,192));
         
         HWND tabWnd = CWindowImpl<CToolTab, CTabCtrl>::Create(hWndParent,rc,NULL, 
-            WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | TCS_TABS | TCS_FOCUSNEVER | WS_CLIPSIBLINGS,0,ID);
+            WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | TCS_TABS | TCS_FOCUSNEVER,0,ID);
             
         if(::IsWindow(tabWnd))
             SetImageList(imageList);
@@ -657,7 +660,6 @@ public:
 			SetCurSel(0);
 			pages[currentPanel]->ShowWindow(SW_SHOW);
 		}
-		SetWindowPos(HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE);
 		return temp;
 	}
 
