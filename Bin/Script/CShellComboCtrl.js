@@ -44,10 +44,6 @@ function MakeShellCtrlStyle(component)
 
     str = "\t"+component.Item("Name")+".SetShellStyle("+str+");\n";
     return str;
-    
-
-
-    return str = "\t"+component.Item("Name")+".SetShellStyle(0);\n";
 }
 /////////////////////////////////////////////////////////////////////////////////
 function ViksoeCtrl_CShellComboCtrl(form,component)

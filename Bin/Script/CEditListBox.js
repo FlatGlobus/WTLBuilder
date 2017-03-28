@@ -7,7 +7,7 @@
 
 function MakeEditListBoxStyle(component)
 {
-    var style=parseInt(component.Item("InternalWindowStyle"),10);
+    //var style=parseInt(component.Item("InternalWindowStyle"),10);
     var styleStr=MakeWindowStyle(component);
     
     if ( component.Item("Browse")==true )

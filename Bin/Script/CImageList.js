@@ -17,7 +17,7 @@ function MakeImageListFlag(component)
     var ILC_COLOR32=             0x00000020;
 
 
-    var style=parseInt(component.Item("Flag"),10);
+    //var style=parseInt(component.Item("Flag"),10);
     var styleStr="";
     return styleStr;
 }

@@ -131,7 +131,7 @@ function StdCtl_CTabCtrl(form,component)
             else
                 pageName+=pages.charAt(idx);
         }
-        sourceStr+="\t"+cmpName+".SetCurSel("+curSel+");\n"
+        sourceStr += "\t" + cmpName + ".SetCurSel(" + curSel + ");\n";
     }
     sourceStr+=MakeControlFont(component);
     sourceStr+=MakeToolTip(component);

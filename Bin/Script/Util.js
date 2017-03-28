@@ -393,7 +393,6 @@ function RemoveFirstOr(str)
 /////////////////////////////////////////////////////////////////////////////////
 function TabStopControls(form)
 {
-	var codegen=form.Code;
 	var components=form.Components;
 	var current=1;
 	var str="";

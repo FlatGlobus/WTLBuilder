@@ -8,7 +8,7 @@
 function DecorativeCtrl_CColorButton(form,component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
+    //var cmpName=component.Item("Name");
     
     CheckComponent(form, component);
 

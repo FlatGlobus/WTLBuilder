@@ -182,7 +182,6 @@ function StdCtl_CStatic(form,component)
     MakeSetFocus(form,component);        
     MakeContained(form,component);
     
-    var codegen=form.Code;
     codegen.Insert(endMemberDecl,headerStr);
     codegen.Insert(endMemberCreation,sourceStr);
     codegen.Insert(endCtrlIDDecl,MakeControlID(component));
@@ -237,7 +236,6 @@ function StdCtl_CPicture(form,component)
     MakeSetFocus(form,component);        
     MakeContained(form,component);
     
-    var codegen=form.Code;
     codegen.Insert(endMemberDecl,headerStr);
     codegen.Insert(endMemberCreation,sourceStr);
     codegen.Insert(endCtrlIDDecl,MakeControlID(component));

@@ -108,7 +108,6 @@ function MakeButtonStyle(component)
 function StdCtl_CButton(form,component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
     
     CheckComponent(form, component);
 

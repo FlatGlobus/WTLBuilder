@@ -34,7 +34,7 @@ function Form_CWindowImpl(form)
 function MakeCWindowImplClassDeclaration(form)
 {
     var declStr="";
-    var codegen=form.Code;
+    
     if ( form.Item("WindowClass")==true )
     {
         declStr="\tDECLARE_WND_CLASS_EX("+MakeCString(form.Item("WindowClass.ClassName"))+",";

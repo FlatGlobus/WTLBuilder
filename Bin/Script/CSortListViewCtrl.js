@@ -35,7 +35,6 @@ function DecorativeCtrl_CSortListViewCtrl(form, component)
     MakeSetFocus(form,component);       
     MakeContained(form,component);
     
-    var codegen=form.Code;
     codegen.Insert(endMemberDecl,headerStr);
     codegen.Insert(endMemberCreation,sourceStr);
     codegen.Insert(endCtrlIDDecl,MakeControlID(component));

@@ -136,30 +136,30 @@ Components *  Component::GetComponents()
 void Component::InitProperty(void)
 {
 	DEFINE_PROPERTY(Name, CString, Component, name)
-	DEFINE_PROPERTY(ParentName, CString, Component, DEF_PARENT_NAME)
-	PUBLIC_PROPERTY(ParentName, FALSE)
+		DEFINE_PROPERTY(ParentName, CString, Component, DEF_PARENT_NAME)
+		PUBLIC_PROPERTY(ParentName, FALSE)
 
-	DEFINE_PROPERTY(UniqueID, long, Component, uniqueID)
-	PUBLIC_PROPERTY(UniqueID, FALSE)
+		DEFINE_PROPERTY(UniqueID, long, Component, uniqueID)
+		PUBLIC_PROPERTY(UniqueID, FALSE)
 
-	DEFINE_PROPERTY(Left, long, Component, bounds.left)
-	DEFINE_PROPERTY(Width, long, Component, bounds.right)
-	DEFINE_PROPERTY(Top, long, Component, bounds.top)
-	DEFINE_PROPERTY(Height, long, Component, bounds.bottom)
-	DEFINE_PROPERTY_2(Generate, BOOL, Component, TRUE)
+		DEFINE_PROPERTY(Left, long, Component, bounds.left)
+		DEFINE_PROPERTY(Width, long, Component, bounds.right)
+		DEFINE_PROPERTY(Top, long, Component, bounds.top)
+		DEFINE_PROPERTY(Height, long, Component, bounds.bottom)
+		DEFINE_PROPERTY_2(Generate, BOOL, Component, TRUE)
 
-	if (IsForm() == FALSE)
-		DEFINE_PROPERTY_2(IncludePath, CString, Component, _T(""))
+		if (IsForm() == FALSE)
+			DEFINE_PROPERTY_2(IncludePath, CString, Component, _T(""))
 
-	if (IsControl())
-	{
-		DEFINE_PROPERTY(TabIndex, long, Component, -1)
-		PUBLIC_PROPERTY(TabIndex, FALSE)
-		DEFINE_PROPERTY(Selected,BOOL,Component,FALSE)
-		PUBLIC_PROPERTY(Selected,FALSE)
-		DEFINE_PROPERTY(FirstSelected,BOOL,Component,FALSE)
-		PUBLIC_PROPERTY(FirstSelected,FALSE)
-	}
+			if (IsControl())
+			{
+				DEFINE_PROPERTY(TabIndex, long, Component, -1)
+				PUBLIC_PROPERTY(TabIndex, FALSE)
+				DEFINE_PROPERTY(Selected, BOOL, Component, FALSE)
+				PUBLIC_PROPERTY(Selected, FALSE)
+				DEFINE_PROPERTY(FirstSelected, BOOL, Component, FALSE)
+				PUBLIC_PROPERTY(FirstSelected, FALSE)
+			}
 }
 
 void Component::ShowProperties(void)
@@ -351,8 +351,8 @@ long Component::get_UniqueID(void)
 void Component::set_Selected(BOOL val)
 {
 	SET_PROP_VALUE(Selected, val)
-	if (val == FALSE)
-		FirstSelected = FALSE;
+		if (val == FALSE)
+			FirstSelected = FALSE;
 }
 
 BOOL Component::get_Selected(void)
@@ -363,17 +363,17 @@ BOOL Component::get_Selected(void)
 void Component::set_FirstSelected(BOOL val)
 {
 	SET_PROP_VALUE(FirstSelected, val)
-	if (val == TRUE)
-	{
-		ShowProperties();
-		if (IsForm() == FALSE)
-			PostEvent(evSetActiveForm, GetParentForm());
-	}
+		if (val == TRUE)
+		{
+			ShowProperties();
+			if (IsForm() == FALSE)
+				PostEvent(evSetActiveForm, GetParentForm());
+		}
 }
 
 BOOL Component::get_FirstSelected(void)
 {
-	return GET_PROP_VALUE(BOOL,FirstSelected)
+	return GET_PROP_VALUE(BOOL, FirstSelected)
 }
 
 BOOL Component::CheckBounds(CRect rc)
@@ -682,9 +682,9 @@ CRect  Component::GetBoundsRect(void)
 	if (state.GetBit(csLoading))
 	{
 		bounds.left = GET_PROP_VALUE(long, Left)
-		bounds.top = GET_PROP_VALUE(long, Top)
-		bounds.right = bounds.left + GET_PROP_VALUE(long, Width)
-		bounds.bottom = bounds.top + GET_PROP_VALUE(long, Height)
+			bounds.top = GET_PROP_VALUE(long, Top)
+			bounds.right = bounds.left + GET_PROP_VALUE(long, Width)
+			bounds.bottom = bounds.top + GET_PROP_VALUE(long, Height)
 	}
 	return bounds;
 }
@@ -693,18 +693,18 @@ void Component::UpdateBoundsProp(CRect & rc)
 {
 	bounds = rc;
 	SET_PROP_VALUE(Left, bounds.left)
-	SET_PROP_VALUE(Top, bounds.top)
-	long temp = bounds.Width();
+		SET_PROP_VALUE(Top, bounds.top)
+		long temp = bounds.Width();
 	SET_PROP_VALUE(Width, temp)
-	temp = bounds.Height();
+		temp = bounds.Height();
 	SET_PROP_VALUE(Height, temp)
 
-	::UpdateProperty(_T("Left"));
+		::UpdateProperty(_T("Left"));
 	::UpdateProperty(_T("Top"));
 	::UpdateProperty(_T("Width"));
 	::UpdateProperty(_T("Height"));
 
-	if(IsForm() == TRUE)
+	if (IsForm() == TRUE)
 	{
 		::UpdateProperty(_T("ClientWidth"));
 		::UpdateProperty(_T("ClientHeight"));
@@ -1362,7 +1362,7 @@ void Components::MouseDown(CPoint point)
 			::SendMessage((HWND)designer->GetParentForm()->GetHandle(), WM_LBUTTONDOWN, 0, MAKELONG(point.x, point.y));
 		}
 	}
-	
+
 	PostEvent(evSetActiveForm, designer->GetParentForm());
 }
 
@@ -1397,7 +1397,7 @@ void Components::MouseUp(CPoint point)
 	}
 	hint = hiNone;
 	pressed = FALSE;
-	
+
 	::PostMessage((HWND)GetParentForm()->GetHandle(), WM_UPDATELAYOUT, 0, 0);
 	Invalidate();
 }

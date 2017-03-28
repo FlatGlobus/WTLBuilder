@@ -26,8 +26,8 @@ var endWindowStyle = "//}}WTLBUILDER_WINDOW_STYLE";
 var beginCtrlToClip = "//{{WTLBUILDER_CTRLTOCLIP";
 var endCtrlToClip = "//}}WTLBUILDER_CTRLTOCLIP";
 
-var beginAttachCtrls = "//{{WTLBUILDER_ATTACH_CONTROLS"
-var endAttachCtrls = "//}}WTLBUILDER_ATTACH_CONTROLS"
+var beginAttachCtrls = "//{{WTLBUILDER_ATTACH_CONTROLS";
+var endAttachCtrls = "//}}WTLBUILDER_ATTACH_CONTROLS";
     
 var beginInitLayout = "//{{WTLBUILDER_INITLAYOUT";
 var endInitLayout = "//}}WTLBUILDER_INITLAYOUT";

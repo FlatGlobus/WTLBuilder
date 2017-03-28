@@ -8,16 +8,14 @@
 function StdCtl_CPaneContainer(form, component)
 {
     var codegen=form.Code;
-    var cmpName=component.Item("Name");
+    //var cmpName=component.Item("Name");
     
     CheckComponent(form, component);
 
-    var headerStr="";
-    headerStr=codegen.Format(component,"\tCPaneContainer\t[!Name];\n"); 
+    var headerStr=codegen.Format(component,"\tCPaneContainer\t[!Name];\n"); 
     headerStr+=MakeContainedDecl(form,component);
-
-    var sourceStr="";
-    sourceStr=codegen.Format(component,"\t[!Name].Create([!ParentName],");    
+    
+    var sourceStr=codegen.Format(component,"\t[!Name].Create([!ParentName],");    
     sourceStr+=MakeLocalizedCString(component.Item("Title"),component)+","+
                MakeWindowStyle(component)+","+
                MakeExWindowStyle(component)+","+

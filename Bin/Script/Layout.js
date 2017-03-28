@@ -10,10 +10,9 @@ function MakeControlsToClip(form)
     var components=form.Components;
     var str="";
     
-    for ( i=0; i <components.Count; i++ )
-    {
-        if ( components.Item(i).Item("Generate")==true && components.Item(i).Item("Layout")==true )
-            str+="\t"+components.Item(i).Item("ID")+",\n"
+    for ( i=0; i <components.Count; i++ ) {
+        if (components.Item(i).Item("Generate") == true && components.Item(i).Item("Layout") == true)
+            str += "\t" + components.Item(i).Item("ID") + ",\n";
     }
     
     return str;
