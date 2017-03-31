@@ -9,6 +9,7 @@
 #include "resource.h"
 
 //REGISTER_PAGE(StdCtl,IDB_STDCTRL)
+REGISTER_FIRST_PAGE(StdCtl, 0)
 
 BOOL APIENTRY DllMain( HANDLE hModule, 
 					  DWORD  ul_reason_for_call, 

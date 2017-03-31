@@ -56,7 +56,7 @@ public:
     HWND Create(HWND Parent,CRect & rc,DWORD _style,UINT id =0)
     {
         style=_style;
-        CWindowImpl<CImageListView>::Create(Parent,rc,NULL,WS_CHILD|WS_VISIBLE,0,id);
+        CWindowImpl<CImageListView>::Create(Parent, rc, NULL, WS_CHILD|WS_VISIBLE, 0, id);
         CreateImageList();
         CalculateVisibleCount();
         return m_hWnd;
@@ -65,8 +65,8 @@ public:
     LRESULT OnEraseBackground(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/)
     {
         CDCHandle dc((HDC)wParam);
-		CRect rc;
-		GetClientRect(&rc);
+        CRect rc;
+        GetClientRect(&rc);
         dc.FillSolidRect(&rc,bkColor);
         return TRUE;
     }

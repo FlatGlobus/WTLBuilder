@@ -10,58 +10,59 @@
 //////////////////////////////////////////////////////////////////////////
 enum Commands
 {
-	evStartingUp,//(void)
-	evShutDown,//(void)
+    evStartingUp,//(void)
+    evShutDown,//(void)
     evWinIniChange,//(void)
-	evLoadPackages,// (void)
-	evEditPackages, // (void)
-	evAddMenu,//(const CMenuHandle * pMenuAdd,bTopLevel)
-	evRunScript,//(LPCTSTR)
-	evRunScriptFromFile,//(const LPTSTRfilename)
-	evInvokeFunc,//(LPTSTRName, VARIANT* Params, LONG Count, VARIANT* RetValue)
-	evLoadScriptFromFile,//(LPCSTR filename)
-	evOnCommand,//(UINT commandId)
+    evLoadPackages,// (void)
+    evEditPackages, // (void)
+    evAddMenu,//(const CMenuHandle * pMenuAdd,bTopLevel)
+    evRunScript,//(LPCTSTR)
+    evRunScriptFromFile,//(const LPTSTRfilename)
+    evInvokeFunc,//(LPTSTRName, VARIANT* Params, LONG Count, VARIANT* RetValue)
+    evLoadScriptFromFile,//(LPCSTR filename)
+    evOnCommand,//(UINT commandId)
     evOutput,//(outMsg, LPCTSTR) show text in the output window with icon
-	evClearOutput,//(void)
+    evClearOutput,//(void)
     evScriptError,
-	evGetComponentInfo,//
-	evCreateComponent,//
-	evSendComponentInfo,
+    evGetComponentInfo,//
+    evCreateComponent,//
+    evSendComponentInfo,
     evGetComponentBitmap,
     evGetPageBitmap,
-	evSelectComponent,
-	evCreateForm,
-	evResetSelectedComponent,
-	evLoadForm,
-	evSaveForm,
+    evIsFirstPage,
+    evSelectComponent,
+    evCreateForm,
+    evResetSelectedComponent,
+    evLoadForm,
+    evSaveForm,
     evSaveAsForm,
     evGenerateLocFile,
     evFormSaved,//LPCTSTR filename
     evFormLoaded,//LPCTSTR filename
-	evSaveFormAsTemplate,
-	evSetActiveForm,
-	evGetActiveForm,
-	evGetFormFileName,
+    evSaveFormAsTemplate,
+    evSetActiveForm,
+    evGetActiveForm,
+    evGetFormFileName,
     evSetFormFileName,
-	evAddForm,
-	evCloseAllForms,
-	evCloseForm,
-	evAlignComponentsLeft,
-	evAlignComponentsTop,
-	evAlignComponentsRight,
-	evAlignComponentsBottom,
-	evAlignComponentsHoriz,
-	evAlignComponentsVert,
-	evMakeSameWidth,
-	evMakeSameHeight,
-	evMakeSameSize,
-	evGoldenSectionWidth,
-	evGoldenSectionHeight,
+    evAddForm,
+    evCloseAllForms,
+    evCloseForm,
+    evAlignComponentsLeft,
+    evAlignComponentsTop,
+    evAlignComponentsRight,
+    evAlignComponentsBottom,
+    evAlignComponentsHoriz,
+    evAlignComponentsVert,
+    evMakeSameWidth,
+    evMakeSameHeight,
+    evMakeSameSize,
+    evGoldenSectionWidth,
+    evGoldenSectionHeight,
     evToParent,
     evHorizOrder,
-	evHorizOrderRight,
+    evHorizOrderRight,
     evVertOrder,
-	evVertOrderBottom,
+    evVertOrderBottom,
     evCenterGroupHoriz,
     evCenterGroupVert,
     evChangeParent,
@@ -79,7 +80,7 @@ enum Commands
     evOnEditCommand,
     evTabIndex,
     evIsFormChanged,
-	evXYCursor // CPoint
+    evXYCursor // CPoint
 };
 
 //for evOutput message

@@ -148,19 +148,19 @@ public:
 //////////////////////////////////////////////////////////////////////////
 namespace StdCtrl
 {
-	class CTabPanelComp:public CTabPanel,public ControlComponent<CTabPanelComp>
-	{
-	public:
-		CTabPanelComp(LPTSTR _name=NULL);
-		~CTabPanelComp(void);
-		virtual BOOL CreateComponent(Component *);
-		BEGIN_MSG_MAP(CTabPanelComp)
-			CHAIN_MSG_MAP(ControlComponent<CTabPanelComp>)
+    class CTabPanelComp:public CTabPanel,public ControlComponent<CTabPanelComp>
+    {
+    public:
+        CTabPanelComp(LPTSTR _name=NULL);
+        ~CTabPanelComp(void);
+        virtual BOOL CreateComponent(Component *);
+        BEGIN_MSG_MAP(CTabPanelComp)
+            CHAIN_MSG_MAP(ControlComponent<CTabPanelComp>)
             CHAIN_MSG_MAP(CTabPanel)
-		END_MSG_MAP()
+        END_MSG_MAP()
 
-		virtual void InitProperty(void);
-	};
+        virtual void InitProperty(void);
+    };
 }
 //////////////////////////////////////////////////////////////////////////
 #endif

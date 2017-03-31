@@ -70,13 +70,13 @@ protected:
         return bitmap;
     }
 
-	virtual void Create(LPCTSTR _name,LPCTSTR _page,Component **objPtr) = 0;
+    virtual void Create(LPCTSTR _name,LPCTSTR _page,Component **objPtr) = 0;
 public:
-	LPCTSTR		name;
-	LPCTSTR		page;
-	HBITMAP		bitmap;
-	UINT		resID;
-	int		type;
+    LPCTSTR		name;
+    LPCTSTR		page;
+    HBITMAP		bitmap;
+    UINT		resID;
+    int		type;
 };
 //////////////////////////////////////////////////////////////////////////
 #define REGISTER_COMPONENT(Name,Page,ID)\
@@ -84,14 +84,14 @@ class _RegisterComponent##Name:public __RegisterComponent\
 {\
 public:\
     inline _RegisterComponent##Name(LPCTSTR _name, LPCTSTR _page,UINT _ID):__RegisterComponent(_name, _page,_ID)\
-						{type=TypeComponent;}\
+                        {type=TypeComponent;}\
     virtual void Create(LPCTSTR n,LPCTSTR p,Component **objPtr)\
     {\
-		if(CheckComponentName(n,p))\
-		{\
-	    	*objPtr=(Component *)new Name(_T(#Page)##_T(":")##_T(#Name));\
-			StopEvent(evCreateComponent);\
-		}\
+        if(CheckComponentName(n,p))\
+        {\
+            *objPtr=(Component *)new Name(_T(#Page)##_T(":")##_T(#Name));\
+            StopEvent(evCreateComponent);\
+        }\
     }\
 }; static _RegisterComponent##Name _Component##Name##(_T(#Name),_T(#Page),ID);
 //////////////////////////////////////////////////////////////////////////
@@ -106,7 +106,7 @@ public:\
    if(CheckComponentName(n,p))\
 {\
     *objPtr=(Component *)new Name(_T(#Page)##_T(":")##_T(#FriendlyName));\
-	StopEvent(evCreateComponent);\
+    StopEvent(evCreateComponent);\
 }\
 }\
 };  static _RegisterComponent##Name _Component##Name##(_T(#FriendlyName),_T(#Page),ID);
@@ -115,24 +115,26 @@ public:\
 class  _RegisterComponent##Name:public __RegisterComponent\
 {\
 public:\
-	inline _RegisterComponent##Name(LPCTSTR _name, LPCTSTR _page):__RegisterComponent(_name, _page,0)\
-	{type=TypeForm;}\
-	virtual void Create(LPCTSTR n,LPCTSTR p,Component **objPtr)\
-	{\
-		if(CheckComponentName(n,p))\
-		{\
-			*objPtr=(Component *)new Name(_T(#Page)##_T(":")##_T(#Name));\
-			StopEvent(evCreateComponent);\
-		}\
-	}\
+    inline _RegisterComponent##Name(LPCTSTR _name, LPCTSTR _page):__RegisterComponent(_name, _page,0)\
+    {type=TypeForm;}\
+    virtual void Create(LPCTSTR n,LPCTSTR p,Component **objPtr)\
+    {\
+        if(CheckComponentName(n,p))\
+        {\
+            *objPtr=(Component *)new Name(_T(#Page)##_T(":")##_T(#Name));\
+            StopEvent(evCreateComponent);\
+        }\
+    }\
 }; static _RegisterComponent##Name _Component##Name##(_T(#Name),_T(#Page));
 //////////////////////////////////////////////////////////////////////////
 class  __RegisterPage
 {
 public:
-    __RegisterPage(LPCTSTR _pageName,UINT ID):pageName(_pageName),bitmap(NULL),resID(ID)
+    __RegisterPage(LPCTSTR _pageName,UINT ID, BOOL isFirst):pageName(_pageName),bitmap(NULL),resID(ID),
+    isFirstPage(isFirst)
     {
         RegisterEvent(evGetPageBitmap,this,&__RegisterPage::GetPageBitmap);
+        RegisterEvent(evIsFirstPage, this, &__RegisterPage::IsFirstPage);
     }
     __RegisterPage::~__RegisterPage(void)
     {
@@ -149,6 +151,16 @@ public:
             StopEvent(evGetPageBitmap);
         }
     }
+
+    void IsFirstPage(LPCTSTR _pageName, BOOL * isFirst)
+    {
+        if (CheckName(_pageName))
+        {
+            *isFirst = isFirstPage;
+            StopEvent(evIsFirstPage);
+        }
+    }
+
 protected:
     BOOL CheckName(LPCTSTR _pageName)
     {
@@ -159,7 +171,7 @@ protected:
 
     HBITMAP LoadBitmap(void)
     {
-        if(bitmap==NULL)
+        if(bitmap==NULL && resID != 0 )
             bitmap=::LoadBitmap(_Module.GetResourceInstance(),MAKEINTRESOURCE(resID));
         return bitmap;
     }
@@ -167,10 +179,12 @@ public:
     LPCTSTR		pageName;
     HBITMAP		bitmap;
     UINT		resID;
+    BOOL        isFirstPage;
 };
 //////////////////////////////////////////////////////////////////////////
 //Page - page name ID - image ID
-#define REGISTER_PAGE(Page,ID) static __RegisterPage _page##Page##(_T(#Page),ID);
+#define REGISTER_PAGE(Page,ID) static __RegisterPage _page##Page##(_T(#Page),ID, FALSE);
+#define REGISTER_FIRST_PAGE(Page,ID) static __RegisterPage _page##Page##(_T(#Page),ID, TRUE);
 //////////////////////////////////////////////////////////////////////////
 
 #endif

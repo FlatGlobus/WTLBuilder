@@ -174,7 +174,7 @@ class ATL_NO_VTABLE CPropertyGridImpl :
    public CCustomDraw< CPropertyGridImpl<T, TBase, TWinTraits> >
 {
 public:
-	DECLARE_WND_SUPERCLASS(NULL, TBase::GetWndClassName())
+    DECLARE_WND_SUPERCLASS(NULL, TBase::GetWndClassName())
 
    CHeaderCtrl m_ctrlHeader;
    PROPERTYDRAWINFO m_di;
@@ -195,8 +195,8 @@ public:
       m_nColumns(0), 
       m_iSelectedRow(-1), 
       m_iSelectedCol(-1),
-	  firstColor(RGB(200,200,255)),
-	  secondColor(RGB(255,255,255))
+      firstColor(RGB(200,200,255)),
+      secondColor(RGB(255,255,255))
    {
       m_di.dwExtStyle = 0;
    }
@@ -235,24 +235,24 @@ public:
 
    void SetFirstColor(COLORREF val)
    {
-	   firstColor=val;
-	   InvalidateRect(NULL);
+       firstColor=val;
+       InvalidateRect(NULL);
    }
 
    COLORREF GetFirstColor()
    {
-	   return firstColor;
+       return firstColor;
    }
 
    void SetSecondColor(COLORREF val)
    {
-	   secondColor=val;
-	   InvalidateRect(NULL);
+       secondColor=val;
+       InvalidateRect(NULL);
    }
 
    COLORREF GetSecondColor()
    {
-	   return secondColor;
+       return secondColor;
    }
 
    BOOL SelectItem(int iRow, int iCol = 0)
@@ -1096,12 +1096,12 @@ public:
       // but the text remains black...
       DWORD dwStyle = GetStyle();
       if( dwStyle & WS_DISABLED ) di.clrBack = di.clrDisabledBack;
-	  
-	  if ( (iItem % 2) == 0 )
-		  di.clrBack=firstColor;
-	  else 
-		  di.clrBack=secondColor;
-		       
+      
+      if ( (iItem % 2) == 0 )
+          di.clrBack=firstColor;
+      else 
+          di.clrBack=secondColor;
+               
 
       // Erase background
       dc.FillSolidRect(&rc, di.clrBack);
@@ -1143,7 +1143,7 @@ public:
 class CPropertyGridCtrl : public CPropertyGridImpl<CPropertyGridCtrl>
 {
 public:
-	DECLARE_WND_SUPERCLASS(_T("WTL_PropertyGrid"), GetWndClassName())
+    DECLARE_WND_SUPERCLASS(_T("WTL_PropertyGrid"), GetWndClassName())
 };
 //////////////////////////////////////////////////////////////////////////
 #ifdef __WTLBUILDER__
@@ -1163,8 +1163,8 @@ namespace ViksoeCtrl
             
         BOOL CreateComponent(Component * _Parent);
         void InitProperty(void);
-		DECLARE_PROPERTY(FirstColor,CColorref)
-		DECLARE_PROPERTY(SecondColor,CColorref)
+        DECLARE_PROPERTY(FirstColor,CColorref)
+        DECLARE_PROPERTY(SecondColor,CColorref)
 
         /*DECLARE_PROPERTY(SingleClickEdit,BOOL)
         DECLARE_PROPERTY(NoGrid,BOOL)
