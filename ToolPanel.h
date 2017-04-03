@@ -553,7 +553,7 @@ public:
             GetItemRect(currentPanel,&item);
 
             GetClientRect(&client);
-            client.top = item.bottom+1;		
+            client.top = item.bottom + 1;
             if(::IsWindow(m_hWndClient))
                 ::MoveWindow(m_hWndClient,client.left,client.top,client.Width(),client.Height(), FALSE);
         }
@@ -609,17 +609,12 @@ public:
         int imgIdx = -1;
         if(bmp!=NULL)
             imgIdx=imageList.Add(bmp,RGB(192,192,192));
-  
-        //int cur=GetItemCount();
-        //if(cur!=0)
-        //    cur+=1;
 
         TCITEM tab = { 0 };
         tab.mask = TCIF_TEXT|TCIF_IMAGE;   
         tab.pszText = (LPTSTR)(LPCTSTR)name;
         tab.cchTextMax = name.GetLength();
         tab.iImage = imgIdx;
-        //int currIdx = InsertItem(cur, &tab);
         int currIdx = AddItem(&tab);
 
         SetFont(AtlGetStockFont(ANSI_VAR_FONT));
@@ -630,6 +625,7 @@ public:
         GetItemRect(currIdx,&item);
         GetClientRect(&client);
         client.top = item.bottom+1;
+        
         temp->Create(m_hWnd, client,100 + currIdx);
         temp->AddImage(IDB_ARROW,_T(""));
         BOOL isFirst = FALSE;

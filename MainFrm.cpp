@@ -22,36 +22,36 @@ BOOL IsPasteEnabled();
 //////////////////////////////////////////////////////////////////////////
 const UINT CMainFrame::_controlsToClip[] =
 {
-//{{WTLBUILDER_CTRLTOCLIP
+    //{{WTLBUILDER_CTRLTOCLIP
 //}}WTLBUILDER_CTRLTOCLIP
-    0
+        0
 };
 
 //////////////////////////////////////////////////////////////////////////
-CMainFrame::CMainFrame(void):project(this),enableUndo(FALSE),userMenuCount(MIN_USER_MENU_ID)
+CMainFrame::CMainFrame(void) :project(this), enableUndo(FALSE), userMenuCount(MIN_USER_MENU_ID)
 //{{WTLBUILDER_CONSTRUCTOR
 //}}WTLBUILDER_CONSTRUCTOR
 {
-    RegisterEvent(evAddMenu,this,&CMainFrame::AddMenu);
-    RegisterEvent(evSendComponentInfo,this,&CMainFrame::FillToolPanel);
-    RegisterEvent(evResetSelectedComponent,this,&CMainFrame::ResetSelectedComponent);
-    RegisterEvent(evFormLoaded,this,&CMainFrame::FormSavedLoaded);
-    RegisterEvent(evFormSaved,this,&CMainFrame::FormSavedLoaded);
-    RegisterEvent(evShowGrid, this,&CMainFrame::SetGridButton); 
-    RegisterEvent(evSetGridSizeX, this,&CMainFrame::SetGridWidth); 
-    RegisterEvent(evSetGridSizeY, this,&CMainFrame::SetGridHeight); 
-    RegisterEvent(evEnableUndo, this,&CMainFrame::EnableUndo);
-    RegisterEvent(evOnEditCommand, this,&CMainFrame::OnEditCommand);
-    RegisterEvent(evSetActiveForm, this,&CMainFrame::SetActiveForm);
-    RegisterEvent(evAddUndo, this,&CMainFrame::SetActiveForm);
-    RegisterEvent(evUndo, this,&CMainFrame::SetActiveForm);
+    RegisterEvent(evAddMenu, this, &CMainFrame::AddMenu);
+    RegisterEvent(evSendComponentInfo, this, &CMainFrame::FillToolPanel);
+    RegisterEvent(evResetSelectedComponent, this, &CMainFrame::ResetSelectedComponent);
+    RegisterEvent(evFormLoaded, this, &CMainFrame::FormSavedLoaded);
+    RegisterEvent(evFormSaved, this, &CMainFrame::FormSavedLoaded);
+    RegisterEvent(evShowGrid, this, &CMainFrame::SetGridButton);
+    RegisterEvent(evSetGridSizeX, this, &CMainFrame::SetGridWidth);
+    RegisterEvent(evSetGridSizeY, this, &CMainFrame::SetGridHeight);
+    RegisterEvent(evEnableUndo, this, &CMainFrame::EnableUndo);
+    RegisterEvent(evOnEditCommand, this, &CMainFrame::OnEditCommand);
+    RegisterEvent(evSetActiveForm, this, &CMainFrame::SetActiveForm);
+    RegisterEvent(evAddUndo, this, &CMainFrame::SetActiveForm);
+    RegisterEvent(evUndo, this, &CMainFrame::SetActiveForm);
     RegisterEvent(evLoadScriptFromFile, this, &CMainFrame::LoadScriptFromFile);
     RegisterEvent(evXYCursor, this, &CMainFrame::XYCursor);
 }
 
 CMainFrame::~CMainFrame(void)
 {
-//{{WTLBUILDER_MEMBER_DESTRUCTION
+    //{{WTLBUILDER_MEMBER_DESTRUCTION
 //}}WTLBUILDER_MEMBER_DESTRUCTION
 
     UnRegisterEvent(this);
@@ -65,37 +65,37 @@ BOOL CMainFrame::PreTranslateMessage(MSG* pMsg)
 
 BOOL CMainFrame::OnIdle()
 {
-    UIEnable(ID_EDIT_CUT,project.Forms->Active!=NULL && 
-        project.Forms->Active->GetComponents()->GetSelCount()!=0);
+    UIEnable(ID_EDIT_CUT, project.Forms->Active != NULL &&
+        project.Forms->Active->GetComponents()->GetSelCount() != 0);
 
-    UIEnable(ID_EDIT_COPY,project.Forms->Active!=NULL && 
-        project.Forms->Active->GetComponents()->GetSelCount()!=0);
+    UIEnable(ID_EDIT_COPY, project.Forms->Active != NULL &&
+        project.Forms->Active->GetComponents()->GetSelCount() != 0);
 
-    UIEnable(ID_EDIT_PASTE,project.Forms->Active && IsPasteEnabled());
+    UIEnable(ID_EDIT_PASTE, project.Forms->Active && IsPasteEnabled());
 
-    UIEnable(ID_EDIT_SELECT_ALL,project.Forms->Active!=NULL);
+    UIEnable(ID_EDIT_SELECT_ALL, project.Forms->Active != NULL);
 
-    UIEnable(ID_EDIT_CLEAR,project.Forms->Active!=NULL && 
-        project.Forms->Active->GetComponents()->GetSelCount()!=0);
+    UIEnable(ID_EDIT_CLEAR, project.Forms->Active != NULL &&
+        project.Forms->Active->GetComponents()->GetSelCount() != 0);
 
-    UIEnable(ID_EDIT_UNDO,enableUndo);
+    UIEnable(ID_EDIT_UNDO, enableUndo);
     return FALSE;
 }
 
 LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
-    m_toolTip.Create(m_hWnd,NULL,NULL,TTS_ALWAYSTIP,WS_EX_TOPMOST);
+    m_toolTip.Create(m_hWnd, NULL, NULL, TTS_ALWAYSTIP, WS_EX_TOPMOST);
 
     //CMenu menu;
     //menu.LoadMenu(IDR_MAINFRAME);
     //SetMenu(menu);
     //UIAddMenuBar(*this);
     m_hAccel = AtlLoadAccelerators(IDR_MAINFRAME);
-///
-    //{{WTLBUILDER_MEMBER_CREATION
+    ///
+        //{{WTLBUILDER_MEMBER_CREATION
     m_formFont.CreateFont(-12,0,0,0,FW_NORMAL,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
     SetFont((HFONT)m_formFont);
-    ResizeClient(774,121);
+    ResizeClient(774,125);
     SetWindowText(_T("WTLBuilder"));
 
     m_panel.Create(m_hWnd,CRect(0,0,774,30),NULL,WS_CHILD|WS_VISIBLE,0,IDC_PANEL);
@@ -120,7 +120,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
     m_panel1.SetVertTextAlign(DT_VCENTER);
     m_panel1.SetSingleLine(true);
 
-    m_toolTab.Create(m_hWnd,CRect(0,60,774,121),IDC_TOOLTAB);
+    m_toolTab.Create(m_hWnd,CRect(0,60,774,125),IDC_TOOLTAB);
     m_buttonst3.Create(m_panel,CRect(109,6,129,26),_T(""),WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,0,IDC_ALIGN_LEFT);
     m_buttonst3.SetFont((HFONT)m_formFont);
     m_buttonst3.SetFlat(true);
@@ -473,7 +473,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
     m_YCursor.SetFont((HFONT)m_formFont);
 
 //}}WTLBUILDER_MEMBER_CREATION
-//{{WTLBUILDER_POST_CREATION
+    //{{WTLBUILDER_POST_CREATION
     m_updownctrl11.SetBuddy(m_edit);
     m_updownctrl51.SetBuddy(m_xedit);
     m_updownctrl57.SetBuddy(m_yedit);
@@ -483,13 +483,13 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
     HMENU hMenu = GetMenu();
     HMENU hFileMenu = ::GetSubMenu(hMenu, FILE_MENU_POSITION);
     HMENU hMruMenu = ::GetSubMenu(hFileMenu, RECENT_MENU_POSITION);
-    
+
     mru.SetMenuHandle(hMruMenu);
     mru.ReadFromRegistry(WTLBuilderRegKey);
     CalcWindowSize();
-    MoveWindow(0,0,0,0);
+    MoveWindow(0, 0, 0, 0);
     toolBox.Create(m_hWnd);
-    
+
     //////////////////////////////////////////////////////////////////////////
     // register object for message filtering and idle updates
     CMessageLoop* pLoop = _Module.GetMessageLoop();
@@ -500,9 +500,9 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
     outputWindow.Create(m_hWnd);
     m_ScriptHost.Init(m_hWnd);
     m_ScriptHost.LoadScriptsFromDir("Script\\");
-    m_ScriptHost.AddScriptItem(L"Output",&outputWindow);
-    m_ScriptHost.AddScriptItem(L"ValueList",&valueListHelper);
-//////////////////////////////////////////////////////////////////////////
+    m_ScriptHost.AddScriptItem(L"Output", &outputWindow);
+    m_ScriptHost.AddScriptItem(L"ValueList", &valueListHelper);
+    //////////////////////////////////////////////////////////////////////////
     return 0;
 }
 
@@ -516,12 +516,12 @@ void CMainFrame::InitLayout()
 {
 //{{WTLBUILDER_INITLAYOUT
 //}}WTLBUILDER_INITLAYOUT
-    //SetScrollSize(_minClientSize);
+        //SetScrollSize(_minClientSize);
 }
 
 void CMainFrame::GetDialogRect(LPRECT r)
 {
-    GetClientRect(r);	
+    GetClientRect(r);
     if (r->right < m_sizeAll.cx)
     {
         r->right = m_sizeAll.cx;
@@ -544,22 +544,22 @@ void CMainFrame::DoPaint(CDCHandle /*dc*/)
 
 LRESULT CMainFrame::OnFileExit(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    if(project.CloseAll()==TRUE)
+    if (project.CloseAll() == TRUE)
     {
-//	    SendEvent(evShutDown);
-//	    StopCommandTimer();
-//      mru.WriteToRegistry(WTLBuilderRegKey);
+        //	    SendEvent(evShutDown);
+        //	    StopCommandTimer();
+        //      mru.WriteToRegistry(WTLBuilderRegKey);
         PostMessage(WM_CLOSE);
     }
     return 0;
 }
 
-LRESULT CMainFrame::OnFileNewForm( WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/ ) 
+LRESULT CMainFrame::OnFileNewForm(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
     EnableMsgPump(FALSE);
     project.New();
     BOOL bHandled;
-    OnSelectComponent(0,0,0,bHandled);
+    OnSelectComponent(0, 0, 0, bHandled);
     EnableMsgPump();
     return 0;
 }
@@ -573,11 +573,11 @@ LRESULT CMainFrame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 
 LRESULT CMainFrame::OnCommonCommand(WORD wNotifyCode, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    SendEvent(evOnCommand,(UINT)wID);
+    SendEvent(evOnCommand, (UINT)wID);
     return 0;
 }
 
-void CMainFrame::AddMenu(const CMenuHandle * pMenuAdd,bool bTopLevel)
+void CMainFrame::AddMenu(const CMenuHandle * pMenuAdd, bool bTopLevel)
 {
     //CMenuHandle tempMenu(m_CmdBar.GetMenu());
     //MergeMenu(&tempMenu,pMenuAdd,bTopLevel);
@@ -587,7 +587,7 @@ void CMainFrame::AddMenu(const CMenuHandle * pMenuAdd,bool bTopLevel)
 
 LRESULT CMainFrame::OnMenuSelect(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-    bHandled=FALSE;
+    bHandled = FALSE;
     return 0;
 }
 
@@ -596,38 +596,38 @@ LRESULT CMainFrame::OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandl
     CRect rc;
     m_panel.GetWindowRect(&rc);
     ScreenToClient(&rc);
-    rc.right=LOWORD(lParam);
+    rc.right = LOWORD(lParam);
     m_panel.MoveWindow(&rc);
 
     m_panel1.GetWindowRect(&rc);
     ScreenToClient(&rc);
-    rc.right=LOWORD(lParam);
+    rc.right = LOWORD(lParam);
     m_panel1.MoveWindow(&rc);
 
     m_toolTab.GetWindowRect(&rc);
     ScreenToClient(&rc);
-    rc.right=LOWORD(lParam);
+    rc.right = LOWORD(lParam);
     m_toolTab.MoveWindow(&rc);
-    bHandled=FALSE;
+    bHandled = FALSE;
     return 0;
 }
 
-void CMainFrame::FillToolPanel(LPCTSTR _name,LPCTSTR _page,HBITMAP _bitmap,int type)
+void CMainFrame::FillToolPanel(LPCTSTR _name, LPCTSTR _page, HBITMAP _bitmap, int type)
 {
-    if((type & TypeForm) != TypeForm)
-        m_toolTab.AddImage(_page,_bitmap ,_name);
+    if ((type & TypeForm) != TypeForm)
+        m_toolTab.AddImage(_page, _bitmap, _name);
 }
 
 LRESULT CMainFrame::OnSelectComponent(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-    CString str=m_toolTab.get_SelectedName();
-    SendEvent(evSelectComponent,(LPCTSTR)str);
+    CString str = m_toolTab.get_SelectedName();
+    SendEvent(evSelectComponent, (LPCTSTR)str);
     return 0;
 }
 
 void CMainFrame::ResetSelectedComponent(void)
 {
-    SendEvent(evSelectComponent,NULL);///временно
+    SendEvent(evSelectComponent, NULL);///временно
     m_toolTab.UnSelect();
 }
 
@@ -668,7 +668,7 @@ LRESULT CMainFrame::OnFileOpen(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
     EnableMsgPump(FALSE);
     project.Open();
     BOOL bHandled;
-    OnSelectComponent(0,0,0,bHandled);
+    OnSelectComponent(0, 0, 0, bHandled);
     EnableMsgPump();
     return 0;
 }
@@ -683,77 +683,77 @@ LRESULT CMainFrame::OnFileClose(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndC
 
 LRESULT CMainFrame::OnAlignCommand(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    if(project.Forms->Active==NULL)
+    if (project.Forms->Active == NULL)
         return 0;
 
     _TCHAR text[8];
-    m_edit.GetLine(0,text,3);
-    long val=StrToLong(text);
+    m_edit.GetLine(0, text, 3);
+    long val = StrToLong(text);
 
-    switch(wID)
+    switch (wID)
     {
     case IDC_ALIGN_LEFT:
-        SendEvent(evAlignComponentsLeft,project.Forms->Active, val);
+        SendEvent(evAlignComponentsLeft, project.Forms->Active, val);
         break;
     case IDC_ALIGN_TOP:
-        SendEvent(evAlignComponentsTop,project.Forms->Active, val);
+        SendEvent(evAlignComponentsTop, project.Forms->Active, val);
         break;
     case IDC_ALIGN_RIGHT:
-        SendEvent(evAlignComponentsRight,project.Forms->Active, val);
+        SendEvent(evAlignComponentsRight, project.Forms->Active, val);
         break;
     case IDC_ALIGN_BOTTOM:
-        SendEvent(evAlignComponentsBottom,project.Forms->Active, val);
+        SendEvent(evAlignComponentsBottom, project.Forms->Active, val);
         break;
     case IDC_CENTER_HORIZ:
-        SendEvent(evAlignComponentsHoriz,project.Forms->Active);
+        SendEvent(evAlignComponentsHoriz, project.Forms->Active);
         break;
     case IDC_CENTER_VERT:
-        SendEvent(evAlignComponentsVert,project.Forms->Active);
+        SendEvent(evAlignComponentsVert, project.Forms->Active);
         break;
     case IDC_SAME_HEIGHT:
-        SendEvent(evMakeSameHeight,project.Forms->Active, val);
+        SendEvent(evMakeSameHeight, project.Forms->Active, val);
         break;
     case IDC_SAME_WIDTH:
-        SendEvent(evMakeSameWidth,project.Forms->Active, val);
+        SendEvent(evMakeSameWidth, project.Forms->Active, val);
         break;
     case IDC_SAME_SIZE:
-        SendEvent(evMakeSameSize,project.Forms->Active, val);
+        SendEvent(evMakeSameSize, project.Forms->Active, val);
         break;
     case IDC_GS_HORIZ:
-        SendEvent(evGoldenSectionWidth,project.Forms->Active);
+        SendEvent(evGoldenSectionWidth, project.Forms->Active);
         break;
     case IDC_GS_VERT:
-        SendEvent(evGoldenSectionHeight,project.Forms->Active);
+        SendEvent(evGoldenSectionHeight, project.Forms->Active);
         break;
     case IDC_TOPARENT:
-        SendEvent(evToParent,project.Forms->Active, val);
+        SendEvent(evToParent, project.Forms->Active, val);
         break;
     case IDC_HORIZ_ORDER:
-        SendEvent(evHorizOrder,project.Forms->Active,val);
+        SendEvent(evHorizOrder, project.Forms->Active, val);
         break;
     case IDC_VERT_ORDER:
-        SendEvent(evVertOrder,project.Forms->Active,val);
+        SendEvent(evVertOrder, project.Forms->Active, val);
         break;
     case IDC_HORIZ_ORDER_RIGHT:
-        SendEvent(evHorizOrderRight,project.Forms->Active,val);
+        SendEvent(evHorizOrderRight, project.Forms->Active, val);
         break;
     case IDC_VERT_ORDER_BOTTOM:
-        SendEvent(evVertOrderBottom,project.Forms->Active,val);
+        SendEvent(evVertOrderBottom, project.Forms->Active, val);
         break;
-    //case IDC_TOBACKGROUND:
-    //    SendEvent(evToBackground,project.Forms->Active);
-    //    break;
-    //case IDC_TOFOREGROUND:
-    //    SendEvent(evToForeground,project.Forms->Active);
-    //    break;
+        //case IDC_TOBACKGROUND:
+        //    SendEvent(evToBackground,project.Forms->Active);
+        //    break;
+        //case IDC_TOFOREGROUND:
+        //    SendEvent(evToForeground,project.Forms->Active);
+        //    break;
     case IDC_CENTER_GROUP_HORIZ:
-        SendEvent(evCenterGroupHoriz,project.Forms->Active,val);
+        SendEvent(evCenterGroupHoriz, project.Forms->Active, val);
         break;
     case IDC_CENTER_GROUP_VERT:
-        SendEvent(evCenterGroupVert,project.Forms->Active,val);
+        SendEvent(evCenterGroupVert, project.Forms->Active, val);
         break;
     case IDC_CHANGEPARENT:
-        SendEvent(evChangeParent,project.Forms->Active);
+        SendEvent(evChangeParent, project.Forms->Active);
         break;
     }
 
@@ -773,14 +773,14 @@ LRESULT CMainFrame::OnGenerateLocFile(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /
     EnableMsgPump(FALSE);
     project.GenerateLocFile();
     EnableMsgPump(TRUE);
-    
+
     return 0;
 }
 
 LRESULT CMainFrame::OnOptions(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
     COptionsDlg dlg;
-    if(dlg.DoModal(::GetDesktopWindow())==IDOK)
+    if (dlg.DoModal(::GetDesktopWindow()) == IDOK)
     {
     }
     return 0;
@@ -788,17 +788,17 @@ LRESULT CMainFrame::OnOptions(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl
 
 LRESULT CMainFrame::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-    if(project.CloseAll()==TRUE)
+    if (project.CloseAll() == TRUE)
     {
         mru.WriteToRegistry(WTLBuilderRegKey);
         //delete m_pScriptHost;
         SendEvent(evShutDown);
         StopCommandTimer();
-        bHandled=FALSE;
+        bHandled = FALSE;
     }
     else
     {
-        bHandled=TRUE;
+        bHandled = TRUE;
         return TRUE;
     }
     return 0;
@@ -806,134 +806,134 @@ LRESULT CMainFrame::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHand
 
 LRESULT CMainFrame::OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-    MINMAXINFO * minmax=(MINMAXINFO *)lParam;
-    minmax->ptMaxSize.x=GetSystemMetrics(SM_CXSCREEN);
-    minmax->ptMaxSize.y=windowHeight;
+    MINMAXINFO * minmax = (MINMAXINFO *)lParam;
+    minmax->ptMaxSize.x = GetSystemMetrics(SM_CXSCREEN);
+    minmax->ptMaxSize.y = windowHeight;
 
-    minmax->ptMinTrackSize.x=GetSystemMetrics(SM_CXSCREEN);
-    minmax->ptMinTrackSize.y=windowHeight;
+    minmax->ptMinTrackSize.x = GetSystemMetrics(SM_CXSCREEN);
+    minmax->ptMinTrackSize.y = windowHeight;
 
-    minmax->ptMaxTrackSize.x=GetSystemMetrics(SM_CXSCREEN);
-    minmax->ptMaxTrackSize.y=windowHeight;
-    
-    bHandled=TRUE;
+    minmax->ptMaxTrackSize.x = GetSystemMetrics(SM_CXSCREEN);
+    minmax->ptMaxTrackSize.y = windowHeight;
+
+    bHandled = TRUE;
     return 0;
 }
 
 long CMainFrame::CalcWindowSize()
 {
-    long panelHeight=-1,toolTabHeight=-1;
-    
-    if(::IsWindow(m_panel))
+    long panelHeight = -1, toolTabHeight = -1;
+
+    if (::IsWindow(m_panel))
     {
         CRect panelRc;
-        ::GetWindowRect(m_panel,&panelRc);
-        panelHeight=panelRc.Height();
+        ::GetWindowRect(m_panel, &panelRc);
+        panelHeight += panelRc.Height();
     }
 
-    if(::IsWindow(m_panel1))
+    if (::IsWindow(m_panel1))
     {
         CRect panelRc;
-        ::GetWindowRect(m_panel1,&panelRc);
-        panelHeight+=panelRc.Height();
+        ::GetWindowRect(m_panel1, &panelRc);
+        panelHeight += panelRc.Height();
     }
 
-    if(::IsWindow(m_toolTab))
+    if (::IsWindow(m_toolTab))
     {
         CRect toolTabRc;
-        ::GetWindowRect(m_toolTab,&toolTabRc);
-        toolTabHeight=toolTabRc.Height();
+        ::GetWindowRect(m_toolTab, &toolTabRc);
+        toolTabHeight = toolTabRc.Height();
     }
 
-    return windowHeight=panelHeight+toolTabHeight+GetSystemMetrics(SM_CYBORDER)*2
-                 +GetSystemMetrics(SM_CYCAPTION)+GetSystemMetrics(SM_CYMENU);
+    return windowHeight = panelHeight + toolTabHeight + GetSystemMetrics(SM_CYBORDER) * 2
+        + GetSystemMetrics(SM_CYCAPTION) + GetSystemMetrics(SM_CYMENU);
 }
 
 LRESULT CMainFrame::OnWinIniChange(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
     CalcWindowSize();
     SendEvent(evWinIniChange);
-    bHandled=FALSE;
+    bHandled = FALSE;
     return TRUE;
 }
 
-void CMainFrame::FormSavedLoaded(Component * form,LPCTSTR formName)
+void CMainFrame::FormSavedLoaded(Component * form, LPCTSTR formName)
 {
     mru.AddToList(formName);
-    if(static_cast<Component *>(form)==static_cast<Component *>((Component*)project.get_Forms()->get_Active()))
+    if (static_cast<Component *>(form) == static_cast<Component *>((Component*)project.get_Forms()->get_Active()))
         SetActiveForm(form);
 }
 
 LRESULT CMainFrame::OnFileRecent(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
-{			
+{
     CString sFile;
-    if(mru.GetFromList(wID, sFile))
-    {										
+    if (mru.GetFromList(wID, sFile))
+    {
         EnableMsgPump(FALSE);
-        if(project.Open(CComBSTR((LPCTSTR)sFile))==TRUE)
+        if (project.Open(CComBSTR((LPCTSTR)sFile)) == TRUE)
             mru.MoveToTop(wID);
         else
             mru.RemoveFromList(wID);
 
         BOOL bHandled;
-        OnSelectComponent(0,0,0,bHandled);
+        OnSelectComponent(0, 0, 0, bHandled);
         EnableMsgPump();
     }
     else
     {
         ::MessageBeep(MB_ICONERROR);
-        ::MessageBox(m_hWnd,_T("Cannot get file name from mru list"),_T("WTLBuilder"),MB_OK|MB_ICONERROR);
+        ::MessageBox(m_hWnd, _T("Cannot get file name from mru list"), _T("WTLBuilder"), MB_OK | MB_ICONERROR);
     }
     return 0;
 }
 
-void CMainFrame::OnEditCommand(WORD wID,Component *comp,CPoint * downPoint)
+void CMainFrame::OnEditCommand(WORD wID, Component *comp, CPoint * downPoint)
 {
-    if(project.Forms->Active==NULL)
-        return ;
+    if (project.Forms->Active == NULL)
+        return;
 
     CMsgPump msgPump;
 
-    switch(wID)
+    switch (wID)
     {
     case ID_EDIT_UNDO:
-        SendEvent(evUndo,project.Forms->Active);
+        SendEvent(evUndo, project.Forms->Active);
         break;
     case ID_EDIT_CUT:
-        SendEvent(evCut,project.Forms->Active,comp);
+        SendEvent(evCut, project.Forms->Active, comp);
         break;
     case ID_EDIT_COPY:
-        SendEvent(evCopy,project.Forms->Active,comp);
+        SendEvent(evCopy, project.Forms->Active, comp);
         break;
     case ID_EDIT_PASTE:
-        SendEvent(evPaste,project.Forms->Active,comp,downPoint);
+        SendEvent(evPaste, project.Forms->Active, comp, downPoint);
         break;
     case ID_EDIT_SELECT_ALL:
-        SendEvent(evSelectAll,project.Forms->Active);
+        SendEvent(evSelectAll, project.Forms->Active);
         break;
     case ID_EDIT_CLEAR:
-        SendEvent(evDelete,project.Forms->Active);
+        SendEvent(evDelete, project.Forms->Active);
         break;
     };
 }
 
 LRESULT CMainFrame::OnTabOrder(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    bool pressed=m_tabOrder.GetPressed();
-    m_tabOrder.SetPressed(pressed=!pressed);
-    SendEvent(evTabIndex,project.Forms->Active,(BOOL)pressed);
+    bool pressed = m_tabOrder.GetPressed();
+    m_tabOrder.SetPressed(pressed = !pressed);
+    SendEvent(evTabIndex, project.Forms->Active, (BOOL)pressed);
     return 0;
 }
 
 LRESULT CMainFrame::OnEdit(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    OnEditCommand(wID,NULL,NULL);
+    OnEditCommand(wID, NULL, NULL);
     return 0;
 }
 
 LRESULT CMainFrame::OnView(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& bHandled)
 {
-    switch(wID)
+    switch (wID)
     {
     case ID_VIEW_PROPERTY:
         toolBox.ShowWindow(SW_SHOW);
@@ -942,44 +942,44 @@ LRESULT CMainFrame::OnView(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOO
         outputWindow.ShowWindow(SW_SHOW);
         break;
     };
-    bHandled=TRUE;
+    bHandled = TRUE;
     return TRUE;
 }
 
 LRESULT CMainFrame::OnShowGrid(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
     m_showgrid.SetPressed(!m_showgrid.GetPressed());
-    SendEvent(evShowGrid,project.Forms->Active,(BOOL)(m_showgrid.GetPressed()==true));
+    SendEvent(evShowGrid, project.Forms->Active, (BOOL)(m_showgrid.GetPressed() == true));
     return 0;
 }
 
-void CMainFrame::SetGridButton(void *obj,BOOL val)
+void CMainFrame::SetGridButton(void *obj, BOOL val)
 {
-    if(obj==NULL)
+    if (obj == NULL)
     {
         StopEvent(evShowGrid);
-        if((BOOL)m_showgrid.GetPressed()!=val)
-            m_showgrid.SetPressed((bool)(val==TRUE));
-     }
+        if ((BOOL)m_showgrid.GetPressed() != val)
+            m_showgrid.SetPressed((bool)(val == TRUE));
+    }
 }
 
-void CMainFrame::SetGridWidth(void *obj,long val)
+void CMainFrame::SetGridWidth(void *obj, long val)
 {
-    if(obj==NULL)
+    if (obj == NULL)
     {
         CString str;
-        str.Format(_T("%d"),val);
+        str.Format(_T("%d"), val);
         m_xedit.SetWindowText(str);
         StopEvent(evSetGridSizeX);
     }
 }
 
-void CMainFrame::SetGridHeight(void *obj,long val)
+void CMainFrame::SetGridHeight(void *obj, long val)
 {
-    if(obj==NULL)
+    if (obj == NULL)
     {
         CString str;
-        str.Format(_T("%d"),val);
+        str.Format(_T("%d"), val);
         m_yedit.SetWindowText(str);
         StopEvent(evSetGridSizeY);
     }
@@ -987,12 +987,12 @@ void CMainFrame::SetGridHeight(void *obj,long val)
 
 LRESULT CMainFrame::OnXEditChange(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    if(::IsWindow(m_xedit))
+    if (::IsWindow(m_xedit))
     {
         _TCHAR text[8];
-        m_xedit.GetLine(0,text,3);
-        long val=StrToLong(text);
-        SendEvent(evSetGridSizeX,project.Forms->Active,val);
+        m_xedit.GetLine(0, text, 3);
+        long val = StrToLong(text);
+        SendEvent(evSetGridSizeX, project.Forms->Active, val);
     }
 
     return 0;
@@ -1000,12 +1000,12 @@ LRESULT CMainFrame::OnXEditChange(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWn
 
 LRESULT CMainFrame::OnYEditChange(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-    if(::IsWindow(m_yedit))
+    if (::IsWindow(m_yedit))
     {
         _TCHAR text[8];
-        m_yedit.GetLine(0,text,3);
-        long val=StrToLong(text);
-        SendEvent(evSetGridSizeY,project.Forms->Active,val);
+        m_yedit.GetLine(0, text, 3);
+        long val = StrToLong(text);
+        SendEvent(evSetGridSizeY, project.Forms->Active, val);
     }
 
     return 0;
@@ -1013,7 +1013,7 @@ LRESULT CMainFrame::OnYEditChange(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWn
 
 void CMainFrame::EnableUndo(BOOL _enableundo)
 {
-    enableUndo=_enableundo;
+    enableUndo = _enableundo;
 }
 //////////////////////////////////////////////////////////////////////////
 int FindMenuItem(CMenuHandle & menu, LPCTSTR MenuString)
@@ -1030,30 +1030,30 @@ int FindMenuItem(CMenuHandle & menu, LPCTSTR MenuString)
     return -1;
 }
 
-void __stdcall CMainFrame::InsertPopupItem(BSTR _after,BSTR _item)
+void __stdcall CMainFrame::InsertPopupItem(BSTR _after, BSTR _item)
 {
     USES_CONVERSION;
-    
+
     CString after = OLE2CT(_after);
     CString item = OLE2CT(_item);
-    
-    CMenuHandle menu=this->GetMenu();
-    if(after.IsEmpty()==FALSE)
+
+    CMenuHandle menu = this->GetMenu();
+    if (after.IsEmpty() == FALSE)
     {
         CMenu newMenu;
         newMenu.CreatePopupMenu();
         int pos = FindMenuItem(menu, (LPCTSTR)after);
         if (pos != -1)
-            menu.InsertMenu(pos+1,MF_BYPOSITION|MF_POPUP, newMenu,item);
+            menu.InsertMenu(pos + 1, MF_BYPOSITION | MF_POPUP, newMenu, item);
         else
-            menu.AppendMenu(MF_POPUP, newMenu,item);
+            menu.AppendMenu(MF_POPUP, newMenu, item);
 
         newMenu.Detach();
         SetMenu(menu);
     }
 }
 
-void __stdcall CMainFrame::AppendItem(BSTR _popup,BSTR _item,BSTR _script)
+void __stdcall CMainFrame::AppendItem(BSTR _popup, BSTR _item, BSTR _script)
 {
     USES_CONVERSION;
 
@@ -1061,19 +1061,19 @@ void __stdcall CMainFrame::AppendItem(BSTR _popup,BSTR _item,BSTR _script)
     CString item = OLE2CT(_item);
     CString script = OLE2CT(_script);
 
-    CMenuHandle menu=this->GetMenu();
+    CMenuHandle menu = this->GetMenu();
     int pos;
-    if(popup.IsEmpty()==FALSE)
+    if (popup.IsEmpty() == FALSE)
     {
         pos = FindMenuItem(menu, (LPCTSTR)popup);
         if (pos == -1)
             return;
         CMenuHandle subMenu((HMENU)menu.GetSubMenu(pos));
-        if(subMenu.IsMenu())
+        if (subMenu.IsMenu())
         {
-            
-            userMenuMap.SetAt(userMenuCount,script);
-            subMenu.AppendMenu(MF_POPUP|MF_STRING, (UINT_PTR)userMenuCount, (LPCTSTR)item);
+
+            userMenuMap.SetAt(userMenuCount, script);
+            subMenu.AppendMenu(MF_POPUP | MF_STRING, (UINT_PTR)userMenuCount, (LPCTSTR)item);
             userMenuCount++;
         }
         SetMenu(menu);
@@ -1100,17 +1100,17 @@ void CMainFrame::LoadFormFromFile(LPCSTR formFileName)
 void CMainFrame::SetActiveForm(Component *form)
 {
     CString formFileName;
-    BOOL flag=FALSE;
-    if(form!=NULL)
+    BOOL flag = FALSE;
+    if (form != NULL)
     {
-        SendEvent(evGetFormFileName,form,&formFileName);
-        SendEvent(evIsFormChanged,form,&flag);
-        SetWindowText(MakeString(_T("WTLBuilder - [%s]%c"),(LPCTSTR)formFileName,flag?'*':' '));
+        SendEvent(evGetFormFileName, form, &formFileName);
+        SendEvent(evIsFormChanged, form, &flag);
+        SetWindowText(MakeString(_T("WTLBuilder - [%s]%c"), (LPCTSTR)formFileName, flag ? '*' : ' '));
     }
     else
     {
         SetWindowText(_T("WTLBuilder"));
-    }	
+    }
 }
 
 LRESULT CMainFrame::OnCtrlBuilder(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
