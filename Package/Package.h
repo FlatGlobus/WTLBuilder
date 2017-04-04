@@ -33,19 +33,19 @@ typedef CSimpleArray<CPackageItem> CPackages;
 class PACKAGE_API CPackage
 {
 public:
-	CPackage(void);
-	~CPackage(void);
-	void EditPackages();
-	void * CreateByName(LPCTSTR);
-	void LoadPackages(void);
-	void FreePackages(void);
-	void StartingUp(void);
-	void OnCommand(UINT);
-	void ScanFolder(LPCTSTR folder,LPCTSTR ext);
-	HBITMAP GetDefaulBitmap();
+    CPackage(void);
+    ~CPackage(void);
+    
+    void * CreateByName(LPCTSTR);
+    void LoadPackages(void);
+    void FreePackages(void);
+    void StartingUp(void);
+    void OnCommand(UINT);
+    void ScanFolder(LPCTSTR folder,LPCTSTR ext);
+    HBITMAP GetDefaulBitmap();
 protected:
-	CBitmap defBitmap;
-	CPackages packages;
+    CBitmap defBitmap;
+    CPackages packages;
 };
 
 extern PACKAGE_API CPackage * Package;

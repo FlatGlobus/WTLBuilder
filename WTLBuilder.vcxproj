@@ -182,6 +182,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="ToolPanel.h" />
     <ClInclude Include="ValueListHelper.h" />
+    <ClInclude Include="version.h" />
     <ClInclude Include="WTLBuilder_h.h" />
   </ItemGroup>
   <ItemGroup>

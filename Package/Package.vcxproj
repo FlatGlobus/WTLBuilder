@@ -122,7 +122,6 @@
   <ItemGroup>
     <ClInclude Include="Package.h" />
     <ClInclude Include="PackageApi.h" />
-    <ClInclude Include="PackageDlg.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="StdAfx.h" />
   </ItemGroup>

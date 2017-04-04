@@ -99,6 +99,9 @@
     <ClInclude Include="WTLBuilder_h.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ScriptHost.rgs" />

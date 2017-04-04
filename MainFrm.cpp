@@ -410,7 +410,7 @@ LRESULT CMainFrame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/
     m_panel55.SetVertTextAlign(DT_VCENTER);
     m_panel55.SetSingleLine(true);
 
-    m_buttonst56.Create(m_panel1,CRect(538,4,558,24),_T(""),WS_CHILD|BS_PUSHBUTTON,0,IDC_SHOW_GSGRID);
+    m_buttonst56.Create(m_panel1,CRect(542,4,562,24),_T(""),WS_CHILD|BS_PUSHBUTTON,0,IDC_SHOW_GSGRID);
     m_buttonst56.SetFont((HFONT)m_formFont);
     m_buttonst56.SetFlat(true);
     m_buttonst56.SetAlign(CButtonST::ST_ALIGN_HORIZ);
@@ -546,8 +546,8 @@ LRESULT CMainFrame::OnFileExit(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCt
 {
     if (project.CloseAll() == TRUE)
     {
-        //	    SendEvent(evShutDown);
-        //	    StopCommandTimer();
+        //        SendEvent(evShutDown);
+        //        StopCommandTimer();
         //      mru.WriteToRegistry(WTLBuilderRegKey);
         PostMessage(WM_CLOSE);
     }

@@ -14,7 +14,6 @@ enum Commands
     evShutDown,//(void)
     evWinIniChange,//(void)
     evLoadPackages,// (void)
-    evEditPackages, // (void)
     evAddMenu,//(const CMenuHandle * pMenuAdd,bTopLevel)
     evRunScript,//(LPCTSTR)
     evRunScriptFromFile,//(const LPTSTRfilename)

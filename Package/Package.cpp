@@ -14,7 +14,6 @@
 #include "resource.h"
 
 #include "Package.h"
-#include "PackageDlg.h"
 #include "Command.h"
 #include "File.h"
 #include "Register.h"
@@ -29,23 +28,23 @@ LPCTSTR DEF_MODULE_DIR = _T("");
 BOOL APIENTRY DllMain( HANDLE hInstance, 
                        DWORD  ul_reason_for_call, 
                        LPVOID lpReserved
-					 )
+                     )
 {
     switch (ul_reason_for_call)
-	{
-		case DLL_PROCESS_ATTACH:
-			_Module.Init(NULL, (HINSTANCE)hInstance);
+    {
+        case DLL_PROCESS_ATTACH:
+            _Module.Init(NULL, (HINSTANCE)hInstance);
             Package=new CPackage;
-			break;
-		case DLL_THREAD_ATTACH:
-			break;
-		case DLL_THREAD_DETACH:
-			break;
-		case DLL_PROCESS_DETACH:
-			_Module.Term();
+            break;
+        case DLL_THREAD_ATTACH:
+            break;
+        case DLL_THREAD_DETACH:
+            break;
+        case DLL_PROCESS_DETACH:
+            _Module.Term();
             if(Package)
                 delete Package;
-			break;
+            break;
    }
     return TRUE;
 }
@@ -65,14 +64,14 @@ CPackageItem::~CPackageItem(void)
 
 BOOL CPackageItem::Load(void)
 {
-	if (Handle)
-		return TRUE;
+    if (Handle)
+        return TRUE;
 
-	if(DllName.IsEmpty())
-		return FALSE;
+    if(DllName.IsEmpty())
+        return FALSE;
 
-	Handle = ::LoadLibrary(DllName);
-	return IsLoaded();
+    Handle = ::LoadLibrary(DllName);
+    return IsLoaded();
 }
 
 void CPackageItem::Free(void)
@@ -99,75 +98,62 @@ BOOL CPackageItem::IsLoaded(void)
 /////////////////////////////////////////////////////////////////////////////////////////		
 CPackage::CPackage()
 { 
-	RegisterEvent(evLoadPackages,this,&CPackage::LoadPackages,0);
-	RegisterEvent(evEditPackages,this,&CPackage::EditPackages);
-	RegisterEvent(evStartingUp,this,&CPackage::StartingUp);
-	defBitmap.LoadBitmap(IDB_DEFAULT);	
+    RegisterEvent(evLoadPackages,this,&CPackage::LoadPackages,0);
+    RegisterEvent(evStartingUp,this,&CPackage::StartingUp);
+    defBitmap.LoadBitmap(IDB_DEFAULT);	
 }
 
 CPackage::~CPackage(void)
 {
-	FreePackages();	
-	UnRegisterEvent(this);
+    FreePackages();	
+    UnRegisterEvent(this);
 }
 
 HBITMAP CPackage::GetDefaulBitmap()
 {
-	return defBitmap;
+    return defBitmap;
 }
 
 void CPackage::ScanFolder(LPCTSTR folder,LPCTSTR ext)
 {
-	CString appPath=CPath::GetAppPath();
-	appPath=appPath+folder;
-	CStringArray packageNames;
-	CPath::GetAllFilesFromFolder(appPath,TRUE,packageNames,ext);
-	for(int i= 0; i < (int)packageNames.GetSize();i++)
-		packages.Add(CPackageItem(packageNames[i]));
+    CString appPath=CPath::GetAppPath();
+    appPath=appPath+folder;
+    CStringArray packageNames;
+    CPath::GetAllFilesFromFolder(appPath,TRUE,packageNames,ext);
+    for(int i= 0; i < (int)packageNames.GetSize();i++)
+        packages.Add(CPackageItem(packageNames[i]));
 }
-
-void CPackage::EditPackages()
-{
-	CPackageDlg dlg;
-	dlg.packages=&packages;
-	dlg.DoModal();
-}	
 
 void * CPackage::CreateByName(LPCTSTR name)
 {
-	return NULL;
+    return NULL;
 }
 
 void CPackage::LoadPackages(void)
 {
-	ScanFolder(DEF_PACKAGE_DIR,DEF_PACKAGE_EXT);
-	for(int i=0; i < packages.GetSize();i++)
-	{
-		packages[i].Load();
-	}
+    ScanFolder(DEF_PACKAGE_DIR,DEF_PACKAGE_EXT);
+    for(int i=0; i < packages.GetSize();i++)
+    {
+        packages[i].Load();
+    }
 }
 
 void CPackage::FreePackages(void)
 {
-	for(int i=0; i < packages.GetSize();i++)
-	{
-		packages[i].Free();
-	}
-	packages.RemoveAll();
+    for(int i=0; i < packages.GetSize();i++)
+    {
+        packages[i].Free();
+    }
+    packages.RemoveAll();
 }
 
 void CPackage::StartingUp(void)
 {
-	//CMenuHandle pMenuAdd;
-	//if(pMenuAdd.LoadMenu(IDR_PACKAGE_MENU))
-	//	SendEvent(evAddMenu,&pMenuAdd,true);
+    //CMenuHandle pMenuAdd;
+    //if(pMenuAdd.LoadMenu(IDR_PACKAGE_MENU))
+    //	SendEvent(evAddMenu,&pMenuAdd,true);
 }
 
 void CPackage::OnCommand(UINT id)
 {
-	switch(id)
-	{
-	case ID_PACKAGES_PACKAGES:EditPackages();
-		break;
-	};
 }
