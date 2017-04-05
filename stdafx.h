@@ -8,8 +8,7 @@
 #define _WTL_NO_THEME_DELAYLOAD
 #define _WTL_NO_CSTRING
 
-#define _CRT_SECURE_NO_WARNINGS
-#pragma warning( disable:4838)
+#include "warning.h"
 
 #include <windows.h>
 #include <atlstr.h>

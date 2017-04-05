@@ -148,7 +148,7 @@ public:
       ATLASSERT(hImageList);
       HICON hIcon = NULL;
 #if _WIN32_WINNT >= 0x0600
-	  OSVERSIONINFO ovi = { 0 };
+      OSVERSIONINFO ovi = { 0 };
       ovi.dwOSVersionInfoSize = sizeof(ovi);
       ::GetVersionEx(&ovi);
       if( ovi.dwMajorVersion >= 6 ) {

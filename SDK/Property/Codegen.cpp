@@ -222,7 +222,7 @@ void CCodeGenerator::SetTemplateName(const CString &str)
     templateName+=str;
 }
 
-void CCodeGenerator::FormatTemplate(void)
+void CCodeGenerator::FormatForm(void)
 {
     header=FormatString(NULL,header);
     source=FormatString(NULL,source);
@@ -320,7 +320,13 @@ CString CCodeGenerator::GetVar(const CString & name)
 //TODO option - num of spaces 
 void CCodeGenerator::Untabify(CString& str)
 {
-    str.Replace("\t", "    ");
+    str.Replace(_T("\t"),_T("    "));
+}
+
+void CCodeGenerator::RemoveFormName(CString& str)
+{
+    header.Replace(str, _T("[!CLASSNAME]"));
+    source.Replace(str, _T("[!CLASSNAME]"));
 }
 
 //////////////////////////////////////////////////////////////////////////

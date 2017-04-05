@@ -25,7 +25,7 @@ function Form_CDialogImpl(form)
     //sourceStr+="\tModifyStyleEx(GetExStyle()," + MakeExWindowStyle(form) + ");\n";
     
     //setting ClientWidth and ClientHeight of the dialog 
-    sourceStr+=codegen.Format(form,"\tResizeClient([!ClientWidth],[!ClientHeight]);\n");
+    sourceStr+=codegen.Format(form, "\tResizeClient([!ClientWidth],[!ClientHeight]);\n");
     //setting caption of the dialog
     if ( form.Item("Caption")!="" && form.Item("CaptionBar") == true)
         sourceStr+="\tSetWindowText("+MakeLocalizedCString(form.Item("Caption"),form)+");\n";
@@ -34,11 +34,11 @@ function Form_CDialogImpl(form)
     {
         //if Icon for the dialog defined
         //generate code for setting Icon image
-        sourceStr+=codegen.Format(form,"\tHICON hIcon = (HICON)::LoadImage(_Module.GetResourceInstance(), MAKEINTRESOURCE([!Icon.ID]),\n"); 
+        sourceStr+=codegen.Format(form, "\tHICON hIcon = (HICON)::LoadImage(_Module.GetResourceInstance(), MAKEINTRESOURCE([!Icon.ID]),\n"); 
         sourceStr+="\t   IMAGE_ICON, ::GetSystemMetrics(SM_CXICON), ::GetSystemMetrics(SM_CYICON), LR_DEFAULTCOLOR);\n";
         sourceStr+="\tSetIcon(hIcon, TRUE);\n";
 
-        sourceStr+=codegen.Format(form,"\tHICON hIconSmall = (HICON)::LoadImage(_Module.GetResourceInstance(), MAKEINTRESOURCE([!Icon.ID]),\n"); 
+        sourceStr+=codegen.Format(form, "\tHICON hIconSmall = (HICON)::LoadImage(_Module.GetResourceInstance(), MAKEINTRESOURCE([!Icon.ID]),\n"); 
         sourceStr+="\t   IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), LR_DEFAULTCOLOR);\n";
         sourceStr+="\tSetIcon(hIconSmall, TRUE);\n";   
     }

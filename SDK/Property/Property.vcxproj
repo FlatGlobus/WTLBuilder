@@ -164,6 +164,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="StdPropClass.h" />
+    <ClInclude Include="warning.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Res\Button.bmp" />

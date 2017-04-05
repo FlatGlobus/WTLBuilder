@@ -31,7 +31,7 @@ class Undo
     static size_t   max_undos;
     UndoArray       undo;
     BOOL            changed;
-	BOOL            fixChanges;
+    BOOL            fixChanges;
 public:
     Undo();
     ~Undo();
@@ -51,31 +51,32 @@ class PROPERTY_API CFormComponent:
     public Component
 {
 protected:
-	Components		components;
-	CPath    		fileName;
-	BOOL			enableClose;
-	BOOL			showWindow;
-	CCodeGenerator  codeGen;
-	CFontEx			formFont;
-	CString			caption;
+    Components		components;
+    CPath    		fileName;
+    CPath    		templateFileName;
+    BOOL			enableClose;
+    BOOL			showWindow;
+    CCodeGenerator  codeGen;
+    CFontEx			formFont;
+    CString			caption;
     DWORD           classStyle;
-	BOOL			visible;
-	long			clientWidth;
-	long			clientHeight;
-	SystemColor		bkColor;
-	UINTArray		_controls;
-	BOOL			enableLayout;
-	long			nPositions;
+    BOOL			visible;
+    long			clientWidth;
+    long			clientHeight;
+    SystemColor		bkColor;
+    UINTArray		_controls;
+    BOOL			enableLayout;
+    long			nPositions;
     CImage          formIcon;
     BOOL            fromTemplate;
     long            idBase;
-	//CBrushEx		bkBrush;
+    //CBrushEx		bkBrush;
     Undo            undo;
     CString			viewCtrl;
 //    CString			toolBarCtrl;
 //    CString			statusBarCtrl;
 //    CString         menu;
-	BOOL			sizeChanged;
+    BOOL			sizeChanged;
     BOOL            showHandle;
 
 
@@ -83,79 +84,80 @@ protected:
     void ToolBarChanged(Component*);
     void StatusBarChanged(Component*);
     void MenuChanged(Component*);
-	BOOL GenerateXML(CXMLDOMDocument2 & Doc);
-	BOOL LoadFromString(const CString &,BOOL loadForm);
+    BOOL GenerateXML(CXMLDOMDocument2 & Doc);
+    BOOL LoadFromString(const CString &,BOOL loadForm);
     void IsFormChanged(Component*,BOOL *);
 public:
     enum SaveOperation {soSave,soSaveAs,soSaveAsTemplate};
-	UINT	*		_controlsToClip;
+    UINT	*		_controlsToClip;
 
-	CFormComponent(LPTSTR _name=NULL);
-	virtual ~CFormComponent();
+    CFormComponent(LPTSTR _name=NULL);
+    virtual ~CFormComponent();
 
-	typedef CScrollImpl<CFormComponent>	scrollBase;
+    typedef CScrollImpl<CFormComponent>	scrollBase;
     typedef CFrameWindowImpl<CFormComponent,CWindow> baseClass;
 
     virtual BOOL PreTranslateMessage(MSG* pMsg);
 
-	BEGIN_MSG_MAP_EX(CFormComponent)
+    BEGIN_MSG_MAP_EX(CFormComponent)
         MESSAGE_HANDLER(WM_PAINT,OnPaint)
-		//CHAIN_MSG_MAP(scrollBase)
-		MESSAGE_HANDLER(WM_CREATE,OnCreate)
-		MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
+        //CHAIN_MSG_MAP(scrollBase)
+        MESSAGE_HANDLER(WM_CREATE,OnCreate)
+        MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
         MESSAGE_HANDLER(WM_ACTIVATE, OnActivate)
         MESSAGE_HANDLER(WM_ERASEBKGND, OnEraseBkgnd)
-		MESSAGE_HANDLER(WM_SIZE,OnSize)
-		MESSAGE_HANDLER(WM_MOVE,OnMove)
-		MESSAGE_HANDLER(WM_CLOSE,OnClose)
-		MESSAGE_HANDLER(WM_GETCTRLFONT,OnGetFormFont)
-		MESSAGE_HANDLER(WM_LBUTTONDOWN, OnButtonDown)
-		MESSAGE_HANDLER(WM_RBUTTONDOWN, OnButtonDown)
-		MESSAGE_HANDLER(WM_NCLBUTTONDOWN,OnButtonDown)
-		MESSAGE_HANDLER(WM_NCRBUTTONDOWN,OnButtonDown)
-		//MESSAGE_HANDLER(WM_ERASEBKGND, LayoutMgr<CFormComponent>::OnEraseBackground)
-		//MESSAGE_HANDLER(WMU_PS_ATTACH_PS, LayoutMgr<CFormComponent>::OnAttachPropertySheet)
-		MESSAGE_HANDLER(WM_UPDATELAYOUT,OnUpdateLayout)
+        MESSAGE_HANDLER(WM_SIZE,OnSize)
+        MESSAGE_HANDLER(WM_MOVE,OnMove)
+        MESSAGE_HANDLER(WM_CLOSE,OnClose)
+        MESSAGE_HANDLER(WM_GETCTRLFONT,OnGetFormFont)
+        MESSAGE_HANDLER(WM_LBUTTONDOWN, OnButtonDown)
+        MESSAGE_HANDLER(WM_RBUTTONDOWN, OnButtonDown)
+        MESSAGE_HANDLER(WM_NCLBUTTONDOWN,OnButtonDown)
+        MESSAGE_HANDLER(WM_NCRBUTTONDOWN,OnButtonDown)
+        //MESSAGE_HANDLER(WM_ERASEBKGND, LayoutMgr<CFormComponent>::OnEraseBackground)
+        //MESSAGE_HANDLER(WMU_PS_ATTACH_PS, LayoutMgr<CFormComponent>::OnAttachPropertySheet)
+        MESSAGE_HANDLER(WM_UPDATELAYOUT,OnUpdateLayout)
         MESSAGE_HANDLER(WM_EXITSIZEMOVE,OnEndSizeMove)
         MESSAGE_HANDLER(WM_GETMINMAXINFO,OnGetMinMaxInfo)
         CHAIN_MSG_MAP(baseClass)
-		REFLECT_NOTIFICATIONS_EX()
-	END_MSG_MAP()
+        REFLECT_NOTIFICATIONS_EX()
+    END_MSG_MAP()
 
-	IDispatch* __stdcall get_Code();
-	LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/);
-	LRESULT OnDestroy(UINT, WPARAM, LPARAM, BOOL& bHandled);
-	LRESULT OnActivate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+    virtual IDispatch* __stdcall get_Code();
+
+    LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/);
+    LRESULT OnDestroy(UINT, WPARAM, LPARAM, BOOL& bHandled);
+    LRESULT OnActivate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnEndSizeMove(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     LRESULT OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-	LRESULT OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+    LRESULT OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
     virtual void DoPaint(CDCHandle dc);
     LRESULT OnPaint(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& bHandled);
     LRESULT OnEraseBkgnd(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& bHandled);
     LRESULT OnMove(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-	LRESULT OnButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/);
-	LRESULT OnClose(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
-	void SetFormFont(CFontEx *);
-	LRESULT OnGetFormFont(UINT,WPARAM,LPARAM, BOOL& bHandled);
-	virtual void InitProperty(void);
+    LRESULT OnButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& /*bHandled*/);
+    LRESULT OnClose(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
+    void SetFormFont(CFontEx *);
+    LRESULT OnGetFormFont(UINT,WPARAM,LPARAM, BOOL& bHandled);
+    virtual void InitProperty(void);
 
 
-	IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(HScroll,(WS_HSCROLL))
-	IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(VScroll,(WS_VSCROLL))
-	IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(MinimizeBox,(WS_MINIMIZEBOX))
-	IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(MaximizeBox,(WS_MAXIMIZEBOX))
-	IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(SysMenu,(WS_SYSMENU))
+    IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(HScroll,(WS_HSCROLL))
+    IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(VScroll,(WS_VSCROLL))
+    IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(MinimizeBox,(WS_MINIMIZEBOX))
+    IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(MaximizeBox,(WS_MAXIMIZEBOX))
+    IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(SysMenu,(WS_SYSMENU))
     IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(ClipSiblings,(WS_CLIPSIBLINGS))
     IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(ClipChildren,(WS_CLIPCHILDREN))
-	//IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(Child, (WS_CHILD))
-	//IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(Border, (WS_BORDER))
+    //IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(Child, (WS_CHILD))
+    //IMPLEMENT_WINSTYLE_BOOL_PROPERTY_I(Border, (WS_BORDER))
 
-	IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(ModalFrame,(WS_EX_DLGMODALFRAME))
-	IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(TopMost,(WS_EX_TOPMOST))
-	IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(Transparent,(WS_EX_TRANSPARENT))
-	IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(MDIChild,(WS_EX_MDICHILD))
-	IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(ToolWindow,(WS_EX_TOOLWINDOW))
-	IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(ContextHelp,(WS_EX_CONTEXTHELP))
+    IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(ModalFrame,(WS_EX_DLGMODALFRAME))
+    IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(TopMost,(WS_EX_TOPMOST))
+    IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(Transparent,(WS_EX_TRANSPARENT))
+    IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(MDIChild,(WS_EX_MDICHILD))
+    IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(ToolWindow,(WS_EX_TOOLWINDOW))
+    IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(ContextHelp,(WS_EX_CONTEXTHELP))
     IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(AcceptFiles,(WS_EX_ACCEPTFILES))
     IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(WindowEdge,(WS_EX_WINDOWEDGE))
     IMPLEMENT_EXWINSTYLE_BOOL_PROPERTY_I(ClientEdge,(WS_EX_CLIENTEDGE))
@@ -174,8 +176,8 @@ public:
     IMPLEMENT_CLASSSTYLE_BOOL_PROPERTY_I(CS_PARENTDC)
     IMPLEMENT_CLASSSTYLE_BOOL_PROPERTY_I(CS_SAVEBITS)
     IMPLEMENT_CLASSSTYLE_BOOL_PROPERTY_I(CS_VREDRAW)
-	IMPLEMENT_CLASSSTYLE_BOOL_PROPERTY_I(CS_IME)
-	IMPLEMENT_CLASSSTYLE_BOOL_PROPERTY_I(CS_DROPSHADOW)
+    IMPLEMENT_CLASSSTYLE_BOOL_PROPERTY_I(CS_IME)
+    IMPLEMENT_CLASSSTYLE_BOOL_PROPERTY_I(CS_DROPSHADOW)
 
 
     DECLARE_PROPERTY(WndClient,CString)
@@ -183,54 +185,54 @@ public:
     //DECLARE_PROPERTY(WndStatusBar,CString)
     //DECLARE_PROPERTY(Menu,CString)
 
-	//set window style WS_OVERLAPPED or WS_POPUP or WS_CHILD
-	DECLARE_PROPERTY(WindowStyle, DWORD)
-	DECLARE_PROPERTY(LocalizeName,CString)
-	DECLARE_PROPERTY(LangID,LangID)
+    //set window style WS_OVERLAPPED or WS_POPUP or WS_CHILD
+    DECLARE_PROPERTY(WindowStyle, DWORD)
+    DECLARE_PROPERTY(LocalizeName,CString)
+    DECLARE_PROPERTY(LangID,LangID)
     DECLARE_PROPERTY(ShowHandle,BOOL)
 
-	void set_EnableLayout(BOOL val);
-	BOOL get_EnableLayout();
-	void set_NPositions(long val);
-	long get_NPositions();
-	void set_ClientHeight(long val);
-	long get_ClientHeight();
-	void set_ClientWidth(long val);
-	long get_ClientWidth();
-	void set_BorderStyle(DWORD val);
-	DWORD get_BorderStyle(void);
-	void set_CaptionBar(BOOL val);
-	BOOL get_CaptionBar(void);
-	void set_Caption(CString str);
-	CString get_Caption(void);
-	void set_ShowWindow(BOOL val);
-	BOOL get_ShowWindow(void);
-	virtual BOOL IsForm();
-	virtual void SetBoundsRect(CRect rc);
-	virtual CRect GetBoundsRect(void);
-	void SaveAsTemplate(Component * frm,CString* templatePath);
+    void set_EnableLayout(BOOL val);
+    BOOL get_EnableLayout();
+    void set_NPositions(long val);
+    long get_NPositions();
+    void set_ClientHeight(long val);
+    long get_ClientHeight();
+    void set_ClientWidth(long val);
+    long get_ClientWidth();
+    void set_BorderStyle(DWORD val);
+    DWORD get_BorderStyle(void);
+    void set_CaptionBar(BOOL val);
+    BOOL get_CaptionBar(void);
+    void set_Caption(CString str);
+    CString get_Caption(void);
+    void set_ShowWindow(BOOL val);
+    BOOL get_ShowWindow(void);
+    virtual BOOL IsForm();
+    virtual void SetBoundsRect(CRect rc);
+    virtual CRect GetBoundsRect(void);
+    void SaveAsTemplate(Component * frm,CString* templatePath);
     void SaveAsForm(Component * frm);
-	void SaveForm(Component * frm,SaveOperation operation);
-	void LoadForm(Component *mainForm,Component ** formPtr,LPCTSTR formFileName,BOOL _fromTemplate);
-	void CloseForm(Component * cmp,BOOL * remove);
-	void GetFormFileName(Component * cmp,CString* formFileName);
-	CString GetFileName();
-	void GenerateCode();
+    void SaveForm(Component * frm,SaveOperation operation);
+    void LoadForm(Component *mainForm,Component ** formPtr,LPCTSTR formFileName,BOOL _fromTemplate);
+    void CloseForm(Component * cmp,BOOL * remove);
+    void GetFormFileName(Component * cmp,CString* formFileName);
+    CString GetFileName();
+    void GenerateCode(SaveOperation);
     void GenerateLocFile(LPCTSTR fileName);
-	DWORD get_InternalWindowStyle();
-	void set_InternalWindowStyle(DWORD s);
-	DWORD get_InternalWindowStyleEx();
-	void set_InternalWindowStyleEx(DWORD s);
-	void set_Visible(BOOL val);
-	BOOL get_Visible();
-	void set_Color(COLORREF val);
-	COLORREF get_Color();
-	void GetDialogRect(LPRECT r);
-	void GetOffset(LPPOINT offset);
+    DWORD get_InternalWindowStyle();
+    void set_InternalWindowStyle(DWORD s);
+    DWORD get_InternalWindowStyleEx();
+    void set_InternalWindowStyleEx(DWORD s);
+    void set_Visible(BOOL val);
+    BOOL get_Visible();
+    void set_Color(COLORREF val);
+    COLORREF get_Color();
+    void GetDialogRect(LPRECT r);
+    void GetOffset(LPPOINT offset);
     void DefineLayout();
-	LRESULT OnUpdateLayout(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-	void InitLayout();
-	virtual void UnAttach(Component * component);
+    LRESULT OnUpdateLayout(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+    void InitLayout();
+    virtual void UnAttach(Component * component);
     void set_GSGuides(BOOL val);
     BOOL get_GSGuides();
     void set_FromLeftToRight(BOOL val);

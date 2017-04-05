@@ -570,9 +570,6 @@ void CFormComponent::set_CaptionBar(BOOL val)
 
 BOOL CFormComponent::get_CaptionBar(void)
 {
-    //DWORD windowStyle = get_InternalWindowStyle();
-
-    //return (windowStyle & WS_CAPTION) == WS_CAPTION;
     return GET_PROP_VALUE(BOOL, CaptionBar)
 }
 
@@ -581,7 +578,6 @@ void CFormComponent::set_Caption(CString str)
     caption=str;
     if(IsWindow())
         SetWindowText((LPCTSTR)caption);
-    //AddUndo(this);
 }
 
 CString CFormComponent::get_Caption(void)
@@ -647,11 +643,10 @@ void CFormComponent::SaveAsTemplate(Component * frm,CString* templatePath)
 {
     if(frm==this && templatePath)
     {
-        CPath temp=fileName;
-        fileName=*templatePath;
+        templateFileName=*templatePath;
         SaveForm(this,soSaveAsTemplate);
-        fileName=temp;
         StopEvent(evSaveFormAsTemplate);
+        templateFileName.Empty();
     }
 }
 
@@ -685,23 +680,33 @@ void CFormComponent::SaveForm(Component * frm,SaveOperation operation)
 
                 fileName=filedlg.m_szFileName;
             }
-            fileName.SetExt(_T("wff"));
-            fileName.SetCurDir();
 
             {
                 CXMLDOMDocument2	Doc;
                 GenerateXML(Doc);
-                Doc.Save((LPCTSTR)fileName);
+                
+                GenerateCode(operation);
+                if (operation != soSaveAsTemplate)
+                {
+                    fileName.SetExt(_T("wff"));
+                    fileName.SetCurDir();
+                    Doc.Save((LPCTSTR)fileName);
+                    codeGen.SaveHeader((LPCTSTR)fileName);
+                    codeGen.SaveSource((LPCTSTR)fileName);
+                    undo.Reset();
+                    AddUndo(this);
+                    SendEvent(evFormSaved, static_cast<Component *>(this), (LPCTSTR)fileName);
+                }
+                else
+                {
+                    templateFileName.SetExt(_T("wff"));
+                    Doc.Save((LPCTSTR)templateFileName);
+                    codeGen.SaveHeader((LPCTSTR)templateFileName);
+                    codeGen.SaveSource((LPCTSTR)templateFileName);
+
+                }
             }
-            GenerateCode();
-            codeGen.SaveHeader((LPCTSTR)fileName);
-            codeGen.SaveSource((LPCTSTR)fileName);
-            if(operation != soSaveAsTemplate)
-            {
-                undo.Reset();
-                AddUndo(this);
-                SendEvent(evFormSaved,static_cast<Component *>(this),(LPCTSTR)fileName);
-            }
+
         }
         catch (CComException *pE)
         {
@@ -755,12 +760,9 @@ void CFormComponent::LoadForm(Component *mainForm,Component ** formPtr,LPCTSTR f
         ComponentCreated();
         SetState(csLoading,FALSE);
 
-        if(fromTemplate==TRUE)
-        {			
-            if(codeGen.LoadHeader((LPCTSTR)fileName)==TRUE)
-                codeGen.LoadSource((LPCTSTR)fileName);
-            fileName="";
-        }
+        if(codeGen.LoadHeader((LPCTSTR)fileName)==TRUE)
+            codeGen.LoadSource((LPCTSTR)fileName);
+
         designer->MoveWindow(0,0,clientWidth,clientHeight);
         AddUndo(this);
 
@@ -870,66 +872,70 @@ void CFormComponent::GetFormFileName(Component * cmp,CString* formFileName)
     }
 }
 
-void CFormComponent::GenerateCode()
+void CFormComponent::GenerateCode(SaveOperation operation)
 {
     CMsgPump pump;
-    if(undo.IsModified()==TRUE)
+
+    if (fileName.IsFilePath() && operation == soSave)//load last source code changes
     {
-        if(fromTemplate==FALSE)
-        {			
-            if(codeGen.LoadHeader((LPCTSTR)fileName)==FALSE ||
-                codeGen.LoadSource((LPCTSTR)fileName)==FALSE)
-            {
-                ::MessageBox(NULL,_T("Error opening source file(s)"),_T("WTLBuilder"),MB_OK);
-                return;
-            }
+        if (codeGen.LoadHeader((LPCTSTR)fileName) == FALSE ||
+            codeGen.LoadSource((LPCTSTR)fileName) == FALSE)
+        {
+            ::MessageBox(NULL, MakeString(_T("Error opening file %s"), (LPCTSTR)fileName), _T("WTLBuilder"), MB_OK);
+            return;
         }
-        BOOL retFlag;
-        codeGen.AddVar(_T("FILENAME"),fileName.GetTitle());
-        codeGen.AddVar(_T("CLASSNAME"),get_Name());
-        codeGen.FormatTemplate();
-        VARIANT params[2];
-        VARIANT retVal;
-        params[1].vt=VT_DISPATCH;
-        params[1].pdispVal=(IDispDynImpl<Component> *)this;
-        CString cmpName;
-        CString cmpPage;
-        CString funcName;
-        ExtractName(GetClassName(),cmpPage,cmpName);
-        cmpPage=cmpPage.Trim();
-        cmpName=cmpName.Trim();
-        funcName.Format(_T("%s_%s"),(LPCTSTR)cmpPage,(LPCTSTR)cmpName);
-        params[0].vt=VT_DISPATCH;
-        params[0].pdispVal=(IDispDynImpl<Component> *)this;//params[1].pdispVal;
-        SendEvent(evInvokeFunc,(BSTR)CComBSTR((LPCTSTR)funcName),&params[0],1,&retVal,&retFlag);
+    }
+
+    BOOL retFlag;
+    codeGen.AddVar(_T("FILENAME"), fileName.GetTitle());
+    codeGen.AddVar(_T("CLASSNAME"), get_Name());
+    codeGen.FormatForm();
+    VARIANT params[2];
+    VARIANT retVal;
+    params[1].vt = VT_DISPATCH;
+    params[1].pdispVal = (IDispDynImpl<Component> *)this;
+    CString cmpName;
+    CString cmpPage;
+    CString funcName;
+    ExtractName(GetClassName(), cmpPage, cmpName);
+    cmpPage = cmpPage.Trim();
+    cmpName = cmpName.Trim();
+    funcName.Format(_T("%s_%s"), (LPCTSTR)cmpPage, (LPCTSTR)cmpName);
+    params[0].vt = VT_DISPATCH;
+    params[0].pdispVal = (IDispDynImpl<Component> *)this;//params[1].pdispVal;
+    SendEvent(evInvokeFunc, (BSTR)CComBSTR((LPCTSTR)funcName), &params[0], 1, &retVal, &retFlag);
+    if (retFlag == FALSE)
+    {
+        CString errMsg;
+        errMsg.Format("Error while generating form code. See %s script function.", (LPCTSTR)funcName);
+        PostEvent(evOutput, ErrorMsg, (LPCTSTR)errMsg);
+        return;
+    }
+
+    for (int i = 0; i < components.GetCount(); i++)
+    {
+        BOOL generate = components.GetAt(i)->GetProperty()->GetPropValue<BOOL>(_T("Generate"));
+        if (generate == FALSE)
+            continue;
+        ExtractName(components.GetAt(i)->GetClassName(), cmpPage, cmpName);
+        funcName.Format(_T("%s_%s"), (LPCTSTR)cmpPage, (LPCTSTR)cmpName);
+        params[0].vt = VT_DISPATCH;
+        params[0].pdispVal = (IDispDynImpl<Component> *)components.GetAt(i);
+        params[1].vt = VT_DISPATCH;
+        params[1].pdispVal = (IDispDynImpl<Component> *)this;
+        SendEvent(evInvokeFunc, (BSTR)CComBSTR((LPCTSTR)funcName), &params[0], 2, &retVal, &retFlag);
         if (retFlag == FALSE)
         {
             CString errMsg;
-            errMsg.Format("Error while generating form code. See %s script function.", (LPCTSTR)funcName);
+            errMsg.Format("Error while generating control code. See %s script function.", (LPCTSTR)funcName);
             PostEvent(evOutput, ErrorMsg, (LPCTSTR)errMsg);
             return;
         }
-        for(int i=0; i < components.GetCount();i++)
-        {
-            BOOL generate=components.GetAt(i)->GetProperty()->GetPropValue<BOOL>(_T("Generate"));
-            if(generate==FALSE)
-                continue;
-            ExtractName(components.GetAt(i)->GetClassName(),cmpPage,cmpName);
-            funcName.Format(_T("%s_%s"),(LPCTSTR)cmpPage,(LPCTSTR)cmpName);
-            params[0].vt=VT_DISPATCH;
-            params[0].pdispVal=(IDispDynImpl<Component> *)components.GetAt(i);
-            params[1].vt=VT_DISPATCH;
-            params[1].pdispVal=(IDispDynImpl<Component> *)this;
-            SendEvent(evInvokeFunc,(BSTR)CComBSTR((LPCTSTR)funcName),&params[0],2,&retVal,&retFlag);
-            if(retFlag==FALSE)
-            {
-                CString errMsg;
-                errMsg.Format("Error while generating control code. See %s script function.", (LPCTSTR)funcName);
-                PostEvent(evOutput, ErrorMsg, (LPCTSTR)errMsg);
-                return;
-            }
-        }
     }
+
+    if (operation == soSaveAsTemplate)
+        codeGen.RemoveFormName(get_Name());
+    
 }
 
 void CFormComponent::GenerateLocFile(LPCTSTR fileName)

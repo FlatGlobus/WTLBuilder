@@ -138,6 +138,9 @@
     <ClInclude Include="StdPropClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="warning.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Res\Button.bmp">

@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "OptionsDlg.h"
 ///////////////////////////////////////////////////////////////////////////////
-const UINT COptionsDlg::_controlsToClip[] =
+const UINT [!CLASSNAME]::_controlsToClip[] =
 {
 //{{WTLBUILDER_CTRLTOCLIP
 //}}WTLBUILDER_CTRLTOCLIP

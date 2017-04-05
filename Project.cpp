@@ -94,7 +94,7 @@ BOOL __stdcall CProject::Open(BSTR fn)
         {
             SendEvent(evOutput, ErrorMsg, (LPCSTR)MakeString(_T("Component Page = %s, Name = %s not found."), page, cmpName));
         }
-
+        
         forms.Add(form);
         SendEvent(evFormLoaded,form,(LPCTSTR)fileName);
     }

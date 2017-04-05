@@ -84,7 +84,8 @@ public:
     void SetTemplateName(const CString &);
     void AddVar(const CString & name,const CString & val);
     CString GetVar(const CString & name);
-    void FormatTemplate(void);
+    void FormatForm(void);
+    void RemoveFormName(CString& str);
 protected:
     void EmptyHeader(CString & Begin,CString & End);
     void EmptySource(CString & Begin,CString & End);
