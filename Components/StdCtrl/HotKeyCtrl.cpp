@@ -17,37 +17,37 @@ static void RegisterStatusBarCtrlStyles();
 
 namespace StdCtrl
 {
-	REGISTER_COMPONENT(CHotKeyCtrl,StdCtl,IDB_HOTKEYCTRL)
+    REGISTER_COMPONENT(CHotKeyCtrl,StdCtl,IDB_HOTKEYCTRL)
 
 CHotKeyCtrl::CHotKeyCtrl(LPTSTR _name):ControlComponent<StdCtrl::CHotKeyCtrl>(_name)
 {
-	SetDefaultSize(80,14);
-	RegisterStatusBarCtrlStyles();
+    SetDefaultSize(80,14);
+    RegisterStatusBarCtrlStyles();
 }
 
-	CHotKeyCtrl::~CHotKeyCtrl(void)
-	{
-	}
+    CHotKeyCtrl::~CHotKeyCtrl(void)
+    {
+    }
 
-	BOOL CHotKeyCtrl::CreateComponent(Component * _Parent)
-	{
+    BOOL CHotKeyCtrl::CreateComponent(Component * _Parent)
+    {
         SetComponentParent(_Parent);
-		CWindowImpl<StdCtrl::CHotKeyCtrl,WTL::CHotKeyCtrl>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
-		return ::IsWindow(m_hWnd);
-	}
+        CWindowImpl<StdCtrl::CHotKeyCtrl,WTL::CHotKeyCtrl>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
+        return ::IsWindow(m_hWnd);
+    }
 
-	void CHotKeyCtrl::InitProperty(void)
-	{
-		ControlComponent<StdCtrl::CHotKeyCtrl>::InitProperty();
-	}
+    void CHotKeyCtrl::InitProperty(void)
+    {
+        ControlComponent<StdCtrl::CHotKeyCtrl>::InitProperty();
+    }
 }
 //////////////////////////////////////////////////////////////////////////
 static void RegisterStatusBarCtrlStyles()
 {
-	static BOOL IsInited=FALSE;
-	if(IsInited==TRUE)
-		return;
+    static BOOL IsInited=FALSE;
+    if(IsInited==TRUE)
+        return;
 
 
-	IsInited=TRUE;
+    IsInited=TRUE;
 }

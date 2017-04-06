@@ -18,9 +18,9 @@ namespace StdCtrl
 REGISTER_COMPONENT(CStatic,StdCtl,IDB_STATIC)
 StdCtrl::CStatic::CStatic(LPTSTR _name):ControlComponent<StdCtrl::CStatic>(_name)
 {
-	SetDefaultSize(60,14);
-	RegisterStaticStyles();
-	enableTabIndex=FALSE;
+    SetDefaultSize(60,14);
+    RegisterStaticStyles();
+    enableTabIndex=FALSE;
 }
 
 CStatic::~CStatic(void)
@@ -30,38 +30,38 @@ CStatic::~CStatic(void)
 BOOL CStatic::CreateComponent(Component * _Parent)
 {
     SetComponentParent(_Parent);
-	CWindowImpl<StdCtrl::CStatic,WTL::CStatic>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),(LPCTSTR)get_Caption(),get_InternalWindowStyle(),get_InternalWindowStyleEx());
-	return ::IsWindow(m_hWnd);
+    CWindowImpl<StdCtrl::CStatic,WTL::CStatic>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),(LPCTSTR)get_Caption(),get_InternalWindowStyle(),get_InternalWindowStyleEx());
+    return ::IsWindow(m_hWnd);
 }
 
 void CStatic::InitProperty(void)
 {
-	ControlComponent<StdCtrl::CStatic>::InitProperty();
-	DEFINE_PROPERTY(Caption,CString,CStatic,(LPCTSTR)get_Name())
-	DEFINE_PROPERTY(Notify,BOOL,CStatic,FALSE)
-	DEFINE_PROPERTY(TextAlign,StaticAlignText,CStatic,SS_LEFT)
- 	DEFINE_PROPERTY(Simple,BOOL,CStatic,FALSE)
-	DEFINE_PROPERTY(Etched,BOOL,CStatic,FALSE)
-	DEFINE_PROPERTY(WordWrap,BOOL,CStatic,FALSE)
-	DEFINE_PROPERTY(NoPrefix,BOOL,CStatic,TRUE)
+    ControlComponent<StdCtrl::CStatic>::InitProperty();
+    DEFINE_PROPERTY(Caption,CString,CStatic,(LPCTSTR)get_Name())
+    DEFINE_PROPERTY(Notify,BOOL,CStatic,FALSE)
+    DEFINE_PROPERTY(TextAlign,StaticAlignText,CStatic,SS_LEFT)
+    DEFINE_PROPERTY(Simple,BOOL,CStatic,FALSE)
+    DEFINE_PROPERTY(Etched,BOOL,CStatic,FALSE)
+    DEFINE_PROPERTY(WordWrap,BOOL,CStatic,FALSE)
+    DEFINE_PROPERTY(NoPrefix,BOOL,CStatic,TRUE)
 }
 
 void CStatic::set_Caption(CString str)
 {
-	caption.Empty();
-	caption=(LPCTSTR)str;
-	if(IsWindow())
-		SetWindowText((LPCTSTR)caption);
-	SetModified();
+    caption.Empty();
+    caption=(LPCTSTR)str;
+    if(IsWindow())
+        SetWindowText((LPCTSTR)caption);
+    SetModified();
 }
 
 CString CStatic::get_Caption(void)
 {
-	if(state.GetBit(csLoading))
-	{
-		caption= GET_PROP_VALUE(CString, Caption)
-	}
-	return caption;
+    if(state.GetBit(csLoading))
+    {
+        caption= GET_PROP_VALUE(CString, Caption)
+    }
+    return caption;
 }
 
 IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CStatic,Notify,(SS_NOTIFY))
@@ -75,8 +75,9 @@ IMPLEMENT_WINSTYLE_BOOL_PROPERTY_NOT(CStatic,NoPrefix,(SS_NOPREFIX))
 REGISTER_COMPONENT(CPicture,StdCtl,IDB_PICTURE)
 StdCtrl::CPicture::CPicture(LPTSTR _name):ControlComponent<StdCtrl::CPicture>(_name)
 {
-	SetDefaultSize(25,25);
-	RegisterStaticStyles();
+    enableTabIndex = FALSE;
+    SetDefaultSize(25,25);
+    RegisterStaticStyles();
 }
 
 CPicture::~CPicture(void)
@@ -86,17 +87,17 @@ CPicture::~CPicture(void)
 BOOL CPicture::CreateComponent(Component * _Parent)
 {
     SetComponentParent(_Parent);
-	CWindowImpl<StdCtrl::CPicture,WTL::CStatic>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
+    CWindowImpl<StdCtrl::CPicture,WTL::CStatic>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
     image.Change.SetObject(this);
     image.Change.SetMethod(&CPicture::OnImageChange);
-	return ::IsWindow(m_hWnd);
+    return ::IsWindow(m_hWnd);
 }
 
 void CPicture::InitProperty(void)
 {
-	ControlComponent<StdCtrl::CPicture>::InitProperty();
-	DEFINE_PROPERTY(Notify,BOOL,CPicture,FALSE)
-	DEFINE_PROPERTY(Etched,BOOL,CPicture,FALSE)
+    ControlComponent<StdCtrl::CPicture>::InitProperty();
+    DEFINE_PROPERTY(Notify,BOOL,CPicture,FALSE)
+    DEFINE_PROPERTY(Etched,BOOL,CPicture,FALSE)
     DEFINE_PROPERTY(CenterImage,BOOL,CPicture,FALSE)
     image.AddProperty(_T("Image"),objprop);
 }
@@ -115,12 +116,12 @@ void CPicture::OnImageChange(CImage *)
             SetIcon((HICON)image);
 
         }
-		else
-		{
-			ModifyStyle(SS_BITMAP | SS_ICON, 0);
-		}
+        else
+        {
+            ModifyStyle(SS_BITMAP | SS_ICON, 0);
+        }
 
-		set_InternalWindowStyle(GetWindowLong(GWL_STYLE));
+        set_InternalWindowStyle(GetWindowLong(GWL_STYLE));
         SetModified();
         ::InvalidateRect(GetParent(),NULL,FALSE);
 }
@@ -132,9 +133,9 @@ IMPLEMENT_WINSTYLE_BOOL_PROPERTY_NOT(CPicture,CenterImage,(SS_CENTERIMAGE))
 
 }
 BEGIN_LIST_PROPERTY(StaticAlignText)
-	LIST_ITEM_DECORATE(SS_LEFT,SS_LEFT,Left)
-	LIST_ITEM_DECORATE(SS_CENTER,SS_CENTER,Center)
-	LIST_ITEM_DECORATE(SS_RIGHT,SS_RIGHT,Right)
+    LIST_ITEM_DECORATE(SS_LEFT,SS_LEFT,Left)
+    LIST_ITEM_DECORATE(SS_CENTER,SS_CENTER,Center)
+    LIST_ITEM_DECORATE(SS_RIGHT,SS_RIGHT,Right)
 END_LIST_ITEM(StaticAlignText)
 
 //BEGIN_LIST_PROPERTY(StaticStyles)
@@ -151,12 +152,12 @@ END_LIST_ITEM(StaticAlignText)
 
 static void RegisterStaticStyles()
 {
-	static BOOL IsInited=FALSE;
-	if(IsInited==TRUE)
-		return;
+    static BOOL IsInited=FALSE;
+    if(IsInited==TRUE)
+        return;
 
-	REGISTER_LIST_PROPERTY(StaticAlignText)
+    REGISTER_LIST_PROPERTY(StaticAlignText)
 //    REGISTER_LIST_PROPERTY(StaticStyles)
-	
-	IsInited=TRUE;
+    
+    IsInited=TRUE;
 }

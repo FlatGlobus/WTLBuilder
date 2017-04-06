@@ -10,50 +10,50 @@
 //////////////////////////////////////////////////////////////////////////
 namespace StdCtrl
 {
-	class CStatic:public CWindowImpl<StdCtrl::CStatic,WTL::CStatic>,
+    class CStatic:public CWindowImpl<StdCtrl::CStatic,WTL::CStatic>,
                   public ControlComponent<StdCtrl::CStatic>
-	{
-		CString caption;
-		long    textAlign;
-	public:
-		CStatic(LPTSTR _name=NULL);
-		~CStatic(void);
-		virtual BOOL CreateComponent(Component *);
-		BEGIN_MSG_MAP(CStatic)
-			CHAIN_MSG_MAP(ControlComponent<StdCtrl::CStatic>)
-			REFLECT_NOTIFICATIONS_EX()
-		END_MSG_MAP()
+    {
+        CString caption;
+        long    textAlign;
+    public:
+        CStatic(LPTSTR _name=NULL);
+        ~CStatic(void);
+        virtual BOOL CreateComponent(Component *);
+        BEGIN_MSG_MAP(CStatic)
+            CHAIN_MSG_MAP(ControlComponent<StdCtrl::CStatic>)
+            REFLECT_NOTIFICATIONS_EX()
+        END_MSG_MAP()
 
-		virtual void InitProperty(void);
+        virtual void InitProperty(void);
 
-		DECLARE_PROPERTY(Caption,CString)
-		DECLARE_WINSTYLE_BOOL_PROPERTY(Notify)
-		DECLARE_WINSTYLE_PROPERTY(TextAlign)
-		DECLARE_WINSTYLE_BOOL_PROPERTY(Simple)
-		DECLARE_WINSTYLE_BOOL_PROPERTY(Etched)
-		DECLARE_WINSTYLE_BOOL_PROPERTY(WordWrap)
-		DECLARE_WINSTYLE_BOOL_PROPERTY(NoPrefix)
-		   
-	};
+        DECLARE_PROPERTY(Caption,CString)
+        DECLARE_WINSTYLE_BOOL_PROPERTY(Notify)
+        DECLARE_WINSTYLE_PROPERTY(TextAlign)
+        DECLARE_WINSTYLE_BOOL_PROPERTY(Simple)
+        DECLARE_WINSTYLE_BOOL_PROPERTY(Etched)
+        DECLARE_WINSTYLE_BOOL_PROPERTY(WordWrap)
+        DECLARE_WINSTYLE_BOOL_PROPERTY(NoPrefix)
+           
+    };
 
-	class CPicture:public CWindowImpl<CPicture,WTL::CStatic>,public ControlComponent<StdCtrl::CPicture>
-	{
+    class CPicture:public CWindowImpl<CPicture,WTL::CStatic>,public ControlComponent<StdCtrl::CPicture>
+    {
         CImage image;
         void OnImageChange(CImage *);
-	public:
-		CPicture(LPTSTR _name=NULL);
-		~CPicture(void);
-		virtual BOOL CreateComponent(Component *);
-		BEGIN_MSG_MAP(CPicture)
-			CHAIN_MSG_MAP(ControlComponent<StdCtrl::CPicture>)
-			REFLECT_NOTIFICATIONS_EX()
-		END_MSG_MAP()
+    public:
+        CPicture(LPTSTR _name=NULL);
+        ~CPicture(void);
+        virtual BOOL CreateComponent(Component *);
+        BEGIN_MSG_MAP(CPicture)
+            CHAIN_MSG_MAP(ControlComponent<StdCtrl::CPicture>)
+            REFLECT_NOTIFICATIONS_EX()
+        END_MSG_MAP()
 
-		virtual void InitProperty(void);
-		DECLARE_WINSTYLE_BOOL_PROPERTY(Notify)
-		DECLARE_WINSTYLE_BOOL_PROPERTY(Etched)
+        virtual void InitProperty(void);
+        DECLARE_WINSTYLE_BOOL_PROPERTY(Notify)
+        DECLARE_WINSTYLE_BOOL_PROPERTY(Etched)
         DECLARE_WINSTYLE_BOOL_PROPERTY(CenterImage)
-	};
+    };
 
 }
 //////////////////////////////////////////////////////////////////////////

@@ -1,2 +1,2 @@
 #pragma once
-#define VERSION _T("v0.2.1")
+#define VERSION _T("v0.2.2")

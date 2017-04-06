@@ -12,32 +12,32 @@
 //////////////////////////////////////////////////////////////////////////
 namespace StdCtrl
 {
-	REGISTER_COMPONENT(CHyperLink,StdCtl,IDB_HYPERLINK)
+    REGISTER_COMPONENT(CHyperLink,StdCtl,IDB_HYPERLINK)
 
-	CHyperLink::CHyperLink(LPTSTR _name):ControlComponent<StdCtrl::CHyperLink>(_name),clrLink(RGB(0, 0, 255)),
+    CHyperLink::CHyperLink(LPTSTR _name):ControlComponent<StdCtrl::CHyperLink>(_name),clrLink(RGB(0, 0, 255)),
     clrVisited(RGB(128, 0, 128))
-	{
-		SetDefaultSize(40,20);
-	}
+    {
+        SetDefaultSize(40,20);
+    }
 
     
     CHyperLink::~CHyperLink(void)
-	{
-	}
+    {
+    }
 
-	BOOL CHyperLink::CreateComponent(Component * _Parent)
-	{
+    BOOL CHyperLink::CreateComponent(Component * _Parent)
+    {
         SetComponentParent(_Parent);
-		Create((HWND)_Parent->GetHandle(),GetBoundsRect(),get_Label(),get_InternalWindowStyle(),get_InternalWindowStyleEx());
-		return ::IsWindow(m_hWnd);
-	}
+        Create((HWND)_Parent->GetHandle(),GetBoundsRect(),get_Label(),get_InternalWindowStyle(),get_InternalWindowStyleEx());
+        return ::IsWindow(m_hWnd);
+    }
 
-	void CHyperLink::InitProperty(void)
-	{
-		ControlComponent<StdCtrl::CHyperLink>::InitProperty();
+    void CHyperLink::InitProperty(void)
+    {
+        ControlComponent<StdCtrl::CHyperLink>::InitProperty();
         DEFINE_PROPERTY(PaintLabel,BOOL,CHyperLink,TRUE)
-		DEFINE_PROPERTY(Label,CString,CHyperLink,_T(""))
-	    DEFINE_PROPERTY(HyperLink,CString,CHyperLink,_T(""))
+        DEFINE_PROPERTY(Label,CString,CHyperLink,_T(""))
+        DEFINE_PROPERTY(HyperLink,CString,CHyperLink,_T(""))
         DEFINE_PROPERTY(ColorLink,CColorref,CHyperLink,clrLink)
         DEFINE_PROPERTY(ColorVisited,CColorref,CHyperLink,clrVisited)
     }

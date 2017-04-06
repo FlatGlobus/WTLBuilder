@@ -14,13 +14,13 @@ typedef long CommonCtrlAlign;
 static void RegisterHeaderCtrlStyles();
 namespace StdCtrl
 {
-	REGISTER_COMPONENT(CHeaderCtrl,StdCtl,IDB_HEADERCTRL)
+    REGISTER_COMPONENT(CHeaderCtrl,StdCtl,IDB_HEADERCTRL)
 
 CHeaderCtrl::CHeaderCtrl(LPTSTR _name):ControlComponent<StdCtrl::CHeaderCtrl>(_name),items(0)
 {
-	SetDefaultSize(200,20);
-	RegisterHeaderCtrlStyles();
-	enableTabIndex=FALSE;
+    SetDefaultSize(200,20);
+    RegisterHeaderCtrlStyles();
+    enableTabIndex=FALSE;
 }
 
 CHeaderCtrl::~CHeaderCtrl(void)
@@ -29,33 +29,33 @@ CHeaderCtrl::~CHeaderCtrl(void)
 
 BOOL CHeaderCtrl::CreateComponent(Component * _Parent)
 {
-	SetComponentParent(_Parent);
-	CWindowImpl<StdCtrl::CHeaderCtrl,WTL::CHeaderCtrl>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
-	return ::IsWindow(m_hWnd);
+    SetComponentParent(_Parent);
+    CWindowImpl<StdCtrl::CHeaderCtrl,WTL::CHeaderCtrl>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
+    return ::IsWindow(m_hWnd);
 }
 
 void CHeaderCtrl::InitProperty(void)
 {
-	ControlComponent<StdCtrl::CHeaderCtrl>::InitProperty();
-	DEFINE_PROPERTY(Buttons,BOOL,CHeaderCtrl,FALSE)
-	DEFINE_PROPERTY(DragDrop,BOOL,CHeaderCtrl,FALSE)
+    ControlComponent<StdCtrl::CHeaderCtrl>::InitProperty();
+    DEFINE_PROPERTY(Buttons,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(DragDrop,BOOL,CHeaderCtrl,FALSE)
 #if (_WIN32_IE >= 0x0500)
-	DEFINE_PROPERTY(FilterBar,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(FilterBar,BOOL,CHeaderCtrl,FALSE)
 #endif
 #if (_WIN32_WINNT >= 0x501)
-	DEFINE_PROPERTY(Flat,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(Flat,BOOL,CHeaderCtrl,FALSE)
 #endif
-	DEFINE_PROPERTY(FullDrag,BOOL,CHeaderCtrl,FALSE)
-	DEFINE_PROPERTY(Hidden,BOOL,CHeaderCtrl,FALSE)
-	DEFINE_PROPERTY(Horiz,BOOL,CHeaderCtrl,FALSE)
-	DEFINE_PROPERTY(HotTrack,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(FullDrag,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(Hidden,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(Horiz,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(HotTrack,BOOL,CHeaderCtrl,FALSE)
 ///common styles
-	DEFINE_PROPERTY(NoDivider,BOOL,CHeaderCtrl,FALSE)
-	DEFINE_PROPERTY(NoMoveY,BOOL,CHeaderCtrl,FALSE)
-	DEFINE_PROPERTY(NoParentAlign,BOOL,CHeaderCtrl,FALSE)
-	DEFINE_PROPERTY(NoResize,BOOL,CHeaderCtrl,FALSE)
-	//DEFINE_PROPERTY(,BOOL,CHeaderCtrl,FALSE)
-	DEFINE_PROPERTY(CtrlAlign,CommonCtrlAlign,CHeaderCtrl,CCS_TOP)
+    DEFINE_PROPERTY(NoDivider,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(NoMoveY,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(NoParentAlign,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(NoResize,BOOL,CHeaderCtrl,FALSE)
+    //DEFINE_PROPERTY(,BOOL,CHeaderCtrl,FALSE)
+    DEFINE_PROPERTY(CtrlAlign,CommonCtrlAlign,CHeaderCtrl,CCS_TOP)
     DEFINE_PROPERTY(Items,long,CHeaderCtrl,0)
 }
 
@@ -102,8 +102,8 @@ long CHeaderCtrl::get_Items()
 //////////////////////////////////////////////////////////////////////////
 static void RegisterHeaderCtrlStyles()
 {
-	static BOOL IsInited=FALSE;
-	if(IsInited==TRUE)
-		return;
-		IsInited=TRUE;
+    static BOOL IsInited=FALSE;
+    if(IsInited==TRUE)
+        return;
+        IsInited=TRUE;
 }

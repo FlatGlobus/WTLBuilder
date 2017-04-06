@@ -156,6 +156,7 @@
     <ClCompile Include="FormType.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="ModuleLoader.cpp" />
+    <ClCompile Include="OptionsDlg.cpp" />
     <ClCompile Include="OutputWindow.cpp" />
     <ClCompile Include="Project.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="FormType.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="ModuleLoader.h" />
+    <ClInclude Include="OptionsDlg.h" />
     <ClInclude Include="OutputWindow.h" />
     <ClInclude Include="Project.h" />
     <ClInclude Include="resource.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="WTLBuilder_h.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="OptionsDlg.wff" />
     <None Include="res\AigmentRight.ico" />
     <None Include="res\AligmentBottom.ico" />
     <None Include="res\AligmentLeft.ico" />

@@ -12,6 +12,8 @@
 #include "WTLBuilderView.h"
 #include "MainFrm.h"
 #include "_util.h"
+#include "OptionsDlg.h"
+
 
 const TCHAR* const WTLBuilderRegKey = _T("Software\\WTLBuilder");
 
@@ -778,6 +780,8 @@ LRESULT CMainFrame::OnGenerateLocFile(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /
 
 LRESULT CMainFrame::OnOptions(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
+    COptionsDlg dlg;
+    dlg.DoModal(::GetDesktopWindow());
     return 0;
 }
 

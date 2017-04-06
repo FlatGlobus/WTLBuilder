@@ -11,19 +11,19 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 template <class T> inline long _round(T val)
 {
-	return val > 0 ? (long)(val+.5) : (long)(val-.5);
+    return val > 0 ? (long)(val+.5) : (long)(val-.5);
 }
 
 template <class T> inline void _swap(T & val1,T & val2)
 {
-	T val=val1;
-	val1=val2;
-	val1=val;
+    T val=val1;
+    val1=val2;
+    val1=val;
 }
 
 template <class T> inline int sign(T val)
 {
-	return val >= 0 ? 1 : -1;
+    return val >= 0 ? 1 : -1;
 }
 
 unsigned long Distanse(CPoint & pt1,CPoint & pt2);
@@ -31,21 +31,21 @@ unsigned long Distanse(CPoint &pt,CPoint &pt1,CPoint &pt2);
 
 inline BOOL PtInRect(CRect &rc,CPoint& point)
 {
-	return point.x >= rc.left && point.x <= rc.right
-		&& point.y >= rc.top && point.y <= rc.bottom;
+    return point.x >= rc.left && point.x <= rc.right
+        && point.y >= rc.top && point.y <= rc.bottom;
 }
 inline BOOL RectInRect(CRect &rc1,CRect& rc2)
 {
-	return rc2.left >= rc1.left && rc2.right <= rc1.right
-		&& rc2.top >= rc1.top && rc2.bottom <= rc1.bottom;
+    return rc2.left >= rc1.left && rc2.right <= rc1.right
+        && rc2.top >= rc1.top && rc2.bottom <= rc1.bottom;
 }
 
 inline void NormalizeRect(CRect & rc)
 {
-	if(rc.left > rc.right)
+    if(rc.left > rc.right)
         _swap(rc.left,rc.right);
-	if(rc.top > rc.bottom)
-		_swap(rc.top,rc.bottom);
+    if(rc.top > rc.bottom)
+        _swap(rc.top,rc.bottom);
 }
 
 inline CString MakeString(LPCTSTR fmt,...)
@@ -91,13 +91,13 @@ template <class T> inline int FindItem(const CSimpleArray<T> &array,const T &val
 
 inline BOOL ExtractName(const CString &str, CString &cmpPage, CString &cmpName)
 {
-	int pos = str.Find(':');
-	if (pos == -1)
-		return FALSE;
+    int pos = str.Find(':');
+    if (pos == -1)
+        return FALSE;
 
-	cmpName = str.Right(str.GetLength() - (pos + 1));
-	cmpPage = str.Left(pos);
-	return TRUE;
+    cmpName = str.Right(str.GetLength() - (pos + 1));
+    cmpPage = str.Left(pos);
+    return TRUE;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 #endif

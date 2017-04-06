@@ -21,9 +21,9 @@ REGISTER_COMPONENT(CVScrollBar,StdCtl,IDB_VSCROLLBAR)
 
 CHScrollBar::CHScrollBar(LPTSTR _name):ControlComponent<StdCtrl::CHScrollBar>(_name)
 {
-	SetDefaultSize(154,17);
-	RegisterScrollBarStyles();
-	enableTabIndex=FALSE;
+    SetDefaultSize(154,17);
+    RegisterScrollBarStyles();
+    enableTabIndex=FALSE;
 }
 
 CHScrollBar::~CHScrollBar(void)
@@ -32,24 +32,24 @@ CHScrollBar::~CHScrollBar(void)
 
 BOOL CHScrollBar::CreateComponent(Component * _Parent)
 {
-	ADD_WIN_STYLE(SBS_HORZ)
+    ADD_WIN_STYLE(SBS_HORZ)
     SetComponentParent(_Parent);
-	CWindowImpl<StdCtrl::CHScrollBar,WTL::CScrollBar>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
-	return ::IsWindow(m_hWnd);
+    CWindowImpl<StdCtrl::CHScrollBar,WTL::CScrollBar>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
+    return ::IsWindow(m_hWnd);
 }
 
 void CHScrollBar::InitProperty(void)
 {
-	ControlComponent<StdCtrl::CHScrollBar>::InitProperty();
-	DEFINE_PROPERTY(Alignment,ScrollBarHorizAlign,CHScrollBar,0)
+    ControlComponent<StdCtrl::CHScrollBar>::InitProperty();
+    DEFINE_PROPERTY(Alignment,ScrollBarHorizAlign,CHScrollBar,0)
 }
 
 IMPLEMENT_WINSTYLE_PROPERTY(CHScrollBar,Alignment,(SBS_BOTTOMALIGN|SBS_TOPALIGN))
 //////////////////////////////////////////////////////////////////////////
 CVScrollBar::CVScrollBar(LPTSTR _name):ControlComponent<StdCtrl::CVScrollBar>(_name)
 {
-	SetDefaultSize(17,154);
-	RegisterScrollBarStyles();
+    SetDefaultSize(17,154);
+    RegisterScrollBarStyles();
 }
 
 CVScrollBar::~CVScrollBar(void)
@@ -58,16 +58,16 @@ CVScrollBar::~CVScrollBar(void)
 
 BOOL CVScrollBar::CreateComponent(Component * _Parent)
 {
-	ADD_WIN_STYLE(SBS_VERT)
+    ADD_WIN_STYLE(SBS_VERT)
     SetComponentParent(_Parent);
-	CWindowImpl<StdCtrl::CVScrollBar,WTL::CScrollBar>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
-	return ::IsWindow(m_hWnd);
+    CWindowImpl<StdCtrl::CVScrollBar,WTL::CScrollBar>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
+    return ::IsWindow(m_hWnd);
 }
 
 void CVScrollBar::InitProperty(void)
 {
-	ControlComponent<StdCtrl::CVScrollBar>::InitProperty();
-	DEFINE_PROPERTY(Alignment,ScrollBarVertAlign,CVScrollBar,0)
+    ControlComponent<StdCtrl::CVScrollBar>::InitProperty();
+    DEFINE_PROPERTY(Alignment,ScrollBarVertAlign,CVScrollBar,0)
 }
 
 IMPLEMENT_WINSTYLE_PROPERTY(CVScrollBar,Alignment,(SBS_LEFTALIGN|SBS_RIGHTALIGN))
@@ -75,25 +75,25 @@ IMPLEMENT_WINSTYLE_PROPERTY(CVScrollBar,Alignment,(SBS_LEFTALIGN|SBS_RIGHTALIGN)
 //////////////////////////////////////////////////////////////////////////
 }
 BEGIN_LIST_PROPERTY(ScrollBarHorizAlign)
-	LIST_ITEM_DECORATE(0,0,None)
-	LIST_ITEM_DECORATE(SBS_BOTTOMALIGN,SBS_BOTTOMALIGN,Bottom)
-	LIST_ITEM_DECORATE(SBS_TOPALIGN,SBS_TOPALIGN,Top)
+    LIST_ITEM_DECORATE(0,0,None)
+    LIST_ITEM_DECORATE(SBS_BOTTOMALIGN,SBS_BOTTOMALIGN,Bottom)
+    LIST_ITEM_DECORATE(SBS_TOPALIGN,SBS_TOPALIGN,Top)
 END_LIST_ITEM(ScrollBarHorizAlign)
 
 BEGIN_LIST_PROPERTY(ScrollBarVertAlign)
-	LIST_ITEM_DECORATE(0,0,None)
-	LIST_ITEM_DECORATE(SBS_LEFTALIGN,SBS_LEFTALIGN,Left)
-	LIST_ITEM_DECORATE(SBS_RIGHTALIGN,SBS_RIGHTALIGN,Top)
+    LIST_ITEM_DECORATE(0,0,None)
+    LIST_ITEM_DECORATE(SBS_LEFTALIGN,SBS_LEFTALIGN,Left)
+    LIST_ITEM_DECORATE(SBS_RIGHTALIGN,SBS_RIGHTALIGN,Top)
 END_LIST_ITEM(ScrollBarVertAlign)
 
 static void RegisterScrollBarStyles()
 {
-	static BOOL IsInited=FALSE;
-	if(IsInited==TRUE)
-		return;
+    static BOOL IsInited=FALSE;
+    if(IsInited==TRUE)
+        return;
 
-	REGISTER_LIST_PROPERTY(ScrollBarHorizAlign)
-	REGISTER_LIST_PROPERTY(ScrollBarVertAlign)
+    REGISTER_LIST_PROPERTY(ScrollBarHorizAlign)
+    REGISTER_LIST_PROPERTY(ScrollBarVertAlign)
 
-	IsInited=TRUE;
+    IsInited=TRUE;
 }

@@ -27,34 +27,57 @@ LRESULT COptionsDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPa
     m_formFont.CreateFont(-12,0,0,0,FW_NORMAL,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
     SetFont((HFONT)m_formFont);
     ModifyStyle(GetStyle(),WS_OVERLAPPED|WS_CLIPSIBLINGS|WS_CAPTION|WS_SYSMENU|WS_MINIMIZEBOX|WS_MAXIMIZEBOX);
-    ResizeClient(602,441);
+    ResizeClient(602,449);
     SetWindowText(_T("Options"));
 
-    m_ok.Create(m_hWnd,CRect(433,410,507,432),_T("OK"),WS_CHILD|WS_VISIBLE|BS_DEFPUSHBUTTON|BS_TEXT|BS_CENTER|BS_VCENTER,0,IDOK);
+    m_ok.Create(m_hWnd,CRect(433,416,507,438),_T("OK"),WS_CHILD|WS_VISIBLE|BS_DEFPUSHBUTTON|BS_TEXT|BS_CENTER|BS_VCENTER,0,IDOK);
     m_ok.SetFont((HFONT)m_formFont);
 
-    m_cancel.Create(m_hWnd,CRect(517,410,591,432),_T("Cancel"),WS_CHILD|WS_VISIBLE|BS_TEXT|BS_CENTER|BS_VCENTER,0,IDCANCEL);
+    m_cancel.Create(m_hWnd,CRect(517,416,591,438),_T("Cancel"),WS_CHILD|WS_VISIBLE|BS_TEXT|BS_CENTER|BS_VCENTER,0,IDCANCEL);
     m_cancel.SetFont((HFONT)m_formFont);
 
-    m_optListbox.Create(m_hWnd,CRect(8,8,192,396),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP,WS_EX_CLIENTEDGE,IDC_COPTIONSDLG_LISTBOX8);
+    m_optListbox.Create(m_hWnd,CRect(8,8,192,396),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP,WS_EX_CLIENTEDGE,IDC_OPTLISTBOX);
     m_optListbox.SetFont((HFONT)m_formFont);
+    m_optListbox.AddString(_T("Code generation"));
     m_optListbox.SetItemHeight(0,13);
     m_optListbox.SetHorizontalExtent(40);
 
-    m_panelhost.Create(m_hWnd,CRect(200,8,594,396),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP,0,IDC_COPTIONSDLG_PANELHOST9);
+    m_panelhost.Create(m_hWnd,CRect(200,8,594,396),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP,0,IDC_OPTPANELHOST);
     m_panelhost.SetFont((HFONT)m_formFont);
     m_panelhost.SetInnerBorder(0);
     m_panelhost.SetOuterBorder(0);
     m_panelhost.SetTheme(TRUE);
     m_panelhost.SetBkColor(RGB(0x00,0x00,0x00));
 
+    m_panel10.Create(m_hWnd,CRect(8,408,594,416),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN,WS_EX_CONTROLPARENT,IDC_COPTIONSDLG_PANEL10);
+    m_panel10.SetFont((HFONT)m_formFont);
+    m_panel10.SetInnerBorder(BDR_SUNKENINNER);
+    m_panel10.SetOuterBorder(BDR_RAISEDOUTER);
+    m_panel10.SetEdgeType(BF_TOP);
+    m_panel10.SetBkColor(RGB(0xF0,0xF0,0xF0));
+    m_panel10.SetTextColor(RGB(0x00,0x00,0x00));
+    m_panel10.SetHorizTextAlign(DT_CENTER);
+    m_panel10.SetVertTextAlign(DT_VCENTER);
+    m_panel10.SetSingleLine(true);
+
+    codeGeneration.Create(m_panelhost,CRect(0,0,394,388),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN,WS_EX_CONTROLPARENT,IDC_COPTIONSDLG_CODEGENERATION);
+    codeGeneration.SetFont((HFONT)m_formFont);
+    codeGeneration.SetInnerBorder(0);
+    codeGeneration.SetOuterBorder(0);
+    codeGeneration.SetEdgeType(BF_RECT);
+    codeGeneration.SetTheme(TRUE);
+    codeGeneration.SetTextColor(RGB(0x00,0x00,0x00));
+    codeGeneration.SetHorizTextAlign(DT_CENTER);
+    codeGeneration.SetVertTextAlign(DT_VCENTER);
+    codeGeneration.SetSingleLine(true);
+    m_panelhost.AddPanel(&codeGeneration);
+
 //}}WTLBUILDER_MEMBER_CREATION
 //{{WTLBUILDER_POST_CREATION
+    m_panelhost.SetCurrent(&codeGeneration);
 //}}WTLBUILDER_POST_CREATION
     CenterWindow();
     DefineLayout();
-
-    m_optionsTree.InsertItem(TVIF_TEXT,_T("Item"),0,0,0,0,(LPARAM)&m_panel6,NULL,NULL);
 
     return TRUE;
 }
@@ -78,34 +101,4 @@ void COptionsDlg::InitLayout()
 //{{WTLBUILDER_INITLAYOUT
 //}}WTLBUILDER_INITLAYOUT
     //SetScrollSize(_minClientSize);
-}
-
-LRESULT COptionsDlg::OnSelchangedOptionsTree(int idCtrl, LPNMHDR pnmh, BOOL& bHandled)
-{
-    if(IDC_OPTIONSDLG_OPTIONSTREE==idCtrl)
-    {
-        HTREEITEM hCurrent = m_optionsTree.get_SelectedItem();
-        if(hCurrent)
-        {
-            CPanel *panel=static_cast<CPanel *>((void*)m_optionsTree.GetItemData(hCurrent));
-            if(panel)
-                m_pages.SetCurrent(panel);
-        }
-    }
-    return 0;
-}
-
-LRESULT COptionsDlg::OnSelchangingOptionsTree(int idCtrl, LPNMHDR pnmh, BOOL& bHandled)
-{
-    if(IDC_OPTIONSDLG_OPTIONSTREE==idCtrl)
-    {
-        HTREEITEM hCurrent = m_optionsTree.get_SelectedItem();
-        if(hCurrent)
-        {
-            CPanel *panel=static_cast<CPanel *>((void*)m_optionsTree.GetItemData(hCurrent));
-            if(panel)
-                m_pages.SetCurrent(panel);
-        }
-    }
-    return 0;
 }

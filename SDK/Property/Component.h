@@ -365,6 +365,11 @@ public:
     int ControlsCount();
     BOOL SetTabIndex(CPoint &,long &);
     BOOL SetTabIndex(Component *,long &);
+    int  FindByTabIndex(long);
+    long FindMaxTabIndex();
+    long FindMinTabIndex();
+    long FindNextTabIndex(long);
+
 protected:
     void SelectControl(int idx,Component * active);
     void SelectComponent(LPCTSTR);
@@ -373,9 +378,6 @@ protected:
     int FindIndex(Component *);
     int FindParentIndex(Component *);
     //return 0 if not found
-    long FindMaxTabIndex();
-    long FindMinTabIndex();
-    long FindNextTabIndex(long);
 
     void MouseDownAll(CDC *,CPoint);
     void MouseMoveAll(CDC *,CPoint);
@@ -404,11 +406,10 @@ protected:
     void CenterGroupVert(Component*, long);
     void ChangeComponentsParent(Component*);
     void ReSetTabIndex();
-    int  FindByTabIndex(long);
+    
     void SelectAll(Component*);
     void ShowCursorPos(const CPoint&);
     
-
     ComponentArray	components;
     CDesignerCtrl *	designer;
 

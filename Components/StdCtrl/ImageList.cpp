@@ -19,7 +19,7 @@ REGISTER_COMPONENT(CImageList,StdCtl,IDB_IMAGELIST)
 CImageList::CImageList(LPTSTR _name):Component(_name),bitmap(BITMAP_TYPE)
 {
     RegisterImageListStyles();
-	enableTabIndex=FALSE;
+    enableTabIndex=FALSE;
 }
 
 CImageList::~CImageList(void)
@@ -35,7 +35,7 @@ void CImageList::InitProperty(void)
 {
     bitmap.Change.SetObject(this);
     bitmap.Change.SetMethod(&CImageList::OnImageChange);
-	Component::InitProperty();
+    Component::InitProperty();
     DEFINE_PROPERTY(Flag,ImageListFlags,CImageList,ILC_MASK)
     DEFINE_PROPERTY(BkColor,CColorref,CImageList,RGB(0,0,0))
     DEFINE_PROPERTY(Mask,CColorref,CImageList,RGB(0,0,0))

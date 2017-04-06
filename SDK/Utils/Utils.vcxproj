@@ -100,6 +100,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="ButtonST.cpp" />
     <ClCompile Include="CFile.cpp" />
     <ClCompile Include="DOMXML.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="StdAfx.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="ButtonST.h" />
     <ClInclude Include="editlistbox.h" />
     <ClInclude Include="InitTempl.h" />

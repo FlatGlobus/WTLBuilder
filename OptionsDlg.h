@@ -7,8 +7,10 @@
 //}}WTLBUILDER_INCLUDE_DECLARATION
 
 //{{WTLBUILDER_CONTROL_ID_DECLARATION
-#define    IDC_COPTIONSDLG_LISTBOX8    1008
-#define    IDC_COPTIONSDLG_PANELHOST9    1009
+#define    IDC_OPTLISTBOX    1008
+#define    IDC_OPTPANELHOST    1009
+#define    IDC_COPTIONSDLG_PANEL10    1010
+#define    IDC_COPTIONSDLG_CODEGENERATION    1011
 //}}WTLBUILDER_CONTROL_ID_DECLARATION
 
 class COptionsDlg:public CResizableDialogImpl<COptionsDlg>
@@ -22,6 +24,8 @@ class COptionsDlg:public CResizableDialogImpl<COptionsDlg>
     CButton    m_cancel;
     CListBox    m_optListbox;
     Panel::CPanelHost    m_panelhost;
+    Panel::CPanel    m_panel10;
+    Panel::CPanel    codeGeneration;
 //}}WTLBUILDER_MEMBER_DECLARATION
     void InitLayout(void);
 public:
@@ -36,8 +40,6 @@ public:
         MESSAGE_HANDLER(WM_INITDIALOG, OnInitDialog)
         COMMAND_ID_HANDLER(IDOK, OnCloseCmd)
         COMMAND_ID_HANDLER(IDCANCEL, OnCloseCmd)
-        NOTIFY_HANDLER(IDC_OPTIONSDLG_OPTIONSTREE,TVN_SELCHANGED, OnSelchangedOptionsTree)
-        NOTIFY_HANDLER(IDC_OPTIONSDLG_OPTIONSTREE,TVN_SELCHANGING, OnSelchangingOptionsTree)
         REFLECT_NOTIFICATIONS()
     END_MSG_MAP()
 
@@ -46,7 +48,5 @@ public:
 
     LRESULT OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
     LRESULT OnCloseCmd(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
-    LRESULT OnSelchangedOptionsTree(int idCtrl, LPNMHDR pnmh, BOOL& bHandled);
-    LRESULT OnSelchangingOptionsTree(int idCtrl, LPNMHDR pnmh, BOOL& bHandled);
 };
 //////////////////////////////////////////////////////////////////////////

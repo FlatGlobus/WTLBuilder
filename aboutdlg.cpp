@@ -33,24 +33,24 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
        IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), LR_DEFAULTCOLOR);
     SetIcon(hIconSmall, TRUE);
 
-    m_button2.Create(m_hWnd,CRect(209,91,292,115),_T("&OK"),WS_CHILD|WS_VISIBLE|BS_TEXT|BS_CENTER|BS_VCENTER,0,IDOK);
+    m_button2.Create(m_hWnd,CRect(209,91,292,115),_T("&OK"),WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_TEXT|BS_CENTER|BS_VCENTER,0,IDOK);
     m_button2.SetFont((HFONT)m_formFont);
 
-    m_picture5.Create(m_hWnd,CRect(10,10,210,66),NULL,WS_CHILD|WS_VISIBLE|WS_TABSTOP|SS_LEFT|SS_RIGHT|SS_BLACKRECT|SS_WHITERECT|SS_GRAYFRAME|SS_USERITEM|SS_LEFTNOWORDWRAP|SS_BITMAP|SS_CENTERIMAGE,0,IDC_CABOUTDLG_PICTURE5);
+    m_picture5.Create(m_hWnd,CRect(10,10,210,66),NULL,WS_CHILD|WS_VISIBLE|SS_LEFT|SS_RIGHT|SS_BLACKRECT|SS_WHITERECT|SS_GRAYFRAME|SS_USERITEM|SS_LEFTNOWORDWRAP|SS_BITMAP|SS_CENTERIMAGE,0,IDC_CABOUTDLG_PICTURE5);
     m_picture5Bitmap.LoadBitmap(IDB_LOGO);
     m_picture5.SetBitmap(m_picture5Bitmap);
 
-    m_static8.Create(m_hWnd,CRect(218,10,495,25),_T("Copyright 2017 © FlatGlobus (wtlbuilder@gmail.com)"),WS_CHILD|WS_VISIBLE|WS_TABSTOP|SS_LEFT,0,IDC_CABOUTDLG_STATIC8);
+    m_static8.Create(m_hWnd,CRect(218,10,495,25),_T("Copyright 2017 © FlatGlobus (wtlbuilder@gmail.com)"),WS_CHILD|WS_VISIBLE|SS_LEFT,0,IDC_CABOUTDLG_STATIC8);
     m_static8.SetFont((HFONT)m_formFont);
 
-    m_static9.Create(m_hWnd,CRect(218,52,261,66),_T("Version"),WS_CHILD|WS_VISIBLE|WS_TABSTOP|SS_LEFT,0,IDC_CABOUTDLG_STATIC9);
+    m_static9.Create(m_hWnd,CRect(218,52,261,66),_T("Version"),WS_CHILD|WS_VISIBLE|SS_LEFT,0,IDC_CABOUTDLG_STATIC9);
     m_static9Font.CreateFont(-12,0,0,0,FW_BOLD,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
     m_static9.SetFont((HFONT)m_static9Font);
 
     m_version.Create(m_hWnd,CRect(276,52,496,66),_T(""),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|SS_LEFT,0,IDC_CABOUTDLG_STATIC11);
     m_version.SetFont((HFONT)m_formFont);
 
-    m_hyperlink12.Create(m_hWnd,CRect(372,84,438,96),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP,0,IDC_CABOUTDLG_HYPERLINK12);
+    m_hyperlink12.Create(m_hWnd,CRect(372,84,438,96),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN,0,IDC_CABOUTDLG_HYPERLINK12);
     m_hyperlink12.SetLabel(_T(""));
     m_hyperlink12.SetHyperLink(_T("wtlbuilder@gmail.com"));
     m_hyperlink12.m_bPaintLabel=true;

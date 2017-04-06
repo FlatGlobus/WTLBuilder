@@ -36,29 +36,29 @@ class  PROPERTY_API CDesignerCtrl : public CWindowImpl<CDesignerCtrl, CWindow>,
     public CTrackMenu<CDesignerCtrl>
 {
 public:
-	DECLARE_WND_CLASS_NULL(_T("WTLBUILDER_DESIGNER_WINDOW"))
+    DECLARE_WND_CLASS_NULL(_T("WTLBUILDER_DESIGNER_WINDOW"))
     CDesignerCtrl(void);
-	HWND Create(Component *Parent,Components *);
-	virtual ~CDesignerCtrl();
-	BEGIN_MSG_MAP(CDesignerCtrl)
-        MESSAGE_HANDLER(WM_SIZE,OnSize)
-		MESSAGE_HANDLER(WM_ERASEBKGND, OnEraseBkgnd)
-		MESSAGE_HANDLER(WM_KEYDOWN, OnKeyDown)
+    HWND Create(Component *Parent, Components *);
+    virtual ~CDesignerCtrl();
+    BEGIN_MSG_MAP(CDesignerCtrl)
+        MESSAGE_HANDLER(WM_SIZE, OnSize)
+        MESSAGE_HANDLER(WM_ERASEBKGND, OnEraseBkgnd)
+        MESSAGE_HANDLER(WM_KEYDOWN, OnKeyDown)
         MESSAGE_HANDLER(WM_KEYUP, OnKeyUp)
-		MESSAGE_HANDLER(WM_LBUTTONDOWN, OnLButtonDown)
-		MESSAGE_HANDLER(WM_LBUTTONUP, OnLButtonUp)
-        MESSAGE_HANDLER(WM_LBUTTONDBLCLK,OnLButtonDblClk)
-		MESSAGE_HANDLER(WM_MOUSEMOVE, OnMouseMove)
-		MESSAGE_HANDLER(WM_PAINT, OnPaint)
-		MESSAGE_HANDLER(WM_WINDOWPOSCHANGED,OnWindowPosChanged)
-        MESSAGE_HANDLER(WM_UPDATE_DESIGNER,OnUpdateDesigner)
-        COMMAND_ID_HANDLER(ID_EDIT_CUT,OnEditCommand)
-        COMMAND_ID_HANDLER(ID_EDIT_COPY,OnEditCommand)
-        COMMAND_ID_HANDLER(ID_EDIT_PASTE,OnEditCommand)
-        COMMAND_ID_HANDLER(ID_EDIT_CLEAR,OnEditCommand)
-        COMMAND_ID_HANDLER(ID_EDIT_SELECT_ALL,OnEditCommand)
+        MESSAGE_HANDLER(WM_LBUTTONDOWN, OnLButtonDown)
+        MESSAGE_HANDLER(WM_LBUTTONUP, OnLButtonUp)
+        MESSAGE_HANDLER(WM_LBUTTONDBLCLK, OnLButtonDblClk)
+        MESSAGE_HANDLER(WM_MOUSEMOVE, OnMouseMove)
+        MESSAGE_HANDLER(WM_PAINT, OnPaint)
+        MESSAGE_HANDLER(WM_WINDOWPOSCHANGED, OnWindowPosChanged)
+        MESSAGE_HANDLER(WM_UPDATE_DESIGNER, OnUpdateDesigner)
+        COMMAND_ID_HANDLER(ID_EDIT_CUT, OnEditCommand)
+        COMMAND_ID_HANDLER(ID_EDIT_COPY, OnEditCommand)
+        COMMAND_ID_HANDLER(ID_EDIT_PASTE, OnEditCommand)
+        COMMAND_ID_HANDLER(ID_EDIT_CLEAR, OnEditCommand)
+        COMMAND_ID_HANDLER(ID_EDIT_SELECT_ALL, OnEditCommand)
         CHAIN_MSG_MAP(CTrackMenu<CDesignerCtrl>)
-	END_MSG_MAP()
+    END_MSG_MAP()
 
     void ShowGrid(BOOL val);
     BOOL IsShowGrid();
@@ -77,20 +77,20 @@ public:
     void PaintGoldenGrid(CDC &);
     Components * GetComponents();
     Component  * GetParentForm();
-    void PaintGrid(CDC &,COLORREF);
+    void PaintGrid(CDC &, COLORREF);
     CPoint SnapToGrid(const CPoint &xy);
     CRect  SnapToGrid(const CRect & rc);
     void SetTabIndexMode(BOOL);
     BOOL GetTabIndexMode();
-	void BringToTop();
+    void BringToTop();
 protected:
     Component  * curentComp;
-	Components * components;
-	Component  * Parent;
-	BOOL	    isShowgrid;		
+    Components * components;
+    Component  * Parent;
+    BOOL	    isShowgrid;
     BOOL	    isShowGoldenGrid;
     BOOL	    isGoldenGridMoveable;
-	CSize	    gridDim;
+    CSize	    gridDim;
     CPoint      offset;
     CPoint	    deltaPoint;
     CPoint      downPoint;
@@ -102,26 +102,26 @@ protected:
     BOOL        componentCreated;
     BOOL        tabIndexMode;
     long        tabIndex;
-   
+
     void CalculateGoldenXY();
     BOOL IsGoldenGrid(CPoint & at);
     void MoveGoldenXY(CPoint &xy);
     int FindXSide(CPoint & at);
     int FindYSide(CPoint & at);
-    virtual void CustomizeMenu(CMenuHandle & menu,CPoint & at);
+    virtual void CustomizeMenu(CMenuHandle & menu, CPoint & at);
     void ShowTabIndexes(CDC &);
-    
+    void DrawTabArrows(CDC & dc);
+
 public:
-	LRESULT OnEraseBkgnd(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
-	LRESULT OnKeyDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
-	LRESULT OnKeyUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
-	LRESULT OnKillFocus(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
-	LRESULT OnLButtonDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
-	LRESULT OnLButtonUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+    LRESULT OnEraseBkgnd(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+    LRESULT OnKeyDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+    LRESULT OnKeyUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+    LRESULT OnLButtonDown(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+    LRESULT OnLButtonUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
     LRESULT OnLButtonDblClk(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
-	LRESULT OnMouseMove(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
-	LRESULT OnPaint(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
-	LRESULT OnWindowPosChanged(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+    LRESULT OnMouseMove(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+    LRESULT OnPaint(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+    LRESULT OnWindowPosChanged(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
     LRESULT OnSize(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& /*bHandled*/);
     LRESULT OnUpdateDesigner(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/, BOOL& /*bHandled*/);
     LRESULT OnEditCommand(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
