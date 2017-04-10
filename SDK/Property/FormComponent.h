@@ -217,7 +217,7 @@ public:
     void CloseForm(Component * cmp,BOOL * remove);
     void GetFormFileName(Component * cmp,CString* formFileName);
     CString GetFileName();
-    void GenerateCode(SaveOperation);
+    BOOL GenerateCode(SaveOperation);
     void GenerateLocFile(LPCTSTR fileName);
     DWORD get_InternalWindowStyle();
     void set_InternalWindowStyle(DWORD s);

@@ -509,29 +509,30 @@ void CDesignerCtrl::DrawTabArrows(CDC & dc)
             {
                 endIdx = components->FindByTabIndex(minTabIndex);
             }
-                Component * startComp = components->GetAt(startIdx);
-                Component * endComp = components->GetAt(endIdx);
-                CRect sRc = startComp->GetBoundsRect();
-                startComp->ComponentToDesigner(sRc);
-                CRect eRc = endComp->GetBoundsRect();
-                endComp->ComponentToDesigner(eRc);
-                if (tbIdx == minTabIndex)
-                {
-                    CBrushEx br;
-                    br.Style=BS_NULL;
-                    CSel _br(dc, br);
+            Component * startComp = components->GetAt(startIdx);
+            Component * endComp = components->GetAt(endIdx);
 
-                    CPenEx p(PS_SOLID, 3, RGB(128, 0, 0));
-                    CSel _p(dc, p);
+            CRect sRc = startComp->GetBoundsRect();
+            startComp->ComponentToDesigner(sRc);
+            CRect eRc = endComp->GetBoundsRect();
+            endComp->ComponentToDesigner(eRc);
+            if (tbIdx == minTabIndex)
+            {
+                CBrushEx br;
+                br.Style = BS_NULL;
+                CSel _br(dc, br);
 
-                    dc.Rectangle(sRc);
-                    //dc.Ellipse(sRc.left + gridDim.cx - halfX, sRc.top + gridDim.cy - halfY, sRc.left + gridDim.cx + halfX, sRc.top + gridDim.cy + halfY);
+                CPenEx p(PS_SOLID, 3, RGB(128, 0, 0));
+                CSel _p(dc, p);
 
-                }
-                //dc.MoveTo(sRc.left + gridDim.cx, sRc.top + gridDim.cy);
-                //ArrowTo(dc.m_hDC, eRc.left + gridDim.cx, eRc.top + gridDim.cy, &a);
-                dc.MoveTo(sRc.left, sRc.top);
-                ArrowTo(dc.m_hDC, eRc.left, eRc.top, &a);
+                dc.Rectangle(sRc);
+
+            }
+
+            dc.MoveTo(sRc.left, (sRc.top + sRc.bottom) / 2);
+            ArrowTo(dc, eRc.left, (eRc.top + eRc.bottom) / 2, &a);
+            dc.Ellipse(eRc.left - 3, (eRc.top + eRc.bottom) / 2 - 3, eRc.left + 3, (eRc.top + eRc.bottom) / 2 + 3);
+
         }
     }
 }

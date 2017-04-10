@@ -52,13 +52,27 @@ BOOL PtInBox(CPoint &at, CPoint & pt)
     return PtInRect(rc, pt);
 }
 //////////////////////////////////////////////////////////////////////////
-//INIT_UNIQUE_CAT(long,Component);
-//INIT_UNIQUE_CAT(long);
-static long UniqueID = 0;
+class CUniqueID
+{
+    long uniqueID;
+public:
+    CUniqueID():uniqueID(-2)
+    {
+    }
+
+    long Get()
+    {
+        return ++uniqueID;
+    }
+
+    operator long() { return Get(); }
+};
+
+static CUniqueID UniqueID;
 //////////////////////////////////////////////////////////////////////////
 Component::Component(LPCTSTR _className) :state(1), pressed(FALSE),
 className(_className), designer(NULL), Parent(NULL), objprop(_className, this), parentName(DEF_PARENT_NAME),
-defaultSize(DEF_SIZE_W, DEF_SIZE_H), bounds(0, 0, 40, 40), minRC(0, 0, 0, 0), tabIndex(-1), enableTabIndex(TRUE), uniqueID(UniqueID++)
+defaultSize(DEF_SIZE_W, DEF_SIZE_H), bounds(0, 0, 40, 40), minRC(0, 0, 0, 0), tabIndex(-1), enableTabIndex(TRUE), uniqueID(UniqueID)
 {
     SetState(csCreating);
 }
@@ -194,7 +208,7 @@ void Component::set_Name(CString n)
 
 CString Component::get_Name(void)
 {
-    if (state.GetBit(csLoading))
+    if (state.GetBit(csLoading) && state.GetBit(csCloning) == FALSE)
     {
         name = GET_PROP_VALUE(CString, Name)
     }
@@ -203,8 +217,8 @@ CString Component::get_Name(void)
     {
         name = MakeDefaultName();
         SET_PROP_VALUE(Name, name)
-            if (state.GetBit(csCreating) == FALSE)
-                SetModified();
+        if (state.GetBit(csCreating) == FALSE)
+            SetModified();
     }
     return name;
 }
@@ -351,8 +365,8 @@ long Component::get_UniqueID(void)
 void Component::set_Selected(BOOL val)
 {
     SET_PROP_VALUE(Selected, val)
-        if (val == FALSE)
-            FirstSelected = FALSE;
+    if (val == FALSE)
+        FirstSelected = FALSE;
 }
 
 BOOL Component::get_Selected(void)
@@ -1066,19 +1080,34 @@ void Component::SetModified(CRect * rc)
     }
 }
 
-Component * Component::Clone()
+Component * Component::Clone(CDesignerCtrl * d)
 {
     Component * ctrl = NULL;
     CString cmpPage;
     CString cmpName;
+    SetDesigner(d);
     ExtractName(className, cmpPage, cmpName);
     SendEvent(evCreateComponent, (LPCTSTR)cmpName, (LPCTSTR)cmpPage, &ctrl);
     if (ctrl != NULL)
     {
         ctrl->SetState(csCreating, TRUE);
+        ctrl->SetState(csCloning, TRUE);
         ctrl->SetState(csLoading, TRUE);
         ctrl->InitProperty();
         ctrl->objprop = objprop;
+
+        ctrl->set_UniqueID(UniqueID);
+        ctrl->SET_PROP_VALUE(UniqueID, ctrl->get_UniqueID())
+        ctrl->SET_PROP_VALUE(ID, CString(_T("")))
+        name = ctrl->MakeDefaultName();
+        ctrl->SET_PROP_VALUE(Name, name)
+
+        if (ctrl->EnableTabIndex() == TRUE)
+        {
+            int tab = GetComponents()->FindMaxTabIndex() + 1;
+            ctrl->SET_PROP_VALUE(TabIndex, tab)
+        }
+        ctrl->SetState(csCloning, FALSE);
     }
     return ctrl;
 }
@@ -1559,8 +1588,8 @@ void Components::ShowCursor(HintItem h)
             Cursor = LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENS));
             break;
         case hiCaption:
-            Cursor = LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZEALL));
-            break;
+Cursor = LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZEALL));
+break;
         }
 
         if (Cursor)
@@ -1641,8 +1670,7 @@ void Components::Paste(ComponentArray * comps, Component * comp, CPoint * downPo
 
     for (unsigned int i = 0; i < comps->size(); i++)
     {
-        ctrl = (*comps)[i]->Clone();
-        ctrl->SetDesigner(designer);
+        ctrl = (*comps)[i]->Clone(designer);
         ctrl->SetState(csLoading, TRUE);
         Component * par = comp;
         if (par == NULL)
@@ -1706,11 +1734,9 @@ Component * Components::Create(CRect & rc, BOOL multiCreate)
 
         designer->ClientToScreen(&rc);
         CWindow((HWND)curParent->GetHandle()).ScreenToClient(&rc);
-        newCtrl->set_UniqueID(GetNextId());
         newCtrl->InitProperty();
         newCtrl->SetBoundsRect(rc);
         newCtrl->CreateComponent(curParent);
-        //newCtrl->SetState(csCreating,FALSE);
         newCtrl->ComponentCreated();
     }
     else
@@ -1730,20 +1756,13 @@ Component * Components::Create(Component *Parent, LPCTSTR newCmpName, CRect & rc
     SendEvent(evCreateComponent, (LPCTSTR)cmpName, (LPCTSTR)cmpPage, &newCtrl);
     if (newCtrl)
     {
-        newCtrl->set_UniqueID(GetNextId());
         newCtrl->InitProperty();
         newCtrl->SetBoundsRect(rc);
         newCtrl->CreateComponent(Parent);
-        //newCtrl->SetState(csCreating,FALSE);
         newCtrl->ComponentCreated();
         Add(newCtrl);
     }
     return newCtrl;
-}
-
-long Components::GetNextId(void)
-{
-    return id++;
 }
 
 Component * Components::GetCurrentParent(CPoint & point)
@@ -3380,7 +3399,7 @@ ComponentArray * Components::Clone(BOOL onlySelected)
     {
         if (components[i]->get_Selected() == FALSE &&  onlySelected == TRUE)
             continue;
-        comp = components[i]->Clone();
+        comp = components[i]->Clone(GetDesigner());
         rc = components[i]->GetBoundsRect();
         components[i]->ComponentToDesigner(rc);
         comp->SetBoundsRect(rc);
@@ -3392,7 +3411,7 @@ ComponentArray * Components::Clone(BOOL onlySelected)
 ComponentArray * Components::Clone(Component * comp)
 {
     ComponentArray * comps = new ComponentArray;
-    comps->push_back(comp->Clone());
+    comps->push_back(comp->Clone(GetDesigner()));
     return comps;
 }
 

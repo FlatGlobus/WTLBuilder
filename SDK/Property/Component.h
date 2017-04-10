@@ -165,7 +165,7 @@ BOOL Class::get_##Name(void)\
 
 enum HintItem {hiNone,hiLeftTop,hiTopMedium,hiRightTop,hiRightMedium,hiRightBottom,
                 hiBottomMedium,hiLeftBottom,hiLeftMedium,hiCaption,hiField,hiAll}; 
-enum ComponentState {csCreating,csDeleting,csLoading,csSaving,csMoving,csReserved1,csReserved2};
+enum ComponentState {csCreating,csDeleting,csLoading,csSaving,csCloning,csMoving,csReserved1,csReserved2};
 class Components;
 //////////////////////////////////////////////////////////////////////////
 class PROPERTY_API Component:public IDispDynImpl<Component>
@@ -280,7 +280,7 @@ public:
     virtual void SetModified(CRect * rc=NULL);
     void set_Focus(BOOL val);
     BOOL get_Focus();
-    virtual Component * Clone();
+    virtual Component * Clone(CDesignerCtrl * d);
     virtual CRect GetMinRect();
     void set_TabIndex(long);
     long get_TabIndex();

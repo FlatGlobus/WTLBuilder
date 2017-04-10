@@ -26,9 +26,8 @@ BOOL CCodeGenerator::LoadSource(const CString & str)
     CPath fileName(str);
     fileName.SetExt(_T("cpp"));
 
-    if(fileName.IsFilePath()==FALSE || str.IsEmpty())
+    if(fileName.IsFilePath()==FALSE || str.IsEmpty() || fileName.ExistFile() == FALSE)
     {
-        MessageBox(NULL,MakeString(_T("File %s not found."),(LPCTSTR)fileName),_T("Error"),MB_OK);
         return FALSE;
     }
     source=LoadString((LPCTSTR)fileName);
@@ -40,9 +39,8 @@ BOOL CCodeGenerator::LoadHeader(const CString & str)
     CPath fileName(str);
     fileName.SetExt(_T("h"));
 
-    if(fileName.IsFilePath()==FALSE || str.IsEmpty())
+    if(fileName.IsFilePath()==FALSE || str.IsEmpty() || fileName.ExistFile() == FALSE)
     {
-        MessageBox(NULL,MakeString(_T("File %s not found."),(LPCTSTR)fileName),_T("Error"),MB_OK);
         return FALSE;
     }
 

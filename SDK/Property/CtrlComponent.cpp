@@ -259,9 +259,7 @@ BOOL ControlComponentBase::get_EnableToolTip()
 void ControlComponentBase::set_ID(CString val)
 {
     strID=val;
-	//long id = CorrectControlID(val);
-	//if(id != -1)
-	//	set_UniqueID(id);
+	
     SetModified();
 }
 
@@ -269,10 +267,10 @@ CString ControlComponentBase::get_ID(void)
 {
     if(strID.IsEmpty())
     {
-        CString cmpName=get_Name();
+        CString cmpName= MakeDefaultName();
         if(cmpName.Find(_T("m_"))==0)
             cmpName.Delete(0,2);
-        strID.Format(_T("IDC_%s_%s"),(LPCTSTR)designer->GetParentForm()->get_Name(),(LPCTSTR)cmpName);
+        strID.Format(_T("ID_%s_%s"),(LPCTSTR)designer->GetParentForm()->get_Name(),(LPCTSTR)cmpName);
         strID.MakeUpper();
     }
 

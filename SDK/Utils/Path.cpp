@@ -18,12 +18,12 @@
 
 CPath::CPath()
 {
-	_bIsRelative = FALSE;
+    _bIsRelative = FALSE;
 }
 
 CPath::CPath(LPCTSTR szPath, BOOL bIsFolderPath)
 {
-	SetPath(szPath, bIsFolderPath);
+    SetPath(szPath, bIsFolderPath);
 }
 
 CPath::~CPath()
@@ -33,216 +33,216 @@ CPath::~CPath()
 
 void CPath::SetPath(LPCTSTR szPath, BOOL bIsFolderPath)
 {
-	char szParamPath[_MAX_PATH];
-	char szDrive[_MAX_DRIVE], szDir[_MAX_DIR];
-	char szName[_MAX_FNAME], szExt[_MAX_EXT];
+    char szParamPath[_MAX_PATH];
+    char szDrive[_MAX_DRIVE], szDir[_MAX_DIR];
+    char szName[_MAX_FNAME], szExt[_MAX_EXT];
 
-	// Reset
-	_sOriginalPath.Empty();
-	_sDriveLabel.Empty();
-	_bIsRelative = FALSE;
-	_aDir.RemoveAll();
-	_sExtName.Empty();
+    // Reset
+    _sOriginalPath.Empty();
+    _sDriveLabel.Empty();
+    _bIsRelative = FALSE;
+    _aDir.RemoveAll();
+    _sExtName.Empty();
 
-	// Original path
-	_sOriginalPath = szPath;
+    // Original path
+    _sOriginalPath = szPath;
 
-	// Get args and remove them from path
-	szParamPath[0] = 0x0;
-	strcpy(szParamPath, szPath);
+    // Get args and remove them from path
+    szParamPath[0] = 0x0;
+    strcpy(szParamPath, szPath);
 
-	PathUnquoteSpaces(szParamPath);
-	if (szParamPath[0] == 0x0) return;
+    PathUnquoteSpaces(szParamPath);
+    if (szParamPath[0] == 0x0) return;
 
-	_splitpath(szParamPath, szDrive, szDir, szName, szExt);
+    _splitpath(szParamPath, szDrive, szDir, szName, szExt);
 
-	// Drive
-	_sDrive = szDrive;
+    // Drive
+    _sDrive = szDrive;
 
-	// Directory
-	_sDir = szDir;
-	_sDir.Replace('/', '\\');
-	if (!_sDir.IsEmpty()) _bIsRelative = (_sDir[0] != '\\');
-	
-	// FileTitle
-	if (bIsFolderPath)
-	{
-		_sDir = CPath::AddBackSlash(_sDir);
-		_sDir += szName;
-		_sDir = CPath::AddBackSlash(_sDir);
-	}
-	else
-	{
-		_sFileTitle = szName;
-	}
+    // Directory
+    _sDir = szDir;
+    _sDir.Replace('/', '\\');
+    if (!_sDir.IsEmpty()) _bIsRelative = (_sDir[0] != '\\');
+    
+    // FileTitle
+    if (bIsFolderPath)
+    {
+        _sDir = CPath::AddBackSlash(_sDir);
+        _sDir += szName;
+        _sDir = CPath::AddBackSlash(_sDir);
+    }
+    else
+    {
+        _sFileTitle = szName;
+    }
 
-	// Get extension name (e.g.: "txt")
-	if (IsFilePath())
-	{
-		_sExtName = szExt;
-		_sExtName.Remove('.');
-	}
+    // Get extension name (e.g.: "txt")
+    if (IsFilePath())
+    {
+        _sExtName = szExt;
+        _sExtName.Remove('.');
+    }
 }
 
 BOOL CPath::IsLocalPath()
 {
-	return !_sDrive.IsEmpty() && !_bIsRelative;
+    return !_sDrive.IsEmpty() && !_bIsRelative;
 }
 
 BOOL CPath::IsRelativePath()
 {
-	return _bIsRelative;
+    return _bIsRelative;
 }
 
 BOOL CPath::IsFilePath()
 {
-	return !_sFileTitle.IsEmpty();
+    return !_sFileTitle.IsEmpty();
 }
 
 BOOL CPath::ExistFile()
 {
-	if (!IsFilePath()) return FALSE;
+    if (!IsFilePath()) return FALSE;
 
-	return PathFileExists(GetPath());
+    return PathFileExists(GetPath());
 }
 
 BOOL CPath::ExistLocation()
 {
-	return PathFileExists(GetLocation());
+    return PathFileExists(GetLocation());
 }
 
 CString CPath::GetAbsolutePath(LPCTSTR szBaseFolder)
 {
-	if (!IsRelativePath()) return sCEmptyString;
+    if (!IsRelativePath()) return sCEmptyString;
 
-	char	szAbsolutePath[_MAX_PATH];
-	CString sFullPath(szBaseFolder);
+    char	szAbsolutePath[_MAX_PATH];
+    CString sFullPath(szBaseFolder);
 
-	if (sFullPath.IsEmpty()) return sCEmptyString;
+    if (sFullPath.IsEmpty()) return sCEmptyString;
 
-	sFullPath = CPath::AddBackSlash(sFullPath);
-	sFullPath += GetPath();
+    sFullPath = CPath::AddBackSlash(sFullPath);
+    sFullPath += GetPath();
 
-	if (!PathCanonicalize(szAbsolutePath, sFullPath)) return sCEmptyString;
+    if (!PathCanonicalize(szAbsolutePath, sFullPath)) return sCEmptyString;
 
-	return szAbsolutePath;
+    return szAbsolutePath;
 }
 
 CString CPath::GetRelativePath(LPCTSTR szBaseFolder)
 {
-	if (IsRelativePath()) return sCEmptyString;
+    if (IsRelativePath()) return sCEmptyString;
 
-	char	szRelativePath[_MAX_PATH];
-	CString	sRelPath;
+    char	szRelativePath[_MAX_PATH];
+    CString	sRelPath;
 
-	PathRelativePathTo(szRelativePath, szBaseFolder, FILE_ATTRIBUTE_DIRECTORY, 
-					GetPath(), IsFilePath() ? 0 : FILE_ATTRIBUTE_DIRECTORY);
+    PathRelativePathTo(szRelativePath, szBaseFolder, FILE_ATTRIBUTE_DIRECTORY, 
+                    GetPath(), IsFilePath() ? 0 : FILE_ATTRIBUTE_DIRECTORY);
 
-	sRelPath = szRelativePath;
-	if (sRelPath.GetLength() > 1)
-	{
-		// Remove ".\" from the beginning
-		if ((sRelPath[0] == '.') && (sRelPath[1] == '\\'))
-			sRelPath.Right(sRelPath.GetLength() - 2);
-	}
+    sRelPath = szRelativePath;
+    if (sRelPath.GetLength() > 1)
+    {
+        // Remove ".\" from the beginning
+        if ((sRelPath[0] == '.') && (sRelPath[1] == '\\'))
+            sRelPath.Right(sRelPath.GetLength() - 2);
+    }
 
-	return sRelPath;
+    return sRelPath;
 }
 
 CString CPath::GetPath(BOOL bOriginal)
 {
-	CString sPath;
+    CString sPath;
 
-	if (bOriginal)
-		sPath = _sOriginalPath;
-	else
-		sPath = GetLocation() + GetFileName();
+    if (bOriginal)
+        sPath = _sOriginalPath;
+    else
+        sPath = GetLocation() + GetFileName();
 
-	return sPath;
+    return sPath;
 }
 
 CString	CPath::GetShortPath()
 {
-	char szShortPath[_MAX_PATH];
-	szShortPath[0] = 0x0;
+    char szShortPath[_MAX_PATH];
+    szShortPath[0] = 0x0;
 
-	GetShortPathName(GetPath(), szShortPath, _MAX_PATH);
+    GetShortPathName(GetPath(), szShortPath, _MAX_PATH);
 
-	return szShortPath;
+    return szShortPath;
 }
 
 CString	CPath::GetLongPath()
 {
-	char szLongPath[_MAX_PATH];
-	szLongPath[0] = 0x0;
+    char szLongPath[_MAX_PATH];
+    szLongPath[0] = 0x0;
 
-	GetLongPathName(GetPath(), szLongPath, _MAX_PATH);
+    GetLongPathName(GetPath(), szLongPath, _MAX_PATH);
 
-	return szLongPath;
+    return szLongPath;
 }
 
 CString CPath::GetDrive()
 {
-	return _sDrive;
+    return _sDrive;
 }
 
 CString	CPath::GetDriveLabel(BOOL bPCNameIfNetwork)
 {
-	if (_sDriveLabel.IsEmpty() && !IsRelativePath())
-	{
-		if ((bPCNameIfNetwork) && (!IsLocalPath()))
-			_sDriveLabel = GetDir(0);
-		else
-		{
-			CString sRoot;
-			char	szVolumeName[256];
+    if (_sDriveLabel.IsEmpty() && !IsRelativePath())
+    {
+        if ((bPCNameIfNetwork) && (!IsLocalPath()))
+            _sDriveLabel = GetDir(0);
+        else
+        {
+            CString sRoot;
+            char	szVolumeName[256];
 
-			szVolumeName[0] = '\0';
-			if (IsLocalPath())
-			{
-				sRoot = _sDrive + CString("\\");
-			}
-			else if (GetDirCount() > 1)
-			{
-				sRoot.Format("\\\\%s\\%s\\", GetDir(0), GetDir(1));
-			}
+            szVolumeName[0] = '\0';
+            if (IsLocalPath())
+            {
+                sRoot = _sDrive + CString("\\");
+            }
+            else if (GetDirCount() > 1)
+            {
+                sRoot.Format("\\\\%s\\%s\\", GetDir(0), GetDir(1));
+            }
 
-			GetVolumeInformation(sRoot, szVolumeName, 255, NULL, NULL, NULL, NULL, 0);
+            GetVolumeInformation(sRoot, szVolumeName, 255, NULL, NULL, NULL, NULL, 0);
 
-			_sDriveLabel = szVolumeName;
-		}
-	}
+            _sDriveLabel = szVolumeName;
+        }
+    }
 
-	return _sDriveLabel;
+    return _sDriveLabel;
 }
 
 int	CPath::GetDirCount()
 {
-	FillDirArray();
-	return _aDir.GetSize();
+    FillDirArray();
+    return _aDir.GetSize();
 }
 
 CString CPath::GetDir(int nIndex)
 {
-	if (nIndex < 0)
-		return _sDir;
-	else if (nIndex < GetDirCount())
-	{
-		FillDirArray();
-		return _aDir[nIndex];
-	}
+    if (nIndex < 0)
+        return _sDir;
+    else if (nIndex < GetDirCount())
+    {
+        FillDirArray();
+        return _aDir[nIndex];
+    }
 
-	return sCEmptyString;
+    return sCEmptyString;
 }
 
 CString	CPath::GetLocation()
 {
-	return _sDrive + GetDir();
+    return _sDrive + GetDir();
 }
 
 CString CPath::GetTitle()
 {
-	return _sFileTitle;
+    return _sFileTitle;
 }
 
 void CPath::SetTitle(CString val)
@@ -257,7 +257,7 @@ CString CPath::GetFileName()
 
 CString CPath::GetExt()
 {
-	return _sExtName;
+    return _sExtName;
 }
 
 void	CPath::SetExt(CString val)
@@ -267,29 +267,29 @@ void	CPath::SetExt(CString val)
 
 BOOL CPath::GetFileSize(__int64 &nSize)
 {
-	BOOL bResult;
+    BOOL bResult;
 
-	bResult = FillFileInfoStruct();
-	nSize = ((__int64)_fis.nFileSizeHigh * (__int64)MAXDWORD) + (__int64)_fis.nFileSizeLow;
-	return bResult;
+    bResult = FillFileInfoStruct();
+    nSize = ((__int64)_fis.nFileSizeHigh * (__int64)MAXDWORD) + (__int64)_fis.nFileSizeLow;
+    return bResult;
 }
 
 BOOL CPath::GetFileTime(CTime &time, DWORD dwType)
 {
-	BOOL bResult;
-	FILETIME *pTime = NULL;
+    BOOL bResult;
+    FILETIME *pTime = NULL;
 
-	bResult = FillFileInfoStruct();
-	switch (dwType)
-	{
-	case FILE_CREATION:	pTime = &_fis.ftCreationTime;	break;
-	case FILE_WRITE:	pTime = &_fis.ftLastWriteTime;	break;
-	case FILE_ACCESS:	
-	default:			pTime = &_fis.ftLastAccessTime;	break;
-	}
+    bResult = FillFileInfoStruct();
+    switch (dwType)
+    {
+    case FILE_CREATION:	pTime = &_fis.ftCreationTime;	break;
+    case FILE_WRITE:	pTime = &_fis.ftLastWriteTime;	break;
+    case FILE_ACCESS:	
+    default:			pTime = &_fis.ftLastAccessTime;	break;
+    }
 
-	if (pTime != NULL) time = CTime(*pTime);
-	return bResult;
+    if (pTime != NULL) time = CTime(*pTime);
+    return bResult;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -299,96 +299,96 @@ BOOL CPath::GetFileTime(CTime &time, DWORD dwType)
 // method is the one which parses _sDir and fill _aDir
 void CPath::FillDirArray()
 {
-	if (_sDir.IsEmpty() || (_aDir.GetSize() > 0)) return;
+    if (_sDir.IsEmpty() || (_aDir.GetSize() > 0)) return;
 
-	int nFrom, nTo;
+    int nFrom, nTo;
 
-	// nFrom: 0 - relative / 1 - local / 2 - network
-	nFrom = IsLocalPath() ? 1 : (IsRelativePath() ? 0 : 2);
+    // nFrom: 0 - relative / 1 - local / 2 - network
+    nFrom = IsLocalPath() ? 1 : (IsRelativePath() ? 0 : 2);
 
-	while ((nTo = _sDir.Find('\\', nFrom)) != -1)
-	{
-		_aDir.Add(_sDir.Mid(nFrom, nTo - nFrom));
-		nFrom = nTo + 1;
-	}
+    while ((nTo = _sDir.Find('\\', nFrom)) != -1)
+    {
+        _aDir.Add(_sDir.Mid(nFrom, nTo - nFrom));
+        nFrom = nTo + 1;
+    }
 }
 
 BOOL CPath::FillFileInfoStruct()
 {
-	HANDLE	hFile;
-	BOOL	bResult;
+    HANDLE	hFile;
+    BOOL	bResult;
 
-	::memset(&_fis, 0, sizeof(_fis));
+    ::memset(&_fis, 0, sizeof(_fis));
 
-	hFile = CreateFile(GetPath(), GENERIC_READ, FILE_SHARE_READ, NULL, 
-						OPEN_EXISTING, FILE_ATTRIBUTE_ARCHIVE | FILE_ATTRIBUTE_HIDDEN |
-						FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_SYSTEM, NULL);
+    hFile = CreateFile(GetPath(), GENERIC_READ, FILE_SHARE_READ, NULL, 
+                        OPEN_EXISTING, FILE_ATTRIBUTE_ARCHIVE | FILE_ATTRIBUTE_HIDDEN |
+                        FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_SYSTEM, NULL);
 
-	if (hFile == INVALID_HANDLE_VALUE) return FALSE;
+    if (hFile == INVALID_HANDLE_VALUE) return FALSE;
 
-	bResult = GetFileInformationByHandle(hFile, &_fis);
+    bResult = GetFileInformationByHandle(hFile, &_fis);
 
-	CloseHandle(hFile);
+    CloseHandle(hFile);
 
-	return bResult;
+    return bResult;
 }
 
 CString CPath::AddBackSlash(LPCTSTR szFolderPath, BOOL bInverted)
 {
-	CString	sResult(szFolderPath);
-	int		nLastChar = sResult.GetLength() - 1;
+    CString	sResult(szFolderPath);
+    int		nLastChar = sResult.GetLength() - 1;
 
-	if (nLastChar >= 0)
-	{
-		if ((sResult[nLastChar] != '\\') && (sResult[nLastChar] != '/'))
-			sResult += bInverted ? '/' : '\\';
-	}
+    if (nLastChar >= 0)
+    {
+        if ((sResult[nLastChar] != '\\') && (sResult[nLastChar] != '/'))
+            sResult += bInverted ? '/' : '\\';
+    }
 
-	return sResult;
+    return sResult;
 }
 
 CString CPath::RemoveBackSlash(LPCTSTR szFolderPath)
 {
-	CString	sResult(szFolderPath);
-	int		nLastChar = sResult.GetLength() - 1;
+    CString	sResult(szFolderPath);
+    int		nLastChar = sResult.GetLength() - 1;
 
-	if (nLastChar >= 0)
-	{
-		if ((sResult[nLastChar] == '\\') || (sResult[nLastChar] == '/'))
-			sResult = sResult.Left(nLastChar);
-	}
+    if (nLastChar >= 0)
+    {
+        if ((sResult[nLastChar] == '\\') || (sResult[nLastChar] == '/'))
+            sResult = sResult.Left(nLastChar);
+    }
 
-	return sResult;
+    return sResult;
 }
 
 CPath::operator LPCTSTR ()
 {
-	_sLPCTSTRPath = GetPath();
-	return _sLPCTSTRPath;
+    _sLPCTSTRPath = GetPath();
+    return _sLPCTSTRPath;
 }
 
 const CPath& CPath::operator = (LPCTSTR szPath)
 {
-	SetPath(szPath);
-	return *this;
+    SetPath(szPath);
+    return *this;
 }
 
 const CPath& CPath::operator = (CPath &ref)
 {
-	_aDir.RemoveAll();
-	_aDir=ref._aDir;
-	
-	_bIsRelative = ref._bIsRelative;
+    _aDir.RemoveAll();
+    _aDir=ref._aDir;
+    
+    _bIsRelative = ref._bIsRelative;
 
-	_fis = ref._fis;
+    _fis = ref._fis;
 
-	_sDir = ref._sDir;
-	_sDrive = ref._sDrive;
-	_sDriveLabel = ref._sDriveLabel;
-	_sExtName = ref._sExtName;
-	_sFileTitle = ref._sFileTitle;
-	_sOriginalPath = ref._sOriginalPath;
-	return *this;
+    _sDir = ref._sDir;
+    _sDrive = ref._sDrive;
+    _sDriveLabel = ref._sDriveLabel;
+    _sExtName = ref._sExtName;
+    _sFileTitle = ref._sFileTitle;
+    _sOriginalPath = ref._sOriginalPath;
+    return *this;
 }
 
 BOOL IsDots(WIN32_FIND_DATA * pFindData)

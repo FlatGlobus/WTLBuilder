@@ -13,6 +13,8 @@
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 
 #include <windows.h>
+#include <tchar.h>
+#include <atltrace.h>
 
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning( disable:4838)

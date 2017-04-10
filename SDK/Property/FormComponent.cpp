@@ -685,7 +685,8 @@ void CFormComponent::SaveForm(Component * frm,SaveOperation operation)
                 CXMLDOMDocument2	Doc;
                 GenerateXML(Doc);
                 
-                GenerateCode(operation);
+                if (GenerateCode(operation) == FALSE)
+                    return;
                 if (operation != soSaveAsTemplate)
                 {
                     fileName.SetExt(_T("wff"));
@@ -872,18 +873,14 @@ void CFormComponent::GetFormFileName(Component * cmp,CString* formFileName)
     }
 }
 
-void CFormComponent::GenerateCode(SaveOperation operation)
+BOOL CFormComponent::GenerateCode(SaveOperation operation)
 {
     CMsgPump pump;
 
     if (fileName.IsFilePath() && operation == soSave)//load last source code changes
     {
-        if (codeGen.LoadHeader((LPCTSTR)fileName) == FALSE ||
-            codeGen.LoadSource((LPCTSTR)fileName) == FALSE)
-        {
-            ::MessageBox(NULL, MakeString(_T("Error opening file %s"), (LPCTSTR)fileName), _T("WTLBuilder"), MB_OK);
-            return;
-        }
+        codeGen.LoadHeader((LPCTSTR)fileName);
+        codeGen.LoadSource((LPCTSTR)fileName);
     }
 
     BOOL retFlag;
@@ -909,7 +906,7 @@ void CFormComponent::GenerateCode(SaveOperation operation)
         CString errMsg;
         errMsg.Format("Error while generating form code. See %s script function.", (LPCTSTR)funcName);
         PostEvent(evOutput, ErrorMsg, (LPCTSTR)errMsg);
-        return;
+        return FALSE;
     }
 
     for (int i = 0; i < components.GetCount(); i++)
@@ -929,13 +926,13 @@ void CFormComponent::GenerateCode(SaveOperation operation)
             CString errMsg;
             errMsg.Format("Error while generating control code. See %s script function.", (LPCTSTR)funcName);
             PostEvent(evOutput, ErrorMsg, (LPCTSTR)errMsg);
-            return;
+            return FALSE;
         }
     }
 
     if (operation == soSaveAsTemplate)
         codeGen.RemoveFormName(get_Name());
-    
+    return TRUE;
 }
 
 void CFormComponent::GenerateLocFile(LPCTSTR fileName)
