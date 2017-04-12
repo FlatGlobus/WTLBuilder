@@ -224,7 +224,6 @@
     <None Include="res\SameSize.ico" />
     <None Include="res\Save.ico" />
     <None Include="res\SaveAll.ico" />
-    <None Include="ScriptHost.rgs" />
     <None Include="res\showform.ico" />
     <None Include="res\sortform.ico" />
     <None Include="res\TabOrder.ico" />
@@ -233,7 +232,6 @@
     <None Include="res\Toolbar.bmp" />
     <None Include="res\ToParent.ico" />
     <None Include="res\TopSide.ico" />
-    <None Include="res\typelib1.bin" />
     <None Include="res\VertOrder.ico" />
     <None Include="res\VertOrderBottom.ico" />
     <None Include="res\VertSize.ico" />

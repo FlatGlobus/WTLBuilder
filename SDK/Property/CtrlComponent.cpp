@@ -131,7 +131,10 @@ void ControlComponentBase::InitProperty(void)
     DEFINE_PROPERTY(ToolTip,CString,ControlComponentBase,_T(""))
     DEFINE_PROPERTY(EnableToolTip,BOOL,ControlComponentBase,FALSE)
     DEFINE_PROPERTY(ID,CString,ControlComponentBase,_T(""))
+
     DEFINE_PROPERTY(TabStop,BOOL,ControlComponentBase,enableTabIndex)
+    PUBLIC_PROPERTY(TabStop, enableTabIndex)
+
     DEFINE_PROPERTY(Group,BOOL,ControlComponentBase,FALSE)
     DEFINE_PROPERTY(HScroll,BOOL,ControlComponentBase,FALSE)
     PUBLIC_PROPERTY(HScroll,FALSE)

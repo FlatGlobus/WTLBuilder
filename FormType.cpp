@@ -71,20 +71,6 @@ LRESULT CFormType::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
     m_name.Create(m_panel1,CRect(77,323,386,345),_T(""),WS_CHILD|WS_VISIBLE|WS_TABSTOP,WS_EX_CLIENTEDGE,IDC_CLASS_NAME_EDIT);
     m_name.SetFont((HFONT)m_formFont);
 
-    m_buttonst19.Create(m_panel1,CRect(408,11,428,31),_T(""),WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,0,IDC_DIALOGIMPL1_BUTTONST19);
-    m_buttonst19.SetFont((HFONT)m_formFont);
-    m_buttonst19.SetFlat(true);
-    m_buttonst19.SetAlign(CButtonST::ST_ALIGN_HORIZ);
-    m_buttonst19.SetColor(CButtonST::BTNST_COLOR_BK_IN,GetSysColor(COLOR_BTNFACE));
-    m_buttonst19.SetColor(CButtonST::BTNST_COLOR_BK_OUT,GetSysColor(COLOR_BTNFACE));
-
-    m_buttonst20.Create(m_panel1,CRect(438,11,458,31),_T(""),WS_CHILD|WS_VISIBLE|BS_PUSHBUTTON,0,IDC_DIALOGIMPL1_BUTTONST20);
-    m_buttonst20.SetFont((HFONT)m_formFont);
-    m_buttonst20.SetFlat(true);
-    m_buttonst20.SetAlign(CButtonST::ST_ALIGN_HORIZ);
-    m_buttonst20.SetColor(CButtonST::BTNST_COLOR_BK_IN,GetSysColor(COLOR_BTNFACE));
-    m_buttonst20.SetColor(CButtonST::BTNST_COLOR_BK_OUT,GetSysColor(COLOR_BTNFACE));
-
     m_static21.Create(m_panel1,CRect(12,294,60,308),_T("File name:"),WS_CHILD|WS_VISIBLE|SS_LEFT,0,IDC_DIALOGIMPL1_STATIC21);
     m_static21.SetFont((HFONT)m_formFont);
 
@@ -103,8 +89,6 @@ LRESULT CFormType::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
     m_name.SetWindowPos(m_filename,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
     m_create.SetWindowPos(m_name,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
     m_cancel.SetWindowPos(m_create,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
-    m_buttonst19.SetWindowPos(m_cancel,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
-    m_buttonst20.SetWindowPos(m_buttonst19,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE);
 //}}WTLBUILDER_TABSTOP
 
     m_formsList.SetImageList(m_images,LVSIL_SMALL);

@@ -27,7 +27,7 @@ PROPERTY_API BOOL IsPasteEnabled();
 
 CDesignerCtrl::CDesignerCtrl() :components(NULL), isShowgrid(TRUE), gridDim(6, 6), isGridPressed(FALSE),
 isShowGoldenGrid(FALSE), FromLeftToRight(TRUE), FromTopToBottom(TRUE), isGoldenGridMoveable(FALSE),
-componentCreated(FALSE), curentComp(NULL), offset(0, 0), tabIndexMode(FALSE), tabIndex(0)
+componentCreated(FALSE), curentComp(NULL), offset(0, 0), tabIndexMode(FALSE), tabIndex(0),Parent(NULL) 
 {
 }
 
@@ -180,11 +180,12 @@ LRESULT CDesignerCtrl::OnLButtonUp(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lPar
     }
     else
     {
-        offset += deltaPoint = LParamToPoint(lParam) - deltaPoint;
-        MoveGoldenXY(deltaPoint);
-        ::RedrawWindow((HWND)Parent->GetHandle(), NULL, NULL, RDW_INVALIDATE | RDW_NOERASE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_INTERNALPAINT);
-        UpdateProperty(_T("OffsetX"));
-        UpdateProperty(_T("OffsetY"));
+        //TODO error here
+        //offset += deltaPoint = LParamToPoint(lParam) - deltaPoint; 
+        //MoveGoldenXY(deltaPoint);
+        //::RedrawWindow((HWND)Parent->GetHandle(), NULL, NULL, RDW_INVALIDATE | RDW_NOERASE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_INTERNALPAINT);
+        //UpdateProperty(_T("OffsetX"));
+        //UpdateProperty(_T("OffsetY"));
     }
 
     if ((GetKeyState(VK_LSHIFT) & 0x100 || GetKeyState(VK_RSHIFT) & 0x100) == FALSE)
@@ -448,18 +449,23 @@ void CDesignerCtrl::ShowTabIndexes(CDC & dc)
         return;
 
     CRect rc;
-    Component * comp;
     CString str;
     CFontEx font;
     CSel _font(dc, font);
     CTextColor textColor(dc, RGB(0xFF, 0xFF, 0xFF));
     CBackColor backColor(dc, RGB(128, 128, 0));
+//
+    int maxTabIndex = components->FindMaxTabIndex();
+    int minTabIndex = components->FindMinTabIndex();
+    if (maxTabIndex == minTabIndex)
+        return;
 
-    for (int i = 0; i < components->GetCount(); i++)
+    for (int tbIdx = minTabIndex; tbIdx <= maxTabIndex; tbIdx++)
     {
-        comp = components->GetAt(i);
-        if (comp->EnableTabIndex() == TRUE && comp->IsControl() == TRUE)
+        int Idx = components->FindByTabIndex(tbIdx);
+        if (Idx != -1)
         {
+            Component * comp = components->GetAt(Idx);
             rc = comp->GetBoundsRect();
             comp->ComponentToDesigner(rc);
             long tabIdx = comp->get_TabIndex();
@@ -528,7 +534,6 @@ void CDesignerCtrl::DrawTabArrows(CDC & dc)
                 dc.Rectangle(sRc);
 
             }
-
             dc.MoveTo(sRc.left, (sRc.top + sRc.bottom) / 2);
             ArrowTo(dc, eRc.left, (eRc.top + eRc.bottom) / 2, &a);
             dc.Ellipse(eRc.left - 3, (eRc.top + eRc.bottom) / 2 - 3, eRc.left + 3, (eRc.top + eRc.bottom) / 2 + 3);

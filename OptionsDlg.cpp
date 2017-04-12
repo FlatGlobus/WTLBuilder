@@ -36,7 +36,7 @@ LRESULT COptionsDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPa
     m_cancel.Create(m_hWnd,CRect(517,416,591,438),_T("Cancel"),WS_CHILD|WS_VISIBLE|BS_TEXT|BS_CENTER|BS_VCENTER,0,IDCANCEL);
     m_cancel.SetFont((HFONT)m_formFont);
 
-    m_optListbox.Create(m_hWnd,CRect(8,8,192,396),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP,WS_EX_CLIENTEDGE,IDC_OPTLISTBOX);
+    m_optListbox.Create(m_hWnd,CRect(8,8,192,396),NULL,WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP|LBS_NOTIFY,WS_EX_CLIENTEDGE,IDC_OPTLISTBOX);
     m_optListbox.SetFont((HFONT)m_formFont);
     m_optListbox.AddString(_T("Code generation"));
     m_optListbox.SetItemHeight(0,13);
@@ -101,4 +101,9 @@ void COptionsDlg::InitLayout()
 //{{WTLBUILDER_INITLAYOUT
 //}}WTLBUILDER_INITLAYOUT
     //SetScrollSize(_minClientSize);
+}
+
+LRESULT COptionsDlg::OnListBoxChange(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+{
+    return 0;
 }

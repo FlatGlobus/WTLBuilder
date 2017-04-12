@@ -551,6 +551,19 @@ inited(prop.inited)
 {
 }
 
+const PropertyBase & PropertyBase::operator =(const PropertyBase & prop)
+{
+    level = prop.level;
+    expand = prop.expand;
+    name = prop.name;
+    type = prop.type;
+    published = prop.published;
+    readOnly = prop.readOnly;
+    inited = prop.inited;
+
+    return *this;
+}
+
 PropertyBase::~PropertyBase(void)
 {
     if(HasChild()) {
@@ -704,11 +717,10 @@ CProperties  & CProperties::operator =(const CProperties& p)
 {
     className=p.className;
     topIndex=p.topIndex;
-    for (PropertyVectorIter iter = ((CProperties&)p).properties.begin( ); iter != p.properties.end( ); iter++ )
+    for (auto iter = ((CProperties&)p).properties.begin( ); iter != p.properties.end( ); iter++ )
     {
 		PropertyBase * prop=FindByName((*iter)->GetName());
 		if (prop)
-			//prop->FromString((*iter)->ToString());
 			prop->SetValue((*iter)->GetValue(false),false);
 
 		if((*iter)->HasChild())

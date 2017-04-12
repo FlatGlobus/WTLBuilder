@@ -619,9 +619,9 @@ BOOL ThreadBridge::CreateThreadWindow(void)
 {
 	if(IsWindow(WND)==FALSE)
 	{
-		WNDCLASS wc = {0, wndproc, 0, sizeof(this), GetModuleHandle(NULL), 0, 0, 0, 0, TEXT("ThreadBrige")};
-		WND = CreateWindow((LPCTSTR)RegisterClass(&wc), TEXT("ThreadBrige"), 0, 0, 0, 0, 0, 0, 0, wc.hInstance, NULL);
-		ThreadBridgeMessage=RegisterWindowMessage(TEXT("EventThreadBridgeMessage"));
+		WNDCLASS wc = {0, wndproc, 0, sizeof(this), GetModuleHandle(NULL), 0, 0, 0, 0, _T("ThreadBrige")};
+		WND = CreateWindow((LPCTSTR)RegisterClass(&wc), _T("ThreadBrige"), 0, 0, 0, 0, 0, 0, 0, wc.hInstance, NULL);
+		ThreadBridgeMessage=RegisterWindowMessage(_T("EventThreadBridgeMessage"));
 	}
 	return WND!=NULL;
 }

@@ -90,7 +90,9 @@ Component::Component(const Component & comp) :
     parentName(comp.parentName),
     uniqueID(comp.uniqueID),
     defaultSize(comp.defaultSize),
-    tabIndex(comp.tabIndex)
+    tabIndex(comp.tabIndex),
+    enableTabIndex(comp.enableTabIndex)
+
 {
 
 }
@@ -1364,8 +1366,7 @@ void Components::MouseDown(CPoint point)
                     temp->FirstSelected = TRUE;
                     RemoveProperties();
                 }
-
-                pressed = TRUE;
+                
                 hint = hiAll;
                 point = SnapToGrid(point);
                 MouseDownAll(&dc, point);
@@ -2295,7 +2296,7 @@ LPUNKNOWN __stdcall Components::get__NewEnum()
 
     enumVar * pEnumVar = new enumVar;
     pEnumVar->Init(&pVar[0], &pVar[count], NULL, AtlFlagCopy);
-    delete pVar;
+    delete[] pVar;
     LPUNKNOWN pVal = NULL;
     pEnumVar->QueryInterface(IID_IUnknown, (void**)pVal);
     return pVal;

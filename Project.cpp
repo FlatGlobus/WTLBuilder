@@ -321,7 +321,7 @@ LPUNKNOWN __stdcall CForms::get__NewEnum()
 
     enumVar * pEnumVar=new enumVar;
     pEnumVar->Init(&pVar[0],&pVar[formCount],NULL,AtlFlagCopy);
-    delete pVar;
+    delete[] pVar;
     LPUNKNOWN pVal=NULL;
     pEnumVar->QueryInterface(IID_IUnknown,(void**)pVal);
     return pVal;

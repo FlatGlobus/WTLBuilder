@@ -13,7 +13,6 @@
 
 //{{WTLBUILDER_INCLUDE_DECLARATION
 #include "Panel.h"
-#include "ButtonST.h"
 //}}WTLBUILDER_INCLUDE_DECLARATION
 
 
@@ -27,8 +26,6 @@
 #define    ID_BROWSE    1013
 #define    IDC_CFORMTYPE_STATIC14    1014
 #define    IDC_CLASS_NAME_EDIT    1016
-#define    IDC_DIALOGIMPL1_BUTTONST19    1019
-#define    IDC_DIALOGIMPL1_BUTTONST20    1020
 #define    IDC_DIALOGIMPL1_STATIC21    1021
 #define    IDC_FILE_NAME_EDIT    1022
 //}}WTLBUILDER_CONTROL_ID_DECLARATION
@@ -49,8 +46,6 @@ class CFormType:public CDialogImpl<CFormType>
     CButton    m_browse;
     CStatic    m_static14;
     CEdit    m_name;
-    CButtonST    m_buttonst19;
-    CButtonST    m_buttonst20;
     CStatic    m_static21;
     CEdit    m_filename;
 //}}WTLBUILDER_MEMBER_DECLARATION

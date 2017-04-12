@@ -40,6 +40,7 @@ public:
         MESSAGE_HANDLER(WM_INITDIALOG, OnInitDialog)
         COMMAND_ID_HANDLER(IDOK, OnCloseCmd)
         COMMAND_ID_HANDLER(IDCANCEL, OnCloseCmd)
+        COMMAND_CODE_HANDLER(LBN_SELCHANGE, OnListBoxChange)
         REFLECT_NOTIFICATIONS()
     END_MSG_MAP()
 
@@ -48,5 +49,6 @@ public:
 
     LRESULT OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
     LRESULT OnCloseCmd(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+    LRESULT OnListBoxChange(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 };
 //////////////////////////////////////////////////////////////////////////

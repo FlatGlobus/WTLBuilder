@@ -104,8 +104,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ScriptHost.rgs" />
-    <None Include="res\typelib1.bin" />
     <None Include="res\AigmentRight.ico">
       <Filter>Resource Files</Filter>
     </None>

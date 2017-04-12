@@ -254,10 +254,13 @@ public:
     {
     }
 
+    virtual ~_Arg()
+    {
+    }
+
     virtual void Free()
     {
-        if(this)
-            delete this;
+        delete this;
     }
 
     virtual void SendEvent(void)
