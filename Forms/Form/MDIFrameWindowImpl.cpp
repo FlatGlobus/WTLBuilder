@@ -47,9 +47,9 @@ namespace Form
     void CMDIFrameWindowImpl::InitProperty(void)
     {
         CFormComponent::InitProperty();
-		CFrameWinTraits tr;
-		SET_PROP_VALUE(InternalWindowStyle, tr.GetWndStyle(0))
-		SET_PROP_VALUE(InternalWindowStyleEx, tr.GetWndExStyle(0))
+		
+		SET_PROP_VALUE(InternalWindowStyle, CFrameWinTraits::GetWndStyle(0))
+		SET_PROP_VALUE(InternalWindowStyleEx, CFrameWinTraits::GetWndExStyle(0))
 		SET_PROP_VALUE(WindowStyle, WS_OVERLAPPED)
 		SET_PROP_VALUE(BorderStyle, WS_THICKFRAME)
 		REMOVE_PROPERTY(MDIChild)

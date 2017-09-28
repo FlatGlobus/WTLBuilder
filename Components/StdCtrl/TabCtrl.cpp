@@ -42,7 +42,6 @@ CTabCtrl::CTabCtrl(LPTSTR _name):ControlComponent<StdCtrl::CTabCtrl>(_name),imag
 	{
 		ControlComponent<StdCtrl::CTabCtrl>::InitProperty();
 				
-		DEFINE_PROPERTY(Bottom,BOOL,CTabCtrl,FALSE)
 		DEFINE_PROPERTY(Buttons,BOOL,CTabCtrl,FALSE)
 		DEFINE_PROPERTY(Right,BOOL,CTabCtrl,FALSE)
 		DEFINE_PROPERTY(FlatButtons,BOOL,CTabCtrl,FALSE)
@@ -69,14 +68,14 @@ CTabCtrl::CTabCtrl(LPTSTR _name):ControlComponent<StdCtrl::CTabCtrl>(_name),imag
 	{
 		Reset();
 		FillPagesArray(val);
-		BOOL hasImages = imageList!=CComponentListEdit::GetNoneStr();
+		BOOL hasImages = imageList != CComponentListEdit::GetNoneStr();
 		for(int i=0; i < pages.GetSize();i++)
 		{
 			TCITEM tab = { 0 };
-			tab.mask = TCIF_TEXT | hasImages ? TCIF_IMAGE : 0;   
+			tab.mask = TCIF_TEXT | (hasImages ? TCIF_IMAGE : 0);
 			tab.pszText = (LPTSTR)(LPCTSTR)pages[i];
 			tab.cchTextMax = pages[i].GetLength();
-			tab.iImage = hasImages ? -1 :-1;//wow!!
+			tab.iImage = -1;
 			InsertItem(i, &tab);
 		}
 	}
@@ -131,8 +130,7 @@ CTabCtrl::CTabCtrl(LPTSTR _name):ControlComponent<StdCtrl::CTabCtrl>(_name),imag
 	{
 		return current;
 	}
-
-	IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CTabCtrl,Bottom,TCS_BOTTOM)
+	
 	IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CTabCtrl,Buttons,TCS_BUTTONS)
 	IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CTabCtrl,Right,TCS_RIGHT)
 	IMPLEMENT_WINSTYLE_BOOL_PROPERTY(CTabCtrl,FlatButtons,TCS_FLATBUTTONS)

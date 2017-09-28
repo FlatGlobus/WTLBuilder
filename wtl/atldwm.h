@@ -1,4 +1,4 @@
-// Windows Template Library - WTL version 9.10
+// Windows Template Library - WTL version 10.0
 // Copyright (C) Microsoft Corporation, WTL Team. All rights reserved.
 //
 // This file is a part of the Windows Template Library.
@@ -10,10 +10,6 @@
 #define __ATLDWM_H__
 
 #pragma once
-
-#ifdef _WIN32_WCE
-	#error atldwm.h is not supported on Windows CE
-#endif
 
 #ifndef __ATLAPP_H__
 	#error atldwm.h requires atlapp.h to be included first
@@ -37,10 +33,7 @@
 // Delay load is NOT AUTOMATIC for VC++ 7, you have to link to delayimp.lib, 
 // and add dwmapi.dll in the Linker.Input.Delay Loaded DLLs section of the 
 // project properties.
-#if (_MSC_VER < 1300) && !defined(_WTL_NO_DWMAPI_DELAYLOAD)
-  #pragma comment(lib, "delayimp.lib")
-  #pragma comment(linker, "/delayload:dwmapi.dll")
-#endif // (_MSC_VER < 1300) && !defined(_WTL_NO_DWMAPI_DELAYLOAD)
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // Classes in this file:
@@ -306,7 +299,7 @@ public:
 
 	void Attach(HTHUMBNAIL hThumbnailNew)
 	{
-		if(t_bManaged && m_hThumbnail != NULL && m_hThumbnail != hThumbnailNew)
+		if(t_bManaged && (m_hThumbnail != NULL) && (m_hThumbnail != hThumbnailNew))
 			Unregister();
 		m_hThumbnail = hThumbnailNew;
 	}

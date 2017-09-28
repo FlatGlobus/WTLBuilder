@@ -72,6 +72,9 @@ LRESULT COptionsDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPa
     codeGeneration.SetSingleLine(true);
     m_panelhost.AddPanel(&codeGeneration);
 
+    m_add_m_prefix.Create(codeGeneration,CRect(8,8,192,32),_T("Add m_ prefix to member name"),WS_CHILD|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_TABSTOP|BS_AUTOCHECKBOX|BS_TEXT|BS_LEFT|BS_VCENTER|BS_FLAT,0,ID_ADD_M_PREFIX);
+    m_add_m_prefix.SetFont((HFONT)m_formFont);
+
 //}}WTLBUILDER_MEMBER_CREATION
 //{{WTLBUILDER_POST_CREATION
     m_panelhost.SetCurrent(&codeGeneration);
@@ -105,5 +108,13 @@ void COptionsDlg::InitLayout()
 
 LRESULT COptionsDlg::OnListBoxChange(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
 {
+    return 0;
+}
+
+LRESULT COptionsDlg::OnM_Prefix(WORD /*wNotifyCode*/, WORD wID, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+    int ch=m_add_m_prefix.GetCheck();
+    PostEvent(evCfgSetBOOLVal, _T("Code Generation"), _T("m_Prefix"), ch == BST_CHECKED ? TRUE: FALSE);
+
     return 0;
 }

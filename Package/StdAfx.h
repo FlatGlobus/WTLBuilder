@@ -14,6 +14,7 @@
 #include "warning.h"
 
 #include <atlstr.h>
+#include <atltypes.h>
 #include <atlbase.h>
 #include <atlapp.h>
 

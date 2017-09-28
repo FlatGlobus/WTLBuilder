@@ -127,7 +127,6 @@ Component * CProject::CreateForm(const CString & _formFileName)
     CString page(_T("Form"));
     CString cmpName(_T("CFrameWindowImpl"));
     BOOL	makeFromTemplate=formFileName.IsEmpty();
-    CString className;
     CString formfilename;
 
     CString location;

@@ -1,4 +1,4 @@
-// Windows Template Library - WTL version 9.10
+// Windows Template Library - WTL version 10.0
 // Copyright (C) Microsoft Corporation, WTL Team. All rights reserved.
 //
 // This file is a part of the Windows Template Library.
@@ -10,10 +10,6 @@
 #define __ATLPRINT_H__
 
 #pragma once
-
-#ifdef _WIN32_WCE
-	#error atlprint.h is not supported on Windows CE
-#endif
 
 #ifndef __ATLAPP_H__
 	#error atlprint.h requires atlapp.h to be included first
@@ -60,11 +56,8 @@ template <> class _printer_info<4> { public: typedef PRINTER_INFO_4 infotype; };
 template <> class _printer_info<5> { public: typedef PRINTER_INFO_5 infotype; };
 template <> class _printer_info<6> { public: typedef PRINTER_INFO_6 infotype; };
 template <> class _printer_info<7> { public: typedef PRINTER_INFO_7 infotype; };
-// these are not in the old (vc6.0) headers
-#ifdef _ATL_USE_NEW_PRINTER_INFO
 template <> class _printer_info<8> { public: typedef PRINTER_INFO_8 infotype; };
 template <> class _printer_info<9> { public: typedef PRINTER_INFO_9 infotype; };
-#endif // _ATL_USE_NEW_PRINTER_INFO
 
 
 template <unsigned int t_nInfo>
@@ -253,7 +246,7 @@ public:
 				memset(pv, 0, nLen);
 				pdev->wDeviceOffset = sizeof(DEVNAMES) / sizeof(TCHAR);
 				pv = pv + sizeof(DEVNAMES); // now points to end
-				SecureHelper::strcpy_x((LPTSTR)pv, lstrlen(lpszPrinterName) + 1, lpszPrinterName);
+				ATL::Checked::tcscpy_s((LPTSTR)pv, lstrlen(lpszPrinterName) + 1, lpszPrinterName);
 				::GlobalUnlock(h);
 			}
 		}
@@ -377,7 +370,7 @@ public:
 		if (h != NULL)
 		{
 			void* p = ::GlobalLock(h);
-			SecureHelper::memcpy_x(p, nSize, pdm, nSize);
+			ATL::Checked::memcpy_s(p, nSize, pdm, nSize);
 			::GlobalUnlock(h);
 		}
 		Attach(h);
@@ -405,7 +398,7 @@ public:
 		if (h != NULL)
 		{
 			void* p = ::GlobalLock(h);
-			SecureHelper::memcpy_x(p, nSize, m_pDevMode, nSize);
+			ATL::Checked::memcpy_s(p, nSize, m_pDevMode, nSize);
 			::GlobalUnlock(h);
 		}
 		return h;
@@ -417,7 +410,7 @@ public:
 	{
 		bool bRet = false;
 		LONG nLen = ::DocumentProperties(NULL, hPrinter, NULL, NULL, NULL, 0);
-		CTempBuffer<DEVMODE, _WTL_STACK_ALLOC_THRESHOLD> buff;
+		ATL::CTempBuffer<DEVMODE, _WTL_STACK_ALLOC_THRESHOLD> buff;
 		DEVMODE* pdm = buff.AllocateBytes(nLen);
 		if(pdm != NULL)
 		{
@@ -439,7 +432,7 @@ public:
 
 		bool bRet = false;
 		LONG nLen = ::DocumentProperties(hWnd, hPrinter, pi.m_pi->pName, NULL, NULL, 0);
-		CTempBuffer<DEVMODE, _WTL_STACK_ALLOC_THRESHOLD> buff;
+		ATL::CTempBuffer<DEVMODE, _WTL_STACK_ALLOC_THRESHOLD> buff;
 		DEVMODE* pdm = buff.AllocateBytes(nLen);
 		if(pdm != NULL)
 		{
@@ -625,7 +618,7 @@ public:
 
 		// Create a thread and return
 		DWORD dwThreadID = 0;
-#if !defined(_ATL_MIN_CRT) && defined(_MT)
+#ifdef _MT
 		HANDLE hThread = (HANDLE)_beginthreadex(NULL, 0, (UINT (WINAPI*)(void*))StartProc, this, 0, (UINT*)&dwThreadID);
 #else
 		HANDLE hThread = ::CreateThread(NULL, 0, StartProc, (void*)this, 0, &dwThreadID);
@@ -958,9 +951,6 @@ public:
 		MESSAGE_HANDLER(WM_VSCROLL, CScrollImpl< T >::OnVScroll)
 		MESSAGE_HANDLER(WM_HSCROLL, CScrollImpl< T >::OnHScroll)
 		MESSAGE_HANDLER(WM_MOUSEWHEEL, CScrollImpl< T >::OnMouseWheel)
-#if !((_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400))
-		MESSAGE_HANDLER(m_uMsgMouseWheel, CScrollImpl< T >::OnMouseWheel)
-#endif // !((_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400))
 		MESSAGE_HANDLER(WM_MOUSEHWHEEL, CScrollImpl< T >::OnMouseHWheel)
 		MESSAGE_HANDLER(WM_SETTINGCHANGE, CScrollImpl< T >::OnSettingChange)
 		MESSAGE_HANDLER(WM_LBUTTONDOWN, CZoomScrollImpl< T >::OnLButtonDown)

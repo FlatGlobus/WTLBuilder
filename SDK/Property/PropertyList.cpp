@@ -201,11 +201,9 @@ LRESULT CPropertyList::OnKeyDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& 
 LRESULT CPropertyList::OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& handled)
 {
 	LRESULT lRes = DefWindowProc(uMsg, wParam, lParam);
-	//destroy prop editor
+	//TODO destroy prop editor
 	if(GetFocus()!=m_hWnd && ::IsWindow(GetWindow(GW_CHILD)))
 		SetFocus();
-
-	CPoint point;
 
 	if(m_Tracker.GetPos()==0 && LOWORD(lParam)!=0)
 		m_Tracker.SetPos(LOWORD(lParam)/2);

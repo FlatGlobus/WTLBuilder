@@ -79,7 +79,13 @@ enum Commands
     evOnEditCommand,
     evTabIndex,
     evIsFormChanged,
-    evXYCursor // CPoint
+    evXYCursor, // CPoint
+    evCfgSetBOOLVal,//const TCHAR * name, BOOL val
+    evCfgGetBOOLVal,//const TCHAR * name, BOOL *val
+    evCfgSetINTVal,//const TCHAR * name, int val
+    evCfgGetINTVal,//const TCHAR * name, int *val
+    evCfgSetSTRVal,//const TCHAR * name, const TCHAR * val
+    evCfgGetSTRVal//const TCHAR * name, const TCHAR * val, int vlaSize
 };
 
 //for evOutput message

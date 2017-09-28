@@ -494,9 +494,7 @@ void CDesignerCtrl::DrawTabArrows(CDC & dc)
     CPenEx pen(PS_SOLID, 1, RGB(128, 0, 0));
     CSel _pen(dc, pen);
     CBackColor backColor(dc, RGB(255, 0, 0));
-
-    CRect rc;
-
+    
     int halfX = gridDim.cx / 2;
     int halfY = gridDim.cy / 2;
 

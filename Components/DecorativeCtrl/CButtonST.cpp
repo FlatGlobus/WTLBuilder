@@ -36,10 +36,9 @@ namespace DecorativeCtrl
       outImage.Change.SetMethod(&CButtonSTComp::OnOutImageChange);
       
       ControlComponent<CButtonSTComp>::InitProperty();
-
-	  CButtonSTWinTraits tr;
-	  SET_PROP_VALUE(InternalWindowStyle, tr.GetWndStyle(0))
-	  SET_PROP_VALUE(InternalWindowStyleEx, tr.GetWndExStyle(0))
+	   
+	  SET_PROP_VALUE(InternalWindowStyle, CButtonSTWinTraits::GetWndStyle(0))
+	  SET_PROP_VALUE(InternalWindowStyleEx, CButtonSTWinTraits::GetWndExStyle(0))
 	  ADD_WIN_STYLE(BS_OWNERDRAW | WS_VISIBLE)
 
       //DEFINE_PROPERTY(Style,ButtonSTStyle,CButtonSTComp,0)

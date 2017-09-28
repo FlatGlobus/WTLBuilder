@@ -118,11 +118,10 @@ LRESULT ControlComponentBase::OnGetCtrlFont(UINT,WPARAM,LPARAM, BOOL& bHandled)
 typedef DWORD WindowStyle;
 void ControlComponentBase::InitProperty(void)
 {
-	CControlWinTraits tr;
     Component::InitProperty();
-    DEFINE_PROPERTY(InternalWindowStyle,DWORD,ControlComponentBase, tr.GetWndStyle(0))
+    DEFINE_PROPERTY(InternalWindowStyle,DWORD,ControlComponentBase, CControlWinTraits::GetWndStyle(0))
     PUBLIC_PROPERTY(InternalWindowStyle,FALSE)
-    DEFINE_PROPERTY(InternalWindowStyleEx,DWORD,ControlComponentBase, tr.GetWndExStyle(0))
+    DEFINE_PROPERTY(InternalWindowStyleEx,DWORD,ControlComponentBase, CControlWinTraits::GetWndExStyle(0))
     PUBLIC_PROPERTY(InternalWindowStyleEx,FALSE)
 	DEFINE_WIN_PROPERTY(Border,ControlComponentBase)
 	DEFINE_WIN_PROPERTY(Enabled,ControlComponentBase)

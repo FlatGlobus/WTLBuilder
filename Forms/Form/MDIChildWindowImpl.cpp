@@ -39,9 +39,8 @@ namespace Form
     {
         CFormComponent::InitProperty();
 
-		CMDIChildWinTraits tr;
-		SET_PROP_VALUE(InternalWindowStyle, tr.GetWndStyle(0))
-		SET_PROP_VALUE(InternalWindowStyleEx, tr.GetWndExStyle(0))
+		SET_PROP_VALUE(InternalWindowStyle, CMDIChildWinTraits::GetWndStyle(0))
+		SET_PROP_VALUE(InternalWindowStyleEx, CMDIChildWinTraits::GetWndExStyle(0))
 		SET_PROP_VALUE(WindowStyle, WS_CHILD)
 		SET_PROP_VALUE(BorderStyle, WS_THICKFRAME)
 

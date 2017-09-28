@@ -568,7 +568,7 @@ PropertyBase::~PropertyBase(void)
 {
     if(HasChild()) {
         PropertyVectorIter iter;
-        for ( iter = child.begin( ); iter != child.end( ); iter++ )
+        for ( iter = child.begin( ); iter != child.end( ); ++iter )
         {
             if(*iter!=NULL)
                 delete *iter;
@@ -672,7 +672,7 @@ void PropertyBase::Update()
     if(HasChild())
     {
         PropertyVectorIter iter;
-        for ( iter = child.begin( ); iter != child.end( ); iter++ )
+        for ( iter = child.begin( ); iter != child.end( ); ++iter )
             (*iter)->Update();
     }
 	inited = true;
@@ -686,7 +686,7 @@ void PropertyBase::Sort()
 CProperties::~CProperties(void)
 {
     PropertyVectorIter iter;
-    for ( iter = properties.begin( ); iter != properties.end( ); iter++ )
+    for ( iter = properties.begin( ); iter != properties.end( ); ++iter )
         if(*iter != NULL)
             delete *iter;
 	properties.clear();
@@ -717,7 +717,7 @@ CProperties  & CProperties::operator =(const CProperties& p)
 {
     className=p.className;
     topIndex=p.topIndex;
-    for (auto iter = ((CProperties&)p).properties.begin( ); iter != p.properties.end( ); iter++ )
+    for (std::vector<PropertyBase *>::const_iterator iter = p.properties.begin(); iter != p.properties.end(); ++iter )
     {
 		PropertyBase * prop=FindByName((*iter)->GetName());
 		if (prop)
@@ -733,7 +733,7 @@ CProperties  & CProperties::operator =(const CProperties& p)
 void CProperties::CopyChild(PropertyBase * parent)
 {
     PropertyVectorIter iter;
-    for ( iter = parent->GetChild().begin( ); iter != parent->GetChild().end( ); iter++ )
+    for ( iter = parent->GetChild().begin( ); iter != parent->GetChild().end( ); ++iter )
     {
         PropertyBase * prop=FindByName((*iter)->GetName());
         if(prop)
@@ -838,7 +838,7 @@ void CProperties::Save(CXMLDOMNode &Node)
 	Node.GetAttributes().SetNamedItem(TypeAttr);
 
     PropertyVectorIter iter;
-    for ( iter = properties.begin( ); iter != properties.end( ); iter++ )
+    for ( iter = properties.begin( ); iter != properties.end( ); ++iter )
 	{
 		(*iter)->Save(Node);
 		if((*iter)->HasChild())
@@ -891,7 +891,7 @@ void CProperties::SaveChild(CXMLDOMNode &Node,PropertyBase * Parentprop)
 	Node.AppendChild(Item);
 
     PropertyVectorIter iter;
-    for ( iter = Parentprop->GetChild().begin( ); iter != Parentprop->GetChild().end( ); iter++ )
+    for ( iter = Parentprop->GetChild().begin( ); iter != Parentprop->GetChild().end( ); ++iter )
 	{
 		(*iter)->Save(Item);
 		if((*iter)->HasChild())
@@ -983,7 +983,7 @@ void CProperties::Update()
 {
 	Sort();
     PropertyVectorIter iter;
-    for ( iter = properties.begin( ); iter != properties.end( ); iter++ )
+    for ( iter = properties.begin( ); iter != properties.end( ); ++iter )
 		(*iter)->Update();
 }
 
@@ -1594,7 +1594,7 @@ PROPERTY_API void DrawPropertyValueListText(HDC hDC,const CRect & DrawRc,Propert
 	rc.bottom-=1;
 	rc.top-=1;
 
-	LPCTSTR text;
+	LPCTSTR text = NULL;
 	if(idx==-1)
 		text=ValueToDecorateString(prop->GetType(),prop->GetValue(true));
 	else

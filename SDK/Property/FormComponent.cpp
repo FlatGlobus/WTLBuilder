@@ -320,12 +320,11 @@ typedef DWORD WindowStyle;
 
 void CFormComponent::InitProperty(void)
 {
-    CControlWinTraits tr;
     Component::InitProperty();
     PUBLIC_PROPERTY(Generate, FALSE)
-        DEFINE_PROPERTY(InternalWindowStyle, DWORD, CFormComponent, tr.GetWndStyle(0))
+        DEFINE_PROPERTY(InternalWindowStyle, DWORD, CFormComponent, CControlWinTraits::GetWndStyle(0))
         PUBLIC_PROPERTY(InternalWindowStyle, FALSE)
-        DEFINE_PROPERTY(InternalWindowStyleEx, DWORD, CFormComponent, tr.GetWndExStyle(0))
+        DEFINE_PROPERTY(InternalWindowStyleEx, DWORD, CFormComponent, CControlWinTraits::GetWndExStyle(0))
         PUBLIC_PROPERTY(InternalWindowStyleEx, FALSE)
         DEFINE_PROPERTY(ShowWindow, BOOL, CFormComponent, TRUE)
         PUBLIC_PROPERTY(ShowWindow, FALSE)

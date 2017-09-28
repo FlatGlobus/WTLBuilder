@@ -1,4 +1,4 @@
-// Windows Template Library - WTL version 9.10
+// Windows Template Library - WTL version 10.0
 // Copyright (C) Microsoft Corporation, WTL Team. All rights reserved.
 //
 // This file is a part of the Windows Template Library.
@@ -23,17 +23,8 @@
 	#error atlribbon.h requires the Windows 7 SDK or higher
 #endif
 
-#ifdef _WIN32_WCE
-	#error atlribbon.h is not supported on Windows CE
-#endif
-
 #ifndef __ATLAPP_H__
 	#error atlribbon.h requires atlapp.h to be included first
-#endif
-
-#if (_ATL_VER < 0x0700)
-  #include <shlwapi.h>
-  #pragma comment(lib, "shlwapi.lib")
 #endif
 
 #include <atlmisc.h>    // for RecentDocumentList classes
@@ -41,7 +32,7 @@
 #include <atlctrls.h>   // required for atlctrlw.h
 #include <atlctrlw.h>   // for CCommandBarCtrl
 
-#if !defined(_WTL_USE_CSTRING) && !defined(__ATLSTR_H__)
+#ifndef __ATLSTR_H__
   #pragma warning(push)
   #pragma warning(disable: 4530)   // unwind semantics not enabled
   #include <string>
@@ -180,8 +171,8 @@ public:
 
 	BOOL UISetText(int nID, UINT uIdResource, BOOL bForceUpdate = FALSE)
 	{
-		CTempBuffer<WCHAR> sText(RIBBONUI_MAX_TEXT);
-		int nRet = AtlLoadString(uIdResource, sText, RIBBONUI_MAX_TEXT);
+		ATL::CTempBuffer<WCHAR> sText(RIBBONUI_MAX_TEXT);
+		int nRet = ATL::AtlLoadString(uIdResource, sText, RIBBONUI_MAX_TEXT);
 		if(nRet > 0)
 			UISetText(nID, sText, bForceUpdate);
 		return (nRet > 0) ? TRUE : FALSE;
@@ -244,8 +235,8 @@ namespace RibbonUI
 {
 
 // Minimal string allocation support for various PROPERTYKEY values
-#if defined(_WTL_USE_CSTRING) || defined(__ATLSTR_H__)
-  typedef _CSTRING_NS::CString Text;
+#ifdef __ATLSTR_H__
+  typedef ATL::CString Text;
 #else
   class Text : public std::wstring
   {
@@ -269,7 +260,7 @@ namespace RibbonUI
 		return static_cast<Text&>(std::wstring::operator =(s));
 	}
   };
-#endif
+#endif // __ATLSTR_H__
 
 // PROPERTYKEY enum and helpers
 enum k_KEY
@@ -410,15 +401,15 @@ struct CharFormat : CHARFORMAT2
 		{
 			&CharFormat::Getk_Family, 
 			&CharFormat::Getk_FontProperties_Size, 
-			&CharFormat::Getk_MaskEffect<CFM_BOLD, CFE_BOLD, UI_PKEY_FontProperties_Bold>,
-			&CharFormat::Getk_MaskEffect<CFM_ITALIC, CFE_ITALIC, UI_PKEY_FontProperties_Italic>,
-			&CharFormat::Getk_MaskEffect<CFM_UNDERLINE, CFE_UNDERLINE, UI_PKEY_FontProperties_Underline>,
-			&CharFormat::Getk_MaskEffect<CFM_STRIKEOUT, CFE_STRIKEOUT, UI_PKEY_FontProperties_Strikethrough>,
-			&CharFormat::Getk_VerticalPositioning, 
-			&CharFormat::Getk_Color<CFM_COLOR, UI_PKEY_FontProperties_ForegroundColor>, 
-			&CharFormat::Getk_Color<CFM_BACKCOLOR, UI_PKEY_FontProperties_BackgroundColor>, 
-			&CharFormat::Getk_ColorType<CFM_COLOR, CFE_AUTOCOLOR, UI_SWATCHCOLORTYPE_AUTOMATIC, UI_PKEY_FontProperties_ForegroundColorType>,
-			&CharFormat::Getk_ColorType<CFM_BACKCOLOR, CFE_AUTOBACKCOLOR, UI_SWATCHCOLORTYPE_NOCOLOR, UI_PKEY_FontProperties_BackgroundColorType>,
+			&CharFormat::Getk_MaskEffectBold,
+			&CharFormat::Getk_MaskEffectItalic,
+			&CharFormat::Getk_MaskEffectUnderline,
+			&CharFormat::Getk_MaskEffectStrikeout,
+			&CharFormat::Getk_VerticalPositioning,
+			&CharFormat::Getk_Color, 
+			&CharFormat::Getk_ColorBack, 
+			&CharFormat::Getk_ColorType,
+			&CharFormat::Getk_ColorTypeBack,
 		};
 
 		DWORD nProps = 0;
@@ -486,18 +477,37 @@ private:
 		}
 	}
 
-	template <DWORD t_dwMask, DWORD t_dwEffects, REFPROPERTYKEY key>
-	void Getk_MaskEffect(IPropertyStore* pStore)
+	void Getk_MaskEffectBold(IPropertyStore* pStore)
+	{
+		Getk_MaskEffectAll(pStore, CFM_BOLD, CFE_BOLD, UI_PKEY_FontProperties_Bold);
+	}
+
+	void Getk_MaskEffectItalic(IPropertyStore* pStore)
+	{
+		Getk_MaskEffectAll(pStore, CFM_ITALIC, CFE_ITALIC, UI_PKEY_FontProperties_Italic);
+	}
+
+	void Getk_MaskEffectUnderline(IPropertyStore* pStore)
+	{
+		Getk_MaskEffectAll(pStore, CFM_UNDERLINE, CFE_UNDERLINE, UI_PKEY_FontProperties_Underline);
+	}
+
+	void Getk_MaskEffectStrikeout(IPropertyStore* pStore)
+	{
+		Getk_MaskEffectAll(pStore, CFM_STRIKEOUT, CFE_STRIKEOUT, UI_PKEY_FontProperties_Strikethrough);
+	}
+
+	void Getk_MaskEffectAll(IPropertyStore* pStore, DWORD _dwMask, DWORD _dwEffects, REFPROPERTYKEY key)
 	{
 		if (SUCCEEDED(pStore->GetValue(key, &propvar)))
 		{
 			UIPropertyToUInt32(key, propvar, &uValue);
 			if ((UI_FONTPROPERTIES)uValue != UI_FONTPROPERTIES_NOTAVAILABLE)
 			{
-				dwMask |= t_dwMask;
-				dwEffects |= ((UI_FONTPROPERTIES) uValue == UI_FONTPROPERTIES_SET) ? t_dwEffects : 0;
+				dwMask |= _dwMask;
+				dwEffects |= ((UI_FONTPROPERTIES)uValue == UI_FONTPROPERTIES_SET) ? _dwEffects : 0;
 			}
-		}	
+		}
 	}
 
 	void Getk_VerticalPositioning(IPropertyStore* pStore)
@@ -517,32 +527,51 @@ private:
 		}
 	}
 
-	template <DWORD t_dwMask, REFPROPERTYKEY key>
 	void Getk_Color(IPropertyStore* pStore)
+	{
+		Getk_ColorAll(pStore, CFM_COLOR, UI_PKEY_FontProperties_ForegroundColor);
+	}
+
+	void Getk_ColorBack(IPropertyStore* pStore)
+	{
+		Getk_ColorAll(pStore, CFM_BACKCOLOR, UI_PKEY_FontProperties_BackgroundColor);
+	}
+		
+	void Getk_ColorAll(IPropertyStore* pStore, DWORD _dwMask, REFPROPERTYKEY key)
 	{
 		UINT32 color = 0;
 		if (SUCCEEDED(pStore->GetValue(key, &propvar)))
 		{
 			UIPropertyToUInt32(key, propvar, &color);
-			dwMask |= t_dwMask;
+			dwMask |= _dwMask;
 
-			if (t_dwMask == CFM_COLOR)
+			if (_dwMask == CFM_COLOR)
 				crTextColor = color;
 			else
 				crBackColor = color;
 		}
 	}
 
-	template <DWORD t_dwMask, DWORD t_dwEffects, UI_SWATCHCOLORTYPE t_type, REFPROPERTYKEY key>
 	void Getk_ColorType(IPropertyStore* pStore)
+	{
+		Getk_ColorTypeAll(pStore, CFM_COLOR, CFE_AUTOCOLOR, UI_SWATCHCOLORTYPE_AUTOMATIC, UI_PKEY_FontProperties_ForegroundColor);
+
+	}
+
+	void Getk_ColorTypeBack(IPropertyStore* pStore)
+	{
+		Getk_ColorTypeAll(pStore, CFM_BACKCOLOR, CFE_AUTOBACKCOLOR, UI_SWATCHCOLORTYPE_NOCOLOR, UI_PKEY_FontProperties_BackgroundColor);
+	}
+
+	void Getk_ColorTypeAll(IPropertyStore* pStore, DWORD _dwMask, DWORD _dwEffects, UI_SWATCHCOLORTYPE _type, REFPROPERTYKEY key)
 	{
 		if (SUCCEEDED(pStore->GetValue(key, &propvar)))
 		{
 			UIPropertyToUInt32(key, propvar, &uValue);
-			if (t_type == (UI_SWATCHCOLORTYPE)uValue)
+			if (_type == (UI_SWATCHCOLORTYPE)uValue)
 			{
-				dwMask |= t_dwMask;
-				dwEffects |= t_dwEffects;
+				dwMask |= _dwMask;
+				dwEffects |= _dwEffects;
 			}
 		}
 	}
@@ -2634,7 +2663,7 @@ public:
 		if (k_(key) == k_Label)
 			 return UIGetText(nCmdID);
 
-		if (AtlLoadString(nCmdID, sText, RIBBONUI_MAX_TEXT))
+		if (ATL::AtlLoadString(nCmdID, sText, RIBBONUI_MAX_TEXT))
 		{
 			PWCHAR pTitle = wcschr(sText, L'\n');
 			switch (k_(key))
@@ -3058,7 +3087,7 @@ typedef struct
 
 // Control message map macros
 #define RIBBON_GALLERY_CONTROL_HANDLER(id, func) \
-	if(uMsg == WM_COMMAND && id == LOWORD(wParam)) \
+	if((uMsg == WM_COMMAND) && (id == LOWORD(wParam))) \
 	{ \
 		bHandled = TRUE; \
 		lResult = func((UI_EXECUTIONVERB)HIWORD(wParam), LOWORD(wParam), (UINT)lParam, bHandled); \
@@ -3070,7 +3099,7 @@ typedef struct
 	RIBBON_GALLERY_CONTROL_HANDLER(id, func)	
 
 #define RIBBON_FONT_CONTROL_HANDLER(id, func) \
-	if(uMsg == WM_COMMAND && id == LOWORD(wParam)) \
+	if((uMsg == WM_COMMAND) && (id == LOWORD(wParam))) \
 	{ \
 		bHandled = TRUE; \
 		lResult = func((UI_EXECUTIONVERB)HIWORD(wParam), LOWORD(wParam), (CHARFORMAT2*)lParam, bHandled); \
@@ -3079,7 +3108,7 @@ typedef struct
 	}
 
 #define RIBBON_COLOR_CONTROL_HANDLER(id, func) \
-	if(uMsg == WM_COMMAND && id == LOWORD(wParam)) \
+	if((uMsg == WM_COMMAND) && (id == LOWORD(wParam))) \
 	{ \
 		bHandled = TRUE; \
 		lResult = func((UI_EXECUTIONVERB)HIWORD(wParam), LOWORD(wParam), (COLORREF)lParam, bHandled); \
@@ -3088,7 +3117,7 @@ typedef struct
 	}
 
 #define RIBBON_SPINNER_CONTROL_HANDLER(id, func) \
-	if(uMsg == WM_COMMAND && id == wParam) \
+	if((uMsg == WM_COMMAND) && (id == wParam)) \
 	{ \
 		bHandled = TRUE; \
 		lResult = func((WORD)wParam, (LONG)lParam, bHandled); \
@@ -3097,7 +3126,7 @@ typedef struct
 	}
 
 #define RIBBON_FLOATSPINNER_CONTROL_HANDLER(id, func) \
-	if(uMsg == WM_COMMAND && id == wParam) \
+	if((uMsg == WM_COMMAND) && (id == wParam)) \
 	{ \
 		bHandled = TRUE; \
 		lResult = func((WORD)wParam, (DOUBLE*)lParam, bHandled); \
@@ -3367,11 +3396,11 @@ public:
 		ATLASSERT(m_Key.m_hKey);
 	}
 
-	CRegKeyEx m_Key;
+	ATL::CRegKey m_Key;
 
 	LONG Save(bool bRibbonUI, HGLOBAL hgSettings = NULL)
 	{
-		CRegKeyEx key;
+		ATL::CRegKey key;
 		const DWORD dwUI = bRibbonUI;
 
 		LONG lRet = key.Create(m_Key, L"Ribbon");
@@ -3403,7 +3432,7 @@ public:
 	{
 		ATLASSERT(hgSettings == NULL);
 
-		CRegKeyEx key;
+		ATL::CRegKey key;
 
 		LONG lRet = key.Open(m_Key, L"Ribbon");
 		if(lRet != ERROR_SUCCESS)

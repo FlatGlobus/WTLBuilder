@@ -283,7 +283,7 @@ protected:
     void CopyChild(PropertyBase * child);
 
 	PropertyVector properties;
-	PropertyMap          propMap; //just for speed
+	PropertyMap    propMap;
 	LPCTSTR className;
     Component * component;
     int topIndex;
@@ -447,7 +447,7 @@ PROPERTY_API void ExTextFile(HWND parent,PropertyBase *prop);
 
 PROPERTY_API void ExColorEdit(HWND parent,PropertyBase *prop,LPARAM);
 //////////////////////////////////////////////////////////////////////////////////////////////////
-extern "C" PROPERTY_API CPropertyList * CreatePropertyList(HWND Parent, WTL::CRect &rc,UINT id);
+extern "C" PROPERTY_API CPropertyList * CreatePropertyList(HWND Parent, CRect &rc,UINT id);
 extern "C" PROPERTY_API void ShowProperties(CProperties * p);
 extern "C" PROPERTY_API void RemoveProperties(void);
 extern "C" PROPERTY_API void UpdateProperty(const CString & p);

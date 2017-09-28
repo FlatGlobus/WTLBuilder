@@ -1273,7 +1273,6 @@ Component * Components::ComponentFromPt(CPoint & at, BOOL realBounds)
 
 Component * Components::SelectComponentFromPt(CPoint & at, BOOL selected)
 {
-    CRect rc;
     Component * comp = NULL;
     HintItem hint;
 
@@ -1292,7 +1291,6 @@ Component * Components::SelectComponentFromPt(CPoint & at, BOOL selected)
                 continue;
             if (selected == TRUE && hint == hiAll)
                 continue;
-            //if(comp==NULL)
             comp = components[i];
             break;
         }

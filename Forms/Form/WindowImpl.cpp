@@ -42,10 +42,9 @@ void CWindowImpl::OnFinalMessage(HWND /*hWnd*/)
 void CWindowImpl::InitProperty(void)
 {
 	CFormComponent::InitProperty();
-	CControlWinTraits tr;
 	
-	SET_WIN_STYLE(tr.GetWndStyle(0))
-	SET_WIN_STYLE_EX(tr.GetWndExStyle(0))
+	SET_WIN_STYLE(CControlWinTraits::GetWndStyle(0))
+	SET_WIN_STYLE_EX(CControlWinTraits::GetWndExStyle(0))
 	SET_PROP_VALUE(WindowStyle, WS_CHILD)
 
     DEFINE_PROPERTY(Border,BOOL,CWindowImpl,FALSE)
