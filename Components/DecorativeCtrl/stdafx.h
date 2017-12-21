@@ -14,9 +14,11 @@
 
 #include "warning.h"
 
+#include <atltypes.h>
 #include <atlstr.h>
 #include <atlbase.h>
 #include <atlapp.h>
+#include <Shellapi.h>
 
 extern CAppModule _Module;
 
@@ -34,10 +36,8 @@ extern CAppModule _Module;
 #include "PropertyListEdit.h"
 #include "PagesList.h"
 #include "CtrlComponent.h"
-//#include "mmgr.h"
 
 #pragma comment( lib, "utils.lib" )
 #pragma comment( lib, "event.lib" )
-//#pragma comment( lib, "mmgr.lib" )
 #pragma comment( lib, "property.lib" )
 

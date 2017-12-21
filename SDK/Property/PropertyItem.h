@@ -109,11 +109,13 @@ public:
     void SetReadOnly(BOOL);
     BOOL GetReadOnly(void);
 
+    const PropertyBase & operator =(const PropertyBase &);
+
 	void Update();
     CProperties* GetProperties() {return objprop; }
     void Sort();
     inline bool operator<( const PropertyBase & p ) const {return name < p.name; } 
-    inline bool operator>( const PropertyBase & p ) const {return name > name; }
+    inline bool operator>( const PropertyBase & p ) const {return name > p.name; }
 protected:
     PropertyVector  child;
     CString			name;
@@ -155,6 +157,16 @@ public:
 
     Property(const Property & prop):PropertyBase(prop), value(prop.value), getmethod(prop.getmethod), setmethod(prop.setmethod), self(prop.self)
     {
+    }
+
+    inline const Property & operator =(const Property &prop)
+    {
+        *((PropertyBase *)this) = *((PropertyBase *)&prop);
+        value=prop.value;
+        getmethod=prop.getmethod;
+        setmethod=prop.setmethod;
+        self = prop.self;
+        return *this;
     }
 
 	virtual void * GetValue(bool native)
@@ -271,7 +283,7 @@ protected:
     void CopyChild(PropertyBase * child);
 
 	PropertyVector properties;
-	PropertyMap          propMap; //just for speed
+	PropertyMap    propMap;
 	LPCTSTR className;
     Component * component;
     int topIndex;
@@ -336,7 +348,7 @@ objprop.SetPublished(_T(#Name),Flag);
 #define REMOVE_PROPERTY_STR(Name)\
     objprop.Remove(_T(#Name));
 
-//changes value in case if previously value was set
+//changes value in case if previously value was set. value must be the same type, for example if Value is CString set SET_PROP_VALUE(Mane, CString(_T("")))
 #define SET_PROP_VALUE(Name, Value) objprop.SetPropValue(_T(#Name),Value);
 #define GET_PROP_VALUE(T, Name) objprop.GetPropValue<T>(_T(#Name));
 ////////////////////////////////////////////////////////////////////////////////////////////////

@@ -18,7 +18,8 @@ class str_lower : public binary_function<wstring, wstring, bool> {
 public:
 	bool operator()(const wstring& x, const wstring& y) const
 	{
-		return (x.compare( y.c_str() ) < 0);
+		//return (x.compare( y.c_str() ) < 0);
+        return (x.compare(y) < 0);
 	}
 };
 

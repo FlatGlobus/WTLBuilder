@@ -209,6 +209,8 @@ public:
     CFontEx(CFontEx & font);
     virtual ~CFontEx();
 
+    const CFontEx & operator = (CFontEx &);
+
     void set_Height(long height);
     long get_Height(void);
     __declspec(property(get=get_Height, put=set_Height)) long Height;
@@ -439,7 +441,6 @@ private:
     CBitmap m_oldBitmap; // bitmap originally found in CMemDC
     CDC		m_pDC; // Saves CDC passed in constructor
     CRect	m_rect; // Rectangle of drawing area.
-    BOOL	m_bMemDC; // TRUE if CDC really is a Memory DC.
 public:
     CPaintDCEx(HDC DC, CRect & ClentRect) : CDC(), m_oldBitmap(NULL), m_pDC(DC), m_rect(ClentRect)
     {

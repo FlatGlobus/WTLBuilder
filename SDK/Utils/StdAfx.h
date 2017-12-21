@@ -8,10 +8,13 @@
 
 #include "warning.h"
 
+
+#include <atltypes.h>
 #include <atlstr.h>
 #include <atlbase.h>
 #include <atlapp.h>
 #include <atlwin.h>
+#include <Shellapi.h>
 extern CAppModule _Module;
 #include <atlcom.h>
 #include <atlhost.h>
@@ -20,4 +23,5 @@ extern CAppModule _Module;
 #include <atlctrls.h>
 #include <atlcrack.h>
 #include <atlmisc.h>
-//#include "..\mmgr\mmgr.h"
+
+

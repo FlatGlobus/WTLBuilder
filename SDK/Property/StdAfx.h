@@ -15,7 +15,7 @@
 #define _WTL_NO_CSTRING
 
 #include "warning.h"
-
+#include <atltypes.h>
 #include <atlstr.h>
 #include <atlbase.h>
 #include <atlapp.h>

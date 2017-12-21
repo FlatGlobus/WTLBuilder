@@ -258,6 +258,15 @@ CFontEx::CFontEx(CFontEx & font)
 	fontColor=0;
 }
 
+const CFontEx & CFontEx::operator = (CFontEx & font)
+{
+    font.get_LogFont(lf);
+    handle = CreateFontIndirect(&lf);
+    fontColor = font.fontColor;
+
+    return *this;
+}
+
 CFontEx::~CFontEx()
 {
 	if(handle)

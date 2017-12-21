@@ -118,11 +118,10 @@ LRESULT ControlComponentBase::OnGetCtrlFont(UINT,WPARAM,LPARAM, BOOL& bHandled)
 typedef DWORD WindowStyle;
 void ControlComponentBase::InitProperty(void)
 {
-	CControlWinTraits tr;
     Component::InitProperty();
-    DEFINE_PROPERTY(InternalWindowStyle,DWORD,ControlComponentBase, tr.GetWndStyle(0))
+    DEFINE_PROPERTY(InternalWindowStyle,DWORD,ControlComponentBase, CControlWinTraits::GetWndStyle(0))
     PUBLIC_PROPERTY(InternalWindowStyle,FALSE)
-    DEFINE_PROPERTY(InternalWindowStyleEx,DWORD,ControlComponentBase, tr.GetWndExStyle(0))
+    DEFINE_PROPERTY(InternalWindowStyleEx,DWORD,ControlComponentBase, CControlWinTraits::GetWndExStyle(0))
     PUBLIC_PROPERTY(InternalWindowStyleEx,FALSE)
 	DEFINE_WIN_PROPERTY(Border,ControlComponentBase)
 	DEFINE_WIN_PROPERTY(Enabled,ControlComponentBase)
@@ -131,7 +130,10 @@ void ControlComponentBase::InitProperty(void)
     DEFINE_PROPERTY(ToolTip,CString,ControlComponentBase,_T(""))
     DEFINE_PROPERTY(EnableToolTip,BOOL,ControlComponentBase,FALSE)
     DEFINE_PROPERTY(ID,CString,ControlComponentBase,_T(""))
+
     DEFINE_PROPERTY(TabStop,BOOL,ControlComponentBase,enableTabIndex)
+    PUBLIC_PROPERTY(TabStop, enableTabIndex)
+
     DEFINE_PROPERTY(Group,BOOL,ControlComponentBase,FALSE)
     DEFINE_PROPERTY(HScroll,BOOL,ControlComponentBase,FALSE)
     PUBLIC_PROPERTY(HScroll,FALSE)

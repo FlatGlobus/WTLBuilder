@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="aboutdlg.cpp" />
     <ClCompile Include="cgfiltyp.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="CScriptEditor.cpp" />
     <ClCompile Include="CToolBoxWnd.cpp" />
     <ClCompile Include="FormType.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="aboutdlg.h" />
     <ClInclude Include="atlscript.h" />
     <ClInclude Include="cgfiltyp.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="CScriptEditor.h" />
     <ClInclude Include="CToolBoxWnd.h" />
     <ClInclude Include="FormType.h" />
@@ -224,7 +226,6 @@
     <None Include="res\SameSize.ico" />
     <None Include="res\Save.ico" />
     <None Include="res\SaveAll.ico" />
-    <None Include="ScriptHost.rgs" />
     <None Include="res\showform.ico" />
     <None Include="res\sortform.ico" />
     <None Include="res\TabOrder.ico" />
@@ -233,7 +234,6 @@
     <None Include="res\Toolbar.bmp" />
     <None Include="res\ToParent.ico" />
     <None Include="res\TopSide.ico" />
-    <None Include="res\typelib1.bin" />
     <None Include="res\VertOrder.ico" />
     <None Include="res\VertOrderBottom.ico" />
     <None Include="res\VertSize.ico" />

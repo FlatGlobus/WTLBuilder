@@ -660,7 +660,8 @@ public:
         CToolPanel *panel=GetPanel(str);
         if(panel==NULL)
         {
-            if((panel=AddPage(str))==NULL)
+            panel = AddPage(str);
+            if(panel == NULL)
                 return FALSE;
         }
         BOOL ret=panel->AddImage(bitmap,cmdName);

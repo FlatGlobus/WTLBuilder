@@ -28,11 +28,11 @@
 #if !defined(__buttonst_h__)
 #define __buttonst_h__
 
-#include <atlctrls.h>
-#include <atlgdi.h>
-#include <atlcrack.h>
-#include <atlmisc.h>
-#include <atlapp.h>
+//#include <atlctrls.h>
+//#include <atlgdi.h>
+//#include <atlcrack.h>
+//#include <atlmisc.h>
+//#include <atlapp.h>
 
 // Comment this if you don't want that CButtonST hilights itself
 // also when the window is inactive (like happens in Internet Explorer)

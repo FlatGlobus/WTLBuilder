@@ -43,6 +43,9 @@
     <ClCompile Include="OptionsDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="atlscript.h">
@@ -102,10 +105,11 @@
     <ClInclude Include="OptionsDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ScriptHost.rgs" />
-    <None Include="res\typelib1.bin" />
     <None Include="res\AigmentRight.ico">
       <Filter>Resource Files</Filter>
     </None>

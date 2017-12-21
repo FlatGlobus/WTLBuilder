@@ -106,6 +106,7 @@
     <ClCompile Include="DOMXML.cpp" />
     <ClCompile Include="GDIUtil.cpp" />
     <ClCompile Include="GradientRender.cpp" />
+    <ClCompile Include="Ini.cpp" />
     <ClCompile Include="InterfaceWrapper.cpp" />
     <ClCompile Include="LayoutMgr.cpp" />
     <ClCompile Include="MapFile.cpp" />
@@ -117,6 +118,7 @@
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="ButtonST.h" />
     <ClInclude Include="editlistbox.h" />
+    <ClInclude Include="Ini.h" />
     <ClInclude Include="InitTempl.h" />
     <ClInclude Include="InterfaceWrapperTools.h" />
     <ClInclude Include="_util.h" />

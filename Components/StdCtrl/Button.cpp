@@ -275,6 +275,7 @@ CGroupBox::CGroupBox(LPTSTR _name):StdCtrl::CButton(_name)
     SetDefaultSize(152,94);
     //windowStyleEx|=WS_EX_TRANSPARENT;
     RegisterButtonStyles();
+    enableTabIndex = FALSE;
 }
 
 CGroupBox::~CGroupBox(void)

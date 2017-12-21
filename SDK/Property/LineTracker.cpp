@@ -12,7 +12,7 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CLineTracker::CLineTracker(void):m_Parent(NULL),m_Pressed(FALSE),m_Pos(0)
+CLineTracker::CLineTracker(void):m_Parent(NULL),m_Pressed(FALSE),m_Pos(0),m_OldCursor(NULL)
 {
     m_Cursor=::LoadCursor(NULL,IDC_SIZEWE);
 }
