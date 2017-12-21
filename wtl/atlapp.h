@@ -147,21 +147,6 @@ DECLARE_TRACE_CATEGORY(atlTraceUI);
 #ifdef _DEBUG
   __declspec(selectany) ATL::CTraceCategory atlTraceUI(_T("atlTraceUI"));
 #endif // _DEBUG
-<<<<<<< HEAD
-=======
-
-// Windows version helper
-inline bool AtlIsOldWindows()
-{
-#ifdef _versionhelpers_H_INCLUDED_
-	return !::IsWindowsVersionOrGreater(4, 90, 0);
-#else // !_versionhelpers_H_INCLUDED_
-	OSVERSIONINFO ovi = { sizeof(OSVERSIONINFO) };
-	BOOL bRet = ::GetVersionEx(&ovi);
-	return (!bRet || !((ovi.dwMajorVersion >= 5) || ((ovi.dwMajorVersion == 4) && (ovi.dwMinorVersion >= 90))));
-#endif // _versionhelpers_H_INCLUDED_
-}
->>>>>>> b19d95df96e59acb54d394a2f0d619f7a7f83e1f
 
 // Default GUI font helper - "MS Shell Dlg" stock font
 inline HFONT AtlGetDefaultGuiFont()
@@ -748,15 +733,12 @@ public:
 ///////////////////////////////////////////////////////////////////////////////
 // CAppModule - module class for an application
 
-<<<<<<< HEAD
 #if (_MSC_VER == 1400)   // VS2005
   #pragma warning(push)
   #pragma warning(disable : 4244)
   #pragma warning(disable : 4312)
 #endif
 
-=======
->>>>>>> b19d95df96e59acb54d394a2f0d619f7a7f83e1f
 class CAppModule : public ATL::CComModule
 {
 public:
