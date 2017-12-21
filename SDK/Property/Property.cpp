@@ -39,7 +39,7 @@ static CPropertyList propertyList;
 
 void RegisterThemes();
 
-extern "C" PROPERTY_API CPropertyList * CreatePropertyList(HWND Parent, WTL::CRect &rc,UINT id)
+extern "C" PROPERTY_API CPropertyList * CreatePropertyList(HWND Parent, CRect &rc,UINT id)
 {
     RegisterThemes();
 	if(::IsWindow(propertyList.m_hWnd)==NULL)
