@@ -842,9 +842,9 @@ DWORD CIni::__StringSplit(LPCTSTR lpString, LPTSTR lpBuffer, DWORD dwBufSize, LP
         lpTarget[COPY_LEN] = _T('\0');
     }
 
-    delete [] pszSeg;
+    free(pszSeg);
     lpBuffer[dwCopied] = _T('\0');
-    delete [] pszDel;
+    free(pszDel);
     return dwCopied;
 }
 
@@ -1056,7 +1056,7 @@ BOOL CIni::__TrimString(LPTSTR lpString)
     {
         LPTSTR psz = _tcsdup(p);
         _tcscpy(lpString, psz);
-        delete [] psz;
+        free(psz);
     }
 
     return bTrimmed;
