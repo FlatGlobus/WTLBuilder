@@ -25,7 +25,7 @@ CGradientRender::CGradientRender()
 CGradientRender::~CGradientRender()
 {
 	if ( m_Data != NULL )
-		delete m_Data;
+		delete [] m_Data;
 }
 
 void CGradientRender::DrawGradient( HDC hDC, RECT& rect, COLORREF startColor, COLORREF endColor, GradientType gradientType, TransformationType transformationType)
@@ -136,7 +136,7 @@ void CGradientRender::DrawGradient( HDC hDC, RECT& rect, COLORREF startColor, CO
 	SelectObject( hMemDC, hOldBitmap );
 	DeleteDC(hMemDC);
 	DeleteObject(hBitmap);
-	delete m_Data;
+	delete [] m_Data;
 	m_Data = NULL;
 }
 
@@ -221,7 +221,7 @@ void CGradientRender::ApplyTransformation(int width, int height, TransformationT
 	}
 
 	memcpy( m_Data, newBuffer, size );
-	delete newBuffer;
+	delete [] newBuffer;
 }
 #ifdef __WTLBUILDER__
 void CGradientRender::AddProperty(LPCTSTR Name,CProperties & objprop)
