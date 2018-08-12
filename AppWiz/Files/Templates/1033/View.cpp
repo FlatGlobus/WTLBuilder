@@ -3,9 +3,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-[!if WTL_USE_RIBBON]
-#include "Ribbon.h"
-[!endif]
 #include "resource.h"
 
 #include "[!output WTL_VIEW_FILE].h"
@@ -45,20 +42,7 @@ BOOL [!output WTL_VIEW_CLASS]::PreTranslateMessage(MSG* pMsg)
 	}
 
 [!endif]
-[!if WTL_VIEWTYPE_HTML]
-	if((pMsg->message < WM_KEYFIRST || pMsg->message > WM_KEYLAST) &&
-	   (pMsg->message < WM_MOUSEFIRST || pMsg->message > WM_MOUSELAST))
-		return FALSE;
-
-	// give HTML page a chance to translate this message
-	return (BOOL)SendMessage(WM_FORWARDMSG, 0, (LPARAM)pMsg);
-[!else]
-[!if WTL_VIEWTYPE_FORM]
-	return CWindow::IsDialogMessage(pMsg);
-[!else]
 	return FALSE;
-[!endif]
-[!endif]
 }
 
 LRESULT [!output WTL_VIEW_CLASS]::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
@@ -98,14 +82,6 @@ LRESULT [!output WTL_VIEW_CLASS]::OnPaint(UINT /*uMsg*/, WPARAM /*wParam*/, LPAR
 }
 [!endif]
 
-
-[!if WTL_APPTYPE_TABVIEW]
-
-void [!output WTL_VIEW_CLASS]::OnFinalMessage(HWND /*hWnd*/)
-{
-	delete this;
-}
-[!endif]
 
 void [!output WTL_VIEW_CLASS]::DefineLayout()
 {

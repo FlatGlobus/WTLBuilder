@@ -42,11 +42,6 @@ AboutDlg.wff
 
 resource.h
 
-[!if WTL_USE_RIBBON]
-Ribbon.xml
-Ribbon.h
-[!endif]
-
 [!if WTL_COM_SERVER]
 root.idl
 root.rgs

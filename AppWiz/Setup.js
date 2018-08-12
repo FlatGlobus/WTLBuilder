@@ -83,23 +83,16 @@ function main()
 	var strRegKey_32 = "HKLM\\Software\\";
 	var strRegKey_64 = "HKLM\\Software\\Wow6432Node\\";
 
-	var nVersions = 14;
+	var nVersions = 7;
 
 	var astrRegKeyVer = new Array();
-	astrRegKeyVer[0] = "Microsoft\\VisualStudio\\7.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[1] = "Microsoft\\VisualStudio\\7.1\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[2] = "Microsoft\\VisualStudio\\8.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[3] = "Microsoft\\VisualStudio\\9.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[4] = "Microsoft\\VisualStudio\\10.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[5] = "Microsoft\\VisualStudio\\11.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[6] = "Microsoft\\VisualStudio\\12.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[7] = "Microsoft\\VisualStudio\\14.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[8] = "Microsoft\\VCExpress\\8.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[9] = "Microsoft\\VCExpress\\9.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[10] = "Microsoft\\VCExpress\\10.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[11] = "Microsoft\\VCExpress\\11.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[12] = "Microsoft\\VCExpress\\12.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[13] = "Microsoft\\VisualStudio\\14.0\\Setup\\VC\\ProductDir";
+	astrRegKeyVer[0] = "Microsoft\\VisualStudio\\8.0\\Setup\\VC\\ProductDir";
+	astrRegKeyVer[1] = "Microsoft\\VisualStudio\\9.0\\Setup\\VC\\ProductDir";
+	astrRegKeyVer[2] = "Microsoft\\VisualStudio\\10.0\\Setup\\VC\\ProductDir";
+	astrRegKeyVer[3] = "Microsoft\\VisualStudio\\11.0\\Setup\\VC\\ProductDir";
+	astrRegKeyVer[4] = "Microsoft\\VisualStudio\\12.0\\Setup\\VC\\ProductDir";
+	astrRegKeyVer[5] = "Microsoft\\VisualStudio\\14.0\\Setup\\VC\\ProductDir";
+	astrRegKeyVer[6] = "Microsoft\\VisualStudio\\SxS\\VS7\\15.0";
 
 	var astrFolder = new Array();
 	astrFolder[0] = "vcprojects";
@@ -108,75 +101,34 @@ function main()
 	astrFolder[3] = "vcprojects";
 	astrFolder[4] = "vcprojects";
 	astrFolder[5] = "vcprojects";
-	astrFolder[6] = "vcprojects";
-	astrFolder[7] = "vcprojects";
-	astrFolder[8] = "Express\\vcprojects";
-	astrFolder[9] = "Express\\vcprojects";
-	astrFolder[10] = "Express\\vcprojects";
-	astrFolder[11] = "vcprojects_WDExpress";
-	astrFolder[12] = "vcprojects_WDExpress";
-	astrFolder[13] = "vcprojects_WDExpress";
+	astrFolder[6] = "Common7\\IDE\\VC\\vcprojects";
 
 	var astrVersions = new Array();
-	astrVersions[0] = "Visual Studio 2002 (7.0)";
-	astrVersions[1] = "Visual Studio 2003 (7.1)";
-	astrVersions[2] = "Visual Studio 2005 (8.0)";
-	astrVersions[3] = "Visual Studio 2008 (9.0)";
-	astrVersions[4] = "Visual Studio 2010 (10.0)";
-	astrVersions[5] = "Visual Studio 2012 (11.0)";
-	astrVersions[6] = "Visual Studio 2013 (12.0)";
-	astrVersions[7] = "Visual Studio 2015 (14.0)";
-	astrVersions[8] = "Visual Studio 2005 Express (8.0)";
-	astrVersions[9] = "Visual Studio 2008 Express (9.0)";
-	astrVersions[10] = "Visual Studio 2010 Express (10.0)";
-	astrVersions[11] = "Visual Studio 2012 Express (11.0)";
-	astrVersions[12] = "Visual Studio 2013 Express (12.0)";
-	astrVersions[13] = "Visual Studio 2015 Express (14.0)";
-
-	var abExpress = new Array();
-	abExpress[0] = false;
-	abExpress[1] = false;
-	abExpress[2] = false;
-	abExpress[3] = false;
-	abExpress[4] = false;
-	abExpress[5] = false;
-	abExpress[6] = false;
-	abExpress[7] = false;
-	abExpress[8] = true;
-	abExpress[9] = true;
-	abExpress[10] = true;
-	abExpress[11] = true;
-	abExpress[12] = true;
-	abExpress[13] = true;
+	astrVersions[0] = "Visual Studio 2005 (8.0)";
+	astrVersions[1] = "Visual Studio 2008 (9.0)";
+	astrVersions[2] = "Visual Studio 2010 (10.0)";
+	astrVersions[3] = "Visual Studio 2012 (11.0)";
+	astrVersions[4] = "Visual Studio 2013 (12.0)";
+	astrVersions[5] = "Visual Studio 2015 (14.0)";
+	astrVersions[6] = "Visual Studio 2017 (15.0)";
 
 	var astrWizVer = new Array();
-	astrWizVer[0] = "7.0";
-	astrWizVer[1] = "7.1";
-	astrWizVer[2] = "8.0";
-	astrWizVer[3] = "9.0";
-	astrWizVer[4] = "10.0";
-	astrWizVer[5] = "11.0";
-	astrWizVer[6] = "12.0";
-	astrWizVer[7] = "14.0";
-	astrWizVer[8] = "8.0";
-	astrWizVer[9] = "9.0";
-	astrWizVer[10] = "10.0";
-	astrWizVer[11] = "11.0";
-	astrWizVer[12] = "12.0";
-	astrWizVer[13] = "14.0";
+	astrWizVer[0] = "8.0";
+	astrWizVer[1] = "9.0";
+	astrWizVer[2] = "10.0";
+	astrWizVer[3] = "11.0";
+	astrWizVer[4] = "12.0";
+	astrWizVer[5] = "14.0";
+	astrWizVer[6] = "15.0";
 
 	var astrParamVer = new Array();
-	astrParamVer[4] = "10";
-	astrParamVer[5] = "11";
-	astrParamVer[6] = "12";
-	astrParamVer[7] = "14";
-	astrParamVer[11] = "11E";
-	astrParamVer[12] = "12E";
-	astrParamVer[13] = "14E";
+	astrParamVer[2] = "10";
+	astrParamVer[3] = "11";
+	astrParamVer[4] = "12";
+	astrParamVer[5] = "14";
+	astrParamVer[6] = "15";
 
-	var nSpecial = 4;
-
-	var nWizSpecial = 0;
+	var nSpecial = 2;
 
 	var bFound = false;
 	for(var i = 0; i < nVersions; i++)
@@ -227,9 +179,6 @@ function main()
 			if(!FileSys.FolderExists(strDataDestFolder))
 				continue;
 
-			if(i < 2)   // special case for VS2002/2003
-				strDataDestFolder = FileSys.BuildPath(strDataDestFolder, "WTL");
-			else
 				strDataDestFolder = FileSys.BuildPath(strDataDestFolder, "AppWiz\\WTL");
 		}
 
@@ -242,8 +191,7 @@ function main()
 		}
 		if(bRet)
 		{
-			var bWizSpecial = (i == nWizSpecial);   // special case for VS2002
-			SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDestFolder, astrWizVer[i], bWizSpecial, abExpress[i], bDebug);
+			SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDestFolder, astrWizVer[i], bDebug);
 		}
 	}
 
@@ -263,7 +211,7 @@ function MessageBox(WSShell, strText, bYesNo)
 	return (nRetBtn == 6);   // 6 = Yes;
 }
 
-function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDestFolder, strWizVer, bWizSpecial, bExpress, bDebug)
+function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDestFolder, strWizVer, bDebug)
 {
 	// Copy files
 	try
@@ -313,7 +261,7 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		while(!fileSrc.AtEndOfStream)
 		{
 			var strLine = fileSrc.ReadLine();
-			if(!bWizSpecial && (strLine.indexOf("Wizard=VsWizard.VsWizardEngine") != -1))
+			if((strLine.indexOf("Wizard=VsWizard.VsWizardEngine") != -1))
 			{
 				strLine += "." + strWizVer;
 			}
@@ -331,9 +279,6 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 
 			fileDest.WriteLine(strLine);
 		}
-
-		if(bExpress)
-			fileDest.WriteLine("Param=\"VC_EXPRESS = 1\"");
 
 		fileSrc.Close();
 		fileDest.Close();
@@ -408,5 +353,5 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		return;
 	}
 
-	WScript.Echo("App Wizard successfully installed!");
+	WScript.Echo("App Wizard for WTLBuilder successfully installed!");
 }

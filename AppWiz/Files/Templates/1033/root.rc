@@ -8,9 +8,6 @@
 // Generated from the TEXTINCLUDE 2 resource.
 //
 #include "atlres.h"
-[!if WTL_USE_RIBBON]
-#include "Ribbon.h"
-[!endif]
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
@@ -38,9 +35,6 @@ END
 2 TEXTINCLUDE 
 BEGIN
     "#include ""atlres.h""\r\n"
-[!if WTL_USE_RIBBON]
-    "#include ""Ribbon.h""\r\n"
-[!endif]
     "\0"
 END
 
@@ -52,9 +46,6 @@ BEGIN
 [!if WTL_USE_MANIFEST]
     "CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST ""res\\\\[!output PROJECT_NAME].exe.manifest""\r\n"
 [!endif]
-[!if WTL_USE_RIBBON]
-    "#include ""Ribbon.rc""\r\n"
-[!endif]
     "\0"
 END
 
@@ -62,35 +53,6 @@ END
 
 
 [!if !WTL_APPTYPE_DLG]
-[!if WTL_USE_TOOLBAR || WTL_USE_RIBBON]
-/////////////////////////////////////////////////////////////////////////////
-//
-// Toolbar
-//
-
-IDR_MAINFRAME TOOLBAR  16, 15
-BEGIN
-    BUTTON      ID_FILE_NEW
-    BUTTON      ID_FILE_OPEN
-    BUTTON      ID_FILE_SAVE
-    SEPARATOR
-    BUTTON      ID_EDIT_CUT
-    BUTTON      ID_EDIT_COPY
-    BUTTON      ID_EDIT_PASTE
-    SEPARATOR
-    BUTTON      ID_FILE_PRINT
-    BUTTON      ID_APP_ABOUT
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Bitmap
-//
-
-IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
-
-[!endif]
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu
@@ -124,30 +86,6 @@ BEGIN
         MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
         MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
     END
-[!if WTL_USE_TOOLBAR || WTL_USE_STATUSBAR || WTL_RIBBON_DUAL_UI || WTL_APPTYPE_EXPLORER]
-    POPUP "&View"
-    BEGIN
-[!if WTL_USE_RIBBON]
-        MENUITEM "&Ribbon",                     ID_VIEW_RIBBON
-[!endif]
-[!if WTL_USE_TOOLBAR]
-        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
-[!endif]
-[!if WTL_USE_STATUSBAR]
-        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
-[!endif]
-[!if WTL_APPTYPE_EXPLORER]
-        MENUITEM "Tree &Pane",                  ID_VIEW_TREEPANE
-[!endif]
-    END
-[!endif]
-[!if WTL_APPTYPE_TABVIEW]
-    POPUP "&Window"
-    BEGIN
-        MENUITEM "&Close\tCtrl+F4",             ID_WINDOW_CLOSE
-        MENUITEM "Close &All",                  ID_WINDOW_CLOSE_ALL
-    END
-[!endif]
     POPUP "&Help"
     BEGIN
         MENUITEM "&About [!output PROJECT_NAME]",              ID_APP_ABOUT
@@ -164,17 +102,6 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "E&xit",                       ID_APP_EXIT
     END
-[!if WTL_USE_TOOLBAR || WTL_USE_STATUSBAR]
-    POPUP "&View"
-    BEGIN
-[!if WTL_USE_TOOLBAR]
-        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
-[!endif]
-[!if WTL_USE_STATUSBAR]
-        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
-[!endif]
-    END
-[!endif]
     POPUP "&Help"
     BEGIN
         MENUITEM "&About [!output PROJECT_NAME]",          ID_APP_ABOUT
@@ -204,17 +131,6 @@ BEGIN
         MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
         MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
     END
-[!if WTL_USE_TOOLBAR || WTL_USE_STATUSBAR]
-    POPUP "&View"
-    BEGIN
-[!if WTL_USE_TOOLBAR]
-        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
-[!endif]
-[!if WTL_USE_STATUSBAR]
-        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
-[!endif]
-    END
-[!endif]
     POPUP "&Window"
     BEGIN
         MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
@@ -278,16 +194,6 @@ BEGIN
         BOTTOMMARGIN, 91
     END
 [!endif]
-[!if WTL_VIEWTYPE_FORM]
-
-    IDD_[!output UPPERCASE_SAFE_PROJECT_NAME]_FORM, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 178
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 86
-    END
-[!endif]
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -303,16 +209,6 @@ BEGIN
     "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
     "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
     "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
-[!if !WTL_VIEWTYPE_FORM]
-    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
-    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
-    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
-    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
-    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
-    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
-    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
-    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
-[!endif]
     VK_F6,          ID_NEXT_PANE,           VIRTKEY 
     VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
 END
@@ -422,21 +318,6 @@ BEGIN
     ID_EDIT_REDO            "Redo the previously undone action\nRedo"
 END
 
-[!if WTL_USE_TOOLBAR || WTL_USE_STATUSBAR || WTL_RIBBON_DUAL_UI]
-STRINGTABLE 
-BEGIN
-[!if WTL_USE_TOOLBAR]
-    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
-[!endif]
-[!if WTL_USE_STATUSBAR]
-    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
-[!endif]
-[!if WTL_USE_RIBBON]
-    ID_VIEW_RIBBON          "Show or hide the ribbon\nToggle Ribbon"
-[!endif]
-END
-
-[!endif]
 STRINGTABLE 
 BEGIN
     ATL_IDS_SCSIZE          "Change the window size"
@@ -493,9 +374,6 @@ IDR_[!output UPPERCASE_SAFE_PROJECT_NAME] REGISTRY "[!output PROJECT_NAME].rgs"
 [!endif]
 [!if WTL_USE_MANIFEST]
 CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "res\\[!output PROJECT_NAME].exe.manifest"
-[!endif]
-[!if WTL_USE_RIBBON]
-#include "Ribbon.rc"
 [!endif]
 
 /////////////////////////////////////////////////////////////////////////////

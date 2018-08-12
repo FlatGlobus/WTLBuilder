@@ -453,6 +453,8 @@ BOOL Component::MouseUp(CDC *dc, CPoint at, HintItem h)
         if (GetState(csCreating))
         {
             bounds = Move(CPoint(at - deltaPoint), h);
+			bounds.right += bounds.Width() < defaultSize.cx ? defaultSize.cx : 0;
+			bounds.bottom += bounds.Height() < defaultSize.cy ? defaultSize.cy : 0;
             SetState(csCreating, FALSE);
             NormalizeRect(bounds);
             SetBoundsRect(bounds);

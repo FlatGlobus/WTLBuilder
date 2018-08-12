@@ -2,32 +2,11 @@
 //
 
 #include "stdafx.h"
-[!if !WTL_USE_CPP_FILES]
+
 
 #include <atlframe.h>
 #include <atlctrls.h>
 #include <atldlgs.h>
-[!if WTL_USE_CMDBAR]
-#include <atlctrlw.h>
-[!endif]
-[!if WTL_APPTYPE_TABVIEW]
-#include <atlctrlx.h>
-[!endif]
-[!if WTL_APPTYPE_EXPLORER]
-#include <atlctrlx.h>
-#include <atlsplit.h>
-[!endif]
-[!if WTL_USE_VIEW]
-[!if WTL_VIEWTYPE_SCROLL]
-#include <atlscrl.h>
-[!endif]
-[!endif]
-[!endif]
-[!if WTL_USE_RIBBON]
-#include <atlribbon.h>
-
-#include "Ribbon.h"
-[!endif]
 
 #include "resource.h"
 
@@ -259,11 +238,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 	// this resolves ATL window thunking problem when Microsoft Layer for Unicode (MSLU) is used
 	::DefWindowProc(NULL, 0, 0, 0L);
 
-[!if !WTL_USE_TOOLBAR || !WTL_USE_REBAR]
 	AtlInitCommonControls(ICC_BAR_CLASSES);	// add flags to support other controls
-[!else]
-	AtlInitCommonControls(ICC_COOL_CLASSES | ICC_BAR_CLASSES);	// add flags to support other controls
-[!endif]
 [!if WTL_COM_SERVER]
 
 	hRes = _Module.Init(ObjectMap, hInstance);
@@ -273,11 +248,6 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 
 	hRes = _Module.Init(NULL, hInstance);
 	ATLASSERT(SUCCEEDED(hRes));
-
-[!endif]
-[!if WTL_USE_VIEW && WTL_VIEWTYPE_RICHEDIT]
-	HMODULE hInstRich = ::LoadLibrary(CRichEditCtrl::GetLibraryName());
-	ATLASSERT(hInstRich != NULL);
 
 [!endif]
 [!if WTL_ENABLE_AX]
@@ -334,12 +304,9 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 [!if WTL_APPTYPE_DLG_MODAL]
 		{
 			[!output WTL_MAINDLG_CLASS] dlgMain;
-			nRet = dlgMain.DoModal();
+			nRet = (int)dlgMain.DoModal();
 		}
 [!else]
-[!if WTL_RIBBON_SINGLE_UI]
-		if (RunTimeHelper::IsRibbonUIAvailable())
-[!endif]
 [!if WTL_APPTYPE_MTSDI]
 		{
 			C[!output SAFE_PROJECT_NAME]ThreadManager mgr;
@@ -349,10 +316,6 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 		{
 			nRet = Run(lpstrCmdLine, nCmdShow);
 		}
-[!endif]
-[!if WTL_RIBBON_SINGLE_UI]
-		else
-			AtlMessageBox(NULL, L"Cannot run with this version of Windows", IDR_MAINFRAME);
 [!endif]
 [!endif]
 
@@ -365,40 +328,19 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 	// BLOCK: Run application
 	{
 		[!output WTL_MAINDLG_CLASS] dlgMain;
-		nRet = dlgMain.DoModal();
+		nRet = (int)dlgMain.DoModal();
 	}
 [!else]
 [!if WTL_APPTYPE_MTSDI]
 	int nRet = 0;
 	// BLOCK: Run application
-[!if WTL_RIBBON_SINGLE_UI]
-	if (RunTimeHelper::IsRibbonUIAvailable())
-[!endif]
 	{
 		C[!output SAFE_PROJECT_NAME]ThreadManager mgr;
 		nRet = mgr.Run(lpstrCmdLine, nCmdShow);
 	}
-[!if WTL_RIBBON_SINGLE_UI]
-	else
-		AtlMessageBox(NULL, L"Cannot run with this version of Windows", IDR_MAINFRAME);
-[!endif]
-[!else]
-[!if WTL_RIBBON_SINGLE_UI]
-	int nRet = 0;
-	if (RunTimeHelper::IsRibbonUIAvailable())
-		nRet = Run(lpstrCmdLine, nCmdShow);
-	else
-		AtlMessageBox(NULL, L"Cannot run with this version of Windows", IDR_MAINFRAME);
 [!else]
 	int nRet = Run(lpstrCmdLine, nCmdShow);
 [!endif]
-[!endif]
-[!endif]
-[!endif]
-[!if WTL_USE_VIEW]
-[!if WTL_VIEWTYPE_RICHEDIT]
-
-	::FreeLibrary(hInstRich);
 [!endif]
 [!endif]
 

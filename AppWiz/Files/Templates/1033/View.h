@@ -38,26 +38,16 @@ public:
 	static const UINT _controlsToClip[];
 
 //{{WTLBUILDER_WINCLASS_DECLARATION
-[!if WTL_VIEWTYPE_GENERIC || WTL_VIEWTYPE_SCROLL]
 	DECLARE_WND_CLASS(NULL)
-[!else]
-	DECLARE_WND_SUPERCLASS(NULL, [!output WTL_VIEW_BASE]::GetWndClassName())
-[!endif]
 //}}WTLBUILDER_WINCLASS_DECLARATION
 
 	BOOL PreTranslateMessage(MSG* pMsg);
-[!if WTL_APPTYPE_TABVIEW]
-	virtual void OnFinalMessage(HWND /*hWnd*/);
-[!endif]
 
 	BEGIN_MSG_MAP([!output WTL_VIEW_CLASS])
 		MESSAGE_HANDLER(WM_CREATE, OnCreate)
 		MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
 [!if WTL_VIEWTYPE_GENERIC]
 		MESSAGE_HANDLER(WM_PAINT, OnPaint)
-[!endif]
-[!if WTL_VIEWTYPE_SCROLL]
-		CHAIN_MSG_MAP([!output WTL_VIEW_BASE_CLASS]<[!output WTL_VIEW_CLASS]>)
 [!endif]
 	END_MSG_MAP()
 

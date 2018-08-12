@@ -199,38 +199,6 @@
 													</TD>
 													<TD VALIGN="top" COLSPAN="3">
 
-														<SPAN CLASS="itemText">Select application features:
-															<P CLASS="Spacer">&nbsp;</P>
-															<INPUT CLASS="CheckBoxA" TYPE="checkbox" ID="WTL_USE_RIBBON" ACCESSKEY="B" TITLE="Application uses a ribbon." value="OFF" NAME="WTL_USE_RIBBON" onClick="OnUseRibbon();">
-															<DIV CLASS="itemTextCheckboxB" ID="WTL_USE_RIBBON_DIV" TITLE="Application uses a ribbon.">
-																<LABEL FOR="WTL_USE_RIBBON" TITLE="Requires Windows 7 SDK." ID="WTL_USE_RIBBON_LABEL">
-																	R<U>i</U>bbon</LABEL>
-															</DIV>
-															<BR>
-															<INPUT CLASS="CheckBoxA" TYPE="checkbox" ID="WTL_USE_TOOLBAR" ACCESSKEY="T" TITLE="Application uses a toolbar." value="ON" NAME="WTL_USE_TOOLBAR" onClick="OnUseToolbar();">
-															<DIV CLASS="itemTextCheckboxB" ID="WTL_USE_TOOLBAR_DIV" TITLE="Application uses a toolbar.">
-																<LABEL FOR="WTL_USE_TOOLBAR" TITLE="Application uses a toolbar." ID="WTL_USE_TOOLBAR_LABEL">
-																	<U>T</U>oolbar</LABEL>
-															</DIV>
-															<BR>
-															<INPUT CLASS="CheckBoxA" TYPE="checkbox" ID="WTL_USE_REBAR" ACCESSKEY="R" TITLE="Application uses a rebar." value="ON" NAME="WTL_USE_REBAR" onClick="OnUseRebar();">
-															<DIV CLASS="itemTextCheckboxB" ID="WTL_USE_REBAR_DIV" TITLE="Application uses a rebar.">
-																<LABEL FOR="WTL_USE_REBAR" TITLE="Application uses a rebar." ID="WTL_USE_REBAR_LABEL">
-																	<U>R</U>ebar</LABEL>
-															</DIV>
-															<BR>
-															<INPUT CLASS="CheckBoxA" TYPE="checkbox" ID="WTL_USE_CMDBAR" ACCESSKEY="C" TITLE="Application uses a command bar." value="ON" NAME="WTL_USE_CMDBAR">
-															<DIV CLASS="itemTextCheckboxB" ID="WTL_USE_CMDBAR_DIV" TITLE="Application uses a command bar.">
-																<LABEL FOR="WTL_USE_CMDBAR" TITLE="Application uses a command bar." ID="WTL_USE_CMDBAR_LABEL">
-																	<U>C</U>ommand Bar</LABEL>
-															</DIV>
-															<BR>
-															<INPUT CLASS="CheckBoxA" TYPE="checkbox" ID="WTL_USE_STATUSBAR" ACCESSKEY="S" TITLE="Application uses a status bar." value="ON" NAME="WTL_USE_STATUSBAR">
-															<DIV CLASS="itemTextCheckboxB" ID="WTL_USE_STATUSBAR_DIV" TITLE="Application uses a status bar.">
-																<LABEL FOR="WTL_USE_STATUSBAR" TITLE="Application uses a status bar." ID="WTL_USE_STATUSBAR_LABEL">
-																	<U>S</U>tatus Bar</LABEL>
-															</DIV>
-														</SPAN>
 
 														<P CLASS="ElementSpacer">&nbsp;</P>
 														<P CLASS="ElementSpacer">&nbsp;</P>
@@ -375,7 +343,6 @@ function Next(document, linkto)
 function OnFinish(document)
 {
 	WTL_USE_VIEW.disabled = false;
-	WTL_USE_RIBBON.disabled = false;
 	OnWizFinish(document);
 }
 
@@ -383,47 +350,16 @@ function OnInit()
 {
 	if(window.external.FindSymbol("WTL_APPTYPE_DLG"))
 	{
-		WTL_USE_RIBBON.checked = false;
-		WTL_USE_TOOLBAR.checked = false;
-		WTL_USE_REBAR.checked = false;
-		WTL_USE_CMDBAR.checked = false;
-		WTL_USE_STATUSBAR.checked = false;
 		WTL_USE_VIEW.checked = false;
 
-		WTL_USE_RIBBON.disabled = true;
-		WTL_USE_TOOLBAR.disabled = true;
-		WTL_USE_REBAR.disabled = true;
-		WTL_USE_CMDBAR.disabled = true;
-		WTL_USE_STATUSBAR.disabled = true;
 		WTL_USE_VIEW.disabled = true;
 		WTL_USE_VIEW_LABEL.disabled = true;
 	}
 	else
 	{
-		if(window.external.FindSymbol("WTL_APPTYPE_TABVIEW") || window.external.FindSymbol("WTL_APPTYPE_EXPLORER"))
-		{
-			WTL_USE_VIEW.checked = true;
-			WTL_USE_VIEW.disabled = true;
-			WTL_USE_VIEW_LABEL.disabled = true;
-		}
-		else
-		{
 			WTL_USE_VIEW.disabled = false;
 			WTL_USE_VIEW_LABEL.disabled = false;
 			WTL_USE_VIEW.checked = window.external.FindSymbol("WTL_USE_VIEW");
-		}
-
-		WTL_USE_RIBBON_LABEL.disabled = WTL_USE_RIBBON.disabled = window.external.FindSymbol("WTL_APPTYPE_MDI");
-		WTL_USE_TOOLBAR.disabled = false;
-		WTL_USE_REBAR.disabled = false;
-		WTL_USE_CMDBAR.disabled = false;
-		WTL_USE_STATUSBAR.disabled = false;
-
-		WTL_USE_RIBBON.checked = window.external.FindSymbol("WTL_USE_RIBBON") && !window.external.FindSymbol("WTL_APPTYPE_MDI");
-		WTL_USE_TOOLBAR.checked = window.external.FindSymbol("WTL_USE_TOOLBAR");
-		WTL_USE_REBAR.checked = window.external.FindSymbol("WTL_USE_REBAR");
-		WTL_USE_CMDBAR.checked = window.external.FindSymbol("WTL_USE_CMDBAR");
-		WTL_USE_STATUSBAR.checked = window.external.FindSymbol("WTL_USE_STATUSBAR");
 	}
 
 	OnViewType();
@@ -447,30 +383,6 @@ function OnUseToolbar()
 	OnUseRebar();
 }
 
-function OnUseRibbon() 
-{
-	if (WTL_USE_RIBBON.checked) 
-		window.external.AddSymbol("WTL_USE_UNICODE", true)
-}
-
-function OnUseRebar() 
-{
-	if(WTL_USE_REBAR.checked)
-	{
-		WTL_USE_CMDBAR.disabled = false;
-		WTL_USE_CMDBAR_LABEL.disabled = false;
-		WTL_USE_CMDBAR.checked = true;
-	}
-	else
-	{
-		WTL_USE_CMDBAR.checked = false;
-		WTL_USE_CMDBAR.disabled = true;
-		WTL_USE_CMDBAR_LABEL.disabled = true;
-	}
-
-	OnUseRibbon();
-}
-
 function OnUseView()
 {
 }
@@ -481,7 +393,7 @@ function OnViewType()
 	oView = 0;
 
 	if(window.external.FindSymbol("WTL_ENABLE_AX") &&
-			(window.external.FindSymbol("WTL_APPTYPE_DLG") || strView == "WTL_VIEWTYPE_FORM"))
+			window.external.FindSymbol("WTL_APPTYPE_DLG"))
 	{
 		WTL_HOST_AX.disabled = false;
 		WTL_HOST_AX_LABEL.disabled = false;

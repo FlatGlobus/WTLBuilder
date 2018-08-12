@@ -217,12 +217,6 @@
 																	<U>M</U>DI Application</LABEL>
 															</DIV>
 															<BR>
-															<INPUT TYPE="radio" CLASS="Radio" NAME="apptype" ID="WTL_APPTYPE_TABVIEW" ACCESSKEY="V" TITLE="Create a tab view application." VALUE="ON" onClick="OnAppType();">
-															<DIV CLASS="itemTextRadioB" TITLE="Create a tab view application." ID="WTL_APPTYPE_TABVIEW_DIV">
-																<LABEL FOR="WTL_APPTYPE_TABVIEW" TITLE="Create a tab view application." ID="WTL_APPTYPE_TABVIEW_LABEL">
-																	Tab <U>V</U>iew Application</LABEL>
-															</DIV>
-															<BR>
 															<INPUT TYPE="radio" CLASS="Radio" NAME="apptype" ID="WTL_APPTYPE_DLG" ACCESSKEY="D" TITLE="Create a dialog-based application." VALUE="ON" onClick="OnAppType();">
 															<DIV CLASS="itemTextRadioB" TITLE="Create a dialog-based application." ID="WTL_APPTYPE_DLG_DIV">
 																<LABEL FOR="WTL_APPTYPE_DLG" TITLE="Create a dialog-based application." ID="WTL_APPTYPE_DLG_LABEL">
@@ -430,11 +424,6 @@ function OnAppType()
 			if(WizardVersion >= 8.0)
 				NextBtn.disabled = false;
 
-			window.external.AddSymbol("WTL_USE_RIBBON", false);
-			window.external.AddSymbol("WTL_USE_TOOLBAR", true);
-			window.external.AddSymbol("WTL_USE_REBAR", true);
-			window.external.AddSymbol("WTL_USE_CMDBAR", true);
-			window.external.AddSymbol("WTL_USE_STATUSBAR", true);
 			window.external.AddSymbol("WTL_USE_VIEW", true);
 
 			window.external.AddSymbol("WTL_WAS_DLG", false);

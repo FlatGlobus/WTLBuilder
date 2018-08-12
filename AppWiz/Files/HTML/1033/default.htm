@@ -46,14 +46,6 @@
 		<SYMBOL NAME="WTL_LIBID" TYPE=text></SYMBOL>
 
 		<SYMBOL NAME='WTL_VIEWTYPE_GENERIC' TYPE="checkbox" VALUE="true"></SYMBOL>
-		<SYMBOL NAME='WTL_VIEWTYPE_FORM' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_VIEWTYPE_LISTBOX' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_VIEWTYPE_EDIT' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_VIEWTYPE_LISTVIEW' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_VIEWTYPE_TREEVIEW' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_VIEWTYPE_RICHEDIT' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_VIEWTYPE_HTML' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_VIEWTYPE_SCROLL' TYPE="checkbox" VALUE="false"></SYMBOL>
 
 		<SYMBOL NAME='WTL_FRAME_CLASS' TYPE="text" VALUE="CMainFrame"></SYMBOL>
 		<SYMBOL NAME='WTL_FRAME_BASE_CLASS' TYPE="text" VALUE="CFrameWindowImpl"></SYMBOL>
@@ -81,8 +73,6 @@
 		<SYMBOL NAME='WTL_APPTYPE_SDI' TYPE="checkbox" VALUE="true"></SYMBOL>
 		<SYMBOL NAME='WTL_APPTYPE_MTSDI' TYPE="checkbox" VALUE="false"></SYMBOL>
 		<SYMBOL NAME='WTL_APPTYPE_MDI' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_APPTYPE_TABVIEW' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_APPTYPE_EXPLORER' TYPE="checkbox" VALUE="false"></SYMBOL>
 		<SYMBOL NAME='WTL_APPTYPE_DLG' TYPE="checkbox" VALUE="false"></SYMBOL>
 		<SYMBOL NAME='WTL_APPTYPE_DLG_MODAL' TYPE="checkbox" VALUE="false"></SYMBOL>
 		<SYMBOL NAME='WTL_ENABLE_AX' TYPE="checkbox" VALUE="false"></SYMBOL>
@@ -95,11 +85,6 @@
 		<SYMBOL NAME='WTL_WAS_DLG' TYPE="checkbox" VALUE="false"></SYMBOL>
 
 		<!-- Page 3 Controls -->
-		<SYMBOL NAME='WTL_USE_RIBBON' TYPE="checkbox" VALUE="false"></SYMBOL>
-		<SYMBOL NAME='WTL_USE_TOOLBAR' TYPE="checkbox" VALUE="true"></SYMBOL>
-		<SYMBOL NAME='WTL_USE_REBAR' TYPE="checkbox" VALUE="true"></SYMBOL>
-		<SYMBOL NAME='WTL_USE_CMDBAR' TYPE="checkbox" VALUE="true"></SYMBOL>
-		<SYMBOL NAME='WTL_USE_STATUSBAR' TYPE="checkbox" VALUE="true"></SYMBOL>
 		<SYMBOL NAME='WTL_USE_VIEW' TYPE="checkbox" VALUE="true"></SYMBOL>
 		<SYMBOL NAME='WTL_HOST_AX' TYPE="checkbox" VALUE="false"></SYMBOL>
 	</HEAD>
@@ -434,14 +419,6 @@ function OnInit()
 	else if(window.external.FindSymbol("WTL_APPTYPE_MDI"))
 	{
 		APP_TYPE_SUMMARY.innerText = "MDI Application";
-	}
-	else if(window.external.FindSymbol("WTL_APPTYPE_TABVIEW"))
-	{
-		APP_TYPE_SUMMARY.innerText = "Tab View Application";
-	}
-	else if(window.external.FindSymbol("WTL_APPTYPE_EXPLORER"))
-	{
-		APP_TYPE_SUMMARY.innerText = "Explorer Application";
 	}
 	else if(window.external.FindSymbol("WTL_APPTYPE_DLG"))
 	{
