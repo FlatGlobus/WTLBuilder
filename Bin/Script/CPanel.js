@@ -42,17 +42,7 @@ function DecorativeCtrl_CPanel(form, component)
     }
     else
     {
-        if(component.Item("Gradient")==false)
-        {
-            sourceStr+="\t"+cmpName+".SetBkColor("+MakeColor(component.Item("BkColor"))+");\n";
-        }
-        else
-        {
-            sourceStr+="\t"+cmpName+".SetStartColor("+MakeColor(component.Item("Gradient.StartColor"))+");\n";
-            sourceStr+="\t"+cmpName+".SetEndColor("+MakeColor(component.Item("Gradient.EndColor"))+");\n";
-            sourceStr+=codegen.Format(component,"\t[!Name].SetGradientType([!GradientType]);\n");
-            sourceStr+=codegen.Format(component,"\t[!Name].SetGradientType([!TransformationType]);\n");
-        }
+        sourceStr+="\t"+cmpName+".SetBkColor("+MakeColor(component.Item("BkColor"))+");\n";
     }    
     sourceStr+="\t"+cmpName+".SetTextColor("+MakeColor(component.Item("TextColor"))+");\n";
     sourceStr+=codegen.Format(component,"\t[!Name].SetHorizTextAlign([!HorizTextAlign]);\n");

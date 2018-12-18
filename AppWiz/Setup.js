@@ -216,12 +216,12 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 	// Copy files
 	try
 	{
-		var strSrc = FileSys.BuildPath(strSourceFolder, "WTLAppWiz4WTLBuilder.ico");
-		var strDest = FileSys.BuildPath(strDestFolder, "WTLAppWiz4WTLBuilder.ico");
+		var strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz.ico");
+		var strDest = FileSys.BuildPath(strDestFolder, "WTL10AppWiz.ico");
 		FileSys.CopyFile(strSrc, strDest);
 
-		strSrc = FileSys.BuildPath(strSourceFolder, "WTLAppWiz4WTLBuilder.vsdir");
-		strDest = FileSys.BuildPath(strDestFolder, "WTLAppWiz4WTLBuilder.vsdir");
+		strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz.vsdir");
+		strDest = FileSys.BuildPath(strDestFolder, "WTL10AppWiz.vsdir");
 		FileSys.CopyFile(strSrc, strDest);
 
 		if(strDataDestFolder != "")
@@ -239,8 +239,8 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 	// Read and write WTLAppWiz4WTLBuilder.vsz, add engine version and replace path when found
 	try
 	{
-		var strSrc = FileSys.BuildPath(strSourceFolder, "WTLAppWiz4WTLBuilder.vsz");
-		var strDest = FileSys.BuildPath(strDestFolder, "WTLAppWiz4WTLBuilder.vsz");
+		var strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz.vsz");
+		var strDest = FileSys.BuildPath(strDestFolder, "WTL10AppWiz.vsz");
 
 		var ForReading = 1;
 		var fileSrc = FileSys.OpenTextFile(strSrc, ForReading);
@@ -288,7 +288,7 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		var strError = "no info";
 		if(e.description.length != 0)
 			strError = e.description;
-		WScript.Echo("ERROR: Cannot read and write WTLAppWiz4WTLBuilder.vsz (" + strError + ")");
+		WScript.Echo("ERROR: Cannot read and write WTL10AppWiz.vsz (" + strError + ")");
 		return;
 	}
 
@@ -314,8 +314,8 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 	// Read and write additional WTLAppWiz4WTLBuilder.vsdir, add path to the wizard location
 	try
 	{
-		var strSrc = FileSys.BuildPath(strSourceFolder, "WTLAppWiz4WTLBuilder.vsdir");
-		var strDest = FileSys.BuildPath(strDestWTLFolder, "WTLAppWiz4WTLBuilder.vsdir");
+		var strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz.vsdir");
+		var strDest = FileSys.BuildPath(strDestWTLFolder, "WTL10AppWiz.vsdir");
 
 		var ForReading = 1;
 		var fileSrc = FileSys.OpenTextFile(strSrc, ForReading);
@@ -336,7 +336,7 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		while(!fileSrc.AtEndOfStream)
 		{
 			var strLine = fileSrc.ReadLine();
-			if(strLine.indexOf("WTLAppWiz4WTLBuilder.vsz|") != -1)
+			if(strLine.indexOf("WTL10AppWiz.vsz|") != -1)
 				strLine = "..\\" + strLine;
 			fileDest.WriteLine(strLine);
 		}
@@ -349,9 +349,9 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		var strError = "no info";
 		if(e.description.length != 0)
 			strError = e.description;
-		WScript.Echo("ERROR: Cannot read and write WTL\\WTLAppWiz4WTLBuilder.vsdir (" + strError + ")");
+		WScript.Echo("ERROR: Cannot read and write WTL\\WTL10AppWiz.vsdir (" + strError + ")");
 		return;
 	}
 
-	WScript.Echo("App Wizard for WTLBuilder successfully installed!");
+	WScript.Echo("App Wizard successfully installed!");
 }

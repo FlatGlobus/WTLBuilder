@@ -82,7 +82,6 @@ LRESULT [!output WTL_VIEW_CLASS]::OnPaint(UINT /*uMsg*/, WPARAM /*wParam*/, LPAR
 }
 [!endif]
 
-
 void [!output WTL_VIEW_CLASS]::DefineLayout()
 {
 //{{WTLBUILDER_ATTACH_CONTROLS

@@ -28,10 +28,14 @@ void [!output WTL_CHILD_FRAME_CLASS]::OnFinalMessage(HWND /*hWnd*/)
 	delete this;
 }
 
-[!if WTL_USE_VIEW]
+
 LRESULT [!output WTL_CHILD_FRAME_CLASS]::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
 {
 	m_toolTip.Create(m_hWnd);
+
+[!if WTL_USE_VIEW]
+	m_hWndClient = m_view.Create(m_hWnd);
+[!endif]
 
 //{{WTLBUILDER_MEMBER_CREATION
 //}}WTLBUILDER_MEMBER_CREATION
@@ -47,18 +51,17 @@ LRESULT [!output WTL_CHILD_FRAME_CLASS]::OnCreate(UINT /*uMsg*/, WPARAM /*wParam
 	return 1;
 }
 
-[!endif]
 LRESULT [!output WTL_CHILD_FRAME_CLASS]::OnForwardMsg(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM lParam, BOOL& /*bHandled*/)
 {
 	LPMSG pMsg = (LPMSG)lParam;
 	m_toolTip.RelayEvent(pMsg);
 [!if WTL_USE_VIEW]
-	if(baseClass::PreTranslateMessage(pMsg))
+	if(_baseClass::PreTranslateMessage(pMsg))
 		return TRUE;
 
 	return m_view.PreTranslateMessage(pMsg);
 [!else]
-	return baseClass::PreTranslateMessage(pMsg);
+	return _baseClass::PreTranslateMessage(pMsg);
 [!endif]
 }
 

@@ -42,8 +42,6 @@ BOOL CPanelComp::CreateComponent(Component * _Parent)
     CWindowImpl<Panel::CPanel>::Create((HWND)_Parent->GetHandle(),GetBoundsRect(),NULL,get_InternalWindowStyle(),get_InternalWindowStyleEx());
     cornerPar.Change.SetObject(this);
     cornerPar.Change.SetMethod(&CPanelComp::OnCornerParChanged);
-    gradientRender.Change.SetObject(this);
-    gradientRender.Change.SetMethod(&CPanelComp::OnGradientChanged);
 	return ::IsWindow(m_hWnd);
 }
 
@@ -73,23 +71,11 @@ void CPanelComp::InitProperty(void)
     DEFINE_PROPERTY(Theme,BOOL,CPanelComp,GetTheme())
     DEFINE_PROPERTY(RoundCorners,BOOL,CPanelComp,GetRoundCorners())
     cornerPar.AddProperty(_T("RoundCorners"),objprop);
-    DEFINE_PROPERTY(Gradient,BOOL,CPanelComp,GetEnableGradient())
-    gradientRender.AddProperty(_T("Gradient"),objprop);
 }
 
 void CPanelComp::OnCornerParChanged(CPointEx *)
 {
     SetCornerParam(cornerPar);
-    SetModified();
-}
-
-void CPanelComp::OnGradientChanged(CGradientRender *)
-{
-    startColor = gradientRender.get_StartColor();
-    endColor = gradientRender.get_EndColor();
-    gradientType = gradientRender.get_GradientType();
-    transformationType = gradientRender.get_TransformationType();
-    InvalidateRect(NULL);
     SetModified();
 }
 
@@ -249,17 +235,6 @@ void CPanelComp::set_RoundCorners(BOOL val)
 BOOL CPanelComp::get_RoundCorners(void)
 {
     return GetRoundCorners();
-}
-
-void CPanelComp::set_Gradient(BOOL val)
-{
-    SetEnableGradient(val);
-    SetModified();
-}
-
-BOOL CPanelComp::get_Gradient()
-{
-    return GetEnableGradient();
 }
 
 BEGIN_LIST_PROPERTY(Inner)

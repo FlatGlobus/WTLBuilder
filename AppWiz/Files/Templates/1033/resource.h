@@ -19,7 +19,7 @@
 [!endif]
 [!endif]
 [!else]
-[!if WTL_APPTYPE_SDI || WTL_APPTYPE_TABVIEW || WTL_APPTYPE_EXPLORER]
+[!if WTL_APPTYPE_SDI ]
 [!if WTL_USE_VIEW]
 [!if WTL_VIEWTYPE_FORM]
 #define IDD_[!output UPPERCASE_SAFE_PROJECT_NAME]_FORM	129
@@ -38,13 +38,6 @@
 [!endif]
 [!endif]
 #define ID_FILE_NEW_WINDOW			32771
-[!endif]
-[!if WTL_APPTYPE_TABVIEW]
-#define ID_WINDOW_CLOSE				32772
-#define ID_WINDOW_CLOSE_ALL			32773
-[!endif]
-[!if WTL_APPTYPE_EXPLORER]
-#define ID_VIEW_TREEPANE			32774
 [!endif]
 #define IDD_NULL					201
 // Next default values for new objects

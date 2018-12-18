@@ -53,15 +53,69 @@ BOOL [!output WTL_FRAME_CLASS]::PreTranslateMessage(MSG* pMsg)
 
 BOOL [!output WTL_FRAME_CLASS]::OnIdle()
 {
+[!if WTL_USE_TOOLBAR]
+	UIUpdateToolBar();
+[!endif]
 	return FALSE;
 }
 
 LRESULT [!output WTL_FRAME_CLASS]::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
 	m_toolTip.Create(m_hWnd);
+[!if WTL_USE_TOOLBAR]
+[!if WTL_USE_REBAR]
+[!if WTL_USE_CMDBAR]
+	// create command bar window
+	HWND hWndCmdBar = m_CmdBar.Create(m_hWnd, rcDefault, NULL, ATL_SIMPLE_CMDBAR_PANE_STYLE);
+	// attach menu
+	m_CmdBar.AttachMenu(GetMenu());
+	// load command bar images
+	m_CmdBar.LoadImages(IDR_MAINFRAME);
+	// remove old menu
+	SetMenu(NULL);
+
+[!endif]
+	HWND hWndToolBar = CreateSimpleToolBarCtrl(m_hWnd, IDR_MAINFRAME, FALSE, ATL_SIMPLE_TOOLBAR_PANE_STYLE);
+
+	CreateSimpleReBar(ATL_SIMPLE_REBAR_NOBORDER_STYLE);
+[!if WTL_USE_CMDBAR]
+	AddSimpleReBarBand(hWndCmdBar);
+	AddSimpleReBarBand(hWndToolBar, NULL, TRUE);
+[!else]
+	AddSimpleReBarBand(hWndToolBar);
+[!endif]
+[!else]
+	CreateSimpleToolBar();
+[!endif]
+[!endif]
+[!if WTL_USE_STATUSBAR]
+
+	CreateSimpleStatusBar();
+[!endif]
 [!if WTL_APPTYPE_MDI]
 
 	CreateMDIClient();
+[!if WTL_USE_CMDBAR]
+	m_CmdBar.SetMDIClient(m_hWndMDIClient);
+[!endif]
+[!endif]
+[!if WTL_APPTYPE_SDI || WTL_APPTYPE_MTSDI ]
+[!if WTL_USE_VIEW]
+	m_hWndClient = m_view.Create(m_hWnd);
+[!endif]
+[!endif]
+[!if WTL_USE_TOOLBAR]
+[!if WTL_USE_REBAR]
+
+	UIAddToolBar(hWndToolBar);
+[!else]
+
+	UIAddToolBar(m_hWndToolBar);
+[!endif]
+	UISetCheck(ID_VIEW_TOOLBAR, 1);
+[!endif]
+[!if WTL_USE_STATUSBAR]
+	UISetCheck(ID_VIEW_STATUS_BAR, 1);
 [!endif]
 
 //{{WTLBUILDER_MEMBER_CREATION
@@ -90,6 +144,10 @@ LRESULT [!output WTL_FRAME_CLASS]::OnDestroy(UINT /*uMsg*/, WPARAM /*wParam*/, L
 //}}WTLBUILDER_MEMBER_DESTRUCTION
 
 [!if WTL_APPTYPE_MDI]
+[!if WTL_USE_CMDBAR]
+		m_CmdBar.AttachMenu(NULL);
+
+[!endif]
 [!endif]
 	// unregister message filtering and idle updates
 	CMessageLoop* pLoop = _Module.GetMessageLoop();
@@ -118,6 +176,12 @@ LRESULT [!output WTL_FRAME_CLASS]::OnDestroy(UINT /*uMsg*/, WPARAM /*wParam*/, L
 //{{WTLBUILDER_MEMBER_DESTRUCTION
 //}}WTLBUILDER_MEMBER_DESTRUCTION
 
+[!if WTL_APPTYPE_MDI]
+[!if WTL_USE_CMDBAR]
+	m_CmdBar.AttachMenu(NULL);
+
+[!endif]
+[!endif]
 	// unregister message filtering and idle updates
 	CMessageLoop* pLoop = _Module.GetMessageLoop();
 	ATLASSERT(pLoop != NULL);
@@ -151,6 +215,40 @@ LRESULT [!output WTL_FRAME_CLASS]::OnFileNew(WORD /*wNotifyCode*/, WORD /*wID*/,
 LRESULT [!output WTL_FRAME_CLASS]::OnFileNewWindow(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
 	::PostThreadMessage(_Module.m_dwMainThreadID, WM_USER, 0, 0L);
+	return 0;
+}
+
+[!endif]
+[!if WTL_USE_TOOLBAR]
+LRESULT [!output WTL_FRAME_CLASS]::OnViewToolBar(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+[!if WTL_USE_REBAR]
+	static BOOL bVisible = TRUE;	// initially visible
+	bVisible = !bVisible;
+	CReBarCtrl rebar = m_hWndToolBar;
+[!if WTL_USE_CMDBAR]
+	int nBandIndex = rebar.IdToIndex(ATL_IDW_BAND_FIRST + 1);	// toolbar is 2nd added band
+[!else]
+	int nBandIndex = rebar.IdToIndex(ATL_IDW_BAND_FIRST);	// toolbar is first 1st band
+[!endif]
+	rebar.ShowBand(nBandIndex, bVisible);
+[!else]
+	BOOL bVisible = !::IsWindowVisible(m_hWndToolBar);
+	::ShowWindow(m_hWndToolBar, bVisible ? SW_SHOWNOACTIVATE : SW_HIDE);
+[!endif]
+	UISetCheck(ID_VIEW_TOOLBAR, bVisible);
+	UpdateLayout();
+	return 0;
+}
+
+[!endif]
+[!if WTL_USE_STATUSBAR]
+LRESULT [!output WTL_FRAME_CLASS]::OnViewStatusBar(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
+{
+	BOOL bVisible = !::IsWindowVisible(m_hWndStatusBar);
+	::ShowWindow(m_hWndStatusBar, bVisible ? SW_SHOWNOACTIVATE : SW_HIDE);
+	UISetCheck(ID_VIEW_STATUS_BAR, bVisible);
+	UpdateLayout();
 	return 0;
 }
 

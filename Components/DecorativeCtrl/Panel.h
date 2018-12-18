@@ -27,7 +27,6 @@ namespace DecorativeCtrl
         CColorref _borderColor;
 
         void OnCornerParChanged(CPointEx *);
-        void OnGradientChanged(CGradientRender *);
 	public:
 		CPanelComp(LPTSTR _name=NULL);
 		~CPanelComp(void);
@@ -56,7 +55,6 @@ namespace DecorativeCtrl
 		DECLARE_PROPERTY(SingleLine,BOOL)
         DECLARE_PROPERTY(Theme,BOOL)
         DECLARE_PROPERTY(RoundCorners,BOOL)
-        DECLARE_PROPERTY(Gradient,BOOL)
 	};
 
    class CPanelHostComp:public Panel::CPanelHost,public ControlComponent<DecorativeCtrl::CPanelHostComp>

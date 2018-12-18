@@ -13,9 +13,8 @@ namespace Panel
    /////////////////////////////////////////////////////////////////////////////
    CPanel::CPanel(void):caption(_T("")),textColor(GetSysColor(COLOR_BTNTEXT)),bkColor(GetSysColor(COLOR_BTNFACE)),
       inner(BDR_RAISEDINNER),outer(BDR_RAISEDOUTER),edge(BF_RECT),vertAlign(DT_VCENTER),horizAlign(DT_CENTER),
-      singleLine(DT_SINGLELINE),theme(FALSE),roundCorners(FALSE),cornerParam(3,3),borderColor(RGB(0,0,0)),
-      startColor(RGB(0,0,0)),endColor(RGB(0xFF,0xFF,0xFF)),gradientType(GRADIENT_HORIZONTAL),transformationType(TRANSFORMATION_NONE),
-      enableGradient(FALSE)
+      singleLine(DT_SINGLELINE),theme(FALSE),roundCorners(FALSE),cornerParam(3,3),borderColor(RGB(0,0,0))
+      
    {
       font.CreateFont(-12,0,0,0,FW_NORMAL,0,0,0,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,
          PROOF_QUALITY,VARIABLE_PITCH | FF_ROMAN,_T("MS Sans Serif"));
@@ -49,10 +48,7 @@ namespace Panel
 
       if(m_hTheme == NULL || theme == FALSE)
       {
-          if(enableGradient==FALSE)
             dc.FillSolidRect(&r,bkColor);
-          else
-            gradientRender.DrawGradient(dc,r,startColor,endColor,gradientType,transformationType);
       }
       else
         DrawThemeBackground(dc,TABP_BODY,0,&r,NULL);
@@ -292,60 +288,6 @@ namespace Panel
        return cornerParam; 
    }
 
-   void CPanel::SetStartColor(COLORREF val)
-   {
-        startColor = val;
-        InvalidateRect(NULL);
-   }
-
-   COLORREF CPanel::GetStartColor(void)
-   {
-        return startColor;
-   }
-
-   void CPanel::SetEndColor(COLORREF val)
-   {
-        endColor = val;
-        InvalidateRect(NULL);
-   }
-
-   COLORREF CPanel::GetEndColor(void)
-   {
-        return endColor;
-   }
-
-   void CPanel::SetGradientType(GradientType val)
-   {
-        gradientType = val;
-        InvalidateRect(NULL);
-   }
-
-   GradientType CPanel::GetGradientType(void)
-   {
-        return gradientType;
-   }
-
-   void CPanel::SetTransformationType(TransformationType val)
-   {
-        transformationType = val;
-        InvalidateRect(NULL);
-   }
-
-   TransformationType CPanel::GetTransformationType(void)
-   {
-        return transformationType;
-   }
-
-   void CPanel::SetEnableGradient(BOOL val)
-   {
-       enableGradient = val;
-       InvalidateRect(NULL);
-   }
-
-   BOOL CPanel::GetEnableGradient()
-   {
-       return enableGradient;
-   }
    //////////////////////////////////////////////////////////////////////////
    CPanelHost::CPanelHost():current(-1)
    {

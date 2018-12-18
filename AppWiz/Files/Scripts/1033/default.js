@@ -14,23 +14,6 @@ function OnFinish(selProj, selObj)
 		var strProjectPath = wizard.FindSymbol('PROJECT_PATH');
 		var strProjectName = wizard.FindSymbol('PROJECT_NAME');
 
-		var WizardVersion = wizard.FindSymbol('WIZARD_VERSION');
-		if(WizardVersion >= 8.0)
-		{
-			// Use embedded manifest for VS2005
-			if(wizard.FindSymbol("WTL_USE_MANIFEST"))
-			{
-				wizard.AddSymbol("WTL_USE_EMBEDDED_MANIFEST", true);
-				wizard.AddSymbol("WTL_USE_MANIFEST", false);
-			}
-
-			// Use ATL3 from SDK for VS2005 Express
-			if(wizard.FindSymbol("VC_EXPRESS"))
-			{
-				wizard.AddSymbol("WTL_USE_EXTERNAL_ATL", true);
-			}
-		}
-
 		// Create symbols based on the project name
 		var strSafeProjectName = CreateSafeName(strProjectName);
 		wizard.AddSymbol("SAFE_PROJECT_NAME", strSafeProjectName);
@@ -55,10 +38,9 @@ function OnFinish(selProj, selObj)
 			strVal = wizard.FormatGuid(strGuid, 0);
 			wizard.AddSymbol("WTL_LIBID", strVal);
 		}
-	        wizard.AddSymbol("WTL_BASE_WINDOW_CLASS","CWindow");
+
 		// Set app type symbols
-		if (wizard.FindSymbol("WTL_APPTYPE_SDI") || wizard.FindSymbol("WTL_APPTYPE_MTSDI") || 
-		    wizard.FindSymbol("WTL_APPTYPE_TABVIEW"))
+		if (wizard.FindSymbol("WTL_APPTYPE_SDI") || wizard.FindSymbol("WTL_APPTYPE_MTSDI"))
 		{
 				wizard.AddSymbol("WTL_FRAME_BASE_CLASS","CFrameWindowImpl");
 		}
@@ -85,15 +67,10 @@ function OnFinish(selProj, selObj)
 		// Set view symbols
 		if(wizard.FindSymbol("WTL_USE_VIEW"))
 		{
-			var strViewFile = strProjectName + "View";
-			wizard.AddSymbol("WTL_VIEW_FILE", strViewFile);
+			wizard.AddSymbol("WTL_VIEW_FILE", "View");
+			wizard.AddSymbol("WTL_VIEW_CLASS", "CView");
 
-			var strViewClass = "C" + wizard.FindSymbol("NICE_SAFE_PROJECT_NAME") + "View";
-			wizard.AddSymbol("WTL_VIEW_CLASS", strViewClass);
-
-				wizard.AddSymbol("WTL_VIEWTYPE_GENERIC", true);
-			if(wizard.FindSymbol("WTL_APPTYPE_TABVIEW"))
-				wizard.AddSymbol("WTL_VIEW_EX_STYLES", "0");
+			wizard.AddSymbol("WTL_VIEWTYPE_GENERIC", true);
 		}
 
 		// Create project and configurations
@@ -109,8 +86,6 @@ function OnFinish(selProj, selObj)
 		selProj.Object.Save();
 
 		// Open resource editor if not VS2005 Express
-		if(!wizard.FindSymbol('VC_EXPRESS'))
-		{
 			if(wizard.FindSymbol("WTL_APPTYPE_DLG"))
 			{
 				var ResHelper = wizard.ResourceHelper;
@@ -126,7 +101,7 @@ function OnFinish(selProj, selObj)
 				ResHelper.OpenResourceInEditor("DIALOG", strDialogID);
 				ResHelper.CloseResourceFile();
 			}
-		}
+
 	}
 	catch(e)
 	{
@@ -226,10 +201,7 @@ function AddConfigurations(proj, strProjectName)
 			var bDebug = (config.ConfigurationName.search("Debug") != -1);
 
 			// General settings
-			if(wizard.FindSymbol("WTL_USE_UNICODE"))
-				config.CharacterSet = charSetUnicode;
-			else
-				config.CharacterSet = charSetMBCS;
+			config.CharacterSet = charSetUnicode;
 
 			var WizardVersion = wizard.FindSymbol('WIZARD_VERSION');
 			if(bDebug)
@@ -250,7 +222,7 @@ function AddConfigurations(proj, strProjectName)
 					config.OutputDirectory = 'Release';
 				}
 
-				config.ATLMinimizesCRunTimeLibraryUsage = true;
+				config.ATLMinimizesCRunTimeLibraryUsage = false;
 			}
 
 			if(wizard.FindSymbol("WTL_USE_VIEW") && wizard.FindSymbol("WTL_COMBO_VIEW_TYPE") == "WTL_VIEWTYPE_HTML")
@@ -429,15 +401,15 @@ function GetTargetName(strName, strProjectName)
 		}
 		else if(strName == 'view.h')
 		{
-			strTarget = strProjectName + 'View.h';
+			strTarget = 'View.h';
 		}
 		else if(strName == 'view.cpp')
 		{
-			strTarget = strProjectName + 'View.cpp';
+			strTarget = 'View.cpp';
 		}
 		else if(strName == 'view.wff')
 		{
-			strTarget = strProjectName + 'View.wff';
+			strTarget = 'View.wff';
 		}
 		else if(strName == 'toolbar.bmp')
 		{

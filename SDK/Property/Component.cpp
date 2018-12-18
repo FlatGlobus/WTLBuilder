@@ -1006,7 +1006,7 @@ _variant_t __stdcall Component::Item(BSTR propName)
         str = _T("");
     }
 
-    ATLTRACE(CString(propName) + "=" + CString(str) + "\n");
+    //ATLTRACE(CString(propName) + "=" + CString(str) + "\n");
     return str.AllocSysString();
 }
 

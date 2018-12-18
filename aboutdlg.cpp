@@ -25,7 +25,7 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
     m_formFont.CreateFont(-12,0,0,0,FW_NORMAL,false,false,false,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH|FF_DONTCARE,_T("MS Sans Serif"));
     SetFont((HFONT)m_formFont);
     ModifyStyle(GetStyle(),WS_POPUP|WS_VISIBLE|WS_CLIPSIBLINGS|WS_CLIPCHILDREN|WS_SYSMENU);
-    ResizeClient(501,124);
+    ResizeClient(521,123);
     HICON hIcon = (HICON)::LoadImage(_Module.GetResourceInstance(), MAKEINTRESOURCE(IDR_MAINFRAME),
        IMAGE_ICON, ::GetSystemMetrics(SM_CXICON), ::GetSystemMetrics(SM_CYICON), LR_DEFAULTCOLOR);
     SetIcon(hIcon, TRUE);
@@ -40,7 +40,7 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
     m_picture5Bitmap.LoadBitmap(IDB_LOGO);
     m_picture5.SetBitmap(m_picture5Bitmap);
 
-    m_static8.Create(m_hWnd,CRect(218,10,495,25),_T("Copyright 2017 © FlatGlobus (wtlbuilder@gmail.com)"),WS_CHILD|WS_VISIBLE|SS_LEFT,0,IDC_CABOUTDLG_STATIC8);
+    m_static8.Create(m_hWnd,CRect(218,10,507,25),_T("Copyright 2007 - 2018 © FlatGlobus (wtlbuilder@gmail.com)"),WS_CHILD|WS_VISIBLE|SS_LEFT,0,IDC_CABOUTDLG_STATIC8);
     m_static8.SetFont((HFONT)m_formFont);
 
     m_static9.Create(m_hWnd,CRect(218,52,261,66),_T("Version"),WS_CHILD|WS_VISIBLE|SS_LEFT,0,IDC_CABOUTDLG_STATIC9);

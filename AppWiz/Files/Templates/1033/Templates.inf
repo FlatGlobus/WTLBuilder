@@ -48,7 +48,3 @@ root.rgs
 rootps.mk
 rootps.def
 [!endif]
-
-[!if WTL_USE_MANIFEST]
-root.exe.manifest
-[!endif]

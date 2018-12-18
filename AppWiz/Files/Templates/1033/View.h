@@ -17,11 +17,7 @@
 typedef ATL::CControlWinTraits [!output WTL_VIEW_CLASS]WinTraits;
 //}}WTLBUILDER_WINDOW_STYLE
 
-[!if WTL_VIEWTYPE_GENERIC || WTL_VIEWTYPE_FORM || WTL_VIEWTYPE_SCROLL]
 class [!output WTL_VIEW_CLASS] : public [!output WTL_VIEW_BASE_CLASS]<[!output WTL_VIEW_CLASS]>,
-[!else]
-class [!output WTL_VIEW_CLASS] : public [!output WTL_VIEW_BASE_CLASS]<[!output WTL_VIEW_CLASS], [!output WTL_VIEW_BASE]>,
-[!endif]
 	public CScrollImpl<[!output WTL_VIEW_CLASS]>,public LayoutMgr<[!output WTL_VIEW_CLASS]>
 //{{WTLBUILDER_BASE_CLASS
 //}}WTLBUILDER_BASE_CLASS
@@ -37,6 +33,8 @@ public:
 	virtual void DoPaint(CDCHandle /*dc*/);
 	static const UINT _controlsToClip[];
 
+	typedef [!output WTL_VIEW_BASE_CLASS]<[!output WTL_VIEW_CLASS], CWindow, [!output WTL_VIEW_CLASS]WinTraits> baseClass;
+
 //{{WTLBUILDER_WINCLASS_DECLARATION
 	DECLARE_WND_CLASS(NULL)
 //}}WTLBUILDER_WINCLASS_DECLARATION
@@ -44,11 +42,12 @@ public:
 	BOOL PreTranslateMessage(MSG* pMsg);
 
 	BEGIN_MSG_MAP([!output WTL_VIEW_CLASS])
+		MESSAGE_HANDLER(WM_SIZE, LayoutMgr<[!output WTL_VIEW_CLASS]>::OnSize)
+		MESSAGE_HANDLER(WM_ERASEBKGND, LayoutMgr<[!output WTL_VIEW_CLASS]>::OnEraseBackground)
 		MESSAGE_HANDLER(WM_CREATE, OnCreate)
 		MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
-[!if WTL_VIEWTYPE_GENERIC]
 		MESSAGE_HANDLER(WM_PAINT, OnPaint)
-[!endif]
+		REFLECT_NOTIFICATIONS_EX()
 	END_MSG_MAP()
 
   [!output WTL_VIEW_CLASS](void);

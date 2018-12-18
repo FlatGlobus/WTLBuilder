@@ -14,7 +14,7 @@
     <ProjectGuid>{2529A233-1D43-4D9E-B926-6D73F7738D20}</ProjectGuid>
     <RootNamespace>Utils</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -105,7 +105,6 @@
     <ClCompile Include="CFile.cpp" />
     <ClCompile Include="DOMXML.cpp" />
     <ClCompile Include="GDIUtil.cpp" />
-    <ClCompile Include="GradientRender.cpp" />
     <ClCompile Include="Ini.cpp" />
     <ClCompile Include="InterfaceWrapper.cpp" />
     <ClCompile Include="LayoutMgr.cpp" />
@@ -128,7 +127,6 @@
     <ClInclude Include="DOMXML.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="GDIUtil.h" />
-    <ClInclude Include="GradientRender.h" />
     <ClInclude Include="InterfaceWrapper.h" />
     <ClInclude Include="LayoutMgr.h" />
     <ClInclude Include="MapFile.h" />

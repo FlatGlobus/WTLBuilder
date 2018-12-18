@@ -53,10 +53,24 @@ public:
 [!endif]
 [!endif]
 
+[!if WTL_USE_CMDBAR]
+[!if WTL_APPTYPE_MDI]
+	CMDICommandBarCtrl m_CmdBar;
+[!else]
+	CCommandBarCtrl m_CmdBar;
+[!endif]
+[!endif]
+
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual BOOL OnIdle();
 
 	BEGIN_UPDATE_UI_MAP([!output WTL_FRAME_CLASS])
+[!if WTL_USE_TOOLBAR]
+		UPDATE_ELEMENT(ID_VIEW_TOOLBAR, UPDUI_MENUPOPUP)
+[!endif]
+[!if WTL_USE_STATUSBAR]
+		UPDATE_ELEMENT(ID_VIEW_STATUS_BAR, UPDUI_MENUPOPUP)
+[!endif]
 	END_UPDATE_UI_MAP()
 
 [!if WTL_APPTYPE_MDI]
@@ -75,6 +89,13 @@ public:
 [!if WTL_APPTYPE_MTSDI]
 		COMMAND_ID_HANDLER(ID_FILE_NEW_WINDOW, OnFileNewWindow)
 [!endif]
+[!if WTL_USE_TOOLBAR]
+		COMMAND_ID_HANDLER(ID_VIEW_TOOLBAR, OnViewToolBar)
+[!endif]
+[!if WTL_USE_STATUSBAR]
+		COMMAND_ID_HANDLER(ID_VIEW_STATUS_BAR, OnViewStatusBar)
+[!endif]
+
 		COMMAND_ID_HANDLER(ID_APP_ABOUT, OnAppAbout)
 [!if WTL_APPTYPE_MDI]
 		COMMAND_ID_HANDLER(ID_WINDOW_CASCADE, OnWindowCascade)
@@ -82,6 +103,7 @@ public:
 		COMMAND_ID_HANDLER(ID_WINDOW_ARRANGE, OnWindowArrangeIcons)
 [!endif]
 		CHAIN_MSG_MAP(_baseClass)
+		REFLECT_NOTIFICATIONS_EX()
 	END_MSG_MAP()
 
   [!output WTL_FRAME_CLASS](void);
@@ -97,6 +119,12 @@ public:
 	LRESULT OnFileNew(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 [!if WTL_APPTYPE_MTSDI]
 	LRESULT OnFileNewWindow(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+[!endif]
+[!if WTL_USE_TOOLBAR]
+	LRESULT OnViewToolBar(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+[!endif]
+[!if WTL_USE_STATUSBAR]
+	LRESULT OnViewStatusBar(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 [!endif]
 	LRESULT OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 [!if WTL_APPTYPE_MDI]

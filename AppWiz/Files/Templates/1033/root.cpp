@@ -3,10 +3,12 @@
 
 #include "stdafx.h"
 
-
 #include <atlframe.h>
 #include <atlctrls.h>
 #include <atldlgs.h>
+[!if WTL_USE_CMDBAR]
+#include <atlctrlw.h>
+[!endif]
 
 #include "resource.h"
 
@@ -50,12 +52,11 @@ int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 	CMessageLoop theLoop;
 	_Module.AddMessageLoop(&theLoop);
 
-	//uncomment and change those two lines if you want use localization in the application 
+	//uncomment and change two lines if you want to use localization in the application 
 	//path to localization files dir
 	//InitLocalization(_T("language"));
 	//default application language
 	//SetCurrentLangID(MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US));
-
 
 	[!output WTL_MAINDLG_CLASS] dlgMain;
 
@@ -107,7 +108,6 @@ public:
 		_Module.Lock();
 [!endif]
 		wndFrame.ShowWindow(pData->nCmdShow);
-		::SetForegroundWindow(wndFrame);	// Win95 needs this
 		delete pData;
 
 		int nRet = theLoop.Run();
@@ -230,15 +230,13 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 [!endif]
 {
 	HRESULT hRes = ::CoInitialize(NULL);
-// If you are running on NT 4.0 or higher you can use the following call instead to 
-// make the EXE free threaded. This means that calls come in on a random RPC thread.
-//	HRESULT hRes = ::CoInitializeEx(NULL, COINIT_MULTITHREADED);
 	ATLASSERT(SUCCEEDED(hRes));
 
-	// this resolves ATL window thunking problem when Microsoft Layer for Unicode (MSLU) is used
-	::DefWindowProc(NULL, 0, 0, 0L);
-
+[!if !WTL_USE_TOOLBAR]
 	AtlInitCommonControls(ICC_BAR_CLASSES);	// add flags to support other controls
+[!else]
+	AtlInitCommonControls(ICC_COOL_CLASSES | ICC_BAR_CLASSES);	// add flags to support other controls
+[!endif]
 [!if WTL_COM_SERVER]
 
 	hRes = _Module.Init(ObjectMap, hInstance);
@@ -250,6 +248,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 	ATLASSERT(SUCCEEDED(hRes));
 
 [!endif]
+
 [!if WTL_ENABLE_AX]
 	AtlAxWinInit();
 
@@ -318,7 +317,6 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 		}
 [!endif]
 [!endif]
-
 		_Module.RevokeClassObjects();
 		::Sleep(_Module.m_dwPause);
 	}

@@ -14,7 +14,6 @@
 
 #include <atlcrack.h>
 #include <atltheme.h>
-#include "GradientRender.h"
 
 namespace Panel
 {
@@ -38,10 +37,6 @@ namespace Panel
 
       COLORREF  startColor;
       COLORREF  endColor;
-      GradientType gradientType;
-      TransformationType transformationType;
-      BOOL      enableGradient;
-      CGradientRender gradientRender;
 
    public:
       DECLARE_WND_CLASS(NULL)
@@ -87,21 +82,6 @@ namespace Panel
 
       void SetCornerParam(const CPoint &);
       const CPoint & GetCornerParam(void);
-
-      void SetStartColor(COLORREF);
-      COLORREF GetStartColor(void);
-
-      void SetEndColor(COLORREF);
-      COLORREF GetEndColor(void);
-
-      void SetGradientType(GradientType);
-      GradientType GetGradientType(void);
-
-      void SetTransformationType(TransformationType);
-      TransformationType GetTransformationType(void);
-
-      void SetEnableGradient(BOOL);
-      BOOL GetEnableGradient();
 
       BEGIN_MSG_MAP(CPanel)
          CHAIN_MSG_MAP(CThemeImpl<CPanel>)
