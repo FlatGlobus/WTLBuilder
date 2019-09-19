@@ -922,11 +922,11 @@ EVENT_API bool SendEvent(DWORD command)
 }
 
 //////////////////////////////////
-EVENT_API LPCTSTR MakeErrString(LPCSTR msg, LPCSTR func)
+EVENT_API LPCTSTR MakeErrString(LPCTSTR msg, LPCTSTR func)
 {
     static TCHAR buff[256];
     memset(buff, 0, 256*sizeof(TCHAR));
-    printf(buff,_T("%s%s"),msg,func);
+    _tprintf(buff,_T("%s%s"),msg,func);
     return buff;
 
 }

@@ -49,7 +49,7 @@ BOOL [!output WTL_MAINDLG_CLASS]::PreTranslateMessage(MSG* pMsg)
 	}
 
 [!endif]
-	return CWindow::IsDialogMessage(pMsg);
+	return [!output ATL_NS]CWindow::IsDialogMessage(pMsg);
 }
 
 BOOL [!output WTL_MAINDLG_CLASS]::OnIdle()
@@ -74,13 +74,13 @@ LRESULT [!output WTL_MAINDLG_CLASS]::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam
 	CenterWindow();
 
 	// set icons
-	HICON hIcon = AtlLoadIconImage(IDR_MAINFRAME, LR_DEFAULTCOLOR, ::GetSystemMetrics(SM_CXICON), ::GetSystemMetrics(SM_CYICON));
+	HICON hIcon = [!output WTL_NS]AtlLoadIconImage(IDR_MAINFRAME, LR_DEFAULTCOLOR, ::GetSystemMetrics(SM_CXICON), ::GetSystemMetrics(SM_CYICON));
 	SetIcon(hIcon, TRUE);
-	HICON hIconSmall = AtlLoadIconImage(IDR_MAINFRAME, LR_DEFAULTCOLOR, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON));
+	HICON hIconSmall = [!output WTL_NS]AtlLoadIconImage(IDR_MAINFRAME, LR_DEFAULTCOLOR, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON));
 	SetIcon(hIconSmall, FALSE);
 
 	// register object for message filtering and idle updates
-	CMessageLoop* pLoop = _Module.GetMessageLoop();
+	[!output WTL_NS]CMessageLoop* pLoop = _Module.GetMessageLoop();
 	ATLASSERT(pLoop != NULL);
 	pLoop->AddMessageFilter(this);
 	pLoop->AddIdleHandler(this);
@@ -96,7 +96,7 @@ LRESULT [!output WTL_MAINDLG_CLASS]::OnDestroy(UINT /*uMsg*/, WPARAM /*wParam*/,
 //}}WTLBUILDER_MEMBER_DESTRUCTION
 
 	// unregister message filtering and idle updates
-	CMessageLoop* pLoop = _Module.GetMessageLoop();
+	[!output WTL_NS]CMessageLoop* pLoop = _Module.GetMessageLoop();
 	ATLASSERT(pLoop != NULL);
 	pLoop->RemoveMessageFilter(this);
 	pLoop->RemoveIdleHandler(this);
@@ -161,9 +161,9 @@ LRESULT [!output WTL_MAINDLG_CLASS]::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam
 	CenterWindow();
 
 	// set icons
-	HICON hIcon = AtlLoadIconImage(IDR_MAINFRAME, LR_DEFAULTCOLOR, ::GetSystemMetrics(SM_CXICON), ::GetSystemMetrics(SM_CYICON));
+	HICON hIcon = [!output WTL_NS]AtlLoadIconImage(IDR_MAINFRAME, LR_DEFAULTCOLOR, ::GetSystemMetrics(SM_CXICON), ::GetSystemMetrics(SM_CYICON));
 	SetIcon(hIcon, TRUE);
-	HICON hIconSmall = AtlLoadIconImage(IDR_MAINFRAME, LR_DEFAULTCOLOR, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON));
+	HICON hIconSmall = [!output WTL_NS]AtlLoadIconImage(IDR_MAINFRAME, LR_DEFAULTCOLOR, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON));
 	SetIcon(hIconSmall, FALSE);
 
 	return TRUE;
@@ -188,7 +188,7 @@ LRESULT [!output WTL_MAINDLG_CLASS]::OnDestroy(UINT /*uMsg*/, WPARAM /*wParam*/,
 [!endif]
 LRESULT [!output WTL_MAINDLG_CLASS]::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-	CSimpleDialog<IDD_ABOUTBOX, FALSE> dlg;
+	[!output ATL_NS]CSimpleDialog<IDD_ABOUTBOX, FALSE> dlg;
 	dlg.DoModal();
 	return 0;
 }

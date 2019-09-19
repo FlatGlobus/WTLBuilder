@@ -32,7 +32,7 @@ public:
     ControlComponentBase(LPCTSTR name);
     virtual ~ControlComponentBase();
 
-    BEGIN_MSG_MAP_EX(ControlComponentBase)
+    BEGIN_MSG_MAP(ControlComponentBase)
         MESSAGE_HANDLER(WM_CREATE,OnCreate)
         MESSAGE_HANDLER(WM_SIZE,OnSize)
         MESSAGE_HANDLER(WM_MOVE,OnSize)
@@ -111,7 +111,7 @@ public:
             static_cast<T*>(this)->DestroyWindow();	
     }
 
-    BEGIN_MSG_MAP_EX(thisclass)
+    BEGIN_MSG_MAP(thisclass)
         CHAIN_MSG_MAP(ControlComponentBase)
     END_MSG_MAP()
 

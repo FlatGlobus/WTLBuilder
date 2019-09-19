@@ -65,7 +65,7 @@ public:
     {
     }
     
-    BEGIN_MSG_MAP_EX(CToolPanel)
+    BEGIN_MSG_MAP(CToolPanel)
         CHAIN_MSG_MAP(CThemeImpl<CToolPanel>)
         MESSAGE_RANGE_HANDLER(WM_MOUSEFIRST, WM_MOUSELAST, OnMouseMessage)
         MESSAGE_HANDLER(WM_LBUTTONDOWN, OnLButtonDown)
@@ -513,7 +513,7 @@ public:
     HWND		m_hWndClient;
     CImageList  imageList;
 
-    BEGIN_MSG_MAP_EX(CToolTab)
+    BEGIN_MSG_MAP(CToolTab)
         MESSAGE_HANDLER(WM_SIZE, OnSize)
         MESSAGE_HANDLER(WM_SELCHANGEPANEL,OnChange);
         REFLECTED_NOTIFY_CODE_HANDLER_EX(TCN_SELCHANGE, OnTabSelect)

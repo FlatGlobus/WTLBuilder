@@ -13,30 +13,8 @@
 //#define IDR_[!output UPPERCASE_SAFE_PROJECT_NAME]TYPE	129
 [!if WTL_APPTYPE_MDI]
 #define IDR_MDICHILD				129
-[!if WTL_USE_VIEW]
-[!if WTL_VIEWTYPE_FORM]
-#define IDD_[!output UPPERCASE_SAFE_PROJECT_NAME]_FORM	130
-[!endif]
-[!endif]
-[!else]
-[!if WTL_APPTYPE_SDI ]
-[!if WTL_USE_VIEW]
-[!if WTL_VIEWTYPE_FORM]
-#define IDD_[!output UPPERCASE_SAFE_PROJECT_NAME]_FORM	129
-[!endif]
-[!endif]
-[!else]
-[!if WTL_APPTYPE_DLG]
-#define IDD_MAINDLG				129
-[!endif]
-[!endif]
 [!endif]
 [!if WTL_APPTYPE_MTSDI]
-[!if WTL_USE_VIEW]
-[!if WTL_VIEWTYPE_FORM]
-#define IDD_[!output UPPERCASE_SAFE_PROJECT_NAME]_FORM	130
-[!endif]
-[!endif]
 #define ID_FILE_NEW_WINDOW			32771
 [!endif]
 #define IDD_NULL					201

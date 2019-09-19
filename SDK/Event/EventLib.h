@@ -96,7 +96,7 @@ EVENT_API DWORD GetLastInputTime(void);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 EVENT_API bool SendEvent(DWORD command);
 
-EVENT_API LPCTSTR MakeErrString(LPCSTR msg, LPCSTR func);
+EVENT_API LPCTSTR MakeErrString(LPCTSTR msg, LPCTSTR func);
 template <class T1> bool SendEvent(DWORD command,T1 par)
 {
     try
@@ -115,7 +115,7 @@ template <class T1> bool SendEvent(DWORD command,T1 par)
     }
     catch (...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         return false;
     }
     return true;
@@ -139,7 +139,7 @@ template <class T1,class T2> bool SendEvent(DWORD command,T1 par,T2 par2)
     }
     catch (...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         return false;
     }
     return true;
@@ -163,7 +163,7 @@ template <class T1,class T2,class T3> bool SendEvent(DWORD command,T1 par,T2 par
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         return false;
     }
     return true;
@@ -187,7 +187,7 @@ template <class T1,class T2,class T3,class T4> bool SendEvent(DWORD command,T1 p
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         return false;
     }
     return true;
@@ -211,7 +211,7 @@ template <class T1,class T2,class T3,class T4,class T5> bool SendEvent(DWORD com
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         return false;
     }
     return true;
@@ -235,7 +235,7 @@ template <class T1,class T2,class T3,class T4,class T5,class T6> bool SendEvent(
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         return false;
     }
     return true;
@@ -280,7 +280,7 @@ public:
         }
         catch(...)
         {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         }
 
     }
@@ -314,7 +314,7 @@ public:
         }
         catch(...)
         {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         }
 
     }
@@ -350,7 +350,7 @@ public:
         }
         catch(...)
         {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         }
 
     }
@@ -386,7 +386,7 @@ public:
         }
         catch(...)
         {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         }
 
     }
@@ -423,7 +423,7 @@ public:
         }
         catch(...)
         {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         }
 
     }
@@ -461,7 +461,7 @@ public:
         }
         catch(...)
         {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
         }
 
     }
@@ -478,7 +478,7 @@ inline void PostEvent(DWORD command,UINT pm=POST_METHOD)
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
     }
 }
 
@@ -491,7 +491,7 @@ template <class T> void PostEvent(DWORD command,T par,UINT pm=POST_METHOD)
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
     }
 
 }
@@ -505,7 +505,7 @@ template <class T,class T1> void PostEvent(DWORD command,T par, T1 par1,UINT pm=
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
     }
 
 }
@@ -519,7 +519,7 @@ template <class T,class T1,class T2> void PostEvent(DWORD command,T par, T1 par1
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
     }
 
 }
@@ -533,7 +533,7 @@ template <class T,class T1,class T2,class T3> void PostEvent(DWORD command,T par
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
     }
 
 }
@@ -547,7 +547,7 @@ template <class T,class T1,class T2,class T3,class T4> void PostEvent(DWORD comm
     }
     catch(...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
     }
 
 }
@@ -568,7 +568,7 @@ template <class T1> void SendEventCFunc(DWORD command,T1 par)
     }
     catch (...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
     }
 }
 
@@ -588,7 +588,7 @@ template <class T1,class T2> void SendEventCFunc(DWORD command,T1 par,T2 par2)
     }
     catch (...)
     {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), __FUNCSIG__));
+        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
     }
 }
 

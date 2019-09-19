@@ -1,5 +1,5 @@
 <!--
-// Windows Template Library - WTL version 9.10
+// Windows Template Library - WTL version 10.0
 // Copyright (C) Microsoft Corporation, WTL Team. All rights reserved.
 //
 // This file is a part of the Windows Template Library.
@@ -201,6 +201,12 @@
 
 														<SPAN CLASS="itemText">Select application features:
 															<P CLASS="Spacer">&nbsp;</P>
+															<INPUT CLASS="CheckBoxA" TYPE="checkbox" ID="WTL_USE_RIBBON" ACCESSKEY="B" TITLE="Application uses a ribbon." value="OFF" NAME="WTL_USE_RIBBON">
+															<DIV CLASS="itemTextCheckboxB" ID="WTL_USE_RIBBON_DIV" TITLE="Application uses a ribbon.">
+																<LABEL FOR="WTL_USE_RIBBON" TITLE="Requires Windows 7 SDK." ID="WTL_USE_RIBBON_LABEL">
+																	R<U>i</U>bbon</LABEL>
+															</DIV>
+															<BR>
 															<INPUT CLASS="CheckBoxA" TYPE="checkbox" ID="WTL_USE_TOOLBAR" ACCESSKEY="T" TITLE="Application uses a toolbar." value="ON" NAME="WTL_USE_TOOLBAR" onClick="OnUseToolbar();">
 															<DIV CLASS="itemTextCheckboxB" ID="WTL_USE_TOOLBAR_DIV" TITLE="Application uses a toolbar.">
 																<LABEL FOR="WTL_USE_TOOLBAR" TITLE="Application uses a toolbar." ID="WTL_USE_TOOLBAR_LABEL">
@@ -369,6 +375,7 @@ function Next(document, linkto)
 function OnFinish(document)
 {
 	WTL_USE_VIEW.disabled = false;
+	WTL_USE_RIBBON.disabled = false;
 	OnWizFinish(document);
 }
 
@@ -376,12 +383,14 @@ function OnInit()
 {
 	if(window.external.FindSymbol("WTL_APPTYPE_DLG"))
 	{
+		WTL_USE_RIBBON.checked = false;
 		WTL_USE_TOOLBAR.checked = false;
 		WTL_USE_REBAR.checked = false;
 		WTL_USE_CMDBAR.checked = false;
 		WTL_USE_STATUSBAR.checked = false;
 		WTL_USE_VIEW.checked = false;
 
+		WTL_USE_RIBBON.disabled = true;
 		WTL_USE_TOOLBAR.disabled = true;
 		WTL_USE_REBAR.disabled = true;
 		WTL_USE_CMDBAR.disabled = true;
@@ -394,13 +403,15 @@ function OnInit()
 		WTL_USE_VIEW.disabled = false;
 		WTL_USE_VIEW_LABEL.disabled = false;
 		WTL_USE_VIEW.checked = window.external.FindSymbol("WTL_USE_VIEW");
-	
+
 		var bMDIorXP = window.external.FindSymbol("WTL_APPTYPE_MDI") || window.external.FindSymbol("WTL_SUPPORT_WINXP");
+		WTL_USE_RIBBON_LABEL.disabled = WTL_USE_RIBBON.disabled = bMDIorXP;
 		WTL_USE_TOOLBAR.disabled = false;
 		WTL_USE_REBAR.disabled = false;
 		WTL_USE_CMDBAR.disabled = false;
 		WTL_USE_STATUSBAR.disabled = false;
 
+		WTL_USE_RIBBON.checked = window.external.FindSymbol("WTL_USE_RIBBON") && !bMDIorXP;
 		WTL_USE_TOOLBAR.checked = window.external.FindSymbol("WTL_USE_TOOLBAR");
 		WTL_USE_REBAR.checked = window.external.FindSymbol("WTL_USE_REBAR");
 		WTL_USE_CMDBAR.checked = window.external.FindSymbol("WTL_USE_CMDBAR");

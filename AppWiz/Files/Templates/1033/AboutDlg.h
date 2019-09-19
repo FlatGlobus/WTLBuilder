@@ -10,7 +10,7 @@
 //{{WTLBUILDER_CONTROL_ID_DECLARATION
 //}}WTLBUILDER_CONTROL_ID_DECLARATION
 
-class CAboutDlg : public CDialogImpl<CAboutDlg>
+class CAboutDlg : public [!output ATL_NS]CDialogImpl<CAboutDlg>
 //{{WTLBUILDER_BASE_CLASS
 //}}WTLBUILDER_BASE_CLASS
 {

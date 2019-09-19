@@ -15,12 +15,12 @@
 //}}WTLBUILDER_CONTROL_ID_DECLARATION
 
 [!if WTL_APPTYPE_DLG && !WTL_APPTYPE_DLG_MODAL]
-class [!output WTL_MAINDLG_CLASS] : public [!output WTL_MAINDLG_BASE_CLASS]<[!output WTL_MAINDLG_CLASS]>, public CUpdateUI<[!output WTL_MAINDLG_CLASS]>,
-		public CMessageFilter, public CIdleHandler
+class [!output WTL_MAINDLG_CLASS] : public [!output WTL_MAINDLG_BASE_CLASS]<[!output WTL_MAINDLG_CLASS]>, public [!output WTL_NS]CUpdateUI<[!output WTL_MAINDLG_CLASS]>,
+		public [!output WTL_NS]CMessageFilter, public [!output WTL_NS]CIdleHandler
 //{{WTLBUILDER_BASE_CLASS
 //}}WTLBUILDER_BASE_CLASS
 {
-	CToolTipCtrl	m_toolTip;
+	[!output WTL_NS]CToolTipCtrl	m_toolTip;
 //{{WTLBUILDER_MEMBER_DECLARATION
 //}}WTLBUILDER_MEMBER_DECLARATION
 	void InitLayout(void);
@@ -63,7 +63,7 @@ public:
 [!if WTL_APPTYPE_DLG && WTL_APPTYPE_DLG_MODAL]
 class [!output WTL_MAINDLG_CLASS] : public [!output WTL_MAINDLG_BASE_CLASS]<[!output WTL_MAINDLG_CLASS]>
 {
-	CToolTipCtrl	m_toolTip;
+	[!output WTL_NS]CToolTipCtrl	m_toolTip;
 //{{WTLBUILDER_MEMBER_DECLARATION
 //}}WTLBUILDER_MEMBER_DECLARATION
 	void InitLayout(void);

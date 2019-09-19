@@ -19,25 +19,27 @@ typedef ATL::CFrameWinTraits [!output WTL_FRAME_CLASS]WinTraits;
 
 class [!output WTL_FRAME_CLASS] : 
 [!if WTL_APPTYPE_MDI]
-	public [!output WTL_FRAME_BASE_CLASS]<[!output WTL_FRAME_CLASS], CMDIWindow, [!output WTL_FRAME_CLASS]WinTraits>, 
+	public [!output WTL_FRAME_BASE_CLASS]<[!output WTL_FRAME_CLASS], [!output ATL_NS]CMDIWindow, [!output WTL_FRAME_CLASS]WinTraits>,
 [!else]
-	public [!output WTL_FRAME_BASE_CLASS]<[!output WTL_FRAME_CLASS], CWindow, [!output WTL_FRAME_CLASS]WinTraits>, 
+	public [!output WTL_FRAME_BASE_CLASS]<[!output WTL_FRAME_CLASS], [!output ATL_NS]CWindow, [!output WTL_FRAME_CLASS]WinTraits>,
 [!endif]
 
-	public CUpdateUI<[!output WTL_FRAME_CLASS]>,
-
-	public CScrollImpl<[!output WTL_FRAME_CLASS]>,public LayoutMgr<[!output WTL_FRAME_CLASS]>,
-	public CMessageFilter, public CIdleHandler
+[!if !WTL_USE_RIBBON]
+	public [!output WTL_NS]CUpdateUI<[!output WTL_FRAME_CLASS]>,
+[!endif]
+	public [!output WTL_NS]CScrollImpl<[!output WTL_FRAME_CLASS]>,public LayoutMgr<[!output WTL_FRAME_CLASS]>,
+	public [!output WTL_NS]CMessageFilter, public [!output WTL_NS]CIdleHandler
 //{{WTLBUILDER_BASE_CLASS
 //}}WTLBUILDER_BASE_CLASS
+
 {
-	CToolTipCtrl	m_toolTip;
+	[!output WTL_NS]CToolTipCtrl	m_toolTip;
 //{{WTLBUILDER_MEMBER_DECLARATION
 //}}WTLBUILDER_MEMBER_DECLARATION
 
 	void InitLayout(void);
 	virtual void DefineLayout();
-	virtual void DoPaint(CDCHandle /*dc*/);
+	virtual void DoPaint([!output WTL_NS]CDCHandle /*dc*/);
 public:
 	virtual void GetOffset(LPPOINT offset);
 	virtual void GetDialogRect(LPRECT r);
@@ -52,18 +54,26 @@ public:
 	[!output WTL_VIEW_CLASS] m_view;
 [!endif]
 [!endif]
-
-[!if WTL_USE_CMDBAR]
+[!if WTL_USE_CMDBAR || WTL_USE_RIBBON]
 [!if WTL_APPTYPE_MDI]
-	CMDICommandBarCtrl m_CmdBar;
+	[!output WTL_NS]CMDICommandBarCtrl m_CmdBar;
 [!else]
-	CCommandBarCtrl m_CmdBar;
+	[!output WTL_NS]CCommandBarCtrl m_CmdBar;
 [!endif]
+[!endif]
+[!if WTL_USE_RIBBON]
+
+	//TODO: Declare ribbon controls
+
+	// Ribbon control map
+	BEGIN_RIBBON_CONTROL_MAP(CMainFrame)
+	END_RIBBON_CONTROL_MAP()
 [!endif]
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	virtual BOOL OnIdle();
 
+[!if !WTL_RIBBON_SINGLE_UI]
 	BEGIN_UPDATE_UI_MAP([!output WTL_FRAME_CLASS])
 [!if WTL_USE_TOOLBAR]
 		UPDATE_ELEMENT(ID_VIEW_TOOLBAR, UPDUI_MENUPOPUP)
@@ -72,11 +82,6 @@ public:
 		UPDATE_ELEMENT(ID_VIEW_STATUS_BAR, UPDUI_MENUPOPUP)
 [!endif]
 	END_UPDATE_UI_MAP()
-
-[!if WTL_APPTYPE_MDI]
-	typedef [!output WTL_FRAME_BASE_CLASS]<[!output WTL_FRAME_CLASS], CMDIWindow, [!output WTL_FRAME_CLASS]WinTraits> _baseClass; 
-[!else]
-	typedef [!output WTL_FRAME_BASE_CLASS]<[!output WTL_FRAME_CLASS], CWindow, [!output WTL_FRAME_CLASS]WinTraits> _baseClass; 
 [!endif]
 
 	BEGIN_MSG_MAP([!output WTL_FRAME_CLASS])
@@ -95,15 +100,19 @@ public:
 [!if WTL_USE_STATUSBAR]
 		COMMAND_ID_HANDLER(ID_VIEW_STATUS_BAR, OnViewStatusBar)
 [!endif]
-
+[!if WTL_RIBBON_DUAL_UI]
+		COMMAND_ID_HANDLER(ID_VIEW_RIBBON, OnViewRibbon)
+[!endif]
 		COMMAND_ID_HANDLER(ID_APP_ABOUT, OnAppAbout)
 [!if WTL_APPTYPE_MDI]
 		COMMAND_ID_HANDLER(ID_WINDOW_CASCADE, OnWindowCascade)
 		COMMAND_ID_HANDLER(ID_WINDOW_TILE_HORZ, OnWindowTile)
 		COMMAND_ID_HANDLER(ID_WINDOW_ARRANGE, OnWindowArrangeIcons)
 [!endif]
-		CHAIN_MSG_MAP(_baseClass)
-		REFLECT_NOTIFICATIONS_EX()
+[!if !WTL_USE_RIBBON]
+		CHAIN_MSG_MAP([!output WTL_NS]CUpdateUI<[!output WTL_FRAME_CLASS]>)
+[!endif]
+		CHAIN_MSG_MAP([!output WTL_FRAME_BASE_CLASS]<[!output WTL_FRAME_CLASS]>)
 	END_MSG_MAP()
 
   [!output WTL_FRAME_CLASS](void);
@@ -115,6 +124,7 @@ public:
 
 	LRESULT OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
 	LRESULT OnDestroy(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/);
+
 	LRESULT OnFileExit(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnFileNew(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 [!if WTL_APPTYPE_MTSDI]
@@ -125,6 +135,9 @@ public:
 [!endif]
 [!if WTL_USE_STATUSBAR]
 	LRESULT OnViewStatusBar(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+[!endif]
+[!if WTL_RIBBON_DUAL_UI]
+	LRESULT OnViewRibbon(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 [!endif]
 	LRESULT OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 [!if WTL_APPTYPE_MDI]

@@ -22,7 +22,7 @@ public:
 	{
 	}
 
-	BEGIN_MSG_MAP_EX(CTrackMenu<T>)
+	BEGIN_MSG_MAP(CTrackMenu<T>)
 		MESSAGE_HANDLER(WM_RBUTTONDOWN, OnRButtonDown)
 	END_MSG_MAP()
 	

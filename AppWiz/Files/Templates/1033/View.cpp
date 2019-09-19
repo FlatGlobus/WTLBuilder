@@ -3,6 +3,9 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
+[!if WTL_USE_RIBBON]
+#include "Ribbon.h"
+[!endif]
 #include "resource.h"
 
 #include "[!output WTL_VIEW_FILE].h"
@@ -74,7 +77,7 @@ LRESULT [!output WTL_VIEW_CLASS]::OnDestroy(UINT /*uMsg*/, WPARAM /*wParam*/, LP
 
 LRESULT [!output WTL_VIEW_CLASS]::OnPaint(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
-	CPaintDC dc(m_hWnd);
+	[!output WTL_NS]CPaintDC dc(m_hWnd);
 
 	//TODO: Add your drawing code here
 
@@ -113,6 +116,6 @@ void [!output WTL_VIEW_CLASS]::GetOffset(LPPOINT offset)
 	*offset = m_ptOffset;
 }
 
-void [!output WTL_VIEW_CLASS]::DoPaint(CDCHandle /*dc*/)
+void [!output WTL_VIEW_CLASS]::DoPaint([!output WTL_NS]CDCHandle /*dc*/)
 {
 }

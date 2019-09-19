@@ -200,7 +200,7 @@ public:
         UPDATE_ELEMENT(ID_EDIT_CLEAR, UPDUI_MENUPOPUP)
     END_UPDATE_UI_MAP()
 
-    BEGIN_MSG_MAP_EX(CMainFrame)
+    BEGIN_MSG_MAP(CMainFrame)
         MESSAGE_HANDLER(WM_SIZE, LayoutMgr<CMainFrame>::OnSize)
         MESSAGE_HANDLER(WM_ERASEBKGND, LayoutMgr<CMainFrame>::OnEraseBackground)
         MESSAGE_HANDLER(WM_CREATE, OnCreate)

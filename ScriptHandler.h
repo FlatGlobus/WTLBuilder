@@ -7,6 +7,7 @@
 #include <vector>
 #include "path.h"
 #include "ScriptError.h"
+#include <string>
 
 #define DEF_SCRIPT_EXT _T("*.js")
 #define LANG_ENGLISH_NEUTRAL (MAKELANGID(LANG_ENGLISH, SUBLANG_NEUTRAL))
@@ -14,9 +15,9 @@
 
 using namespace std;
 //////////////////////////////////////////////////////////////////////////
-class str_lower : public binary_function<wstring, wstring, bool> {
+class str_lower : public binary_function<std::wstring, std::wstring, bool> {
 public:
-	bool operator()(const wstring& x, const wstring& y) const
+	bool operator()(const std::wstring& x, const std::wstring& y) const
 	{
 		//return (x.compare( y.c_str() ) < 0);
         return (x.compare(y) < 0);

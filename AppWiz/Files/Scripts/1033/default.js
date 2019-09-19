@@ -1,4 +1,4 @@
-// Windows Template Library - WTL version 9.10
+// Windows Template Library - WTL version 10.0
 // Copyright (C) Microsoft Corporation, WTL Team. All rights reserved.
 //
 // This file is a part of the Windows Template Library.
@@ -39,29 +39,81 @@ function OnFinish(selProj, selObj)
 			wizard.AddSymbol("WTL_LIBID", strVal);
 		}
 
-		// Set app type symbols
-		if (wizard.FindSymbol("WTL_APPTYPE_SDI") || wizard.FindSymbol("WTL_APPTYPE_MTSDI"))
+		if(wizard.FindSymbol("WTL_SUPPORT_WINXP"))
 		{
-				wizard.AddSymbol("WTL_FRAME_BASE_CLASS","CFrameWindowImpl");
+			wizard.AddSymbol("WTL_USE_RIBBON", false);
+		}
+
+		// Set namepaces
+		if(wizard.FindSymbol("WTL_NO_AUTO_NS"))
+		{
+			wizard.AddSymbol("WTL_NS", "WTL::");
+			wizard.AddSymbol("ATL_NS", "ATL::");
+		}
+		else
+		{
+			wizard.AddSymbol("WTL_NS", "");
+			wizard.AddSymbol("ATL_NS", "");
+		}
+
+		var strWTL_NS = wizard.FindSymbol("WTL_NS");
+		var strATL_NS = wizard.FindSymbol("ATL_NS");
+
+		wizard.AddSymbol("WTL_FRAME_BASE_CLASS", strWTL_NS + wizard.FindSymbol("WTL_FRAME_BASE_CLASS"));
+		wizard.AddSymbol("WTL_CHILD_FRAME_BASE_CLASS", strWTL_NS + wizard.FindSymbol("WTL_CHILD_FRAME_BASE_CLASS"));
+
+		wizard.AddSymbol("WTL_MAINDLG_BASE_CLASS", strATL_NS + wizard.FindSymbol("WTL_MAINDLG_BASE_CLASS"));
+		wizard.AddSymbol("WTL_VIEW_BASE_CLASS", strATL_NS + wizard.FindSymbol("WTL_VIEW_BASE_CLASS"));
+		wizard.AddSymbol("WTL_VIEW_BASE", strATL_NS + wizard.FindSymbol("WTL_VIEW_BASE"));
+
+		// Set app type symbols
+		if (wizard.FindSymbol("WTL_APPTYPE_SDI") || wizard.FindSymbol("WTL_APPTYPE_MTSDI") || 
+		    wizard.FindSymbol("WTL_APPTYPE_TABVIEW") || wizard.FindSymbol("WTL_APPTYPE_EXPLORER"))
+		{
+			if (wizard.FindSymbol("WTL_USE_RIBBON"))
+				wizard.AddSymbol("WTL_FRAME_BASE_CLASS", strWTL_NS + "CRibbonFrameWindowImpl");
+			else
+				wizard.AddSymbol("WTL_FRAME_BASE_CLASS", strWTL_NS + "CFrameWindowImpl");
 		}
 		else if(wizard.FindSymbol("WTL_APPTYPE_MDI"))
 		{
-			wizard.AddSymbol("WTL_FRAME_BASE_CLASS", "CMDIFrameWindowImpl");
-			wizard.AddSymbol("WTL_CHILD_FRAME_BASE_CLASS","CMDIChildWindowImpl");
+			wizard.AddSymbol("WTL_FRAME_BASE_CLASS", strWTL_NS + "CMDIFrameWindowImpl");
+			wizard.AddSymbol("WTL_CHILD_FRAME_BASE_CLASS", strWTL_NS + "CMDIChildWindowImpl");
+			wizard.AddSymbol("WTL_USE_RIBBON", false);
 		}
 		else if(wizard.FindSymbol("WTL_APPTYPE_DLG"))
 		{
 			wizard.AddSymbol("WTL_MAINDLG_CLASS","CMainDlg");
 			if(wizard.FindSymbol("WTL_ENABLE_AX"))
-				wizard.AddSymbol("WTL_MAINDLG_BASE_CLASS", "CAxDialogImpl");
+				wizard.AddSymbol("WTL_MAINDLG_BASE_CLASS", strATL_NS + "CAxDialogImpl");
 			else
-				wizard.AddSymbol("WTL_MAINDLG_BASE_CLASS", "CDialogImpl");
+				wizard.AddSymbol("WTL_MAINDLG_BASE_CLASS", strATL_NS + "CDialogImpl");
 
+			wizard.AddSymbol("WTL_USE_RIBBON", false);
 			wizard.AddSymbol("WTL_USE_TOOLBAR", false);
 			wizard.AddSymbol("WTL_USE_REBAR", false);
 			wizard.AddSymbol("WTL_USE_CMDBAR", false);
 			wizard.AddSymbol("WTL_USE_STATUSBAR", false);
 			wizard.AddSymbol("WTL_USE_VIEW", false);
+		}
+
+		if (wizard.FindSymbol("WTL_USE_RIBBON"))
+		{
+			if (wizard.FindSymbol("WTL_USE_TOOLBAR"))
+			{
+				wizard.AddSymbol("WTL_RIBBON_DUAL_UI", true);
+				wizard.AddSymbol("WTL_RIBBON_SINGLE_UI", false);
+			}
+			else
+			{
+				wizard.AddSymbol("WTL_RIBBON_DUAL_UI", false);
+				wizard.AddSymbol("WTL_RIBBON_SINGLE_UI", true);
+			}
+		}
+		else
+		{
+			wizard.AddSymbol("WTL_RIBBON_DUAL_UI", false);
+			wizard.AddSymbol("WTL_RIBBON_SINGLE_UI", false);
 		}
 
 		// Set view symbols
@@ -81,27 +133,13 @@ function OnFinish(selProj, selObj)
 		var InfFile = CreateCustomInfFile();
 		AddFilesToCustomProj(selProj, strProjectName, strProjectPath, InfFile);
 		AddPchSettings(selProj);
+			
+		if (wizard.FindSymbol("WTL_USE_RIBBON"))
+			AddRibbonSettings(selProj);
+			
 		InfFile.Delete();
 
 		selProj.Object.Save();
-
-		// Open resource editor if not VS2005 Express
-			if(wizard.FindSymbol("WTL_APPTYPE_DLG"))
-			{
-				var ResHelper = wizard.ResourceHelper;
-				ResHelper.OpenResourceFile(strProjectPath + "\\" + strProjectName + ".rc");
-				ResHelper.OpenResourceInEditor("DIALOG", "IDD_MAINDLG");
-				ResHelper.CloseResourceFile();
-			}
-			else if(wizard.FindSymbol("WTL_USE_VIEW") && wizard.FindSymbol("WTL_VIEWTYPE_FORM"))
-			{
-				var strDialogID = "IDD_" + wizard.FindSymbol("UPPERCASE_SAFE_PROJECT_NAME") + "_FORM";
-				var ResHelper = wizard.ResourceHelper;
-				ResHelper.OpenResourceFile(strProjectPath + "\\" + strProjectName + ".rc");
-				ResHelper.OpenResourceInEditor("DIALOG", strDialogID);
-				ResHelper.CloseResourceFile();
-			}
-
 	}
 	catch(e)
 	{
@@ -225,7 +263,7 @@ function AddConfigurations(proj, strProjectName)
 				config.ATLMinimizesCRunTimeLibraryUsage = false;
 			}
 
-			if(wizard.FindSymbol("WTL_USE_VIEW") && wizard.FindSymbol("WTL_COMBO_VIEW_TYPE") == "WTL_VIEWTYPE_HTML")
+			if(wizard.FindSymbol("WTL_USE_VIEW"))
 				config.UseOfATL = useATLDynamic;
 
 			// Compiler settings
@@ -235,7 +273,8 @@ function AddConfigurations(proj, strProjectName)
 			if(bDebug)
 			{
 				CLTool.RuntimeLibrary = rtMultiThreadedDebug;
-				CLTool.MinimalRebuild = true;
+				if(WizardVersion < 15.0)
+					CLTool.MinimalRebuild = true;
 				CLTool.DebugInformationFormat = debugEditAndContinue;
 				CLTool.BasicRuntimeChecks = runtimeBasicCheckAll;
 				CLTool.Optimization = optimizeDisabled;
@@ -266,6 +305,11 @@ function AddConfigurations(proj, strProjectName)
 			else
 			{
 				LinkTool.LinkIncremental = linkIncrementalNo;
+			}
+
+			if (wizard.FindSymbol("WTL_USE_RIBBON"))
+			{
+				LinkTool.DelayLoadDLLs = "propsys.dll;dwmapi.dll";
 			}
 
 			// Resource settings
@@ -319,6 +363,27 @@ function AddPchSettings(proj)
 		{
 			var config = fStdafx.FileConfigurations.Item(i + 1);
 			config.Tool.UsePrecompiledHeader = pchCreateUsingSpecific;
+		}
+	}
+	catch(e)
+	{
+		throw e;
+	}
+}
+
+function AddRibbonSettings(proj)
+{
+	try
+	{
+		var files = proj.Object.Files;
+		var fRibbon = files("Ribbon.xml");
+
+		for(var i = 0; i < fRibbon.FileConfigurations.Count; i++)
+		{
+			var config = fRibbon.FileConfigurations.Item(i + 1);
+			config.Tool.Description = "Compiling Ribbon.xml";
+			config.Tool.CommandLine = "uicc Ribbon.xml Ribbon.bml /header:Ribbon.h /res:Ribbon.rc";
+			config.Tool.Outputs = "Ribbon.bml;Ribbon.rc;Ribbon.h";
 		}
 	}
 	catch(e)

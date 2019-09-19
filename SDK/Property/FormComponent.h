@@ -99,7 +99,7 @@ public:
 
     virtual BOOL PreTranslateMessage(MSG* pMsg);
 
-    BEGIN_MSG_MAP_EX(CFormComponent)
+    BEGIN_MSG_MAP(CFormComponent)
         MESSAGE_HANDLER(WM_PAINT,OnPaint)
         //CHAIN_MSG_MAP(scrollBase)
         MESSAGE_HANDLER(WM_CREATE,OnCreate)

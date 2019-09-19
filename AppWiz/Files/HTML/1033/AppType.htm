@@ -1,5 +1,5 @@
 <!--
-// Windows Template Library - WTL version 9.10
+// Windows Template Library - WTL version 10.0
 // Copyright (C) Microsoft Corporation, WTL Team. All rights reserved.
 //
 // This file is a part of the Windows Template Library.
@@ -250,6 +250,14 @@
 																	Create as a <U>C</U>OM Server</LABEL>
 															</DIV>
 															<BR>
+                                                                                                                        <!-- 
+															<INPUT CLASS="CheckBoxA" TYPE="checkbox" ID="WTL_NO_AUTO_NS" ACCESSKEY="N" TITLE="Don't use automatic namespaces." value="ON" NAME="WTL_NO_AUTO_NS">
+															<DIV CLASS="itemTextCheckboxB" ID="WTL_NO_AUTO_NS_DIV" TITLE="Don't use automatic namespaces.">
+																<LABEL FOR="WTL_NO_AUTO_NS" TITLE="Don't use automatic namespaces." ID="WTL_NO_AUTO_NS_LABEL">
+																	<U>N</U>o Automatic Namespaces</LABEL>
+															</DIV>
+															<BR>
+                                                                                                                        -->
 															<INPUT CLASS="CheckBoxA" TYPE="checkbox" ID="WTL_SUPPORT_WINXP" ACCESSKEY="X" TITLE="Support running on Windows XP." value="ON" NAME="WTL_SUPPORT_WINXP">
 															<DIV CLASS="itemTextCheckboxB" ID="WTL_SUPPORT_WINXP_DIV" TITLE="Support running on Windows XP.">
 																<LABEL FOR="WTL_SUPPORT_WINXP" TITLE="Support running on Windows XP." ID="WTL_SUPPORT_WINXP_LABEL">
@@ -407,6 +415,7 @@ function OnAppType()
 			if(WizardVersion >= 8.0)
 				NextBtn.disabled = false;
 
+			window.external.AddSymbol("WTL_USE_RIBBON", false);
 			window.external.AddSymbol("WTL_USE_TOOLBAR", true);
 			window.external.AddSymbol("WTL_USE_REBAR", true);
 			window.external.AddSymbol("WTL_USE_CMDBAR", true);

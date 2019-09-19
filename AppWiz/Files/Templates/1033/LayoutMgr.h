@@ -262,7 +262,7 @@ public:
 	SIZE			_minWindowSize;		//!< the minimum window size of the mgr
 	SIZE			_maxWindowSize;		//!< the minimum window size of the mgr
 	bool			_showHandle;		//!< show the resizing handle ?
-	CScrollBar		_handle;			//!< the handle window
+	[!output WTL_NS]CScrollBar		_handle;			//!< the handle window
 	const UINT		*_controlsToClip;	//!< the default _controlsToClip array
 	bool			_ignoreFormSize;
 };
@@ -272,7 +272,7 @@ public:
 // CResizableDialogImplT
 //=====================================================================
 //! This class is the base class for resizable dialogs
-template <class T, class TBase = CWindow, class DlgBase = CDialogImpl<T, TBase> >
+template <class T, class TBase = [!output ATL_NS]CWindow, class DlgBase = [!output ATL_NS]CDialogImpl<T, TBase> >
 class ATL_NO_VTABLE CResizableDialogImplT : public DlgBase, public LayoutMgr<T>
 {
 public:
@@ -300,11 +300,11 @@ protected:
 //=====================================================================
 // CResizableDialogImpl
 //=====================================================================
-template <class T, class TBase = CWindow>
-class ATL_NO_VTABLE CResizableDialogImpl : public CResizableDialogImplT<T, TBase, CDialogImpl<T, TBase> >
+template <class T, class TBase = [!output ATL_NS]CWindow>
+class ATL_NO_VTABLE CResizableDialogImpl : public CResizableDialogImplT<T, TBase, [!output ATL_NS]CDialogImpl<T, TBase> >
 {
 public:
-	typedef CResizableDialogImplT<T, TBase, CDialogImpl<T, TBase> > inherited;
+	typedef CResizableDialogImplT<T, TBase, [!output ATL_NS]CDialogImpl<T, TBase> > inherited;
 	//! Constructor
 	/*!
 	\param useHandle : if true a handle is shown on the bottom right corner of the dialog
@@ -317,11 +317,11 @@ public:
 //=====================================================================
 // CAxResizableDialogImpl
 //=====================================================================
-template <class T, class TBase = CWindow>
-class ATL_NO_VTABLE CAxResizableDialogImpl : public CResizableDialogImplT<T, TBase, CAxDialogImpl<T, TBase> >
+template <class T, class TBase = [!output ATL_NS]CWindow>
+class ATL_NO_VTABLE CAxResizableDialogImpl : public CResizableDialogImplT<T, TBase, [!output ATL_NS]CAxDialogImpl<T, TBase> >
 {
 public:
-	typedef CResizableDialogImplT<T, TBase, CAxDialogImpl<T, TBase> > inherited;
+	typedef CResizableDialogImplT<T, TBase, [!output ATL_NS]CAxDialogImpl<T, TBase> > inherited;
 	//! Constructor
 	/*!
 	\param useHandle : if true a handle is shown on the bottom right corner of the dialog
@@ -338,10 +338,10 @@ public:
 // CResizableFormViewImplT
 //=====================================================================
 //! This class is the base class for resizable form views
-template <class T, class TBase = CWindow, class DlgBase = CDialogImpl<T, TBase> >
+template <class T, class TBase = [!output ATL_NS]CWindow, class DlgBase = [!output ATL_NS]CDialogImpl<T, TBase> >
 class ATL_NO_VTABLE CResizableFormViewImplT : 
 	public DlgBase,
-	public CScrollImpl<T>,
+	public [!output WTL_NS]CScrollImpl<T>,
 	public LayoutMgr<T>
 {
 public:
@@ -374,8 +374,8 @@ protected:
 //=====================================================================
 // CResizableFormViewImpl
 //=====================================================================
-template <class T, class TBase = CWindow>
-class ATL_NO_VTABLE CResizableFormViewImpl : public CResizableFormViewImplT<T, TBase, CDialogImpl<T, TBase> >
+template <class T, class TBase = [!output ATL_NS]CWindow>
+class ATL_NO_VTABLE CResizableFormViewImpl : public CResizableFormViewImplT<T, TBase, [!output ATL_NS]CDialogImpl<T, TBase> >
 {
 };
 
@@ -384,8 +384,8 @@ class ATL_NO_VTABLE CResizableFormViewImpl : public CResizableFormViewImplT<T, T
 //=====================================================================
 // CAxResizableFormViewImpl
 //=====================================================================
-template <class T, class TBase = CWindow>
-class ATL_NO_VTABLE CAxResizableFormViewImpl : public CResizableFormViewImplT<T, TBase, CAxDialogImpl<T, TBase> >
+template <class T, class TBase = [!output ATL_NS]CWindow>
+class ATL_NO_VTABLE CAxResizableFormViewImpl : public CResizableFormViewImplT<T, TBase, [!output ATL_NS]CAxDialogImpl<T, TBase> >
 {
 };
 
@@ -398,21 +398,21 @@ class ATL_NO_VTABLE CAxResizableFormViewImpl : public CResizableFormViewImplT<T,
 // CResizablePropertySheetImpl
 //=====================================================================
 //! This the base class for resizable property sheet
-template <bool childWnd, class T, class TBase = CPropertySheetWindow>
+template <bool childWnd, class T, class TBase = [!output WTL_NS]CPropertySheetWindow>
 class ATL_NO_VTABLE CResizablePropertySheetImpl : 
-	public CPropertySheetImpl<T, TBase>,
+	public [!output WTL_NS]CPropertySheetImpl<T, TBase>,
 	public LayoutMgr<T>
 {
 public:
 
 	typedef CResizablePropertySheetImpl<childWnd, T, TBase>	thisClass;
-	typedef CPropertySheetImpl<T, TBase>					dialogBase;
+	typedef [!output WTL_NS]CPropertySheetImpl<T, TBase>					dialogBase;
 
 	//! Constructor
 	/*!
 	\param useHandle : if true a handle is shown on the bottom right corner of the dialog
 	*/
-	CResizablePropertySheetImpl(_U_STRINGorID title = (LPCTSTR)NULL, UINT uStartPage = 0, HWND hWndParent = NULL, bool useHandle = true);
+	CResizablePropertySheetImpl([!output ATL_NS]_U_STRINGorID title = (LPCTSTR)NULL, UINT uStartPage = 0, HWND hWndParent = NULL, bool useHandle = true);
 	//! Creates it
 	HWND Create(HWND hWndParent = NULL);
 
@@ -446,7 +446,7 @@ protected:
 // CChildResizablePropertySheetImpl
 //=============================================================================
 //! A resizable child property sheet
-template <class T, class TBase = CPropertySheetWindow>
+template <class T, class TBase = [!output WTL_NS]CPropertySheetWindow>
 class ATL_NO_VTABLE CChildResizablePropertySheetImpl : 
 	public CResizablePropertySheetImpl<true, T, TBase>
 {
@@ -464,7 +464,7 @@ public:
 	\param useHandle : if true a handle is shown on the bottom right corner of the dialog
 	\param placeHolderID : id of the control which will server as a reference for the position of the property sheet
 	*/
-	CChildResizablePropertySheetImpl(UINT placeHolderID, _U_STRINGorID title = (LPCTSTR)NULL, UINT uStartPage = 0, HWND hWndParent = NULL, bool useHandle = true);
+	CChildResizablePropertySheetImpl(UINT placeHolderID, [!output ATL_NS]_U_STRINGorID title = (LPCTSTR)NULL, UINT uStartPage = 0, HWND hWndParent = NULL, bool useHandle = true);
 	//! Specific intialisation depending on wether or not the property sheet is a child window
 	void SpecificInit();
 protected:
@@ -476,7 +476,7 @@ protected:
 // CPopupResizablePropertySheetImpl
 //=============================================================================
 //! A resizable popup property sheet
-template <class T, class TBase = CPropertySheetWindow>
+template <class T, class TBase = [!output WTL_NS]CPropertySheetWindow>
 class ATL_NO_VTABLE CPopupResizablePropertySheetImpl : 
 	public CResizablePropertySheetImpl<false, T, TBase>
 {
@@ -490,7 +490,7 @@ public:
 	\param useHandle : if true a handle is shown on the bottom right corner of the dialog
 	\param placeHolderID : id of the control which will server as a reference for the position of the property sheet
 	*/
-	CPopupResizablePropertySheetImpl(_U_STRINGorID title = (LPCTSTR)NULL, UINT uStartPage = 0, HWND hWndParent = NULL, bool useHandle = true);
+	CPopupResizablePropertySheetImpl([!output ATL_NS]_U_STRINGorID title = (LPCTSTR)NULL, UINT uStartPage = 0, HWND hWndParent = NULL, bool useHandle = true);
 
 	BEGIN_MSG_MAP(thisClass)
 		CHAIN_MSG_MAP(dialogBase)
@@ -504,14 +504,14 @@ public:
 // CResizablePropertyPageImpl
 //=====================================================================
 //! This class is the base class for resizable dialogs
-template <class T, class TBase = CPropertyPageWindow, class dialogBase = CPropertyPageImpl<T, TBase> >
+template <class T, class TBase = [!output WTL_NS]CPropertyPageWindow, class dialogBase = [!output WTL_NS]CPropertyPageImpl<T, TBase> >
 class ATL_NO_VTABLE CResizablePropertyPageImplT : public dialogBase, public LayoutMgr<T>
 {
 public:
 	typedef CResizablePropertyPageImplT<T, TBase, dialogBase> thisClass;
 
 	//! Constructor
-	CResizablePropertyPageImplT(_U_STRINGorID title = (LPCTSTR)NULL);
+	CResizablePropertyPageImplT([!output ATL_NS]_U_STRINGorID title = (LPCTSTR)NULL);
 
 	BEGIN_MSG_MAP(thisClass)
 		MESSAGE_HANDLER(WM_SIZE, LayoutMgr<T>::OnSize)
@@ -532,29 +532,29 @@ protected:
 //=====================================================================
 // CResizablePropertyPageImpl
 //=====================================================================
-template <class T, class TBase = CPropertyPageWindow>
-class ATL_NO_VTABLE CResizablePropertyPageImpl : public CResizablePropertyPageImplT<T, TBase, CPropertyPageImpl<T, TBase> >
+template <class T, class TBase = [!output WTL_NS]CPropertyPageWindow>
+class ATL_NO_VTABLE CResizablePropertyPageImpl : public CResizablePropertyPageImplT<T, TBase, [!output WTL_NS]CPropertyPageImpl<T, TBase> >
 {
 public:
-	typedef CResizablePropertyPageImplT<T, TBase, CPropertyPageImpl<T, TBase> > inherited;
+	typedef CResizablePropertyPageImplT<T, TBase, [!output WTL_NS]CPropertyPageImpl<T, TBase> > inherited;
 
 	//! Constructor
-	CResizablePropertyPageImpl(_U_STRINGorID title = (LPCTSTR)NULL);
+	CResizablePropertyPageImpl([!output ATL_NS]_U_STRINGorID title = (LPCTSTR)NULL);
 };
 
 #ifndef _ATL_NO_HOSTING
 //=====================================================================
 // CAxResizablePropertyPageImpl
 //=====================================================================
-template <class T, class TBase = CPropertyPageWindow>
-class ATL_NO_VTABLE CAxResizablePropertyPageImpl : public CResizablePropertyPageImplT<T, TBase, CAxPropertyPageImpl<T, TBase> >
+template <class T, class TBase = [!output WTL_NS]CPropertyPageWindow>
+class ATL_NO_VTABLE CAxResizablePropertyPageImpl : public CResizablePropertyPageImplT<T, TBase, [!output WTL_NS]CAxPropertyPageImpl<T, TBase> >
 {
 public:
 	typedef CAxResizablePropertyPageImpl<T, TBase> thisClass;
-	typedef CResizablePropertyPageImplT<T, TBase, CAxPropertyPageImpl<T, TBase> > inherited;
+	typedef CResizablePropertyPageImplT<T, TBase, [!output WTL_NS]CAxPropertyPageImpl<T, TBase> > inherited;
 
 	//! Constructor
-	CAxResizablePropertyPageImpl(_U_STRINGorID title = (LPCTSTR)NULL);
+	CAxResizablePropertyPageImpl([!output ATL_NS]_U_STRINGorID title = (LPCTSTR)NULL);
 #if (_ATL_VER >= 0x0700)
 	// workaround an ATL7 bug, the initialisation code for ActiveX control is in CAxDialogImpl or CAxResizablePropertyPageImpl derives from CAxDialogImpl
 	// so we must copy the code of CAxDialogImpl into this class and call it at the initalisation of the dialog
@@ -972,7 +972,7 @@ inline void LayoutMgr<T>::DoLayout()
 			if(::GetParent(wgt->first) != pT->m_hWnd)
 			{
 				pT->ClientToScreen(&rc);
-				CWindow(::GetParent(wgt->first)).ScreenToClient(&rc);
+                [!output ATL_NS]CWindow(::GetParent(wgt->first)).ScreenToClient(&rc);
 			}
 
 			::SetWindowPos(
@@ -1515,8 +1515,8 @@ inline void CResizableFormViewImplT<T, TBase, DlgBase>::GetDialogRect(LPRECT r)
 // CResizablePropertySheetImpl
 //-----------------------------------------------------------------------------
 template <bool childWnd, class T, class TBase>
-inline CResizablePropertySheetImpl<childWnd, T, TBase>::CResizablePropertySheetImpl(_U_STRINGorID title , UINT uStartPage, HWND hWndParent, bool useHandle)
-: CPropertySheetImpl<T, TBase>(title, uStartPage, hWndParent)
+inline CResizablePropertySheetImpl<childWnd, T, TBase>::CResizablePropertySheetImpl([!output ATL_NS]_U_STRINGorID title , UINT uStartPage, HWND hWndParent, bool useHandle)
+: [!output WTL_NS]CPropertySheetImpl<T, TBase>(title, uStartPage, hWndParent)
 {
 	_showHandle = useHandle;
 }
@@ -1531,7 +1531,7 @@ inline void CResizablePropertySheetImpl<childWnd, T, TBase>::OnInitDialog()
 template <bool childWnd, class T, class TBase>
 inline HWND CResizablePropertySheetImpl<childWnd, T, TBase>::Create(HWND hWndParent)
 {
-	if (CPropertySheetImpl< T, TBase >::Create(hWndParent) == 0)
+	if ([!output WTL_NS]CPropertySheetImpl< T, TBase >::Create(hWndParent) == 0)
 		{
 		return 0;
 		}
@@ -1563,7 +1563,7 @@ inline int CALLBACK CResizablePropertySheetImpl<childWnd, T, TBase>::PropSheetCa
 		{
 		::PostMessage(hWnd, WMU_PS_INIT, 0, 0);
 		}
-	return CPropertySheetImpl< T, TBase >::PropSheetCallback(hWnd, uMsg, lParam);
+	return[!output WTL_NS]CPropertySheetImpl< T, TBase >::PropSheetCallback(hWnd, uMsg, lParam);
 }
 
 // Attach a page
@@ -1637,7 +1637,7 @@ inline LRESULT CResizablePropertySheetImpl<childWnd, T, TBase>::OnEraseBackgroun
 // CChildResizablePropertySheetImpl
 //=============================================================================
 template <class T, class TBase>
-CChildResizablePropertySheetImpl<T, TBase>::CChildResizablePropertySheetImpl(UINT placeHolderID, _U_STRINGorID title, UINT uStartPage, HWND hWndParent, bool useHandle)
+CChildResizablePropertySheetImpl<T, TBase>::CChildResizablePropertySheetImpl(UINT placeHolderID, [!output ATL_NS]_U_STRINGorID title, UINT uStartPage, HWND hWndParent, bool useHandle)
 : CResizablePropertySheetImpl<true, T, TBase>(title, uStartPage, hWndParent, useHandle), m_ID_Place_Holder(placeHolderID)
 {
 }
@@ -1654,9 +1654,9 @@ inline void CChildResizablePropertySheetImpl<T, TBase>::SpecificInit()
 
 	const UINT	*id;
 	T			*pT = static_cast<T*>(this);
-	CWindow parent = pT->GetParent();
-	CWindow tab = pT->GetTabControl();
-	CWindow actPg = pT->GetActivePage();
+    [!output ATL_NS]CWindow parent = pT->GetParent();
+    [!output ATL_NS] CWindow tab = pT->GetTabControl();
+    [!output ATL_NS] CWindow actPg = pT->GetActivePage();
 	ATLASSERT(parent != 0);
 	ATLASSERT(tab != 0);
 	ATLASSERT(actPg != 0);
@@ -1665,7 +1665,7 @@ inline void CChildResizablePropertySheetImpl<T, TBase>::SpecificInit()
 	// Destroy the standard buttons
 	for(id = stdIDs; *id != -1; id++)
 		{
-		CWindow btn = pT->GetDlgItem(*id);
+        [!output ATL_NS] CWindow btn = pT->GetDlgItem(*id);
 		if (btn != 0) { btn.DestroyWindow(); }
 		}
 	// Get relative position of the tab control and of the active page
@@ -1673,7 +1673,7 @@ inline void CChildResizablePropertySheetImpl<T, TBase>::SpecificInit()
 	tab.GetWindowRect(&rTC);
 	actPg.GetWindowRect(&rAP);
 	// Move and resize the window and the tab control
-	CWindow ph = parent.GetDlgItem(m_ID_Place_Holder);
+    [!output ATL_NS] CWindow ph = parent.GetDlgItem(m_ID_Place_Holder);
 	ATLASSERT(ph.IsWindow());
 	RECT cr;
 	ph.GetWindowRect(&cr);
@@ -1707,7 +1707,7 @@ inline void CChildResizablePropertySheetImpl<T, TBase>::SpecificInit()
 // CPopupResizablePropertySheetImpl
 //=============================================================================
 template <class T, class TBase>
-CPopupResizablePropertySheetImpl<T, TBase>::CPopupResizablePropertySheetImpl(_U_STRINGorID title, UINT uStartPage, HWND hWndParent, bool useHandle)
+CPopupResizablePropertySheetImpl<T, TBase>::CPopupResizablePropertySheetImpl([!output ATL_NS]_U_STRINGorID title, UINT uStartPage, HWND hWndParent, bool useHandle)
 : CResizablePropertySheetImpl<false, T, TBase>(title, uStartPage, hWndParent, useHandle)
 {
 }
@@ -1722,7 +1722,7 @@ inline void CPopupResizablePropertySheetImpl<T, TBase>::SpecificInit()
 		-1
 		};
 	T			*pT = static_cast<T *>(this);
-	CWindow		tab = pT->GetTabControl();
+    [!output ATL_NS] CWindow		tab = pT->GetTabControl();
 	// we can now set the constraints for the tabControl
 	pT->AttachForm(tab, ATTACH_LEFT);
 	pT->AttachForm(tab, ATTACH_RIGHT);
@@ -1766,7 +1766,7 @@ inline void CPopupResizablePropertySheetImpl<T, TBase>::SpecificInit()
 // CResizablePropertyPageImplT
 //-----------------------------------------------------------------------------
 template <class T, class TBase, class dialogBase>
-inline CResizablePropertyPageImplT<T, TBase, dialogBase>::CResizablePropertyPageImplT(_U_STRINGorID title)
+inline CResizablePropertyPageImplT<T, TBase, dialogBase>::CResizablePropertyPageImplT([!output ATL_NS]_U_STRINGorID title)
 : dialogBase(title), _init(false)
 {
 }
@@ -1798,7 +1798,7 @@ inline BOOL CResizablePropertyPageImplT<T, TBase, dialogBase>::OnSetActive()
 // CResizablePropertyPageImpl
 //-----------------------------------------------------------------------------
 template <class T, class TBase>
-inline CResizablePropertyPageImpl<T, TBase>::CResizablePropertyPageImpl(_U_STRINGorID title)
+inline CResizablePropertyPageImpl<T, TBase>::CResizablePropertyPageImpl([!output ATL_NS]_U_STRINGorID title)
 : inherited(title)
 {
 }
@@ -1808,7 +1808,7 @@ inline CResizablePropertyPageImpl<T, TBase>::CResizablePropertyPageImpl(_U_STRIN
 // CAxResizablePropertyPageImpl
 //-----------------------------------------------------------------------------
 template <class T, class TBase>
-inline CAxResizablePropertyPageImpl<T, TBase>::CAxResizablePropertyPageImpl(_U_STRINGorID title)
+inline CAxResizablePropertyPageImpl<T, TBase>::CAxResizablePropertyPageImpl([!output ATL_NS]_U_STRINGorID title)
 : inherited(title)
 {
 }

@@ -18,11 +18,11 @@ typedef ATL::CControlWinTraits [!output WTL_VIEW_CLASS]WinTraits;
 //}}WTLBUILDER_WINDOW_STYLE
 
 class [!output WTL_VIEW_CLASS] : public [!output WTL_VIEW_BASE_CLASS]<[!output WTL_VIEW_CLASS]>,
-	public CScrollImpl<[!output WTL_VIEW_CLASS]>,public LayoutMgr<[!output WTL_VIEW_CLASS]>
+	public [!output WTL_NS]CScrollImpl<[!output WTL_VIEW_CLASS]>,public LayoutMgr<[!output WTL_VIEW_CLASS]>
 //{{WTLBUILDER_BASE_CLASS
 //}}WTLBUILDER_BASE_CLASS
 {
-	CToolTipCtrl	m_toolTip;
+	[!output WTL_NS]CToolTipCtrl	m_toolTip;
 //{{WTLBUILDER_MEMBER_DECLARATION
 //}}WTLBUILDER_MEMBER_DECLARATION
 	void InitLayout(void);
@@ -30,7 +30,7 @@ class [!output WTL_VIEW_CLASS] : public [!output WTL_VIEW_BASE_CLASS]<[!output W
 public:
 	virtual void GetDialogRect(LPRECT r);
 	virtual void GetOffset(LPPOINT offset);
-	virtual void DoPaint(CDCHandle /*dc*/);
+	virtual void DoPaint([!output WTL_NS]CDCHandle /*dc*/);
 	static const UINT _controlsToClip[];
 
 	typedef [!output WTL_VIEW_BASE_CLASS]<[!output WTL_VIEW_CLASS], CWindow, [!output WTL_VIEW_CLASS]WinTraits> baseClass;

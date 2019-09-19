@@ -9,6 +9,11 @@
 [!if WTL_USE_CMDBAR]
 #include <atlctrlw.h>
 [!endif]
+[!if WTL_USE_RIBBON]
+#include <atlribbon.h>
+
+#include "Ribbon.h"
+[!endif]
 
 #include "resource.h"
 
@@ -37,19 +42,19 @@
 [!endif]
 [!if WTL_COM_SERVER]
 
-CServerAppModule _Module;
+[!output WTL_NS]CServerAppModule _Module;
 
 BEGIN_OBJECT_MAP(ObjectMap)
 END_OBJECT_MAP()
 [!else]
 
-CAppModule _Module;
+[!output WTL_NS]CAppModule _Module;
 [!endif]
 [!if WTL_APPTYPE_DLG && !WTL_APPTYPE_DLG_MODAL]
 
 int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 {
-	CMessageLoop theLoop;
+	[!output WTL_NS]CMessageLoop theLoop;
 	_Module.AddMessageLoop(&theLoop);
 
 	//uncomment and change two lines if you want to use localization in the application 
@@ -92,7 +97,7 @@ public:
 	// thread proc
 	static DWORD WINAPI RunThread(LPVOID lpData)
 	{
-		CMessageLoop theLoop;
+		[!output WTL_NS]CMessageLoop theLoop;
 		_Module.AddMessageLoop(&theLoop);
 
 		_RunData* pData = (_RunData*)lpData;
@@ -199,7 +204,7 @@ public:
 
 int Run(LPTSTR /*lpstrCmdLine*/ = NULL, int nCmdShow = SW_SHOWDEFAULT)
 {
-	CMessageLoop theLoop;
+	[!output WTL_NS]CMessageLoop theLoop;
 	_Module.AddMessageLoop(&theLoop);
 
 	[!output WTL_FRAME_CLASS] wndMain;
@@ -232,10 +237,10 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 	HRESULT hRes = ::CoInitialize(NULL);
 	ATLASSERT(SUCCEEDED(hRes));
 
-[!if !WTL_USE_TOOLBAR]
-	AtlInitCommonControls(ICC_BAR_CLASSES);	// add flags to support other controls
+[!if !WTL_USE_TOOLBAR || !WTL_USE_REBAR]
+	[!output WTL_NS]AtlInitCommonControls(ICC_BAR_CLASSES);	// add flags to support other controls
 [!else]
-	AtlInitCommonControls(ICC_COOL_CLASSES | ICC_BAR_CLASSES);	// add flags to support other controls
+	[!output WTL_NS]AtlInitCommonControls(ICC_COOL_CLASSES | ICC_BAR_CLASSES);	// add flags to support other controls
 [!endif]
 [!if WTL_COM_SERVER]
 
@@ -249,8 +254,11 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 
 [!endif]
 
+//	HMODULE hInstRich = ::LoadLibrary(CRichEditCtrl::GetLibraryName());
+//	ATLASSERT(hInstRich != NULL);
+
 [!if WTL_ENABLE_AX]
-	AtlAxWinInit();
+	[!output ATL_NS]AtlAxWinInit();
 
 [!endif]
 [!if WTL_COM_SERVER]
@@ -296,7 +304,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 
 		if(bAutomation)
 		{
-			CMessageLoop theLoop;
+			[!output WTL_NS]CMessageLoop theLoop;
 			nRet = theLoop.Run();
 		}
 		else
@@ -306,6 +314,9 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 			nRet = (int)dlgMain.DoModal();
 		}
 [!else]
+[!if WTL_RIBBON_SINGLE_UI]
+		if ([!output WTL_NS]RunTimeHelper::IsRibbonUIAvailable())
+[!endif]
 [!if WTL_APPTYPE_MTSDI]
 		{
 			C[!output SAFE_PROJECT_NAME]ThreadManager mgr;
@@ -316,7 +327,12 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 			nRet = Run(lpstrCmdLine, nCmdShow);
 		}
 [!endif]
+[!if WTL_RIBBON_SINGLE_UI]
+		else
+			[!output WTL_NS]AtlMessageBox(NULL, L"Cannot run with this version of Windows", IDR_MAINFRAME);
 [!endif]
+[!endif]
+
 		_Module.RevokeClassObjects();
 		::Sleep(_Module.m_dwPause);
 	}
@@ -332,15 +348,32 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR /*
 [!if WTL_APPTYPE_MTSDI]
 	int nRet = 0;
 	// BLOCK: Run application
+[!if WTL_RIBBON_SINGLE_UI]
+	if ([!output WTL_NS]RunTimeHelper::IsRibbonUIAvailable())
+[!endif]
 	{
 		C[!output SAFE_PROJECT_NAME]ThreadManager mgr;
 		nRet = mgr.Run(lpstrCmdLine, nCmdShow);
 	}
+[!if WTL_RIBBON_SINGLE_UI]
+	else
+		[!output WTL_NS]AtlMessageBox(NULL, L"Cannot run with this version of Windows", IDR_MAINFRAME);
+[!endif]
+[!else]
+[!if WTL_RIBBON_SINGLE_UI]
+	int nRet = 0;
+	if ([!output WTL_NS]RunTimeHelper::IsRibbonUIAvailable())
+		nRet = Run(lpstrCmdLine, nCmdShow);
+	else
+		[!output WTL_NS]AtlMessageBox(NULL, L"Cannot run with this version of Windows", IDR_MAINFRAME);
 [!else]
 	int nRet = Run(lpstrCmdLine, nCmdShow);
 [!endif]
 [!endif]
 [!endif]
+[!endif]
+
+//	::FreeLibrary(hInstRich);
 
 	_Module.Term();
 	::CoUninitialize();

@@ -1,4 +1,4 @@
-// Windows Template Library - WTL version 9.10
+// Windows Template Library - WTL version 10.0
 // Copyright (C) Microsoft Corporation, WTL Team. All rights reserved.
 //
 // This file is a part of the Windows Template Library.
@@ -77,13 +77,14 @@ function main()
 		return;
 	}
 
-	if(!strVersion) 
+	if(!strVersion)
 		MessageBox(WSShell, "Setup will search for installed versions of Visual Studio,\nand ask to add the WTL App Wizard for each of them.");
-	
+
 	var strRegKey_32 = "HKLM\\Software\\";
 	var strRegKey_64 = "HKLM\\Software\\Wow6432Node\\";
 
-	var nVersions = 7;
+// Search for Visual Studio 2005-2015
+	var nVersions = 6;
 
 	var astrRegKeyVer = new Array();
 	astrRegKeyVer[0] = "Microsoft\\VisualStudio\\8.0\\Setup\\VC\\ProductDir";
@@ -92,16 +93,8 @@ function main()
 	astrRegKeyVer[3] = "Microsoft\\VisualStudio\\11.0\\Setup\\VC\\ProductDir";
 	astrRegKeyVer[4] = "Microsoft\\VisualStudio\\12.0\\Setup\\VC\\ProductDir";
 	astrRegKeyVer[5] = "Microsoft\\VisualStudio\\14.0\\Setup\\VC\\ProductDir";
-	astrRegKeyVer[6] = "Microsoft\\VisualStudio\\SxS\\VS7\\15.0";
 
-	var astrFolder = new Array();
-	astrFolder[0] = "vcprojects";
-	astrFolder[1] = "vcprojects";
-	astrFolder[2] = "vcprojects";
-	astrFolder[3] = "vcprojects";
-	astrFolder[4] = "vcprojects";
-	astrFolder[5] = "vcprojects";
-	astrFolder[6] = "Common7\\IDE\\VC\\vcprojects";
+	var strWizardFolder = "vcprojects";
 
 	var astrVersions = new Array();
 	astrVersions[0] = "Visual Studio 2005 (8.0)";
@@ -110,7 +103,6 @@ function main()
 	astrVersions[3] = "Visual Studio 2012 (11.0)";
 	astrVersions[4] = "Visual Studio 2013 (12.0)";
 	astrVersions[5] = "Visual Studio 2015 (14.0)";
-	astrVersions[6] = "Visual Studio 2017 (15.0)";
 
 	var astrWizVer = new Array();
 	astrWizVer[0] = "8.0";
@@ -119,14 +111,12 @@ function main()
 	astrWizVer[3] = "11.0";
 	astrWizVer[4] = "12.0";
 	astrWizVer[5] = "14.0";
-	astrWizVer[6] = "15.0";
 
 	var astrParamVer = new Array();
 	astrParamVer[2] = "10";
 	astrParamVer[3] = "11";
 	astrParamVer[4] = "12";
 	astrParamVer[5] = "14";
-	astrParamVer[6] = "15";
 
 	var nSpecial = 2;
 
@@ -157,7 +147,7 @@ function main()
 			}
 		}
 
-		var strDestFolder = FileSys.BuildPath(strValue, astrFolder[i]);
+		var strDestFolder = FileSys.BuildPath(strValue, strWizardFolder);
 		if(bDebug)
 			WScript.Echo("Destination: " + strDestFolder);
 		if(!FileSys.FolderExists(strDestFolder))
@@ -179,12 +169,12 @@ function main()
 			if(!FileSys.FolderExists(strDataDestFolder))
 				continue;
 
-				strDataDestFolder = FileSys.BuildPath(strDataDestFolder, "AppWiz\\WTL");
+			strDataDestFolder = FileSys.BuildPath(strDataDestFolder, "AppWiz\\WTL");
 		}
 
 		bFound = true;
 		var bRet = true;
-		if(!strVersion) 
+		if(!strVersion)
 		{
 			var strMsg = "Found: " + astrVersions[i] + "\n\nInstall WTL App Wizard?";
 			bRet = MessageBox(WSShell, strMsg, true);
@@ -192,6 +182,175 @@ function main()
 		if(bRet)
 		{
 			SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDestFolder, astrWizVer[i], bDebug);
+		}
+	}
+
+// Search for Visual Studio 2017-2019
+	var nVersionsNew = 2;
+
+	var strWizardFolderNew = "Common7\\IDE\\VC\\vcprojects";
+
+	var astrVersionsNew = new Array();
+	astrVersionsNew[0] = "Visual Studio 2017 (15.0)";
+	astrVersionsNew[1] = "Visual Studio 2019 (16.0)";
+
+	var astrWizVerNew = new Array();
+	astrWizVerNew[0] = "15.0";
+	astrWizVerNew[1] = "16.0";
+
+	var astrParamVerNew = new Array();
+	astrParamVerNew[0] = "15";
+	astrParamVerNew[1] = "16";
+
+	var astrFilterVer = new Array();
+	astrFilterVer[0] = "[15.0,16.0]";
+	astrFilterVer[1] = "[16.0,17.0]";
+
+	// Ensure that we can run vswhere.exe
+	var strProgFileRegKey_x86 = "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir (x86)";
+	var strProgFileRegKey = "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\ProgramFilesDir";
+
+	var strVSWFolder = "";
+	try
+	{
+		strVSWFolder = WSShell.RegRead(strProgFileRegKey_x86);
+	}
+	catch(e)
+	{
+		try
+		{
+			strVSWFolder = WSShell.RegRead(strProgFileRegKey);
+		}
+		catch(e)
+		{
+			strVSWFolder = "";
+		}
+	}
+
+	var strVSWFile = "";
+	if(strVSWFolder)
+	{
+		strVSWFile = FileSys.BuildPath(strVSWFolder, "Microsoft Visual Studio\\Installer\\vswhere.exe");
+		if(!FileSys.FileExists(strVSWFile))
+		{
+			if(bDebug)
+				WScript.Echo("ERROR: Cannot find vswhere.exe");
+			strVSWFile = "";
+		}
+	}
+
+	for(var j = 0; j < nVersionsNew; j++)
+	{
+		if(!strVSWFile)
+			continue;
+
+		if(strVersion && (strVersion != astrParamVerNew[j]))
+			continue;
+
+		if(bDebug)
+			WScript.Echo("Looking for: " + astrVersionsNew[j]);
+
+		var TemporaryFolder = 2;
+		var strTmpFolder = FileSys.GetSpecialFolder(TemporaryFolder);
+
+		var strBatFile = FileSys.BuildPath(strTmpFolder, FileSys.GetTempName() + ".bat");
+		if(bDebug)
+			WScript.Echo("Temp batch file: " + strBatFile);
+
+		var strLogFile = FileSys.BuildPath(strTmpFolder, FileSys.GetTempName());
+		if(bDebug)
+			WScript.Echo("Temp log file: " + strLogFile);
+
+		try
+		{
+			var fileBat = FileSys.CreateTextFile(strBatFile);
+			var strLine = "@\"" + strVSWFile + "\" -nologo -version " + astrFilterVer[j] + " -prerelease -property installationPath -format value > " + strLogFile;
+			fileBat.WriteLine(strLine);
+			fileBat.Close();
+
+			WSShell.Run(strBatFile, 0, true);
+		}
+		catch(e)
+		{
+			var strError = "no info";
+			if(e.description.length != 0)
+				strError = e.description;
+			WScript.Echo("ERROR: Cannot create/use tmp batch file (" + strError + ")");
+			continue;
+		}
+
+		try
+		{
+			var ForReading = 1;
+			var fileLog = FileSys.OpenTextFile(strLogFile, ForReading);
+
+			while(!fileLog.AtEndOfStream)
+			{
+				var strLine = fileLog.ReadLine();
+
+				var strDestFolder = FileSys.BuildPath(strLine, strWizardFolderNew);
+				if(bDebug)
+					WScript.Echo("Destination: " + strDestFolder);
+				if(!FileSys.FolderExists(strDestFolder))
+				{
+					try
+					{
+						FileSys.CreateFolder(strDestFolder);
+					}
+					catch(e)
+					{
+					}
+
+					if(!FileSys.FolderExists(strDestFolder))
+						continue;
+				}
+
+				var strDataDestFolder = "";
+				if(bCopyFiles)
+				{
+					strDataDestFolder = FileSys.BuildPath(strLine, "VCWizards");
+					if(bDebug)
+						WScript.Echo("Data Destination: " + strDataDestFolder);
+					if(!FileSys.FolderExists(strDataDestFolder))
+						continue;
+
+					strDataDestFolder = FileSys.BuildPath(strDataDestFolder, "AppWiz\\WTL");
+				}
+
+				bFound = true;
+				var bRet = true;
+				if(!strVersion)
+				{
+					var strMsg = "Found: " + astrVersionsNew[j] + "\nat: " + strLine + "\n\nInstall WTL App Wizard?";
+					bRet = MessageBox(WSShell, strMsg, true);
+				}
+				if(bRet)
+				{
+					SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDestFolder, astrWizVerNew[j], bDebug);
+				}
+			}
+
+			fileLog.Close();
+		}
+		catch(e)
+		{
+			var strError = "no info";
+			if(e.description.length != 0)
+				strError = e.description;
+			WScript.Echo("ERROR: Cannot read tmp file (" + strError + ")");
+		}
+
+		try
+		{
+			FileSys.DeleteFile(strBatFile);
+			FileSys.DeleteFile(strLogFile);
+		}
+		catch(e)
+		{
+			var strError = "no info";
+			if(e.description.length != 0)
+				strError = e.description;
+			WScript.Echo("ERROR: Cannot delete tmp file (" + strError + ")");
 		}
 	}
 
@@ -216,12 +375,12 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 	// Copy files
 	try
 	{
-		var strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz.ico");
-		var strDest = FileSys.BuildPath(strDestFolder, "WTL10AppWiz.ico");
+		var strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz4WTLBuilder.ico");
+		var strDest = FileSys.BuildPath(strDestFolder, "WTL10AppWiz4WTLBuilder.ico");
 		FileSys.CopyFile(strSrc, strDest);
 
-		strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz.vsdir");
-		strDest = FileSys.BuildPath(strDestFolder, "WTL10AppWiz.vsdir");
+		strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz4WTLBuilder.vsdir");
+		strDest = FileSys.BuildPath(strDestFolder, "WTL10AppWiz4WTLBuilder.vsdir");
 		FileSys.CopyFile(strSrc, strDest);
 
 		if(strDataDestFolder != "")
@@ -236,11 +395,11 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		return;
 	}
 
-	// Read and write WTLAppWiz4WTLBuilder.vsz, add engine version and replace path when found
+	// Read and write WTL10AppWiz.vsz, add engine version and replace path when found
 	try
 	{
-		var strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz.vsz");
-		var strDest = FileSys.BuildPath(strDestFolder, "WTL10AppWiz.vsz");
+		var strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz4WTLBuilder.vsz");
+		var strDest = FileSys.BuildPath(strDestFolder, "WTL10AppWiz4WTLBuilder.vsz");
 
 		var ForReading = 1;
 		var fileSrc = FileSys.OpenTextFile(strSrc, ForReading);
@@ -288,7 +447,7 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		var strError = "no info";
 		if(e.description.length != 0)
 			strError = e.description;
-		WScript.Echo("ERROR: Cannot read and write WTL10AppWiz.vsz (" + strError + ")");
+		WScript.Echo("ERROR: Cannot read and write WTL10AppWiz4WTLBuilder.vsz (" + strError + ")");
 		return;
 	}
 
@@ -311,11 +470,11 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		return;
 	}
 
-	// Read and write additional WTLAppWiz4WTLBuilder.vsdir, add path to the wizard location
+	// Read and write additional WTL10AppWiz.vsdir, add path to the wizard location
 	try
 	{
-		var strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz.vsdir");
-		var strDest = FileSys.BuildPath(strDestWTLFolder, "WTL10AppWiz.vsdir");
+		var strSrc = FileSys.BuildPath(strSourceFolder, "WTL10AppWiz4WTLBuilder.vsdir");
+		var strDest = FileSys.BuildPath(strDestWTLFolder, "WTL10AppWiz4WTLBuilder.vsdir");
 
 		var ForReading = 1;
 		var fileSrc = FileSys.OpenTextFile(strSrc, ForReading);
@@ -336,7 +495,7 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		while(!fileSrc.AtEndOfStream)
 		{
 			var strLine = fileSrc.ReadLine();
-			if(strLine.indexOf("WTL10AppWiz.vsz|") != -1)
+			if(strLine.indexOf("WTL10AppWiz4WTLBuilder.vsz|") != -1)
 				strLine = "..\\" + strLine;
 			fileDest.WriteLine(strLine);
 		}
@@ -349,9 +508,9 @@ function SetupWizard(WSShell, FileSys, strSourceFolder, strDestFolder, strDataDe
 		var strError = "no info";
 		if(e.description.length != 0)
 			strError = e.description;
-		WScript.Echo("ERROR: Cannot read and write WTL\\WTL10AppWiz.vsdir (" + strError + ")");
+		WScript.Echo("ERROR: Cannot read and write WTL\\WTL10AppWiz4WTLBuilder.vsdir (" + strError + ")");
 		return;
 	}
 
-	WScript.Echo("App Wizard successfully installed!");
+	WScript.Echo("App Wizard for WTLBuilder successfully installed!");
 }

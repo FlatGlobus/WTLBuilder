@@ -66,7 +66,7 @@ LRESULT ControlComponentBase::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, 
         ctrlFont.Change.SetMethod(&ControlComponentBase::SetControlFont);
     }
     bHandled=FALSE;
-    SetMsgHandled(FALSE);
+    //SetMsgHandled(FALSE);
     return 0;
 }
 
@@ -78,7 +78,7 @@ LRESULT ControlComponentBase::OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
         UpdateBoundsProp(bounds);
     }
     bHandled=FALSE;
-    SetMsgHandled(FALSE);
+    //SetMsgHandled(FALSE);
     return FALSE;
 }
 
@@ -90,7 +90,7 @@ LRESULT ControlComponentBase::OnPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, B
 		Paint(dc);
 	}
 	bHandled = FALSE;
-	SetMsgHandled(FALSE);
+	//SetMsgHandled(FALSE);
 	return FALSE;
 }
 
