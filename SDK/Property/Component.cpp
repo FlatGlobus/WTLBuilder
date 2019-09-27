@@ -398,7 +398,7 @@ BOOL Component::CheckBounds(CRect rc)
     {
         CRect RC;
         ::GetClientRect((HWND)Parent->GetHandle(), &RC);
-        BOOL dimFlag = rc.left >= RC.left && rc.top >= RC.top && rc.right <= RC.right && rc.bottom <= RC.bottom;
+        BOOL dimFlag = TRUE;//rc.left >= RC.left && rc.top >= RC.top && rc.right <= RC.right && rc.bottom <= RC.bottom;
 
         BOOL minRCFlag = TRUE;
         if (minRC.IsRectNull() == FALSE)
@@ -572,10 +572,10 @@ CRect Component::Move(CPoint &at, HintItem hint)
                 rc.left = maxRC.left;
             break;
         case hiAll:
-            if (rc.left + at.x >= maxRC.left && rc.bottom + at.y <= maxRC.bottom && rc.top + at.y >= maxRC.top && rc.right + at.x <= maxRC.right)
+            //if (rc.left + at.x >= maxRC.left && rc.bottom + at.y <= maxRC.bottom && rc.top + at.y >= maxRC.top && rc.right + at.x <= maxRC.right)
                 rc += at;
-            else
-                modFlag = FALSE;
+            //else
+            //    modFlag = FALSE;
             break;
         }
 

@@ -74,8 +74,11 @@ function ViksoeCtrl_CShellComboCtrl(form,component)
         sourceStr+=codegen.Format(component,"\t[!Name].SetHorizontalExtent([!HorizontalExtent]);\n");
 
     sourceStr+=MakeToolTip(component);
+
     if(component.Item("Path") != "")
        sourceStr+="\t"+cmpName+".Populate("+MakeCString(component.Item("Path"))+");\n";
+    else
+       sourceStr+="\t"+cmpName+".Populate();\n";
 
     sourceStr+="\n";
     

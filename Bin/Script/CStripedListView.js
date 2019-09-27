@@ -33,6 +33,7 @@ function DecorativeCtrl_CStripedListView(form, component)
     MakeContained(form,component);
     
     var codegen=form.Code;
+    codegen.AddInclude(endIncludeDecl,CorrectPath(component.Item("IncludePath"))+"StripedListView.h");
     codegen.Insert(endMemberDecl,headerStr);
     codegen.Insert(endMemberCreation,sourceStr);
     codegen.Insert(endCtrlIDDecl,MakeControlID(component));

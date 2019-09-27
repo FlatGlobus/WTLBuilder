@@ -4,6 +4,7 @@
 //
 //	You are free to use, distribute or modify this code
 //	as long as this header is not removed or modified.
+//https://www.codeproject.com/Articles/1127/Resizable-dialogs-form-views-and-property-sheets-f
 // --------------------------------------------------------------------------
 #if !defined(__layoutmgr_h__)
 #define __layoutmgr_h__
