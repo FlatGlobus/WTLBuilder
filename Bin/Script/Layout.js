@@ -11,7 +11,7 @@ function MakeControlsToClip(form)
     var str="";
     
     for ( i=0; i <components.Count; i++ ) {
-        if (components.Item(i).Item("Generate") == true && components.Item(i).Item("Layout") == true)
+        if (components.Item(i).Item("Generate") == true )//&& components.Item(i).Item("Layout") == true)
             str += "\t" + components.Item(i).Item("ID") + ",\n";
     }
     
@@ -26,7 +26,7 @@ function MakeDefineLayout(form)
     {
         var component=components.Item(i);
         
-        if ( component != null && component.Item("Layout")==true )
+        if ( component != null )//&& component.Item("Layout")==true )
         {
             if ( component.Item("Layout.Left.AttachForm")==true )
                 str+="\tAttachForm("+component.Item("Name")+",ATTACH_LEFT);\n";
@@ -34,19 +34,19 @@ function MakeDefineLayout(form)
                 if ( component.Item("Layout.Left.AttachOppositeForm")==true )
                 str+="\tAttachOppositeForm("+component.Item("Name")+",ATTACH_LEFT);\n";
             else
-                if ( component.Item("Layout.Left.AttachChild")==true )
+                if ( component.Item("Layout.Left.AttachChild")==true && component.Item("Layout.Left.Child") != "NULL")
                 str+="\tAttachWidget("+component.Item("Name")+",ATTACH_LEFT,"+component.Item("Layout.Left.Child")+");\n";
             else
-                if ( component.Item("Layout.Left.AttachOppositeChild")==true )
+                if ( component.Item("Layout.Left.AttachOppositeChild")==true && component.Item("Layout.Left.Child") != "NULL")
                 str+="\tAttachOppositeWidget("+component.Item("Name")+",ATTACH_LEFT,"+component.Item("Layout.Left.Child")+");\n";
             else
-                if ( component.Item("Layout.Left.AttachPosition")==true )
+                if ( component.Item("Layout.Left.AttachPosition")==true)
                 str+="\tAttachPosition("+component.Item("Name")+",ATTACH_LEFT,"+component.Item("Layout.Left.Position")+");\n";
             else
                 if ( component.Item("Layout.Left.AttachSelf")==true )
                 str+="\tAttachSelf("+component.Item("Name")+",ATTACH_LEFT);\n";
             else
-                if ( component.Item("Layout.Left.AttachNone")==true )
+                //if ( component.Item("Layout.Left.AttachNone")==true )
                 str+="\tAttachNone("+component.Item("Name")+",ATTACH_LEFT);\n";
 
 ///
@@ -56,19 +56,19 @@ function MakeDefineLayout(form)
                 if ( component.Item("Layout.Top.AttachOppositeForm")==true )
                 str+="\tAttachOppositeForm("+component.Item("Name")+",ATTACH_TOP);\n";
             else
-                if ( component.Item("Layout.Top.AttachChild")==true )
+                if ( component.Item("Layout.Top.AttachChild")==true && component.Item("Layout.Top.Child") != "NULL")
                 str+="\tAttachWidget("+component.Item("Name")+",ATTACH_TOP,"+component.Item("Layout.Top.Child")+");\n";
             else
-                if ( component.Item("Layout.Top.AttachOppositeChild")==true )
+                if ( component.Item("Layout.Top.AttachOppositeChild")==true && component.Item("Layout.Top.Child") != "NULL")
                 str+="\tAttachOppositeWidget("+component.Item("Name")+",ATTACH_TOP,"+component.Item("Layout.Top.Child")+");\n";
             else
-                if ( component.Item("Layout.Top.AttachPosition")==true )
+                if ( component.Item("Layout.Top.AttachPosition")==true)
                 str+="\tAttachPosition("+component.Item("Name")+",ATTACH_TOP,"+component.Item("Layout.Top.Position")+");\n";
             else
                 if ( component.Item("Layout.Top.AttachSelf")==true )
                 str+="\tAttachSelf("+component.Item("Name")+",ATTACH_TOP);\n";
             else
-                if ( component.Item("Layout.Top.AttachNone")==true )
+                //if ( component.Item("Layout.Top.AttachNone")==true )
                 str+="\tAttachNone("+component.Item("Name")+",ATTACH_TOP);\n";
 
 ///                     
@@ -78,10 +78,10 @@ function MakeDefineLayout(form)
                 if ( component.Item("Layout.Right.AttachOppositeForm")==true )
                 str+="\tAttachOppositeForm("+component.Item("Name")+",ATTACH_RIGHT);\n";
             else
-                if ( component.Item("Layout.Right.AttachChild")==true )
+                if ( component.Item("Layout.Right.AttachChild")==true && component.Item("Layout.Right.Child") != "NULL")
                 str+="\tAttachWidget("+component.Item("Name")+",ATTACH_RIGHT,"+component.Item("Layout.Right.Child")+");\n";
             else
-                if ( component.Item("Layout.Right.AttachOppositeChild")==true )
+                if ( component.Item("Layout.Right.AttachOppositeChild")==true && component.Item("Layout.Right.Child") != "NULL")
                 str+="\tAttachOppositeWidget("+component.Item("Name")+",ATTACH_RIGHT,"+component.Item("Layout.Right.Child")+");\n";
             else
                 if ( component.Item("Layout.Right.AttachPosition")==true )
@@ -90,7 +90,7 @@ function MakeDefineLayout(form)
                 if ( component.Item("Layout.Right.AttachSelf")==true )
                 str+="\tAttachSelf("+component.Item("Name")+",ATTACH_RIGHT);\n";
             else
-                if ( component.Item("Layout.Right.AttachNone")==true )
+                //if ( component.Item("Layout.Right.AttachNone")==true )
                 str+="\tAttachNone("+component.Item("Name")+",ATTACH_RIGHT);\n";
 
 ///                     
@@ -100,10 +100,10 @@ function MakeDefineLayout(form)
                 if ( component.Item("Layout.Bottom.AttachOppositeForm")==true )
                 str+="\tAttachOppositeForm("+component.Item("Name")+",ATTACH_BOTTOM);\n";
             else
-                if ( component.Item("Layout.Bottom.AttachChild")==true )
+                if ( component.Item("Layout.Bottom.AttachChild")==true && component.Item("Layout.Bottom.Child") != "NULL")
                 str+="\tAttachWidget("+component.Item("Name")+",ATTACH_BOTTOM,"+component.Item("Layout.Bottom.Child")+");\n";
             else
-                if ( component.Item("Layout.Bottom.AttachOppositeChild")==true )
+                if ( component.Item("Layout.Bottom.AttachOppositeChild")==true && component.Item("Layout.Bottom.Child") != "NULL")
                 str+="\tAttachOppositeWidget("+component.Item("Name")+",ATTACH_BOTTOM,"+component.Item("Layout.Bottom.Child")+");\n";
             else
                 if ( component.Item("Layout.Bottom.AttachPosition")==true )
@@ -112,7 +112,7 @@ function MakeDefineLayout(form)
                 if ( component.Item("Layout.Bottom.AttachSelf")==true )
                 str+="\tAttachSelf("+component.Item("Name")+",ATTACH_BOTTOM);\n";
             else
-                if ( component.Item("Layout.Bottom.AttachNone")==true )
+                //if ( component.Item("Layout.Bottom.AttachNone")==true )
                 str+="\tAttachNone("+component.Item("Name")+",ATTACH_BOTTOM);\n";
 
 ///                     
@@ -122,10 +122,10 @@ function MakeDefineLayout(form)
                 if ( component.Item("Layout.HCenter.AttachOppositeForm")==true )
                 str+="\tAttachOppositeForm("+component.Item("Name")+",ATTACH_HCENTER);\n";
             else
-                if ( component.Item("Layout.HCenter.AttachChild")==true )
+                if ( component.Item("Layout.HCenter.AttachChild")==true && component.Item("Layout.HCenter.Child") != "NULL")
                 str+="\tAttachWidget("+component.Item("Name")+",ATTACH_HCENTER,"+component.Item("Layout.HCenter.Child")+");\n";
             else
-                if ( component.Item("Layout.HCenter.AttachOppositeChild")==true )
+                if ( component.Item("Layout.HCenter.AttachOppositeChild")==true && component.Item("Layout.HCenter.Child") != "NULL")
                 str+="\tAttachOppositeWidget("+component.Item("Name")+",ATTACH_HCENTER,"+component.Item("Layout.HCenter.Child")+");\n";
             else
                 if ( component.Item("Layout.HCenter.AttachPosition")==true )
@@ -140,10 +140,10 @@ function MakeDefineLayout(form)
                 if ( component.Item("Layout.VCenter.AttachOppositeForm")==true )
                 str+="\tAttachOppositeForm("+component.Item("Name")+",ATTACH_VCENTER);\n";
             else
-                if ( component.Item("Layout.VCenter.AttachChild")==true )
+                if ( component.Item("Layout.VCenter.AttachChild")==true && component.Item("Layout.VCenter.Child") != "NULL")
                 str+="\tAttachWidget("+component.Item("Name")+",ATTACH_VCENTER,"+component.Item("Layout.VCenter.Child")+");\n";
             else
-                if ( component.Item("Layout.VCenter.AttachOppositeChild")==true )
+                if ( component.Item("Layout.VCenter.AttachOppositeChild")==true && component.Item("Layout.VCenter.Child") != "NULL")
                 str+="\tAttachOppositeWidget("+component.Item("Name")+",ATTACH_VCENTER,"+component.Item("Layout.VCenter.Child")+");\n";
             else
                 if ( component.Item("Layout.VCenter.AttachPosition")==true )

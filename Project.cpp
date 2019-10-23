@@ -187,7 +187,7 @@ void __stdcall CProject::Save()
 {
     CWaitCursor wc;
     BOOL asTemplate=FALSE;
-    CMsgPump pump;
+    CStopMsgPump pump;
     SendEvent(evSaveForm,forms.Active,asTemplate);
     EnableMsgPump(TRUE);
 }

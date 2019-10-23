@@ -43,7 +43,7 @@ Undo::~Undo()
 
 void Undo::Add(const CString & str)
 {
-    CMsgPump pump;
+    CStopMsgPump pump;
     undo.Add(str);
     if (undo.GetCount() > 1 || fixChanges == TRUE)
         changed = TRUE;
@@ -58,7 +58,7 @@ void Undo::Add(const CString & str)
 
 CString Undo::Get()
 {
-    CMsgPump pump;
+    CStopMsgPump pump;
     CString ret;
     if (undo.GetCount() - 2)
     {
@@ -886,7 +886,7 @@ void CFormComponent::GetFormFileName(Component * cmp, CString* formFileName)
 
 BOOL CFormComponent::GenerateCode(SaveOperation operation)
 {
-    CMsgPump pump;
+    CStopMsgPump pump;
 
     if (fileName.IsFilePath() && operation == soSave)//load last source code changes
     {
@@ -1374,7 +1374,7 @@ void CFormComponent::UndoChanges(Component * form)
     if (form == this)
     {
         //StopEvent(evUndo);
-        CMsgPump pump;
+        CStopMsgPump pump;
         CString undodata = undo.Get();
         if (undodata.GetLength())
         {
@@ -1389,7 +1389,7 @@ void CFormComponent::EditCopy(Component * form, Component *comp)
 {
     if (form == this)
     {
-        CMsgPump pump;
+        CStopMsgPump pump;
         StopEvent(evCopy);
         FreeClipboard();
         if (comp == NULL || designer->GetComponents()->GetSelCount())
@@ -1404,7 +1404,7 @@ void CFormComponent::EditCut(Component * form, Component *comp)
 {
     if (form == this)
     {
-        CMsgPump pump;
+        CStopMsgPump pump;
         StopEvent(evCut);
         FreeClipboard();
         if (comp == NULL || designer->GetComponents()->GetSelCount())
@@ -1427,7 +1427,7 @@ void CFormComponent::EditPaste(Component * form, Component *comp, CPoint * downP
         StopEvent(evPaste);
         if (clipboard)
         {
-            CMsgPump pump;
+            CStopMsgPump pump;
             designer->GetComponents()->Paste(clipboard, comp, downPoint);
             AddUndo(this);
         }
@@ -1441,7 +1441,7 @@ void CFormComponent::EditDelete(Component * form)
         StopEvent(evDelete);
         if (designer->GetComponents()->GetSelCount())
         {
-            CMsgPump pump;
+            CStopMsgPump pump;
             designer->GetComponents()->Delete();
             AddUndo(this);
             ::RedrawWindow((HWND)GetHandle(), NULL, NULL, RDW_INVALIDATE | RDW_NOERASE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_INTERNALPAINT);

@@ -638,6 +638,7 @@ void ThreadBridge::PostEvent(_Arg *arg)
 				::SendMessage(WND, ThreadBridgeMessage, 0, (LPARAM)arg);
 		}
 	}
+    __MessagePump();
 }
 
 BOOL ThreadBridge::StartCommandTimer(UINT resolution)
@@ -901,8 +902,6 @@ EVENT_API BOOL IsEnabledMsgPump()
 
 EVENT_API bool SendEvent(DWORD command)
 {
-	try
-	{
 		Gag	* object;
 		EventMethod method;
 		mapIterator cmdsPtr;
@@ -913,20 +912,5 @@ EVENT_API bool SendEvent(DWORD command)
 				(object->*(method))();
 			}
 		}
-	}
-	catch (...)
-	{
-		return false;
-	}
 	return true;
-}
-
-//////////////////////////////////
-EVENT_API LPCTSTR MakeErrString(LPCTSTR msg, LPCTSTR func)
-{
-    static TCHAR buff[256];
-    memset(buff, 0, 256*sizeof(TCHAR));
-    _tprintf(buff,_T("%s%s"),msg,func);
-    return buff;
-
 }

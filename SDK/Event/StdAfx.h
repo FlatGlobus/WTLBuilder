@@ -14,7 +14,6 @@
 
 #include <windows.h>
 #include <tchar.h>
-#include <atltrace.h>
 
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning( disable:4838)

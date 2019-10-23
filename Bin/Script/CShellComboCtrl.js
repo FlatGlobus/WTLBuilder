@@ -75,18 +75,21 @@ function ViksoeCtrl_CShellComboCtrl(form,component)
 
     sourceStr+=MakeToolTip(component);
 
+    var postSource = "";
     if(component.Item("Path") != "")
-       sourceStr+="\t"+cmpName+".Populate("+MakeCString(component.Item("Path"))+");\n";
+       postSource+="\t"+cmpName+".Populate("+MakeCString(component.Item("Path"))+");\n";
     else
-       sourceStr+="\t"+cmpName+".Populate();\n";
+       postSource+="\t"+cmpName+".Populate();\n";
 
     sourceStr+="\n";
-    
+
     MakeSetFocus(form,component);
     MakeContained(form,component);        
     
     codegen.Insert(endMemberDecl,headerStr);
     codegen.Insert(endMemberCreation,sourceStr);
+    codegen.Insert(endPostCreation,postSource);
+
     codegen.Insert(endCtrlIDDecl,MakeControlID(component));
     codegen.AddInclude(endIncludeDecl,CorrectPath(component.Item("IncludePath"))+"atlshellext.h");
     codegen.AddInclude(endIncludeDecl,CorrectPath(component.Item("IncludePath"))+"ShellCtrls.h");

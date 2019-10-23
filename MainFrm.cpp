@@ -891,7 +891,7 @@ void CMainFrame::OnEditCommand(WORD wID, Component *comp, CPoint * downPoint)
     if (project.Forms->Active == NULL)
         return;
 
-    CMsgPump msgPump;
+    CStopMsgPump msgPump;
 
     switch (wID)
     {

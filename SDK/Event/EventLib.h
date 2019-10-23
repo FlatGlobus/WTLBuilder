@@ -48,11 +48,11 @@ EVENT_API BOOL IsEnabledMsgPump();
 EVENT_API void CreateBridge();
 EVENT_API void DestroyBridge();
 //////////////////////////////////////////////////////////////////////////
-class CMsgPump
+class CStopMsgPump
 {
 public:
-    CMsgPump(){EnableMsgPump(FALSE);}
-    ~CMsgPump(){EnableMsgPump(TRUE);}
+    CStopMsgPump(){EnableMsgPump(FALSE);}
+    ~CStopMsgPump(){EnableMsgPump(TRUE);}
 };
 //////////////////////////////////////////////////////////////////////////
 #define MIN_PR 255
@@ -95,12 +95,8 @@ EVENT_API BOOL __MessagePump(void);
 EVENT_API DWORD GetLastInputTime(void);
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 EVENT_API bool SendEvent(DWORD command);
-
-EVENT_API LPCTSTR MakeErrString(LPCTSTR msg, LPCTSTR func);
 template <class T1> bool SendEvent(DWORD command,T1 par)
 {
-    try
-    {
         Gag	* object;						
         typedef void (Gag::*EventMethodPar)(T1);
         EventMethodPar method;
@@ -112,19 +108,12 @@ template <class T1> bool SendEvent(DWORD command,T1 par)
                 (object->*(method))(par);
             }
         }
-    }
-    catch (...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        return false;
-    }
+
     return true;
 }
 
 template <class T1,class T2> bool SendEvent(DWORD command,T1 par,T2 par2)
 {
-    try
-    {
         Gag	* object;						
         typedef void (Gag::*EventMethodPar)(T1,T2);
         EventMethodPar method;
@@ -136,19 +125,11 @@ template <class T1,class T2> bool SendEvent(DWORD command,T1 par,T2 par2)
                 (object->*(method))(par,par2);
             }
         }
-    }
-    catch (...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        return false;
-    }
     return true;
 }
 
 template <class T1,class T2,class T3> bool SendEvent(DWORD command,T1 par,T2 par2,T3 par3)
 {
-    try
-    {
         Gag	* object;						
         typedef void (Gag::*EventMethodPar)(T1,T2,T3);
         EventMethodPar method;
@@ -160,19 +141,11 @@ template <class T1,class T2,class T3> bool SendEvent(DWORD command,T1 par,T2 par
                 (object->*(method))(par,par2,par3);
             }
         }
-    }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        return false;
-    }
     return true;
 }
 
 template <class T1,class T2,class T3,class T4> bool SendEvent(DWORD command,T1 par,T2 par2,T3 par3,T4 par4)
 {
-    try
-    {
         Gag	* object;						
         typedef void (Gag::*EventMethodPar)(T1,T2,T3,T4);
         EventMethodPar method;
@@ -184,19 +157,11 @@ template <class T1,class T2,class T3,class T4> bool SendEvent(DWORD command,T1 p
                 (object->*(method))(par,par2,par3,par4);
             }
         }
-    }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        return false;
-    }
     return true;
 }
 
 template <class T1,class T2,class T3,class T4,class T5> bool SendEvent(DWORD command,T1 par,T2 par2,T3 par3,T4 par4,T5 par5)
 {
-    try
-    {
         Gag	* object;						
         typedef void (Gag::*EventMethodPar)(T1,T2,T3,T4,T5);
         EventMethodPar method;
@@ -208,19 +173,11 @@ template <class T1,class T2,class T3,class T4,class T5> bool SendEvent(DWORD com
                 (object->*(method))(par,par2,par3,par4,par5);
             }
         }
-    }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        return false;
-    }
     return true;
 }
 
 template <class T1,class T2,class T3,class T4,class T5,class T6> bool SendEvent(DWORD command,T1 par,T2 par2,T3 par3,T4 par4,T5 par5,T6 par6)
 {
-    try
-    {
         Gag	* object;						
         typedef void (Gag::*EventMethodPar)(T1,T2,T3,T4,T5,T6);
         EventMethodPar method;
@@ -232,12 +189,6 @@ template <class T1,class T2,class T3,class T4,class T5,class T6> bool SendEvent(
                 (object->*(method))(par,par2,par3,par4,par5,par6);
             }
         }
-    }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        return false;
-    }
     return true;
 }
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -260,13 +211,12 @@ public:
 
     virtual void Free()
     {
+        if (this)
         delete this;
     }
 
     virtual void SendEvent(void)
     {
-        try
-        {
             Gag	* object;						
             EventMethod method;
             mapIterator cmdsPtr;
@@ -278,12 +228,6 @@ public:
                 }
             }
         }
-        catch(...)
-        {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        }
-
-    }
 };
 
 template <class T> 
@@ -298,8 +242,6 @@ public:
 
     virtual void SendEvent(void)
     {
-        try
-        {
             Gag	* object;						
             typedef void (Gag::*EventMethodPar)(T);
             EventMethodPar method;
@@ -312,12 +254,6 @@ public:
                 }
             }
         }
-        catch(...)
-        {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        }
-
-    }
 
 };
 
@@ -334,8 +270,6 @@ public:
 
     virtual void SendEvent(void)
     {
-        try
-        {
             Gag	* object;						
             typedef void (Gag::*EventMethodPar)(T,T1);
             EventMethodPar method;
@@ -348,12 +282,6 @@ public:
                 }
             }
         }
-        catch(...)
-        {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        }
-
-    }
 };
 
 template <class T, class T1, class T2> 
@@ -370,8 +298,6 @@ public:
 
     virtual void SendEvent(void)
     {
-        try
-        {
             Gag	* object;						
             typedef void (Gag::*EventMethodPar)(T,T1,T2);
             EventMethodPar method;
@@ -384,12 +310,6 @@ public:
                 }
             }
         }
-        catch(...)
-        {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        }
-
-    }
 };
 
 template <class T, class T1, class T2,class T3> 
@@ -407,8 +327,6 @@ public:
 
     virtual void SendEvent(void)
     {
-        try
-        {
             Gag	* object;						
             typedef void (Gag::*EventMethodPar)(T,T1,T2,T3);
             EventMethodPar method;
@@ -421,12 +339,6 @@ public:
                 }
             }
         }
-        catch(...)
-        {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        }
-
-    }
 };
 
 template <class T, class T1, class T2,class T3,class T4> 
@@ -445,8 +357,6 @@ public:
 
     virtual void SendEvent(void)
     {
-        try
-        {
             Gag	* object;						
             typedef void (Gag::*EventMethodPar)(T,T1,T2,T3,T4);
             EventMethodPar method;
@@ -459,103 +369,48 @@ public:
                 }
             }
         }
-        catch(...)
-        {
-            ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-        }
-
-    }
 };
 //////////////////////////////////////////////////////////////////////////
 EVENT_API void _PostEvent(_Arg * args);
 //////////////////////////////////////////////////////////////////////////
 inline void PostEvent(DWORD command,UINT pm=POST_METHOD)
 {
-    try
-    {
         _Arg * arg=new _Arg(command,pm);
         _PostEvent(arg);
     }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-    }
-}
 
 template <class T> void PostEvent(DWORD command,T par,UINT pm=POST_METHOD)
 {
-    try
-    {
         _Arg1<T> * arg=new _Arg1<T>(command,par,pm);
         _PostEvent(arg);
     }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-    }
-
-}
 
 template <class T,class T1> void PostEvent(DWORD command,T par, T1 par1,UINT pm=POST_METHOD)
 {
-    try
-    {
         _Arg2<T,T1> * arg=new _Arg2<T,T1>(command,par,par1,pm);
         _PostEvent(arg);
     }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-    }
-
-}
 
 template <class T,class T1,class T2> void PostEvent(DWORD command,T par, T1 par1,T2 par2,UINT pm=POST_METHOD)
 {
-    try
-    {
         _Arg3<T,T1,T2> * arg=new _Arg3<T,T1,T2>(command,par,par1,par2,pm);
         _PostEvent(arg);
     }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-    }
-
-}
 
 template <class T,class T1,class T2,class T3> void PostEvent(DWORD command,T par, T1 par1,T2 par2,T3 par3,UINT pm=POST_METHOD)
 {
-    try
-    {
         _Arg4<T,T1,T2,T3> * arg=new _Arg4<T,T1,T2,T3>(command,par,par1,par2,par3,pm);
         _PostEvent(arg);
     }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-    }
-
-}
 
 template <class T,class T1,class T2,class T3,class T4> void PostEvent(DWORD command,T par, T1 par1,T2 par2,T3 par3,T4 par4,UINT pm=POST_METHOD)
 {
-    try
-    {
         _Arg4<T,T1,T2,T3,T4> * arg=new _Arg5<T,T1,T2,T3,T4>(command,par,par1,par2,par3,par4,pm);
         _PostEvent(arg);
     }
-    catch(...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-    }
-
-}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 template <class T1> void SendEventCFunc(DWORD command,T1 par)
 {
-    try
-    {
         typedef void (__cdecl *CFuncPar)(T1);
         CFuncPar method;
         Gag	* object;
@@ -566,16 +421,9 @@ template <class T1> void SendEventCFunc(DWORD command,T1 par)
                 method(par);
         }
     }
-    catch (...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-    }
-}
 
 template <class T1,class T2> void SendEventCFunc(DWORD command,T1 par,T2 par2)
 {
-    try
-    {
         typedef void (__cdecl *CFuncPar)(T1,T2);
         CFuncPar method;
         Gag	* object;
@@ -586,11 +434,6 @@ template <class T1,class T2> void SendEventCFunc(DWORD command,T1 par,T2 par2)
                 method(par,par2);
         }
     }
-    catch (...)
-    {
-        ATLTRACE2(MakeErrString(_T("Exception, see   "), _T(__FUNCSIG__)));
-    }
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #endif

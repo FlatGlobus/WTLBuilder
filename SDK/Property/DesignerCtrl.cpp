@@ -65,7 +65,7 @@ LRESULT CDesignerCtrl::OnKeyDown(UINT /*uMsg*/, WPARAM wParam, LPARAM /*lParam*/
     {
     case VK_DELETE:
     {
-        CMsgPump msgPump;
+        CStopMsgPump msgPump;
         components->Delete();
         ::RedrawWindow((HWND)GetParentForm()->GetHandle(), NULL, NULL, RDW_INVALIDATE | RDW_NOERASE | RDW_UPDATENOW | RDW_ALLCHILDREN | RDW_INTERNALPAINT);
         SendEvent(evAddUndo, Parent);

@@ -29,11 +29,15 @@ function ViksoeCtrl_CShellListCtrl(form, component)
     sourceStr+=MakeListViewCtrlStyleEx(component);
     sourceStr+="\n";
     
+    var postSource=codegen.Format(component,"\t[!Name].Populate("+MakeCString(component.Item("Path"))+");\n");
+
     MakeSetFocus(form,component);        
     MakeContained(form,component);   
     
     codegen.Insert(endMemberDecl,headerStr);
     codegen.Insert(endMemberCreation,sourceStr);
+    codegen.Insert(endPostCreation,postSource);
+
     codegen.Insert(endCtrlIDDecl,MakeControlID(component));
     codegen.AddInclude(endIncludeDecl,CorrectPath(component.Item("IncludePath"))+"atlshellext.h");
     codegen.AddInclude(endIncludeDecl,CorrectPath(component.Item("IncludePath"))+"ShellCtrls.h");

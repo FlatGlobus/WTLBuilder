@@ -133,7 +133,7 @@ CString CLayout::get_Child(void)
 {
     CComponentListEdit::SetComponentKind(_T(""));
 	if(component->GetComponentParent()->GetState(csLoading)==FALSE && component->GetComponents()->Find(child)==NULL)
-		child=_T("None");
+		child=_T("NULL");
 	return child;
 }
 
@@ -195,7 +195,7 @@ void CLayout::AddProperty(LPCTSTR Name,LPCTSTR SubName,CProperties & objprop)
 		DEFINE_SUB_PROPERTY(AttachPosition,BOOL,CLayout,FALSE)
 		DEFINE_SUB_PROPERTY(AttachSelf,BOOL,CLayout,FALSE)
         DEFINE_SUB_PROPERTY(AttachNone,BOOL,CLayout,FALSE)
-		DEFINE_SUB_PROPERTY(Child,ComponentName,CLayout,_T("None"))
+		DEFINE_SUB_PROPERTY(Child,ComponentName,CLayout,_T("NULL"))
 		DEFINE_SUB_PROPERTY(Position,long,CLayout,0)
 	END_SUB_PROPERTY
 }
