@@ -81,7 +81,13 @@ function StdCtl_CEdit(form,component)
     sourceStr+=MakeLocalizedCString(component.Item("Text"),component)+","+
                MakeEditStyle(component)+","+
                MakeExWindowStyle(component)+","+
-               component.Item("ID")+");\n";    
+               component.Item("ID")+");\n"; 
+			   
+	if(component.Item("CueBannerText") != "")
+	{
+		sourceStr+="\t"+cmpName+".SetCueBannerText(" + MakeLocalizedUnicodeCString(component.Item("CueBannerText"),component)+");\n";
+	}
+			   
     sourceStr+=MakeControlFont(component);
     sourceStr+=MakeToolTip(component);
     sourceStr+="\n";

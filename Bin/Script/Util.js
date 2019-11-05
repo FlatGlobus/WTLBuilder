@@ -36,6 +36,28 @@ function MakeCString(str)
     return ret;
 }
 /////////////////////////////////////////////////////////////////////////////////
+function MakeUnicodeCString(str)
+{
+    if ( str.length==0 )
+        return "L\"\")";
+
+    if ( str=="NULL" )
+        return str;
+
+    var ret="L\"";
+    var ch='';
+    for ( i=0; i < str.length; i++ )
+    {
+        ch=str.charAt(i);
+        if ( ch=='\\' )
+            ret+='\\';
+        ret+=ch;
+    }
+    ret+="\""; 
+    return ret;
+}
+
+/////////////////////////////////////////////////////////////////////////////////
 function MakeLocalizedCString(str, component)
 {
     if(component.IsControl() == true)
@@ -50,6 +72,22 @@ function MakeLocalizedCString(str, component)
     }
     return MakeCString(str);
 }
+/////////////////////////////////////////////////////////////////////////////////
+function MakeLocalizedUnicodeCString(str, component)
+{
+    if(component.IsControl() == true)
+    {
+        if(component.Form.Item("Localize") == true && component.Item("Localize") == true)
+            return "Translate(" + MakeCString(MakeControlNameID(component)) + "," + MakeUnicodeCString(str)+")";
+    }
+    if(component.IsForm() == true)
+    {
+        if(component.Item("Localize") == true)
+            return "Translate(" + MakeCString("Caption") + "," + MakeUnicodeCString(str)+")";
+    }
+    return MakeUnicodeCString(str);
+}
+
 /////////////////////////////////////////////////////////////////////////////////
 function MakeLocalizedCStringEx(str, ext, component)
 {

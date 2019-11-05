@@ -49,10 +49,13 @@ void CEdit::InitProperty(void)
 	DEFINE_PROPERTY(UpperCase,BOOL,CEdit,FALSE)
 	DEFINE_PROPERTY(WantReturn,BOOL,CEdit,FALSE)
 	DEFINE_PROPERTY(Text,CString,CEdit,_T(""))
+    DEFINE_PROPERTY(CueBannerText, CString, CEdit, _T(""))
 	DEFINE_PROPERTY(TextAlign,EditAlignText,CEdit,ES_LEFT)
 	//DEFINE_PROPERTY(LimitText,long,CEdit,-1)
 	PUBLIC_PROPERTY(VScroll,TRUE)
 	PUBLIC_PROPERTY(HScroll,TRUE)
+    
+
 } 
 
 void CEdit::set_Text(CString str)
@@ -72,6 +75,25 @@ CString CEdit::get_Text(void)
 	}
 	return text;
 }
+
+void CEdit::set_CueBannerText(CString str)
+{
+    cueBannerText.Empty();
+    cueBannerText = (LPCTSTR)str;
+    //if (IsWindow())
+    //    SetCueBannerText((LPCWSTR)cueBannerText);
+    SetModified();
+}
+
+CString CEdit::get_CueBannerText(void)
+{
+    if (state.GetBit(csLoading))
+    {
+        cueBannerText = GET_PROP_VALUE(CString, CueBannerText)
+    }
+    return cueBannerText;
+}
+
 
 //void CEdit::SetLimitText(long)
 //{

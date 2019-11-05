@@ -13,6 +13,7 @@ namespace StdCtrl
 	class CEdit:public CWindowImpl<StdCtrl::CEdit,WTL::CEdit>,public ControlComponent<StdCtrl::CEdit>
 	{
 		CString text;
+        CString cueBannerText;
         CString ddxVar;
 		long limitText;
 		//long leftMargin;
@@ -30,6 +31,7 @@ namespace StdCtrl
 		//void SetLimitText(long);
 		//long GetLimitText(void);
 		DECLARE_PROPERTY(Text,CString)	
+        DECLARE_PROPERTY(CueBannerText, CString)
 		DECLARE_WINSTYLE_BOOL_PROPERTY(AutoHScroll)
 		DECLARE_WINSTYLE_BOOL_PROPERTY(AutoVScroll)
 		DECLARE_WINSTYLE_BOOL_PROPERTY(MultiLine)

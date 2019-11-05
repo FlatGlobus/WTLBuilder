@@ -53,7 +53,7 @@ BOOL __stdcall CProject::Open(BSTR fn)
 
     if(fileName.IsFilePath()==FALSE)
     {
-        CFileDialog filedlg(TRUE,_T("*.wff"),NULL,OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT|OFN_PATHMUSTEXIST,FormFilter, ::GetDesktopWindow());
+        CFileDialog filedlg(TRUE,_T("*.wff"),NULL,OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT|OFN_PATHMUSTEXIST,FormFilter);
         if(filedlg.DoModal()!=IDOK)
             return FALSE;
         fileName=filedlg.m_szFileName;
@@ -243,7 +243,7 @@ void CProject::SaveAsTemplate(void)
         {
             CFileDialog filedlg(FALSE,_T("*.wff"),NULL,OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT|OFN_PATHMUSTEXIST,FormFilter);
             filedlg.m_ofn.lpstrInitialDir=(LPCTSTR)templatesPath;
-            if(filedlg.DoModal(GetDesktopWindow())!=IDOK)
+            if(filedlg.DoModal()!=IDOK)
                 return;
             formFileName=filedlg.m_szFileName;
         }
@@ -267,7 +267,7 @@ void CProject::GenerateLocFile(void)
     CPath temp(formFileName);
     
     CFileDialog filedlg(FALSE,_T("*.lng"),temp.GetTitle(),OFN_HIDEREADONLY|OFN_OVERWRITEPROMPT|OFN_PATHMUSTEXIST,LocFilter);
-    if(filedlg.DoModal(GetDesktopWindow())!=IDOK)
+    if(filedlg.DoModal()!=IDOK)
         return;
 
     CWaitCursor wc;
